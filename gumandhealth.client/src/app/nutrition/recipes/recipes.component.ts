@@ -4,6 +4,8 @@ import { Component } from '@angular/core';
   selector: 'app-recipes',
   templateUrl: './recipes.component.html',
   styleUrl: './recipes.component.css',
+
+
 })
 export class RecipesComponent {
   viewRecipeDetails(id: number) {}
