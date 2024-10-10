@@ -1,0 +1,12 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "ConnectionStrings": {
+    "YourConnectionString": "Server=DESKTOP-K8J0AHQ;Database=Gymster;Trusted_Connection=True;TrustServerCertificate=True;"
+  },
+  "AllowedHosts": "*"
+}
