@@ -152,7 +152,7 @@
 </section>
 <!-- Services Section End -->
 <!-- Client Says Section Begin -->
-<section class="client-says set-bg" data-setbg="/assets/img/client-bg.jpg">
+<section class="client-says set-bg" [style.backgroundImage]="'url(/assets/img/client-bg.jpg)'">
   <div class="container">
     <div class="row">
       <div class="col-lg-9">
@@ -193,7 +193,8 @@
       </div>
       <div class="col-lg-6">
         <div class="lifestyle-img">
-          <img src="/assets/img/lifestyle.jpg" alt="" />
+
+            <img src="/assets/img/lifestyle.jpg" alt="" />
         </div>
       </div>
     </div>
