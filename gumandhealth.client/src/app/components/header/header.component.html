@@ -4,17 +4,18 @@
       <div class="row">
         <div class="col-lg-2 col-md-2">
           <div class="logo">
-            <a href="./index.html"><img src="img/logo.png" alt="" /></a>
+            <a routerLink="/"><img src="/assets/img/logo.png" alt="Logo" /></a>
           </div>
         </div>
         <div class="col-lg-10 col-md-10">
           <nav class="main-menu mobile-menu">
             <ul>
-              <li><a class="active" href="./index.html">Home</a></li>
-              <li><a href="./about-us.html">About us</a></li>
-              <li><a href="./classes.html">Classes</a></li>
-              <li><a href="./blog.html">Blog</a></li>
-              <li><a href="./contact.html">Contact</a></li>
+              <!-- Use correct Angular routerLink and routerLinkActive -->
+              <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
+              <li><a routerLink="/about" routerLinkActive="active">About Us</a></li>
+              <li><a routerLink="/classes" routerLinkActive="active">Classes</a></li>
+              <li><a routerLink="/blog" routerLinkActive="active">Blog</a></li>
+              <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
               <li class="phone-num">
                 <i class="fa fa-phone"></i><span>+546 990221 123</span>
               </li>
