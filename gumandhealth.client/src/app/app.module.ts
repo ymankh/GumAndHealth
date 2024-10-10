@@ -8,10 +8,7 @@ import { NutritionComponent } from './nutrition/nutrition.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { AboutComponent } from './pages/about/about.component';
-import { BlogComponent } from './pages/blog/blog.component';
-import { ClassesComponent } from './pages/classes/classes.component';
-import { ContactComponent } from './pages/contact/contact.component';
+import { AboutUSComponent } from './about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +17,7 @@ import { ContactComponent } from './pages/contact/contact.component';
     HomeComponent,
     HeaderComponent,
     FooterComponent,
+    AboutUSComponent,
     AboutComponent,
     BlogComponent,
     ClassesComponent,

@@ -364,3 +364,4 @@ FodyWeavers.xsd
 /gumandhealth.client/package-lock.json
 /GumAndHealth.Server/appsettings.json
 /GumAndHealth.Server/Models/MyDbContext.cs
+/GumAndHealth.Server/fit.json
