@@ -6,7 +6,7 @@
     }
   },
   "ConnectionStrings": {
-    "YourConnectionString": "Server=DESKTOP-K8J0AHQ;Database=Gymster;Trusted_Connection=True;TrustServerCertificate=True;"
+    "YourConnectionString": "Server=DESKTOP-QJHUPSA;Database=Gymster;Trusted_Connection=True;TrustServerCertificate=True;"
   },
   "AllowedHosts": "*"
 }
