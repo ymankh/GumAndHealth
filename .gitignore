@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/gumandhealth.client/package-lock.json
+/GumAndHealth.Server/appsettings.json
+/GumAndHealth.Server/Models/MyDbContext.cs
