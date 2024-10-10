@@ -5,6 +5,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NutritionComponent } from './nutrition/nutrition.component';
+import { HomeComponent } from './components/home/home.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { RecipesComponent } from './nutrition/recipes/recipes.component';
 import { TipsComponent } from './nutrition/tips/tips.component';
 
@@ -20,8 +23,9 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     NutritionComponent,
-    RecipesComponent,
-    TipsComponent,
+    HomeComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
