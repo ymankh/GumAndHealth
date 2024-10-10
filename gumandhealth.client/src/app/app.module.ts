@@ -8,16 +8,6 @@ import { NutritionComponent } from './nutrition/nutrition.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { RecipesComponent } from './nutrition/recipes/recipes.component';
-import { TipsComponent } from './nutrition/tips/tips.component';
-
-// تعريف المسارات
-const routes: Routes = [
-  { path: 'recipes', component: RecipesComponent },
-  { path: 'tips', component: TipsComponent },
-  { path: 'nutrition', component: NutritionComponent }
-  
-];
 
 @NgModule({
   declarations: [
@@ -25,15 +15,19 @@ const routes: Routes = [
     NutritionComponent,
     HomeComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    RouterModule.forRoot(routes) // إضافة المسارات هنا
+    // RouterModule.forRoot(routes) // إضافة المسارات هنا
   ],
+
+  //ما في داعي نحط الراوتس هون يا جماعة.. لازم جوا ال
+  // app-routing.module
+
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
