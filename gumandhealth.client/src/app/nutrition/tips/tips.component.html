@@ -1,1 +1,20 @@
-<p>tips works!</p>
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Health Tips</h2>
+  <div class="row">
+    <div class="col-md-6 mb-4" *ngFor="let step of healthSteps">
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <!-- الوجه الأمامي: الصورة -->
+          <div class="flip-card-front">
+            <img [src]="step.image" class="card-img-top" alt="{{ step.title }} Image">
+          </div>
+          <!-- الوجه الخلفي: العنوان والنص -->
+          <div class="flip-card-back">
+            <h5 class="card-title">{{ step.title }}</h5>
+            <p class="card-text">{{ step.body }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
