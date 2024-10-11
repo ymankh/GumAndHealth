@@ -40,7 +40,6 @@ namespace GumAndHealth.Server.Controllers
             return Ok(GetCurrentUser);
         }
 
-
         private User GetCurrentUser
         {
             get
