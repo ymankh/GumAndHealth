@@ -1,0 +1,63 @@
+body {
+  margin: 0; /* Remove body margin */
+  color: #1a202c;
+  text-align: left;
+  background-color: #e2e8f0;
+}
+
+.main-body {
+  padding: 10px;
+}
+
+.card {
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+  margin-bottom: 15px;
+}
+
+.card-body {
+  padding: 0.75rem;
+  height: auto;
+}
+
+.sidebar {
+  height: 70vh; /* Adjust sidebar height */
+  background-color: #fff;
+  padding: 10px;
+  border-radius: .25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
+  margin-bottom: 15px; /* Space between image section and data section */
+}
+
+  .sidebar img {
+    width: 80% !important;
+    height: auto !important; /* Make height auto */
+  }
+
+  .sidebar h4 {
+    margin-top: 20%;
+    font-size: 28px;
+  }
+
+.navbar {
+  height: 60px; /* Adjusted navbar height */
+}
+
+.table th {
+  background-color: forestgreen;
+  color: white;
+  font-size: 14px;
+}
+
+.table td {
+  font-size: 14px;
+}
+
+.container {
+  padding-right: 0; /* Remove padding */
+  padding-left: 0; /* Remove padding */
+}
+
+.row {
+  margin-right: 0; /* Remove margin */
+  margin-left: 0; /* Remove margin */
+}
