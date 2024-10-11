@@ -72,7 +72,14 @@ namespace GumAndHealth.Server
             var app = builder.Build();
 
             app.UseDefaultFiles();
+
             app.UseStaticFiles(); // Serve wwwroot
+
+            // Create the image folder if not existed
+            var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "images");
+            if (!Directory.Exists(folderPath))
+                Directory.CreateDirectory(folderPath);
+
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(
@@ -89,7 +96,13 @@ namespace GumAndHealth.Server
 
             app.UseHttpsRedirection();
 
+            // Enable CORS globally
+            app.UseCors("AllowAnyOrigin");
+
+            // Use Authentication and Authorization middleware
+            app.UseAuthentication();
             app.UseAuthorization();
+
 
 
             app.MapControllers();
