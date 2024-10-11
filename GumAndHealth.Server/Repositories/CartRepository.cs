@@ -19,5 +19,34 @@ namespace GumAndHealth.Server.Repositories
             context.SaveChanges();
             return cart;
         }
+
+        public CartItem? UpdateOrCreateCartItem(long productId, long userId, long quantity = 1)
+        {
+            // Get the cart item if existed
+            var cart = UserCart(userId);
+            var cartItem = context.CartItems
+                .FirstOrDefault(ci => ci.CartId == cart.Id && ci.ProductId == productId);
+            if (cartItem == null)
+            {
+                if (quantity == 0)
+                    return null;
+
+                // Create if not exist
+                cartItem = new CartItem
+                {
+                    CartId = cart.Id,
+                    ProductId = productId,
+                    Quantity = quantity
+                };
+                context.CartItems.Add(cartItem);
+                context.SaveChanges();
+                return cartItem;
+            }
+            cartItem.Quantity = quantity;
+            // Update id existed
+            context.Update(cartItem);
+            context.SaveChanges();
+            return cartItem;
+        }
     }
 }

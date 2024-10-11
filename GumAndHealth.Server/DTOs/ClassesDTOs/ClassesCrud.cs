@@ -1,8 +1,9 @@
-﻿namespace GumAndHealth.Server.DTOs.ClassesDTOs
-{
-    public class dasboardClassesCrud
-    {
+﻿using GumAndHealth.Server.Models;
 
+namespace GumAndHealth.Server.DTOs.ClassesDTOs
+{
+    public class ClassesCrud
+    {
         public long Id { get; set; }
 
         public string? Name { get; set; }
@@ -12,5 +13,7 @@
         public string? ImagePath { get; set; }
 
         public decimal? PricePerMonth { get; set; }
+
+        
     }
 }
