@@ -1,8 +1,8 @@
-if(!isAdmin){  
+@if(!isAdmin){  
 <app-header></app-header>
 <router-outlet></router-outlet>
 <app-footer></app-footer>
 }
-esle{
+@else {
 <router-outlet></router-outlet>
 }

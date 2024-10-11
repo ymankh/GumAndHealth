@@ -39,14 +39,11 @@ import { ClassDetailsComponent } from './pages/class-details/class-details.compo
     GymsComponent,
     RecipesComponent,
     RecipeDetailComponent,
-    RecipeDetailComponent ,
+    RecipeDetailComponent,
     GymsComponent,
     SingleGymComponent,
     AdminComponent,
-    AdminClassesComponent
-
-    
-    AdminComponent,
+    AdminClassesComponent,
     ClassDetailsComponent
   ],
   imports: [
