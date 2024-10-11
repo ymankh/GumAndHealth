@@ -27,7 +27,7 @@ namespace GumAndHealth.Server.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult Register([FromBody] UserRegisterDto register)
+        public IActionResult Register([FromForm] UserRegisterDto register)
         {
             var user = authRepository.RegisterUser(register);
             return Created();

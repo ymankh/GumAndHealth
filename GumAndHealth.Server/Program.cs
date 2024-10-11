@@ -1,6 +1,8 @@
 
 using System.Text;
+using GumAndHealth.Server.Helpers;
 using GumAndHealth.Server.Models;
+using GumAndHealth.Server.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
@@ -20,6 +22,10 @@ namespace GumAndHealth.Server
             // Add services to the container.
             builder.Services.AddDbContext<MyDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("YourConnectionString")));
+
+            builder.Services.AddSingleton<GenerateJwtToken>();
+            builder.Services.AddScoped<AuthRepository>();
+
             // Add JWT Bearer Authentication
             builder.Services.AddAuthentication(options =>
                 {
