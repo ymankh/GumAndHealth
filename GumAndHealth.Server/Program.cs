@@ -66,10 +66,6 @@ namespace GumAndHealth.Server
             {
                 // Handle circular references
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-
-                // Alternatively, you can use Preserve instead of Ignore:
-                // options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize;
-                // options.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
             });
 
             builder.Services.AddControllers();
