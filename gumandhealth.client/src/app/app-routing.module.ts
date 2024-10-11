@@ -10,6 +10,7 @@ import { ClassesComponent } from './pages/classes/classes.component';
 import { NutritionComponent } from './nutrition/nutrition.component';
 import { ProfileComponent } from './profile/profile.component';
 import { GymsComponent } from './pages/gyms/gyms.component';
+import { RecipeDetailComponent } from './nutrition/recipe-detail/recipe-detail.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'nutrition', component:NutritionComponent},
   { path: 'Profile', component: ProfileComponent },
   { path: 'Gyms', component: GymsComponent },
+  { path: 'recipe/:id', component: RecipeDetailComponent }, // مسار تفاصيل الوصفة
 
   { path: '**', component: HomeComponent, pathMatch: 'full' },
 
