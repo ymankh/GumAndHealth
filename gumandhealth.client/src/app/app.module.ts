@@ -19,6 +19,8 @@ import { GymsComponent } from './pages/gyms/gyms.component';
 import { RecipesComponent } from './nutrition/recipes/recipes.component';
 import { RecipeDetailComponent } from './nutrition/recipe-detail/recipe-detail.component';
 import { SingleGymComponent } from './pages/single-gym/single-gym.component';
+import { AdminComponent } from './pages/admin/admin.component';
+import { AdminClassesComponent } from './pages/admin-classes/admin-classes.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { SingleGymComponent } from './pages/single-gym/single-gym.component';
     RecipeDetailComponent,
     RecipeDetailComponent ,
     GymsComponent,
-    SingleGymComponent
+    SingleGymComponent,
+    AdminComponent,
+    AdminClassesComponent
   ],
   imports: [
     FormsModule,
