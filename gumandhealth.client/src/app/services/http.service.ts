@@ -10,6 +10,6 @@ import { Category } from '../shared/interfaces';
 export class HttpService {
   constructor(readonly http: HttpClient) {}
   getAllCategory(): Observable<Category[]> {
-    return this.http.get<Category[]>('/api/RecipeCategory');
+    return this.http.get<Category[]>(root + '/api/RecipeCategory');
   }
 }
