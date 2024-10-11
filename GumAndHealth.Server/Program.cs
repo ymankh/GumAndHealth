@@ -20,12 +20,13 @@ namespace GumAndHealth.Server
 
             // Add services to the container.
             // Add services to the container.
-            //builder.Services.AddDbContext<MyDbContext>(options =>
-            //    options.UseSqlServer(builder.Configuration.GetConnectionString("YourConnectionString")));
+            builder.Services.AddDbContext<MyDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("YourConnectionString")));
 
             builder.Services.AddSingleton<GenerateJwtToken>();
             builder.Services.AddScoped<AuthRepository>();
             builder.Services.AddScoped<GymServiceRepository>();
+            builder.Services.AddScoped<CartRepository>();
 
             // Add JWT Bearer Authentication
             builder.Services.AddAuthentication(options =>

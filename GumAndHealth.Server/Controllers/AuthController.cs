@@ -37,16 +37,19 @@ namespace GumAndHealth.Server.Controllers
         [Authorize]
         public IActionResult GetUser()
         {
-            var user = GetCurrentUser();
-            return Ok(user);
+            return Ok(GetCurrentUser);
         }
 
-        private User GetCurrentUser()
+        private User GetCurrentUser
         {
-            var userId = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-            var user = context.Users.Find(userId);
-            return user;
+            get
+            {
+                var userId = Convert.ToInt64(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+                var user = context.Users.Find(userId);
+                return user;
+            }
         }
+
         //[HttpGet("all")]
         //public IActionResult GetAllUsers()
         //{
