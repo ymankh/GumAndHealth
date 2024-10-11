@@ -31,26 +31,23 @@
           </div>
           <div class="contact-widget">
             <ul>
-              <li>Main Str, no 23, <br />NY, New York PK 23589</li>
-              <li>+546 990221 123 <br />contact&#64;industryalinc.com</li>
+              <li>shikh khalil Sreet<br />HR3X+2VM،</li>
+              <li>+962 077000 000<br />contact&#64;example.com</li>
             </ul>
           </div>
         </div>
       </div>
       <div class="col-lg-8">
-        <!--#addContact="ngForm" (ngSubmit)="addNewContact(addContact.value)"-->
-
-
-        <form class="contact-form">
+        <form #addContact="ngForm" (ngSubmit)="addNewContact(addContact.value)" class="contact-form">
           <div class="row">
             <div class="col-lg-6">
-              <input type="text" placeholder="Your Name" />
+              <input type="text" placeholder="Your Name" ngModel name="name" />
             </div>
             <div class="col-lg-6">
-              <input type="email" placeholder="Your E-mail" />
+              <input type="email" placeholder="Your E-mail" ngModel name="email" />
             </div>
             <div class="col-lg-12">
-              <textarea placeholder="Message"></textarea>
+              <textarea placeholder="Message" ngModel name="message"></textarea>
               <input type="submit" class="submit-btn contact-btn" value="Send" />
             </div>
           </div>
@@ -62,15 +59,16 @@
 <!-- Contact Section End -->
 <!-- Map Section Begin -->
 <div class="map">
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24182.553681405774!2d-73.99529774360377!3d40.744003480221!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259737e225aa1%3A0x652ff78189c0e104!2sStuyvesant%20Town-Peter%20Cooper%20Village%2C%20New%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sbd!4v1567961277124!5m2!1sen!2sbd"
+
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3363.009728827796!2d35.849668799999996!3d32.5525856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151c7715f2c2e7ab%3A0x51755840c8ddbefd!2sOrange%20Digital%20Village%20Irbid!5e0!3m2!1sar!2sjo!4v1728640550226!5m2!1sar!2sjo"
           height="585"
           style="border: 0"
           allowfullscreen></iframe>
   <div class="map-address">
     <div class="map-address-text">
       <ul>
-        <li>Main Str, no 23, <br />NY, New York PK 23589</li>
-        <li>+546 990221 123 <br />contact industryalinc.com</li>
+        <li>shikh khalil Sreet<br />HR3X+2VM،</li>
+        <li>+962 077000 000<br />contact&#64;example.com</li>
       </ul>
     </div>
   </div>
