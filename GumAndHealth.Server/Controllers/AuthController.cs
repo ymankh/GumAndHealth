@@ -47,5 +47,10 @@ namespace GumAndHealth.Server.Controllers
             var user = context.Users.Find(userId);
             return user;
         }
+        //[HttpGet("all")]
+        //public IActionResult GetAllUsers()
+        //{
+        //    return Ok(authRepository.All());
+        //}
     }
 }
