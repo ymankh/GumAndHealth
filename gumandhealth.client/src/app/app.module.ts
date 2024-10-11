@@ -16,6 +16,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { FormsModule } from '@angular/forms';
 import { TipsComponent } from './nutrition/tips/tips.component';
 import { GymsComponent } from './pages/gyms/gyms.component';
+import { RecipesComponent } from './nutrition/recipes/recipes.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,8 @@ import { GymsComponent } from './pages/gyms/gyms.component';
     ProfileComponent,
     TipsComponent,
     GymsComponent
+    TipsComponent,
+    RecipesComponent
   ],
   imports: [
     FormsModule,
