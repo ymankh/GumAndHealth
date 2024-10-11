@@ -7,6 +7,8 @@ import { AboutComponent } from './pages/about/about.component';
 import { BlogComponent } from './pages/blog/blog.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { ClassesComponent } from './pages/classes/classes.component';
+import { NutritionComponent } from './nutrition/nutrition.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -16,6 +18,9 @@ const routes: Routes = [
   { path: 'classes', component: ClassesComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'nutrition', component:NutritionComponent},
+  { path: 'Profile', component: ProfileComponent },
+
   { path: '**', component: HomeComponent, pathMatch: 'full' },
 
   // to home
