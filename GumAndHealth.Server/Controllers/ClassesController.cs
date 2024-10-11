@@ -80,9 +80,47 @@ namespace GumAndHealth.Server.Controllers
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////
+        [HttpGet("getAllClassSchedules")]
+        public IActionResult GetAllClassSchedules()
+        {
+            var classSchedules = _db.ClassSchedules
+                .Include(cs => cs.Instructor)  // جلب معلومات المدرس
+                .Include(cs => cs.Class)        // جلب معلومات الكلاس
+                .ToList();  // جلب جميع المواعيد
 
+            if (!classSchedules.Any())
+            {
+                return NotFound("No class schedules found.");
+            }
 
+            var response = classSchedules.Select(cs => new
+            {
+                ClassScheduleId = cs.Id,
+                AvailableDay = cs.AvailableDay,
+                StartTime = cs.StartTime,
+                EndTime = cs.EndTime,
+                InstructorName = cs.Instructor.FullName,
+                InstructorBio = cs.Instructor.Bio,
+                InstructorCredentials = cs.Instructor.Credentials,
+                ClassName = cs.Class.Name  // إضافة اسم الكلاس هنا
+            });
 
+            return Ok(response);
+        }
+
+        [HttpGet("getImages/{imageName}")]
+        public IActionResult getImage(string imageName)
+        {
+            var pathImage = Path.Combine(Directory.GetCurrentDirectory(), "images", imageName);
+
+            if (System.IO.File.Exists(pathImage))
+            {
+                return PhysicalFile(pathImage, "image/*");
+            }
+
+            return NotFound();
+
+        }
 
     }
 }
