@@ -13,11 +13,7 @@ import { BlogComponent } from './pages/blog/blog.component';
 import { ClassesComponent } from './pages/classes/classes.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { ProfileComponent } from './profile/profile.component';
-<<<<<<< HEAD
-import { TipsComponent } from './nutrition/tips/tips.component';
-=======
 import { FormsModule } from '@angular/forms';
->>>>>>> dbd7eb4712f80ed0fe50140f4de89b6e52c3145d
 
 @NgModule({
   declarations: [
