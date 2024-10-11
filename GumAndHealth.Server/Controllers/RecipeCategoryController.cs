@@ -36,6 +36,9 @@ namespace GumAndHealth.Server.Controllers
                     return NotFound();
                 }
 
+
+
+
                 return category;
             }
         }
