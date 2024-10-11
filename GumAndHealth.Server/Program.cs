@@ -2,6 +2,7 @@ using System.Text;
 using GumAndHealth.Server.Helpers;
 using GumAndHealth.Server.Models;
 using GumAndHealth.Server.Repositories;
+using GumAndHealth.Server.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
@@ -27,6 +28,7 @@ namespace GumAndHealth.Server
             builder.Services.AddScoped<AuthRepository>();
             builder.Services.AddScoped<GymServiceRepository>();
             builder.Services.AddScoped<CartRepository>();
+            builder.Services.AddScoped<PayPalPaymentService>();
 
             //Add JWT Bearer Authentication
             builder.Services.AddAuthentication(options =>

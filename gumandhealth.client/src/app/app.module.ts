@@ -18,6 +18,7 @@ import { TipsComponent } from './nutrition/tips/tips.component';
 import { GymsComponent } from './pages/gyms/gyms.component';
 import { RecipesComponent } from './nutrition/recipes/recipes.component';
 import { RecipeDetailComponent } from './nutrition/recipe-detail/recipe-detail.component';
+import { SingleGymComponent } from './pages/single-gym/single-gym.component';
 
 @NgModule({
   declarations: [
@@ -35,9 +36,9 @@ import { RecipeDetailComponent } from './nutrition/recipe-detail/recipe-detail.c
     GymsComponent,
     RecipesComponent,
     RecipeDetailComponent,
-     RecipeDetailComponent 
-
-    
+    RecipeDetailComponent ,
+    GymsComponent,
+    SingleGymComponent
   ],
   imports: [
     FormsModule,

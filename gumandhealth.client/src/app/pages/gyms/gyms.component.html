@@ -1,1 +1,40 @@
-<p>gyms works!</p>
+<!-- Hero Section Begin -->
+<div class="hero-section set-bg" [style.backgroundImage]="'url(/assets/img/classes-bg.jpg)'">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="hero-text">
+          <h1>Classes</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Hero Section End -->
+<!-- Gyms Section Begin -->
+<div class="classes-section spad">
+  <div class="container">
+    <div class="row gym-cards-container">
+      <div class="col-lg-4 col-md-6" *ngFor="let item of allGyms">
+        <div class="single-classes-item gymSingle card shadow-sm">
+          <div class="gym-card-image">
+            <img src="../../../assets/img/Gyms/{{item.imagePath}}" alt="Gym Image" class="img-fluid">
+          </div>
+          <div class="gym-card-body gymBody p-3">
+            <h4>{{item.name}}</h4>
+            <p class="gym-description">{{item.description}}</p>
+            <div class="gym-type">
+              <strong>Type: </strong>
+              <span>{{item.isMixed ? 'Mixed' : 'Separate'}}</span>
+            </div>
+            <!-- Button to go to gym details -->
+            <a routerLink="/gym-details/{{item.id}}" class="btn btn-primary mt-3">
+              View Details
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Gyms Section End -->
