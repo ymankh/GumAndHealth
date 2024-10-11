@@ -29,10 +29,35 @@ namespace GumAndHealth.Server.Controllers
         public IActionResult GetClassByID(int id)
         {
             if (id <= 0) { return BadRequest("Please enter an Id higher than 0"); }
-            var classes = _db.ClassServices.Where(x => x.Id == id).FirstOrDefault();
-            if (classes == null) { return NotFound("There is no classes"); }
-            return Ok(classes);
+
+            var classDetails = _db.ClassServices
+                .Include(cs => cs.ClassSchedules) // جلب مواعيد الكلاس
+                .ThenInclude(cs => cs.Instructor)  // جلب معلومات المدرب
+                .FirstOrDefault(cs => cs.Id == id);
+
+            if (classDetails == null) { return NotFound("Class not found"); }
+
+            var response = new
+            {
+                ClassId = classDetails.Id,
+                ClassName = classDetails.Name,
+                ClassImage = classDetails.ImagePath,
+                Description = classDetails.Description,
+                Schedules = classDetails.ClassSchedules.Select(cs => new
+                {
+                    ClassScheduleId = cs.Id,
+                    AvailableDay = cs.AvailableDay,
+                    StartTime = cs.StartTime,
+                    EndTime = cs.EndTime,
+                    InstructorName = cs.Instructor.FullName,
+                    InstructorBio = cs.Instructor.Bio,
+                    InstructorCredentials = cs.Instructor.Credentials
+                })
+            };
+
+            return Ok(response);
         }
+
         ///////////////////////////////////////////////////////////////////////////////////////
 
         [HttpGet("filter")]

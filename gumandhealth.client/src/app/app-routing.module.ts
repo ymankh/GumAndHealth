@@ -13,6 +13,7 @@ import { GymsComponent } from './pages/gyms/gyms.component';
 import { RecipeDetailComponent } from './nutrition/recipe-detail/recipe-detail.component';
 import { SingleGymComponent } from './pages/single-gym/single-gym.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { ClassDetailsComponent } from './pages/class-details/class-details.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'singleGym/:id', component: SingleGymComponent},
   { path: 'singleGym', component: SingleGymComponent },
   { path: 'Admin', component: AdminComponent },
+  { path: 'ClassDetails/:id', component: ClassDetailsComponent },
 
 
   { path: 'recipe/:id', component: RecipeDetailComponent }, // مسار تفاصيل الوصفة

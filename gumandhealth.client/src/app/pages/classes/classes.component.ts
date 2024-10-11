@@ -25,15 +25,17 @@ export class ClassesComponent implements OnInit {
     this.GetTheClasses();
     this.getClassSchedules();
   }
+ 
 
   GetTheClasses() {
     this._ser.getAllClasses().subscribe((data) => {
       this.classes = data;
+      this.filteredClasses = data;
     });
   }
 
   goToClassDetails(classID: number) {
-    this.router.navigate(['', classID]);
+    this.router.navigate(['ClassDetails', classID]);
   }
   getClassSchedules() {
     this._ser.getJadwal().subscribe((data: any) => {
@@ -47,7 +49,17 @@ export class ClassesComponent implements OnInit {
       console.log('Transformed Schedules:', this.schedules); // تحقق من التحويل
     });
   }
-
+  searchTerm: string = ''; // لحفظ نص البحث
+  filteredClasses:any
+  onSearch() {
+    if (this.searchTerm) {
+      this._ser.filter(this.searchTerm).subscribe((data) => {
+        this.filteredClasses = data; // قم بتعيين الكلاسات المفلترة
+      });
+    } else {
+      this.filteredClasses = this.classes; // إذا كان النص فارغًا، أعد الكلاسات الكاملة
+    }
+  }
 
   convertToDate(timeString: string): Date {
     if (!timeString) {
