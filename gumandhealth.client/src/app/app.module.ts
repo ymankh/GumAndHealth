@@ -35,7 +35,6 @@ import { RecipeDetailComponent } from './nutrition/recipe-detail/recipe-detail.c
     GymsComponent,
     RecipesComponent,
     RecipeDetailComponent,
-     RecipeDetailComponent 
 
     
   ],
