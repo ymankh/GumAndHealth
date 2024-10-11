@@ -14,10 +14,17 @@ export class FawarehService {
 
 
 
-  //get All Gyms Service
+  ///////////////// get All Gyms Service /////////////////
   getAllGyms(): Observable<any> {
     return this.http.get<any>(`${this.staticUrl}/Gyms/GetAllGyms`)
   }
+
+
+  ///////////////// for single gym /////////////////
+  getSignleGym(id: any): Observable<any> {
+    return this.http.get<any>(`${this.staticUrl}/Gyms/GetGymById/${id}`)
+  }
+
 
 
 
