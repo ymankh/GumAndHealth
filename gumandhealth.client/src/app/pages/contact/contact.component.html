@@ -1,0 +1,76 @@
+<!-- Hero Section Begin -->
+
+<div class="hero-section set-bg" [style.backgroundImage]="'url(/assets/img/contact-bg.jpg)'">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="hero-text">
+          <h1>Contact</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Hero Section End -->
+<!-- Contact Section Begin -->
+<section class="contact-section spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="contact-text">
+          <div class="section-title">
+            <h2>Get in touch</h2>
+            <p>
+              Welcome to CrossFit, where fitness meets healthy living.
+              We offer diverse classes tailored for all levels, from CrossFit
+              to yoga, alongside nutritious meal options to fuel your journey.
+              Our supportive community is dedicated to helping you achieve your
+              goals and embrace a healthier lifestyle. Join us and take the first
+              step towards ultimate wellness!
+            </p>
+          </div>
+          <div class="contact-widget">
+            <ul>
+              <li>shikh khalil Sreet<br />HR3X+2VM،</li>
+              <li>+962 077000 000<br />contact&#64;example.com</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <form #addContact="ngForm" (ngSubmit)="addNewContact(addContact.value)" class="contact-form">
+          <div class="row">
+            <div class="col-lg-6">
+              <input type="text" placeholder="Your Name" ngModel name="name" />
+            </div>
+            <div class="col-lg-6">
+              <input type="email" placeholder="Your E-mail" ngModel name="email" />
+            </div>
+            <div class="col-lg-12">
+              <textarea placeholder="Message" ngModel name="message"></textarea>
+              <input type="submit" class="submit-btn contact-btn" value="Send" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Contact Section End -->
+<!-- Map Section Begin -->
+<div class="map">
+
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3363.009728827796!2d35.849668799999996!3d32.5525856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151c7715f2c2e7ab%3A0x51755840c8ddbefd!2sOrange%20Digital%20Village%20Irbid!5e0!3m2!1sar!2sjo!4v1728640550226!5m2!1sar!2sjo"
+          height="585"
+          style="border: 0"
+          allowfullscreen></iframe>
+  <div class="map-address">
+    <div class="map-address-text">
+      <ul>
+        <li>shikh khalil Sreet<br />HR3X+2VM،</li>
+        <li>+962 077000 000<br />contact&#64;example.com</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- Map Section End -->

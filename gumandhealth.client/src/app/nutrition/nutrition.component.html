@@ -1,1 +1,42 @@
-<p>nutrition works!</p>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <!-- Card 1: Tips -->
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <img src="/assets/img/imgnutrition2.png"
+             class="card-img-top"
+             alt="Healthy Tips Image" />
+        <div class="card-body">
+          <h5 class="card-title">Healthy Tips</h5>
+          <p class="card-text">
+            Discover healthy nutrition tips that will help you achieve a healthy lifestyle.
+          </p>
+
+          <button class="btn btn-success" (click)="navigateToRecipes(1)">
+            Explore Tips
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Recipes -->
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <img src="/assets/img/imgnutrition1.png"
+             class="card-img-top"
+             alt="Healthy Recipes Image" />
+        <div class="card-body">
+          <h5 class="card-title">Healthy Recipes</h5>
+          <p class="card-text">
+            Enjoy the most delicious healthy recipes that boost your health and energize you.
+          </p>
+
+          <button class="btn btn-success" (click)="navigateToRecipes(2)">
+            Explore Recipes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
