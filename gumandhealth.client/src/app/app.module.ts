@@ -36,9 +36,7 @@ import { SingleGymComponent } from './pages/single-gym/single-gym.component';
     GymsComponent,
     RecipesComponent,
     RecipeDetailComponent,
-     RecipeDetailComponent 
-
-    
+    RecipeDetailComponent ,
     GymsComponent,
     SingleGymComponent
   ],
