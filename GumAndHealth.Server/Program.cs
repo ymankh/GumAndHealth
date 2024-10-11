@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace GumAndHealth.Server
 {
@@ -67,7 +69,36 @@ namespace GumAndHealth.Server
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Bearer {token}\""
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
+
+                // This adds "Bearer" automatically when the token is entered in Swagger
+                c.OperationFilter<AppendBearerTokenOperationFilter>();
+            });
 
             var app = builder.Build();
 
@@ -110,6 +141,17 @@ namespace GumAndHealth.Server
             app.MapFallbackToFile("/index.html");
 
             app.Run();
+        }
+    }
+    public class AppendBearerTokenOperationFilter : IOperationFilter
+    {
+        public void Apply(OpenApiOperation operation, OperationFilterContext context)
+        {
+            var authHeaderParameter = operation.Parameters?.FirstOrDefault(p => p.Name == "Authorization");
+            if (authHeaderParameter != null)
+            {
+                authHeaderParameter.Description = "Enter your JWT token. Bearer will be added automatically.";
+            }
         }
     }
 }
