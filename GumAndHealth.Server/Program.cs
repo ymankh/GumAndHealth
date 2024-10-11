@@ -142,24 +142,24 @@ namespace GumAndHealth.Server
             //    options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
             //});
 
-            //// Add session services
-            //builder.Services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
-            //builder.Services.AddSession(options =>
-            //{
-            //    options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout
-            //    options.Cookie.HttpOnly = true; // Make the session cookie HTTP only
-            //    options.Cookie.IsEssential = true; // Make the session cookie essential
-            //});
+            // Add session services
+            builder.Services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout
+                options.Cookie.HttpOnly = true; // Make the session cookie HTTP only
+                options.Cookie.IsEssential = true; // Make the session cookie essential
+            });
 
-            //// Add EmailService as a dependency
-            //builder.Services.AddTransient<EmailService>();
+            // Add EmailService as a dependency
+            builder.Services.AddTransient<EmailService>();
 
-            //// Load configuration settings (like SMTP details)
-            //builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            // Load configuration settings (like SMTP details)
+            builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
-            //builder.Services.AddSingleton<OtpService>();
+            builder.Services.AddSingleton<OtpService>();
 
-            //builder.Services.AddMemoryCache();
+            builder.Services.AddMemoryCache();
 
             ////Endhosam***************************************
 

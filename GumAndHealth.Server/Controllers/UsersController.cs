@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using hosam.DTOs;
+using GumAndHealth.Server.Repositories;
+using GumAndHealth.Server.Helpers;
 
 namespace GumAndHealth.Server.Controllers
 {
@@ -12,50 +14,54 @@ namespace GumAndHealth.Server.Controllers
     {
         private MyDbContext _db;
         private TokenGenerator _tokenGenerator;
-        public UsersController(MyDbContext db, TokenGenerator tokenGenerator)
+        private AuthRepository _authRepository;
+        private GenerateJwtToken _generateJwtToken;
+        public UsersController(MyDbContext db, TokenGenerator tokenGenerator, AuthRepository authRepository, GenerateJwtToken generateJwt)
         {
             _db = db;
             _tokenGenerator = tokenGenerator;
+            _authRepository = authRepository;
+            _generateJwtToken = generateJwt;
 
         }
 
 
-        [HttpPost("Register")]
-        public IActionResult AddUser([FromForm] UserRegisterRequestDTO addUser)
-        {
-            byte[] hash, salt;
-            PasswordHasher.CreatePasswordHash(addUser.Password, out hash, out salt);
-            var newuser = new User()
-            {
-                Name = addUser.Username,
-                Email = addUser.Email,
-                Username = addUser.Username,
-                PasswordSalt = salt,
-                PasswordHash = hash
-            };
-            _db.Users.Add(newuser);
-            _db.SaveChanges();
-            var user = _db.Users.FirstOrDefault(u => u.Email == newuser.Email);
-            var cart = new Cart() { UserId = user.Id };
-            _db.Carts.Add(cart);
-            _db.SaveChanges();
-            return Ok(newuser);
-        }
+        //[HttpPost("Register")]
+        //public IActionResult AddUser([FromForm] UserRegisterRequestDTO addUser)
+        //{
+        //    byte[] hash, salt;
+        //    PasswordHasher.CreatePasswordHash(addUser.Password, out hash, out salt);
+        //    var newuser = new User()
+        //    {
+        //        Name = addUser.Username,
+        //        Email = addUser.Email,
+        //        Username = addUser.Username,
+        //        PasswordSalt = salt,
+        //        PasswordHash = hash
+        //    };
+        //    _db.Users.Add(newuser);
+        //    _db.SaveChanges();
+        //    var user = _db.Users.FirstOrDefault(u => u.Email == newuser.Email);
+        //    var cart = new Cart() { UserId = user.Id };
+        //    _db.Carts.Add(cart);
+        //    _db.SaveChanges();
+        //    return Ok(newuser);
+        //}
 
 
-        [HttpPost("Login")]
-        public IActionResult Login([FromForm] UserLoginRequestDTO user)
-        {
-            var dbuser = _db.Users.FirstOrDefault(u => u.Email == user.Email);
-            if (dbuser == null || !PasswordHasher.VerifyPasswordHash(user.Password, dbuser.PasswordHash, dbuser.PasswordSalt))
-            {
-                return BadRequest("Login Unauthorized!");
-            }
-            var roles = dbuser.Status.Split(" ").ToList();
-            var token = _tokenGenerator.GenerateToken(dbuser.Email, roles);
+        //[HttpPost("Login")]
+        //public IActionResult Login([FromForm] UserLoginRequestDTO user)
+        //{
+        //    var dbuser = _db.Users.FirstOrDefault(u => u.Email == user.Email);
+        //    if (dbuser == null || !PasswordHasher.VerifyPasswordHash(user.Password, dbuser.PasswordHash, dbuser.PasswordSalt))
+        //    {
+        //        return BadRequest("Login Unauthorized!");
+        //    }
+        //    var roles = dbuser.Status.Split(" ").ToList();
+        //    var token = _tokenGenerator.GenerateToken(dbuser.Email, roles);
 
-            return Ok(new { Token = token, UserId = dbuser.Id, userStatus = dbuser.Status });
-        }
+        //    return Ok(new { Token = token, UserId = dbuser.Id, userStatus = dbuser.Status });
+        //}
 
         [HttpGet]
         public IActionResult GetAllUsers()
@@ -114,45 +120,21 @@ namespace GumAndHealth.Server.Controllers
         [HttpPost("Google")]
         public IActionResult RegisterationFromGoogle([FromBody] RegisterGoogleDTO addUser)
         {
-            var userfetch = _db.Users.Where(x => x.Email == addUser.email).FirstOrDefault();
+            var userfetch = _authRepository.GetUserByEmail(addUser.email);
 
             if (userfetch == null)
             {
-                byte[] hash, salt;
-                PasswordHasher.CreatePasswordHash(addUser.uid, out hash, out salt);
-                var newuser = new User()
+              userfetch = _authRepository.RegisterUser(new DTOs.UserDTOs.UserRegisterDto
                 {
-                    Name = addUser.displayName,
-                    Email = addUser.email,
-                    Username = addUser.displayName,
-                    PasswordSalt = salt,
-                    PasswordHash = hash
-                };
-                _db.Users.Add(newuser);
-                _db.SaveChanges();
-                var user = _db.Users.FirstOrDefault(u => u.Email == newuser.Email);
-                var cart = new Cart() { UserId = user.Id };
-                _db.Carts.Add(cart);
-                _db.SaveChanges();
-
-                var roles = user.Status.Split(" ").ToList();
-                var token = _tokenGenerator.GenerateToken(user.Email, roles);
-                return Ok(new { Token = token, userID = user.Id, userStatus = user.Status });
+                  Email = addUser.email,
+                  Username = addUser.displayName,
+                  Name = addUser.displayName,
+                  Password = addUser.uid
+                });
+                
             }
-            else
-            {
-
-                var user = _db.Users.FirstOrDefault(x => x.Email == addUser.email);
-                if (user == null || !PasswordHasher.VerifyPasswordHash(addUser.uid, user.PasswordHash, user.PasswordSalt))
-                {
-                    return Unauthorized("Invalid username or password.");
-                }
-
-                var Status = user.Status.Split(" ").ToList();
-                var token = _tokenGenerator.GenerateToken(user.Email, Status);
-
-                return Ok(new { Token = token, userID = user.Id, userStatus = user.Status });
-            }
+            var token = _generateJwtToken.Generate(userfetch.Id);
+            return Ok(new { token });
         }
 
         [HttpGet("GetAddressById/{id}")]

@@ -21,8 +21,15 @@ namespace GumAndHealth.Server.Repositories
             return Encoding.UTF8.GetString(user.PasswordHash) == hashedPassword ? user : null;
         }
 
+        public User? GetUserByEmail(string email)
+        {
+            email = email.Trim().ToLower();
+            return context.Users.FirstOrDefault(u => u.Email == email);
+        }
+
         public User RegisterUser(UserRegisterDto userData)
         {
+            
             // Generate a unique salt for this user
             var salt = SaltHelper.GenerateSalt(16);  // 16 bytes salt
 
@@ -42,6 +49,9 @@ namespace GumAndHealth.Server.Repositories
                 user.Image = ImageSaver.SaveImage(userData.Image);
             }
             context.Users.Add(user);
+            context.SaveChanges();
+            var cart = new Cart() { UserId = user.Id };
+            context.Carts.Add(cart);
             context.SaveChanges();
             return user;
         }
