@@ -23,6 +23,7 @@ namespace GumAndHealth.Server.Controllers
         {
             var allGyms = _db.GymServices.Select(g => new GymResponseDTO
             {
+                Id = g.Id,
                 Name = g.Name,
                 Description = g.Description,
                 ImagePath = g.ImagePath,
@@ -43,6 +44,22 @@ namespace GumAndHealth.Server.Controllers
             }
 
             return Ok(allGyms);
+        }
+
+
+        [HttpGet("GetGymById/{id}")]
+        public IActionResult GetGymById(int id)
+        {
+            var gym = _db.GymServices.FirstOrDefault(g => g.Id == id);
+
+            if (gym == null)
+            {
+                return NotFound("Gym not found");
+            }
+
+            return Ok(gym);
+
+
         }
 
 

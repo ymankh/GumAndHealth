@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'nutrition', component:NutritionComponent},
   { path: 'Profile', component: ProfileComponent },
   { path: 'Gyms', component: GymsComponent },
-  { path: 'singleGym', component: SingleGymComponent},
+  { path: 'singleGym/:id', component: SingleGymComponent},
 
   { path: 'recipe/:id', component: RecipeDetailComponent }, // مسار تفاصيل الوصفة
 

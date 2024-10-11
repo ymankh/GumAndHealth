@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="hero-text">
-          <h1>Classes</h1>
+          <h1 >Local Gyms</h1>
         </div>
       </div>
     </div>
@@ -12,6 +12,8 @@
 </div>
 <!-- Hero Section End -->
 <!-- Gyms Section Begin -->
+
+
 <div class="classes-section spad">
   <div class="container">
     <div class="row gym-cards-container">
@@ -28,9 +30,8 @@
               <span>{{item.isMixed ? 'Mixed' : 'Separate'}}</span>
             </div>
             <!-- Button to go to gym details -->
-            <a routerLink="/gym-details/{{item.id}}" class="btn btn-primary mt-3">
-              View Details
-            </a>
+            <a routerLink="/singleGym/{{item.id}}" class="btn btn-primary mt-3">View Details</a>
+            <a routerLink="/singleGym" class="btn btn-primary mt-3">Single Gym</a>
           </div>
         </div>
       </div>
