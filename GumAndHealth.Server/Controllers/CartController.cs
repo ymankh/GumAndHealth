@@ -57,65 +57,20 @@ namespace GumAndHealth.Server.Controllers
             return Ok(new { approvalUrl });
         }
 
-        //[HttpGet("success")]
-        //public IActionResult ExecutePayment(string paymentId, string PayerID, string token, int userId)
-        //{
-        //    var user = db.Users.Find(userId);
-        //    var (cartItems, cart) = GetAllCartItems(user);
-        //    var totalAmount = cartItems.Sum(c => c.Price);
+        [HttpGet("success")]
+        public IActionResult ExecutePayment(string paymentId, string PayerID, string token, int userId)
+        {
+            var order = cartRepository.Checkout(userId, paymentId);
+            var executedPayment = payPalService.ExecutePayment(paymentId, PayerID);
+            string script = "<script>window.close();</script>";
+            return Content(script, "text/html");
+        }
 
-        //    // Create new order
-        //    var order = new Order
-        //    {
-        //        UserId = user.UserId,
-        //        Address = user.Address,
-        //        OrderDate = DateTime.Now,
-        //        ShippingStatus = "pending",
-        //        CreatedAt = DateTime.Now,
-        //        VoucherId = cart.VoucherId,
-        //        TotalAmount = totalAmount
-        //    };
-
-        //    db.Orders.Add(order);
-        //    db.SaveChanges();
-        //    // Add the cart Items to the order
-        //    foreach (var cartItem in cartItems)
-        //    {
-        //        var orderItem = new OrderItem
-        //        {
-        //            OrderId = order.OrderId,
-        //            Quantity = cartItem.Quantity,
-        //            TotalPrice = cartItem.Price,
-        //            ProductId = cartItem.ProductId
-
-        //        };
-        //        db.OrderItems.Add(orderItem);
-        //        db.CartItems.Remove(cartItem);
-        //    }
-        //    db.Carts.Remove(cart);
-
-        //    var executedPayment = payPalService.ExecutePayment(paymentId, PayerID);
-        //    var payment = new Payment
-        //    {
-        //        Status = executedPayment.state,
-        //        OrderId = order.OrderId,
-        //        Amount = order.TotalAmount,
-        //        PaymentMethod = "Paypal",
-        //        PaymentDate = DateTime.Now,
-        //        TransactionId = executedPayment.id,
-        //        PaymentGateway = "Paypal"
-        //    };
-        //    db.Payments.Add(payment);
-        //    db.SaveChanges();
-        //    string script = "<script>window.close();</script>";
-        //    return Content(script, "text/html");
-        //}
-
-        //[HttpGet("cancel")]
-        //public IActionResult CancelPayment()
-        //{
-        //    return BadRequest("Payment canceled.");
-        //}
+        [HttpGet("cancel")]
+        public IActionResult CancelPayment()
+        {
+            return BadRequest("Payment canceled.");
+        }
 
     }
 }

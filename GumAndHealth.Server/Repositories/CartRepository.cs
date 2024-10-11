@@ -1,6 +1,9 @@
 ﻿using GumAndHealth.Server.DTOs.CartItemDTOs;
 using GumAndHealth.Server.Models;
 using Microsoft.EntityFrameworkCore;
+using PayPal.Api;
+using Order = GumAndHealth.Server.Models.Order;
+using Payment = GumAndHealth.Server.Models.Payment;
 
 namespace GumAndHealth.Server.Repositories
 {
@@ -54,6 +57,48 @@ namespace GumAndHealth.Server.Repositories
         {
             var cart = UserCart(userId);
             return cart.CartItems.Sum(cItem => cItem.Product!.Price * cItem.Quantity ?? 0);
+        }
+
+        public Order Checkout(long userId, string paymentId)
+        {
+            // Create payment
+            var totalPrice = GetTotalPrice(userId);
+            var payment = new Payment
+            {
+                Amount = totalPrice,
+                DateAndTime = DateTime.Now,
+                Method = "PayPal",
+                Status = "pending",
+                TransactionId = paymentId
+
+            };
+            context.Payments.Add(payment);
+            context.SaveChanges();
+            // Create order
+            var order = new Order
+            {
+                UserId = userId,
+                OrderDate = DateTime.Now,
+                PaymentId = payment.Id,
+                Status = "created",
+                TotalAmount = totalPrice
+            };
+            context.Orders.Add(order);
+            context.SaveChanges();
+
+            foreach (var cartItem in UserCart(userId).CartItems)
+            {
+                context.OrderItems.Add(new OrderItem
+                {
+                    OrderId = order.Id,
+                    ProductId = cartItem.ProductId,
+                    Quantity = cartItem.Quantity
+                });
+                context.CartItems.Remove(cartItem);
+            }
+
+            context.SaveChanges();
+            return order;
         }
     }
 }
