@@ -16,6 +16,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { FormsModule } from '@angular/forms';
 import { TipsComponent } from './nutrition/tips/tips.component';
 import { GymsComponent } from './pages/gyms/gyms.component';
+import { RecipesComponent } from './nutrition/recipes/recipes.component';
+import { RecipeDetailComponent } from './nutrition/recipe-detail/recipe-detail.component';
 import { SingleGymComponent } from './pages/single-gym/single-gym.component';
 
 @NgModule({
@@ -31,6 +33,12 @@ import { SingleGymComponent } from './pages/single-gym/single-gym.component';
     ContactComponent,
     ProfileComponent,
     TipsComponent,
+    GymsComponent,
+    RecipesComponent,
+    RecipeDetailComponent,
+     RecipeDetailComponent 
+
+    
     GymsComponent,
     SingleGymComponent
   ],

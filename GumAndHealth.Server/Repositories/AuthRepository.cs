@@ -3,6 +3,8 @@ using GumAndHealth.Server.Helpers;
 using GumAndHealth.Server.Models;
 using System.Data;
 using GumAndHealth.Server.shared;
+using System.Collections;
+using System.Text;
 
 namespace GumAndHealth.Server.Repositories
 {
@@ -13,18 +15,21 @@ namespace GumAndHealth.Server.Repositories
 
             var user = context.Users.SingleOrDefault(u => u.Email == loginData.Email);
             if (user == null)
-
                 return null;
 
+            var hashedPassword = HashHelper.HashPassword(loginData.password, Encoding.UTF8.GetString(user.PasswordSalt));
+            return Encoding.UTF8.GetString(user.PasswordHash) == hashedPassword ? user : null;
+        }
 
-            var hashedPassword = HashHelper.HashPassword(loginData.password, user.PasswordSalt.ToString());
-
-            return user.PasswordHash.ToString() == hashedPassword ? user : null;
-
+        public User? GetUserByEmail(string email)
+        {
+            email = email.Trim().ToLower();
+            return context.Users.FirstOrDefault(u => u.Email == email);
         }
 
         public User RegisterUser(UserRegisterDto userData)
         {
+            
             // Generate a unique salt for this user
             var salt = SaltHelper.GenerateSalt(16);  // 16 bytes salt
 
@@ -45,7 +50,15 @@ namespace GumAndHealth.Server.Repositories
             }
             context.Users.Add(user);
             context.SaveChanges();
+            var cart = new Cart() { UserId = user.Id };
+            context.Carts.Add(cart);
+            context.SaveChanges();
             return user;
+        }
+
+        public List<User> All()
+        {
+            return context.Users.ToList();
         }
     }
 }

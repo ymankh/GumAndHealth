@@ -1,4 +1,3 @@
-
 using System.Text;
 using GumAndHealth.Server.Helpers;
 using GumAndHealth.Server.Models;
@@ -8,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NuGet.Protocol.Core.Types;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace GumAndHealth.Server
@@ -25,8 +25,10 @@ namespace GumAndHealth.Server
 
             builder.Services.AddSingleton<GenerateJwtToken>();
             builder.Services.AddScoped<AuthRepository>();
+            builder.Services.AddScoped<GymServiceRepository>();
+            builder.Services.AddScoped<CartRepository>();
 
-            // Add JWT Bearer Authentication
+            //Add JWT Bearer Authentication
             builder.Services.AddAuthentication(options =>
                 {
                     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -101,6 +103,66 @@ namespace GumAndHealth.Server
                 // This adds "Bearer" automatically when the token is entered in Swagger
                 c.OperationFilter<AppendBearerTokenOperationFilter>();
             });
+
+
+            ////hosam************************************
+            //// Register TokenGenerator as a singleton or transient service
+            //builder.Services.AddSingleton<TokenGenerator>(); // or .AddTransient<TokenGenerator>()
+
+            //// Retrieve JWT settings from configuration
+            //var jwtSettings = builder.Configuration.GetSection("Jwt");
+            //var key = jwtSettings.GetValue<string>("Key");
+            //var issuer = jwtSettings.GetValue<string>("Issuer");
+            //var audience = jwtSettings.GetValue<string>("Audience");
+
+            //// Ensure values are not null
+            //if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(issuer) || string.IsNullOrEmpty(audience))
+            //{
+            //    throw new InvalidOperationException("JWT settings are not properly configured.");
+            //}
+
+            //// Add JWT Authentication
+            //builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            //    .AddJwtBearer(options =>
+            //    {
+            //        options.TokenValidationParameters = new TokenValidationParameters
+            //        {
+            //            ValidateIssuer = true,
+            //            ValidateAudience = true,
+            //            ValidateLifetime = true,
+            //            ValidateIssuerSigningKey = true,
+            //            ValidIssuer = jwtSettings["Issuer"],
+            //            ValidAudience = jwtSettings["Audience"],
+            //            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]))
+            //        };
+            //    });
+
+            //builder.Services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
+            //});
+
+            // Add session services
+            builder.Services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout
+                options.Cookie.HttpOnly = true; // Make the session cookie HTTP only
+                options.Cookie.IsEssential = true; // Make the session cookie essential
+            });
+
+            // Add EmailService as a dependency
+            builder.Services.AddTransient<EmailService>();
+
+            // Load configuration settings (like SMTP details)
+            builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+            builder.Services.AddSingleton<OtpService>();
+
+            builder.Services.AddMemoryCache();
+
+            ////Endhosam***************************************
+
 
             var app = builder.Build();
 
