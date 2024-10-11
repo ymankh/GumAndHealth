@@ -12,10 +12,12 @@ import { ProfileComponent } from './profile/profile.component';
 import { GymsComponent } from './pages/gyms/gyms.component';
 import { RecipeDetailComponent } from './nutrition/recipe-detail/recipe-detail.component';
 import { SingleGymComponent } from './pages/single-gym/single-gym.component';
+import { AdminClassesComponent } from './pages/admin-classes/admin-classes.component';
 import { AdminComponent } from './pages/admin/admin.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
+  { path: 'displayClasses', component: AdminClassesComponent },
   { path: 'recipes', component: RecipesComponent },
   { path: 'tips', component: TipsComponent },
   { path: 'about', component: AboutComponent },

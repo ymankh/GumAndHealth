@@ -20,6 +20,7 @@ import { RecipesComponent } from './nutrition/recipes/recipes.component';
 import { RecipeDetailComponent } from './nutrition/recipe-detail/recipe-detail.component';
 import { SingleGymComponent } from './pages/single-gym/single-gym.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { AdminClassesComponent } from './pages/admin-classes/admin-classes.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { AdminComponent } from './pages/admin/admin.component';
     RecipeDetailComponent ,
     GymsComponent,
     SingleGymComponent,
-    AdminComponent
+    AdminComponent,
+    AdminClassesComponent
   ],
   imports: [
     FormsModule,
