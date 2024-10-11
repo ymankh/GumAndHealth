@@ -25,6 +25,7 @@ const routes: Routes = [
   { path: 'nutrition', component:NutritionComponent},
   { path: 'Profile', component: ProfileComponent },
   { path: 'Gyms', component: GymsComponent },
+  { path: 'singleGym/:id', component: SingleGymComponent},
   { path: 'singleGym', component: SingleGymComponent },
   { path: 'Admin', component: AdminComponent },
 
