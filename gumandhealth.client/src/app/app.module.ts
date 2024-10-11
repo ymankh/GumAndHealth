@@ -20,6 +20,7 @@ import { RecipesComponent } from './nutrition/recipes/recipes.component';
 import { RecipeDetailComponent } from './nutrition/recipe-detail/recipe-detail.component';
 import { SingleGymComponent } from './pages/single-gym/single-gym.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { AdminClassesComponent } from './pages/admin-classes/admin-classes.component';
 import { ClassDetailsComponent } from './pages/class-details/class-details.component';
 
 @NgModule({
@@ -41,6 +42,10 @@ import { ClassDetailsComponent } from './pages/class-details/class-details.compo
     RecipeDetailComponent ,
     GymsComponent,
     SingleGymComponent,
+    AdminComponent,
+    AdminClassesComponent
+
+    
     AdminComponent,
     ClassDetailsComponent
   ],

@@ -1,0 +1,34 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  color: black;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: black;
+}
+
+p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: black;
+}
+
+h4 {
+  margin-top: 20px;
+  color: black;
+  font-size: 1.5rem;
+}
+
+.btn {
+  margin-top: 30px;
+}
