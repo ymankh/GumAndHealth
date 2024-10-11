@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NuGet.Protocol.Core.Types;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace GumAndHealth.Server
@@ -25,6 +26,7 @@ namespace GumAndHealth.Server
 
             builder.Services.AddSingleton<GenerateJwtToken>();
             builder.Services.AddScoped<AuthRepository>();
+            builder.Services.AddScoped<GymServiceRepository>();
 
             // Add JWT Bearer Authentication
             builder.Services.AddAuthentication(options =>
