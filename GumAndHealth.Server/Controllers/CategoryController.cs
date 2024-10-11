@@ -17,12 +17,11 @@ namespace GumAndHealth.Server.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateCategories(CreateCategoryDto createCategoryDto)
+        public IActionResult CreateCategories([FromForm] CreateCategoryDto createCategoryDto)
         {
             var newCategory = categoryRepository.CreateCategory(createCategoryDto);
             return Ok(newCategory);
         }
-
     }
 
 }
