@@ -15,5 +15,7 @@ public partial class ClassService
 
     public decimal? PricePerMonth { get; set; }
 
+    public virtual ICollection<ClassSchedule> ClassSchedules { get; set; } = new List<ClassSchedule>();
+
     public virtual ICollection<ClassSubscription> ClassSubscriptions { get; set; } = new List<ClassSubscription>();
 }
