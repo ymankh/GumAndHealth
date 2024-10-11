@@ -1,4 +1,5 @@
 ﻿using GumAndHealth.Server.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GumAndHealth.Server.Repositories
 {
@@ -6,7 +7,9 @@ namespace GumAndHealth.Server.Repositories
     {
         public Cart UserCart(long userId)
         {
-            var cart = context.Carts.FirstOrDefault(c => c.UserId == userId);
+            var cart = context.Carts
+                .Include(c => c.CartItems)
+                .ThenInclude(ci => ci.Product).FirstOrDefault(c => c.UserId == userId);
             if (cart != null) return cart;
             cart = new Cart
             {
