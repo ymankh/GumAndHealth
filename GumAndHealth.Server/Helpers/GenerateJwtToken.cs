@@ -8,7 +8,7 @@ namespace GumAndHealth.Server.Helpers
     public class GenerateJwtToken(IConfiguration config)
     {
 
-        public string Generate(int customUserId)
+        public string Generate(long customUserId)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
