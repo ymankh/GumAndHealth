@@ -14,6 +14,7 @@ import { RecipeDetailComponent } from './nutrition/recipe-detail/recipe-detail.c
 import { SingleGymComponent } from './pages/single-gym/single-gym.component';
 import { AdminClassesComponent } from './pages/admin-classes/admin-classes.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { ClassDetailsComponent } from './pages/class-details/class-details.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'singleGym/:id', component: SingleGymComponent},
   { path: 'singleGym', component: SingleGymComponent },
   { path: 'Admin', component: AdminComponent },
+  { path: 'ClassDetails/:id', component: ClassDetailsComponent },
 
 
   { path: 'recipe/:id', component: RecipeDetailComponent }, // مسار تفاصيل الوصفة

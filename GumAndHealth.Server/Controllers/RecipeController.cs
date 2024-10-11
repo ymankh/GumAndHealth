@@ -36,7 +36,16 @@ namespace GumAndHealth.Server.Controllers
 
                 return recipe;
             }
+
+        [HttpGet("GetRecipesByCategory")]
+        public IActionResult GetRecipesByCategory(long recipeCategoryId)
+        {
+            var recipes = _context.Recipes
+                                  .Find(recipeCategoryId);
+            return Ok(recipes);
         }
 
     }
+
+}
 

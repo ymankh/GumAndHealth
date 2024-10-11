@@ -21,6 +21,7 @@ import { RecipeDetailComponent } from './nutrition/recipe-detail/recipe-detail.c
 import { SingleGymComponent } from './pages/single-gym/single-gym.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { AdminClassesComponent } from './pages/admin-classes/admin-classes.component';
+import { ClassDetailsComponent } from './pages/class-details/class-details.component';
 
 @NgModule({
   declarations: [
@@ -38,11 +39,12 @@ import { AdminClassesComponent } from './pages/admin-classes/admin-classes.compo
     GymsComponent,
     RecipesComponent,
     RecipeDetailComponent,
-    RecipeDetailComponent ,
+    RecipeDetailComponent,
     GymsComponent,
     SingleGymComponent,
     AdminComponent,
-    AdminClassesComponent
+    AdminClassesComponent,
+    ClassDetailsComponent
   ],
   imports: [
     FormsModule,

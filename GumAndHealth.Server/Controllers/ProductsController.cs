@@ -16,6 +16,13 @@ namespace GumAndHealth.Server.Controllers
             var paginatedProducts = productRepository.GetPaginatedProduct(productFilter);
             return Ok(paginatedProducts);
         }
+        [HttpPost]
+        public IActionResult CreateProduct([FromForm] CreateProductDto createProductDto)
+        {
+            var newProduct = productRepository.CreateProduct(createProductDto);
+            return Ok(newProduct);
+        }
+
     }
 
 }
