@@ -7,7 +7,7 @@ public partial class CartItem
 {
     public long Id { get; set; }
 
-    public long ProductId { get; set; }
+    public long? ProductId { get; set; }
 
     public long? CartId { get; set; }
 

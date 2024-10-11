@@ -1,8 +1,6 @@
 ﻿using GumAndHealth.Server.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
 namespace GumAndHealth.Server.Controllers
 {
     [Route("api/[controller]")]
@@ -30,8 +28,8 @@ namespace GumAndHealth.Server.Controllers
         [HttpGet("GetClassByID")]
         public IActionResult GetClassByID(int id)
         {
-            if(id <= 0) { return BadRequest("Please enter an Id higher than 0"); }
-            var classes = _db.ClassServices.Where( x => x.Id == id).FirstOrDefault();
+            if (id <= 0) { return BadRequest("Please enter an Id higher than 0"); }
+            var classes = _db.ClassServices.Where(x => x.Id == id).FirstOrDefault();
             if (classes == null) { return NotFound("There is no classes"); }
             return Ok(classes);
         }
@@ -58,10 +56,10 @@ namespace GumAndHealth.Server.Controllers
             }
 
             var classSchedule = _db.ClassSchedules
-                .Include(cs => cs.Instructor) 
+                .Include(cs => cs.Instructor)
                 .FirstOrDefault(cs => cs.Id == id);
 
- 
+
             if (classSchedule == null)
             {
                 return NotFound("Class schedule not found");
@@ -78,7 +76,7 @@ namespace GumAndHealth.Server.Controllers
                 instructorCredentials = classSchedule.Instructor.Credentials
             };
 
-            return Ok(response); 
+            return Ok(response);
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////
