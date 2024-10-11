@@ -38,7 +38,10 @@
         </div>
       </div>
       <div class="col-lg-8">
-        <form action="#" class="contact-form">
+        <!--#addContact="ngForm" (ngSubmit)="addNewContact(addContact.value)"-->
+
+
+        <form class="contact-form">
           <div class="row">
             <div class="col-lg-6">
               <input type="text" placeholder="Your Name" />
@@ -47,11 +50,8 @@
               <input type="email" placeholder="Your E-mail" />
             </div>
             <div class="col-lg-12">
-              <input type="text" placeholder="Subject" />
               <textarea placeholder="Message"></textarea>
-              <input type="submit"
-                     class="submit-btn contact-btn"
-                     value="Send" />
+              <input type="submit" class="submit-btn contact-btn" value="Send" />
             </div>
           </div>
         </form>

@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class ContactComponent {
 
+
+  ngOnInit() { }
+
+//  constructor() {private _ser: UrlService}
 }
