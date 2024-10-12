@@ -7,63 +7,72 @@
         </div>
         <div class="card-body">
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+            <!-- Email Field -->
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
-              <input
-                type="email"
-                class="form-control"
-                id="email"
-                formControlName="email"
-                placeholder="Enter your email"
-                [ngClass]="{
+              <input type="email"
+                     class="form-control"
+                     id="email"
+                     formControlName="email"
+                     placeholder="Enter your email"
+                     [ngClass]="{
                   'is-invalid':
                     loginForm.get('email')?.invalid &&
                     loginForm.get('email')?.touched
-                }"
-              />
-              <div
-                *ngIf="
+                }" />
+              <div *ngIf="
                   loginForm.get('email')?.invalid &&
                   loginForm.get('email')?.touched
                 "
-                class="invalid-feedback"
-              >
+                   class="invalid-feedback">
                 Email is required and should be valid.
               </div>
             </div>
 
+            <!-- Password Field -->
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
-              <input
-                type="password"
-                class="form-control"
-                id="password"
-                formControlName="password"
-                placeholder="Enter your password"
-                [ngClass]="{
+              <input type="password"
+                     class="form-control"
+                     id="password"
+                     formControlName="password"
+                     placeholder="Enter your password"
+                     [ngClass]="{
                   'is-invalid':
                     loginForm.get('password')?.invalid &&
                     loginForm.get('password')?.touched
-                }"
-              />
-              <div
-                *ngIf="
+                }" />
+              <div *ngIf="
                   loginForm.get('password')?.invalid &&
                   loginForm.get('password')?.touched
                 "
-                class="invalid-feedback"
-              >
-                Password is required.
+                   class="invalid-feedback">
+                Password is required and must be at least 6 characters.
               </div>
             </div>
 
-            <button
-              type="submit"
-              class="btn btn-primary w-100"
-              [disabled]="loginForm.invalid"
-            >
+            <!-- Display login error -->
+            <div *ngIf="loginError" class="alert alert-danger">{{ loginError }}</div>
+
+            <!-- Login Button -->
+            <button type="submit"
+                    class="btn btn-primary w-100"
+                    [disabled]="loginForm.invalid || isLoading">
+              <!-- Show loading spinner if in progress -->
+              <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
               Login
             </button>
+
+            <button type="button"
+                    class="btn btn-secondary w-100 mt-2"
+                    (click)="navigateToRegister()">
+              Register
+            </button>
+
+            <button type="button" class="btn btn-link w-100 mt-2" (click)="navigateToResetPassword()">
+              Forgot your password?
+            </button>
+
           </form>
         </div>
       </div>

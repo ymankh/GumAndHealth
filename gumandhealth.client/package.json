@@ -23,6 +23,7 @@
     "@angular/router": "^18.0.0",
     "izitoast": "^1.4.0",
     "jest-editor-support": "*",
+    "jspdf": "^2.5.2",
     "run-script-os": "*",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.14.2",
