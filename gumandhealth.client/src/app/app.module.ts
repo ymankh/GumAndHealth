@@ -31,10 +31,10 @@ import { RecipesComponent } from './nutrition/recipes/recipes.component';
     ContactComponent,
     ProfileComponent,
     TipsComponent,
-    GymsComponent
+    GymsComponent,
     TipsComponent,
     RecipesComponent
-  ],
+  ], 
   imports: [
     FormsModule,
     BrowserModule,
