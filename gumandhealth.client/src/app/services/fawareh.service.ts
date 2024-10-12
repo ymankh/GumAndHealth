@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { root } from '../shared/constants';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FawarehService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private auth: AuthService) { }
 
   staticUrl = "https://localhost:7280/api"
 
