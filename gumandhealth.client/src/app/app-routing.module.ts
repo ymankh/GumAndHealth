@@ -21,6 +21,7 @@ import { ClassDetailsComponent } from './pages/class-details/class-details.compo
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { LoginComponent } from './pages/login/login.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { TestimonialsComponent } from './pages/testimonials/testimonials.component';
 
 
 const routes: Routes = [
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'nutrition', component: NutritionComponent },
   { path: 'Profile', component: ProfileComponent },
+  { path: 'Testimonials', component: TestimonialsComponent },
   { path: 'edit-profile/:id', component: EditProfileComponent},
   { path: 'Gyms', component: GymsComponent },
   { path: 'singleGym/:id', component: SingleGymComponent },

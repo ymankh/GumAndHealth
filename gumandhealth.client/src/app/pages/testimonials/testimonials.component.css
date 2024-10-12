@@ -1,93 +1,95 @@
-/* Importing fonts from Google */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-
-/* Reseting */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
-
 body {
-  background: linear-gradient(to right, #101c81, #2a6ba3);
-  min-height: 100vh;
+  color: #000;
+  overflow-x: hidden;
+  height: 100%;
+  background-repeat: no-repeat;
 }
 
-.owl-carousel .owl-item {
-  transition: all 0.3s ease-in-out;
+.card-main {
+  padding: 50px;
+  border-radius: 10px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  box-shadow: 0px 4px 8px 0px #283593;
 }
 
-  .owl-carousel .owl-item .card {
-    padding: 30px;
-    position: relative;
-  }
-
-.owl-carousel .owl-stage-outer {
-  overflow-y: auto !important;
-  padding-bottom: 40px;
+.card-0 {
+  color: #fff;
+  background-color: #1c9b3b;
+  position: relative;
+  margin-left: 70px;
+  border-radius: 10px;
+  min-height: 312px;
 }
 
-.owl-carousel .owl-item img {
-  height: 200px;
-  object-fit: cover;
-  border-radius: 6px;
+.carousel-indicators li {
+  cursor: pointer;
+  border-radius: 50% !important;
+  width: 10px;
+  height: 10px;
 }
 
-.owl-carousel .owl-item .card .name {
+.profile {
+  color: #000;
+  background-color: #FFD54F;
   position: absolute;
-  bottom: -20px;
-  left: 33%;
-  color: #101c81;
-  font-size: 1.1rem;
-  font-weight: 600;
-  background-color: aquamarine;
-  padding: 0.3rem 0.4rem;
-  border-radius: 5px;
-  box-shadow: 2px 3px 15px #3c405a;
+  left: -70px;
+  top: 17%;
+  border-radius: 8px;
+  border-top-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 
-.owl-carousel .owl-item .card {
-  opacity: 0.2;
-  transform: scale3d(0.8, 0.8, 0.8);
-  transition: all 0.3s ease-in-out;
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  border-bottom-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
-.owl-carousel .owl-item.active.center .card {
-  opacity: 1;
-  transform: scale3d(1, 1, 1);
+.open-quotes {
+  margin-left: 130px;
+  margin-top: 100px;
 }
 
-.owl-carousel .owl-dots {
-  display: inline-block;
-  width: 100%;
-  text-align: center;
+.content {
+  margin-left: 150px;
+  margin-right: 80px;
 }
 
-.owl-theme .owl-dots .owl-dot span {
-  height: 20px;
-  background: #2a6ba3 !important;
-  border-radius: 2px !important;
-  opacity: 0.8;
+.close-quotes {
+  margin-bottom: 100px;
+  margin-right: 60px
 }
 
-.owl-theme .owl-dots .owl-dot.active span,
-.owl-theme .owl-dots .owl-dot:hover span {
-  height: 13px;
-  width: 13px;
-  opacity: 1;
-  transform: translateY(2px);
-  background: #83b8e7 !important;
-}
-
-@media(min-width: 480.6px) and (max-width: 575.5px) {
-  .owl-carousel .owl-item .card .name {
-    left: 24%;
+@media screen and (max-width: 600px) {
+  .card-main {
+    padding: 50px 10px;
   }
-}
 
-@media(max-width: 360px) {
-  .owl-carousel .owl-item .card .name {
-    left: 30%;
+  .card-0 {
+    min-height: 432px;
+  }
+
+  .profile {
+    top: 24%;
+  }
+
+  .profile-pic {
+    width: 90px;
+    height: 90px;
+  }
+
+  .open-quotes {
+    margin-left: 100px;
+  }
+
+  .content {
+    margin-left: 120px;
+    margin-right: 50px;
+  }
+
+  .close-quotes {
+    margin-right: 30px
   }
 }
