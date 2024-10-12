@@ -14,7 +14,6 @@ export class CartService {
   cart$ = this.cartSubject.asObservable();
 
   constructor(private http: HttpClient) {
-    
     // Load cart from localStorage if available
     const storedCart = localStorage.getItem('cart');
     if (storedCart) {
@@ -48,6 +47,16 @@ export class CartService {
       title: 'item added',
       message: 'Successfully inserted to the cart',
     });
+  }
+
+  updateQuantity(item: CartItem) {
+    this.cartItems.forEach((cartItem) => {
+      if (cartItem.productId === item.productId) {
+        cartItem.quantity = item.quantity;
+      }
+    });
+    this.cartSubject.next(this.cartItems);
+    this.saveCartToLocalStorage();
   }
 
   // Remove item from cart

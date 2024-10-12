@@ -100,5 +100,12 @@ namespace GumAndHealth.Server.Repositories
             context.SaveChanges();
             return order;
         }
+
+        public void DeleteCartItem(long productId, long userId)
+        {
+            var cartItem = context.CartItems.FirstOrDefault(cItem => cItem.ProductId == productId);
+            if (cartItem == null) return;
+            context.CartItems.Remove(cartItem);
+        }
     }
 }

@@ -46,6 +46,17 @@ export class CartComponent implements OnInit {
     throw new Error('Method not implemented.');
   }
   updateQuantity(item: CartItem) {
-    throw new Error('Method not implemented');
+    this.cartService.updateQuantity(item);
+  }
+
+  decrementQuantity(item: CartItem) {
+    if (item.quantity > 1) {
+      item.quantity--;
+      this.updateQuantity(item);
+    }
+  }
+  incrementQuantity(item: CartItem) {
+    item.quantity++;
+    this.updateQuantity(item);
   }
 }
