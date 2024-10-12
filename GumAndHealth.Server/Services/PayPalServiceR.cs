@@ -1,73 +1,70 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using PayPal.Api;
 using PayPalCheckoutSdk.Core;
+using Payment = PayPal.Api.Payment;
+
 using PayPalCheckoutSdk.Orders;
 
 namespace GumAndHealth.Server.Services
 {
     public class PayPalServiceR
     {
-        private readonly PayPalHttpClient _client;
+        private readonly string clientId;
+        private readonly string clientSecret;
 
-        public PayPalServiceR(IConfiguration configuration)
+        public PayPalServiceR(IConfiguration config)
         {
-            var clientId = configuration["PayPalR:ClientId"];
-            var secret = configuration["PayPalR:Secret"];
-            var isLive = configuration["PayPalR:IsLive"] == "true";
-
-            PayPalEnvironment environment;
-
-            if (isLive)
-            {
-                environment = new LiveEnvironment(clientId, secret);
-            }
-            else
-            {
-                environment = new SandboxEnvironment(clientId, secret);
-            }
-
-            _client = new PayPalHttpClient(environment);
+            this.clientId = config["PayPalR:ClientId"];
+            this.clientSecret = config["PayPalR:ClientSecret"];
         }
 
-        public async Task<Order> CreateOrder(decimal amount, string currency, string returnUrl, string cancelUrl)
+        private APIContext GetAPIContext()
         {
-            var orderRequest = new OrderRequest()
+            var oauthToken = new OAuthTokenCredential(clientId, clientSecret).GetAccessToken();
+            return new APIContext(oauthToken);
+        }
+
+        public Payment CreatePayment(string redirectUrl, decimal total, string? message, long userId)
+        {
+            var apiContext = GetAPIContext();
+
+            // Define payment details
+            var payment = new Payment
             {
-                CheckoutPaymentIntent = "CAPTURE",
-                PurchaseUnits = new List<PurchaseUnitRequest>
+                intent = "sale",
+                payer = new PayPal.Api.Payer { payment_method = "paypal" },
+                transactions = new List<Transaction>
                 {
-                    new PurchaseUnitRequest
+                    new Transaction
                     {
-                        AmountWithBreakdown = new AmountWithBreakdown
+                        amount = new Amount
                         {
-                            CurrencyCode = currency,
-                            Value = amount.ToString("F2")
-                        }
+                            currency = "USD",
+                            total = $"{total}" // amount to charge
+                        },
+                        description = message?? "Product description"
                     }
                 },
-                ApplicationContext = new ApplicationContext
+                redirect_urls = new RedirectUrls
                 {
-                    ReturnUrl = returnUrl,
-                    CancelUrl = cancelUrl
+                    cancel_url = $"{redirectUrl}/cancel",
+                    return_url = $"{redirectUrl}/success?userId={userId}"
                 }
             };
 
-            var request = new OrdersCreateRequest();
-            request.Prefer("return=representation");
-            request.RequestBody(orderRequest);
-
-            var response = await _client.Execute(request);
-            return response.Result<Order>();
+            // Create payment using PayPal API
+            return payment.Create(apiContext);
         }
 
-        public async Task<Order> CaptureOrder(string orderId)
+        public Payment ExecutePayment(string paymentId, string payerId)
         {
-            var request = new OrdersCaptureRequest(orderId);
-            request.RequestBody(new OrderActionRequest());
+            var apiContext = GetAPIContext();
+            var paymentExecution = new PaymentExecution { payer_id = payerId };
+            var payment = new Payment { id = paymentId };
 
-            var response = await _client.Execute(request);
-            return response.Result<Order>();
+            return payment.Execute(apiContext, paymentExecution);
         }
     }
 }

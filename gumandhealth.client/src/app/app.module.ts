@@ -7,6 +7,7 @@ import { NutritionComponent } from './nutrition/nutrition.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AdminComponent } from './pages/admin/admin.component';
 import { AboutComponent } from './pages/about/about.component';
 import { BlogComponent } from './pages/blog/blog.component';
 import { ClassesComponent } from './pages/classes/classes.component';
@@ -19,7 +20,6 @@ import { GymsComponent } from './pages/gyms/gyms.component';
 import { RecipesComponent } from './nutrition/recipes/recipes.component';
 import { RecipeDetailComponent } from './nutrition/recipe-detail/recipe-detail.component';
 import { SingleGymComponent } from './pages/single-gym/single-gym.component';
-import { AdminComponent } from './pages/admin/admin.component';
 import { AdminClassesComponent } from './pages/admin-classes/admin-classes.component';
 import { ClassDetailsComponent } from './pages/class-details/class-details.component';
 import { ProductsComponent } from './pages/products/products.component';
@@ -40,19 +40,19 @@ import { TestimonialsComponent } from './pages/testimonials/testimonials.compone
     HomeComponent,
     HeaderComponent,
     FooterComponent,
+    AdminComponent,
+    AdminClassesComponent,
+    AdminClassEditComponent,
     AboutComponent,
     BlogComponent,
     ClassesComponent,
     ContactComponent,
     ProfileComponent,
-    AdminClassEditComponent,
     TipsComponent,
     GymsComponent,
     RecipesComponent,
     RecipeDetailComponent,
     SingleGymComponent,
-    AdminComponent,
-    AdminClassesComponent,
     ClassDetailsComponent,
     ProductsComponent,
     ProductCardComponent,
