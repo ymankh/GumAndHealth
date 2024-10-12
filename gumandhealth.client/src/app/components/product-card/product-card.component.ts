@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductServiceService } from '../../services/product-service.service';
 import { Product } from '../../shared/interfaces';
 import { CartService } from '../../services/cart.service';
-
+import {root } from '../../shared/constants'
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
@@ -29,4 +29,8 @@ export class ProductCardComponent implements OnInit {
   showDetails(product: Product) {
     console.log(product);
   }
+
+  imageurl(image: string|undefined ) {return root+"/" +image }
+
+
 }
