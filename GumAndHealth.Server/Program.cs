@@ -2,6 +2,7 @@ using System.Text;
 using GumAndHealth.Server.Helpers;
 using GumAndHealth.Server.Models;
 using GumAndHealth.Server.Repositories;
+using GumAndHealth.Server.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
@@ -23,10 +24,15 @@ namespace GumAndHealth.Server
             builder.Services.AddDbContext<MyDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("YourConnectionString")));
 
+
+            // Adding the repos
             builder.Services.AddSingleton<GenerateJwtToken>();
             builder.Services.AddScoped<AuthRepository>();
             builder.Services.AddScoped<GymServiceRepository>();
             builder.Services.AddScoped<CartRepository>();
+            builder.Services.AddScoped<PayPalPaymentService>();
+            builder.Services.AddScoped<ProductsRepository>();
+            builder.Services.AddScoped<CategoryRepository>();
 
             //Add JWT Bearer Authentication
             builder.Services.AddAuthentication(options =>

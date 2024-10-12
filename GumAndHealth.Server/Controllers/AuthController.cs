@@ -15,7 +15,7 @@ namespace GumAndHealth.Server.Controllers
         : ControllerBase
     {
         [HttpPost("login")]
-        public IActionResult Login([FromBody] UserLoginDto loginData)
+        public IActionResult Login([FromForm] UserLoginDto loginData)
         {
             // Get the user using the login data
             var user = authRepository.GetUser(loginData);
@@ -30,7 +30,7 @@ namespace GumAndHealth.Server.Controllers
         [HttpPost("register")]
         public IActionResult Register([FromForm] UserRegisterDto register)
         {
-            if(authRepository.GetUserByEmail(register.Email) != null)
+            if (authRepository.GetUserByEmail(register.Email) != null)
             {
                 return Unauthorized("User Email Already exist");
             }
@@ -77,7 +77,7 @@ namespace GumAndHealth.Server.Controllers
         [HttpPut("EditUser/{id}")]
         public IActionResult EditUser(int id, [FromForm] UserPutDTO edit)
         {
-            var user = context.Users.Where(a => a.Id == id).FirstOrDefault();
+            var user = context.Users.FirstOrDefault(a => a.Id == id);
             if (user == null)
             {
                 return NotFound();
@@ -94,7 +94,7 @@ namespace GumAndHealth.Server.Controllers
         [HttpPut]
         public IActionResult ResetPassword([FromBody] resetPasswordDTO newpass)
         {
-            var user = context.Users.Where(u => u.Email == newpass.Email).FirstOrDefault();
+            var user = context.Users.FirstOrDefault(u => u.Email == newpass.Email);
             if (user == null)
             {
                 return BadRequest();
