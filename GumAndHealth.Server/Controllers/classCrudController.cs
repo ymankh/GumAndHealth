@@ -140,6 +140,30 @@ namespace GumAndHealth.Server.Controllers
             return _context.ClassServices.Any(e => e.Id == id);
         }
 
+        ////////////////////////////////////////////////
+        ///
 
+        [HttpGet("allClasses")]
+        public async Task<ActionResult<IEnumerable<allClass>>> GetClassess()
+        {
+            var classes = await _context.ClassServices
+                .Include(cs => cs.ClassSchedules)
+                .ThenInclude(cs => cs.Instructor)
+                .Select(cs => new allClass
+                {
+                    Id = cs.Id,
+                    Name = cs.Name,
+                    Description = cs.Description,
+                    ImagePath = cs.ImagePath,
+                    PricePerMonth = cs.PricePerMonth ?? 0,
+                    AvailableDay = cs.ClassSchedules.Select(c => c.AvailableDay).FirstOrDefault(),
+                    StartTime = cs.ClassSchedules.Select(c => c.StartTime).FirstOrDefault() ?? new TimeOnly(),
+                    EndTime = cs.ClassSchedules.Select(c => c.EndTime).FirstOrDefault() ?? new TimeOnly(),
+                    InstructorName = cs.ClassSchedules.Select(c => c.Instructor.FullName).FirstOrDefault()
+                })
+                .ToListAsync();
+
+            return Ok(classes);
+        }
     }
 }
