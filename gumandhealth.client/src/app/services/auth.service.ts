@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { root } from '../shared/constants';
 import iziToast from 'izitoast';
 
@@ -41,26 +41,37 @@ export class AuthService {
           title: 'Login Failed',
           message: 'Invalid email or password',
         });
-        // Handle login error (e.g., display error message)
         console.error(error);
       }
     );
 
-    // Save login status in localStorage (for persistence)
     localStorage.setItem('isLoggedIn', 'true');
   }
 
   // Method to log out a user
   logout(): void {
-    // Perform logout logic (e.g., clear user data, invalidate session)
     this.isLoggedInSubject.next(false);
-
-    // Remove login status from localStorage
     localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('token');
   }
 
-  // Method to get the current login state (useful for components needing immediate access)
+  // Method to get the current login state
   isUserLoggedIn(): boolean {
     return this.isLoggedInSubject.getValue();
+  }
+
+  // Method to register a new user
+  register(email: string, password: string): Observable<any> {
+    const formData = new FormData();
+    formData.append('Email', email);
+    formData.append('Password', password);
+
+    // Post registration data to backend
+    return this.http.post<any>(root + '/api/Auth/register', formData);
+  }
+
+  // Method to fetch data from an API
+  fetchData(apiUrl: string): Observable<any> {
+    return this.http.get<any>(apiUrl);
   }
 }
