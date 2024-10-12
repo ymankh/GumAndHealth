@@ -43,7 +43,7 @@ const routes: Routes = [
   { path: 'nutrition', component: NutritionComponent },
   { path: 'Profile', component: ProfileComponent },
   { path: 'Testimonials', component: TestimonialsComponent },
-  { path: 'edit-profile/:id', component: EditProfileComponent},
+  { path: 'edit-profile/:id', component: EditProfileComponent },
   { path: 'Gyms', component: GymsComponent },
   { path: 'singleGym/:id', component: SingleGymComponent },
   { path: 'admin', component: AdminComponent },
@@ -62,10 +62,9 @@ const routes: Routes = [
   { path: 'shop', component: ShopComponent },
   { path: 'cart', component: CartComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
-  
+
+  { path: 'products/category/:id', component: ProductCardComponent }, // or ProductsComponent if that's the correct name
   { path: '**', redirectTo: '', pathMatch: 'full' }, // Wildcard route to redirect invalid paths to home
-  { path: '**', redirectTo: '', pathMatch: 'full' },
-  { path: 'products/category/:id', component: ProductCardComponent } // or ProductsComponent if that's the correct name
   // Wildcard route to redirect invalid paths to home
 ];
 
