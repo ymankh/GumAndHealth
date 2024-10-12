@@ -26,6 +26,9 @@ import { TestimonialsComponent } from './pages/testimonials/testimonials.compone
 import { NutritionComponent } from './nutrition/nutrition.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { RecipeCategoryAdminComponent } from './pages/admin/recipe-category-admin/recipe-category-admin.component';
+import { RecipeCategoryAdminPostComponent } from './pages/admin/recipe-category-admin-post/recipe-category-admin-post.component';
+import { ViewDetilesAdminComponent } from './pages/admin/view-detiles-admin/view-detiles-admin.component';
+import { RecipeAdminPostComponent } from './pages/admin/recipe-admin-post/recipe-admin-post.component';
 
 
 const routes: Routes = [
@@ -64,6 +67,9 @@ const routes: Routes = [
   { path: 'shop', component: ShopComponent },
   { path: 'cart', component: CartComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'PostRecipe', component: RecipeCategoryAdminPostComponent },
+  { path: 'view-detiles-admin/:id', component: ViewDetilesAdminComponent },
+  { path: 'recipe-admin-post', component: RecipeAdminPostComponent },
 
   { path: 'products/category/:id', component: ProductCardComponent }, // or ProductsComponent if that's the correct name
   { path: '**', redirectTo: '', pathMatch: 'full' }, // Wildcard route to redirect invalid paths to home

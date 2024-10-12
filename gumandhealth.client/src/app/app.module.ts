@@ -32,6 +32,9 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { TestimonialsComponent } from './pages/testimonials/testimonials.component';
+import { RecipeCategoryAdminPostComponent } from './pages/admin/recipe-category-admin-post/recipe-category-admin-post.component';
+import { ViewDetilesAdminComponent } from './pages/admin/view-detiles-admin/view-detiles-admin.component';
+import { RecipeAdminPostComponent } from './pages/admin/recipe-admin-post/recipe-admin-post.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +68,10 @@ import { TestimonialsComponent } from './pages/testimonials/testimonials.compone
     ResetPasswordComponent,
     TipsComponent,
     EditProfileComponent,
-    TestimonialsComponent
+    TestimonialsComponent,
+    RecipeCategoryAdminPostComponent,
+    ViewDetilesAdminComponent,
+    RecipeAdminPostComponent,
   ],
   imports: [
     BrowserModule,
