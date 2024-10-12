@@ -18,11 +18,17 @@ export class AhmadService {
     debugger
     return this.http.post<any>("https://localhost:44325/api/Contacts", data)
   }
+  private apiUrl = "https://localhost:44325/api/";
 
 
+  getClassById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}classCrud/getClass/${id}`);
+  }
 
-  ///////////////////////////////////
-  
+  updateClass(id: number, classItem: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}classCrud/putClass/${id}`, classItem);
+  }
+
 
 
 }
