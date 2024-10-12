@@ -10,13 +10,13 @@
         <div class="col-lg-10 col-md-12">
           <nav class="main-menu mobile-menu">
             <ul>
-              <li><a routerLink="/" routerLinkActive="active">Home</a></li>
+              <li><a routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">Home</a></li>
               <li><a routerLink="/classes" routerLinkActive="active">Classes</a></li>
               <li><a routerLink="/nutrition" routerLinkActive="active">Nutrition</a></li>
               <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
               <li><a routerLink="/gyms" routerLinkActive="active">Gyms</a></li>
               <li><a routerLink="/shop" routerLinkActive="active">Shop</a></li>
-              <li><a routerLink="/admin" routerLinkActive="active">Admin</a></li>
+              <li><a routerLink="/admin" routerLinkActive="active">Admin</a></li> 
               <li><a routerLink="/testimonials" routerLinkActive="active">Testimonials</a></li>
 
               <!-- Show Profile and Logout when the user is logged in -->

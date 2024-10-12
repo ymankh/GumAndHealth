@@ -26,10 +26,10 @@ import { TestimonialsComponent } from './pages/testimonials/testimonials.compone
 import { NutritionComponent } from './nutrition/nutrition.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 
-
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'about', component: AboutComponent },
+  { path: 'store', component: ShopComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'classes', component: ClassesComponent },
   { path: 'contact', component: ContactComponent },
@@ -42,22 +42,22 @@ const routes: Routes = [
   { path: 'nutrition', component: NutritionComponent },
   { path: 'Profile', component: ProfileComponent },
   { path: 'Testimonials', component: TestimonialsComponent },
-  { path: 'edit-profile/:id', component: EditProfileComponent},
+  { path: 'edit-profile/:id', component: EditProfileComponent },
   { path: 'Gyms', component: GymsComponent },
   { path: 'singleGym/:id', component: SingleGymComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'admin/classes', component: AdminClassesComponent },
   { path: 'class-details/:id', component: ClassDetailsComponent },
-  { path: 'products', component: ProductsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'shop', component: ShopComponent },
   { path: 'cart', component: CartComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
-  
+  { path: 'products', component: ProductCardComponent, pathMatch: 'full' }, // or ProductsComponent if that's the correct name
+  { path: 'products/category/:id', component: ProductCardComponent }, // or ProductsComponent if that's the correct name
+
   { path: '**', redirectTo: '', pathMatch: 'full' }, // Wildcard route to redirect invalid paths to home
   { path: '**', redirectTo: '', pathMatch: 'full' },
-  { path: 'products/category/:id', component: ProductCardComponent } // or ProductsComponent if that's the correct name
   // Wildcard route to redirect invalid paths to home
 ];
 
@@ -65,4 +65,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

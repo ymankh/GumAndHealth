@@ -78,7 +78,7 @@ namespace GumAndHealth.Server.Controllers
         {
             var order = cartRepository.Checkout(userId, paymentId);
             var executedPayment = payPalService.ExecutePayment(paymentId, PayerID);
-            string script = "<script>window.close();</script>";
+            const string script = "<script>window.close();</script>";
             return Content(script, "text/html");
         }
 
