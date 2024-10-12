@@ -20,4 +20,10 @@ export class NajlaaService {
   getRecipeCategory(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
+
+ 
+  getRecipeById(id: number): Observable<any> {
+    return this.http.get(`https://localhost:7280/api/Recipe/GetRecipeByCategory?recipeCategoryId=${id}`);
+  }
+
 }

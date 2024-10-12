@@ -1,8 +1,10 @@
-﻿using GumAndHealth.Server.Models;
+﻿using GumAndHealth.Server.DTOs.RecipeDTO;
+using GumAndHealth.Server.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+
 
 namespace GumAndHealth.Server.Controllers
 {
@@ -41,8 +43,41 @@ namespace GumAndHealth.Server.Controllers
 
                 return category;
             }
+
+        [HttpPost]
+        [Route("api/RecipeCategory")]
+        public async Task<IActionResult> AddRecipeCategory([FromForm] RecipeCategoryDto recipeCategoryDto)
+        {
+            if (recipeCategoryDto.Image != null)
+            {
+                var fileName = Path.GetFileName(recipeCategoryDto.Image.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "C://Users/Orange/source/repos/GumAndHealth/gumandhealth.client/src/assets/img", fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await recipeCategoryDto.Image.CopyToAsync(stream);
+                }
+
+                // Save data to database
+                var newCategory = new RecipesCategory
+                {
+                    Name = recipeCategoryDto.Name,
+                    Description = recipeCategoryDto.Description,
+                    ImagePath = fileName
+                };
+
+                _context.RecipesCategories.Add(newCategory);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { success = true, message = "Category added successfully" });
+            }
+
+            return BadRequest(new { success = false, message = "Image is required" });
         }
 
+
     }
+
+}
 
 

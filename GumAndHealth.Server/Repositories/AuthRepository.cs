@@ -17,7 +17,7 @@ namespace GumAndHealth.Server.Repositories
             if (user == null)
                 return null;
 
-            var hashedPassword = HashHelper.HashPassword(loginData.password, Encoding.UTF8.GetString(user.PasswordSalt));
+            var hashedPassword = HashHelper.HashPassword(loginData.Password, Encoding.UTF8.GetString(user.PasswordSalt));
             return Encoding.UTF8.GetString(user.PasswordHash) == hashedPassword ? user : null;
         }
 

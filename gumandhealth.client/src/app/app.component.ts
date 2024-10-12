@@ -18,6 +18,6 @@ export class AppComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
-
+  isAdmin = false;
   title = 'Gym And Health';
 }

@@ -24,8 +24,9 @@ namespace GumAndHealth.Server.Controllers
             return Ok(cartRepository.UserCart(CurrentUser.Id));
         }
 
-        [HttpPost]
-        public IActionResult UpdateCartItem(UpdateCartItemDto updatedCartItem)
+        [Authorize]
+        [HttpPost("AddToCart")]
+        public IActionResult AddToCart(UpdateCartItemDto updatedCartItem)
         {
             cartRepository.UpdateOrCreateCartItem(updatedCartItem);
             return Ok();

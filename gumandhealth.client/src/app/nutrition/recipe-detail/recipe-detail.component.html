@@ -1,1 +1,44 @@
-<p>recipe-detail works!</p>
+
+<div class="container mt-5">
+  <div class="book-container">
+    <div class="book">
+      <!-- الجهة اليسرى (الصورة) -->
+      <div class="book-left">
+        <img [src]="'/assets/img/' + recipe.image" alt="{{ recipe.name }} Image">
+      </div>
+
+      <!-- الجهة اليمنى (المعلومات) -->
+      <div class="book-right">
+        <!-- عرض الاسم -->
+        <h2 class="card-title">{{ recipe.name }}</h2>
+
+        <!-- عرض الوصف -->
+        <p class="card-text text-muted">{{ recipe.description }}</p>
+
+        <!-- عرض عدد السعرات الحرارية -->
+        <p class="text-success"><strong>Calories:</strong> {{ recipe.caloriesCount }}</p>
+
+        <!-- عرض المكونات -->
+        <div class="ingredients">
+          <h4>Ingredients:</h4>
+          <ul>
+            <li>{{ recipe.ingredients }}</li>
+          </ul>
+        </div>
+
+        <!-- عرض الوصفة نفسها (الخطوات أو الطريقة) -->
+        <div class="recipe-steps">
+          <h4>Recipe:</h4>
+          <p>{{ recipe.recipe1 }}</p>
+        </div>
+
+        <!-- الأزرار -->
+        <div class="book-footer">
+          <a routerLink="/recipes" class="btn btn-secondary">Back to Recipes</a>
+          <button (click)="generatePDF()" class="btn btn-success">Download Recipe as PDF</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
