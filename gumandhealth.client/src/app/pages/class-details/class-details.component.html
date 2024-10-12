@@ -1,0 +1,41 @@
+<!-- Class Details Section Begin -->
+<div class="class-details-section spad">
+  <div class="container">
+    <div class="class-header">
+      <div class="class-info">
+        <h2>{{ classDetails?.className }}</h2>
+        <div class="class-description">
+          <p>{{ classDetails?.description }}</p>
+        </div>
+      </div>
+      <img [src]="'https://localhost:7280/api/Classes/getImages/' + classDetails?.classImage"
+           alt="{{ classDetails?.className }}"
+           class="class-image" />
+    </div>
+
+    <div class="class-schedules">
+      <h3>Available Schedules:</h3>
+      <div class="schedule-list">
+        <div *ngFor="let day of getUniqueDays()" class="schedule-item">
+          <div class="schedule-header">
+            <i class="fas fa-calendar-day"></i>
+            <span class="schedule-day">{{ day }}</span>
+          </div>
+          <div *ngFor="let schedule of getSchedulesByDay(day)">
+            <div class="schedule-time">
+              {{ schedule.startTime }} - {{ schedule.endTime }} <!-- استخدم السلسلة الزمنية كما هي -->
+            </div>
+            <div class="schedule-instructor">
+              <strong>Instructor:</strong> {{ schedule.instructorName }} <br />
+              <strong>Bio:</strong> {{ schedule.instructorBio }} <br />
+              <strong>Credentials:</strong> {{ schedule.instructorCredentials }}
+            </div>
+                        <button (click)="joinClass(schedule.classScheduleId)" class="join-button">Join the class</button>
+            <hr />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Class Details Section End -->

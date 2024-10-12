@@ -1,0 +1,65 @@
+<!-- Hero Section Begin -->
+<div class="hero-section set-bg" [style.backgroundImage]="'url(/assets/img/classes-bg.jpg)'">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="hero-text">
+          <h1>{{singleGymData.name}}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Hero Section End -->
+<!-- Single Gym Details Section Begin -->
+<div class="gym-details-section spad">
+  <div class="container">
+    <div class="row">
+      <!-- Image on the left -->
+      <div class="col-lg-6">
+        <div class="gym-details-image">
+          <img src="../../../assets/img/Gyms/{{singleGymData.imagePath}}" alt="{{singleGymData.name}}" class="img-fluid">
+        </div>
+      </div>
+
+      <!-- Details on the right -->
+      <div class="col-lg-6">
+        <div class="gym-details-content p-3">
+          <!-- Gym Name and Description -->
+          <h2>{{singleGymData.name}}</h2>
+          <p class="gym-description">{{singleGymData.description}}</p>
+
+          <!-- Gym Type -->
+          <div class="gym-type">
+            <h4>Type:</h4>
+            <p>{{singleGymData.isMixed ? 'Mixed' : 'Separate'}}</p>
+          </div>
+
+          <!-- Price per Month -->
+          <div class="gym-price">
+            <h4>Price per Month:</h4>
+            <p>${{singleGymData.pricePerMonth}}</p>
+          </div>
+
+          <!-- Operating Hours -->
+          <div class="gym-operating-hours">
+            <h4>Operating Hours</h4>
+            <p *ngIf="singleGymData.isMixed">
+              Open 24/7
+            </p>
+            <div *ngIf="!singleGymData.isMixed">
+              <p><strong>Women Shift:</strong> {{singleGymData.womenShiftStart}} - {{singleGymData.womenShiftEnd}}</p>
+              <p><strong>Men Shift:</strong> {{singleGymData.menShiftStart}} - {{singleGymData.menShiftEnd}}</p>
+            </div>
+          </div>
+
+          <!-- Subscribe Button -->
+          <a routerLink="/subscribe/{{singleGymData.id}}" class="btn btn-success mt-4">
+            Subscribe Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Single Gym Details Section End -->

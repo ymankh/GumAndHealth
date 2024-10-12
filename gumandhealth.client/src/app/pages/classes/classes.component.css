@@ -1,0 +1,24 @@
+.hero-text h2 {
+  font-size: 36px; /* ضبط حجم الخط */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* إضافة ظل للنص لتحسين الوضوح */
+  color: white; /* لون النص */
+}
+.hero-section {
+  position: relative; /* يجعل العنصر يحتوي على موضع نسبي */
+  height: 400px; /* اضبط ارتفاع القسم حسب الحاجة */
+  background-size: cover; /* تأكد من أن الصورة تغطي الخلفية بالكامل */
+  background-position: center; /* مركز الصورة */
+}
+
+.hero-text {
+  position: absolute; /* نص فوق الصورة */
+  top: 50%; /* تحريك النص إلى منتصف القسم عموديًا */
+  left: 50%; /* تحريك النص إلى منتصف القسم أفقيًا */
+  transform: translate(-50%, -50%); /* مركزة النص تمامًا */
+  color: white; /* لون النص */
+  text-align: center; /* مركز النص */
+  z-index: 10; /* تأكد من أن النص فوق أي عنصر آخر */
+  padding: 10px; /* إضافة بعض الحشو لجعل النص واضح */
+  background-color: rgba(0, 0, 0, 0.5); /* إضافة خلفية داكنة شفافة للنص لتحسين الوضوح */
+  border-radius: 5px; /* جعل الحواف دائرية */
+}
