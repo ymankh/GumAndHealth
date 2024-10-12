@@ -17,26 +17,27 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { ClassDetailsComponent } from './pages/class-details/class-details.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { LoginComponent } from './pages/login/login.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
+  { path: 'cart', component: CartComponent },
   { path: 'displayClasses', component: AdminClassesComponent },
-  {path: "store", component: ProductCardComponent},
+  { path: 'store', component: ProductCardComponent },
   { path: 'recipes', component: RecipesComponent },
   { path: 'tips', component: TipsComponent },
   { path: 'about', component: AboutComponent },
   { path: 'classes', component: ClassesComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'nutrition', component:NutritionComponent},
+  { path: 'nutrition', component: NutritionComponent },
   { path: 'Profile', component: ProfileComponent },
   { path: 'Gyms', component: GymsComponent },
-  { path: 'singleGym/:id', component: SingleGymComponent},
+  { path: 'singleGym/:id', component: SingleGymComponent },
   { path: 'singleGym', component: SingleGymComponent },
   { path: 'Admin', component: AdminComponent },
   { path: 'ClassDetails/:id', component: ClassDetailsComponent },
   { path: 'login', component: LoginComponent },
-
 
   { path: 'recipe/:id', component: RecipeDetailComponent }, // مسار تفاصيل الوصفة
 
