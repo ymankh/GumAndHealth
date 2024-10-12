@@ -1,7 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NutritionComponent } from './nutrition/nutrition.component';
@@ -28,10 +27,14 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { LoginComponent } from './pages/login/login.component';
 import { ShopComponent } from './pages/shop/shop.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { RecipeCategoryAdminComponent } from './pages/admin/recipe-category-admin/recipe-category-admin.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { TestimonialsComponent } from './pages/testimonials/testimonials.component';
 
 @NgModule({
   declarations: [
-    AdminClassEditComponent,
     AppComponent,
     NutritionComponent,
     HomeComponent,
@@ -42,37 +45,36 @@ import { CartComponent } from './pages/cart/cart.component';
     ClassesComponent,
     ContactComponent,
     ProfileComponent,
+    AdminClassEditComponent,
     TipsComponent,
     GymsComponent,
     RecipesComponent,
     RecipeDetailComponent,
-    RecipeDetailComponent,
-    GymsComponent,
     SingleGymComponent,
     AdminComponent,
     AdminClassesComponent,
     ClassDetailsComponent,
-    ClassDetailsComponent,
     ProductsComponent,
     ProductCardComponent,
     LoginComponent,
-    TipsComponent,
     ShopComponent,
     CartComponent,
+    RecipeCategoryAdminComponent,
+
+    RegisterComponent,
+    ResetPasswordComponent,
+    TipsComponent,
+    EditProfileComponent,
+    TestimonialsComponent
   ],
   imports: [
-    ReactiveFormsModule,
-    FormsModule,
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,
-    // RouterModule.forRoot(routes) // إضافة المسارات هنا
+    ReactiveFormsModule,
+    FormsModule,
+    AppRoutingModule
   ],
-
-  //ما في داعي نحط الراوتس هون يا جماعة.. لازم جوا ال
-  // app-routing.module
-
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

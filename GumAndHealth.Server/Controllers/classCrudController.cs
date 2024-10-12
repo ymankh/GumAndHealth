@@ -119,7 +119,7 @@ namespace GumAndHealth.Server.Controllers
         }
 
         // DELETE: api/ClassCrudApps/5
-        [HttpDelete("{id}")]
+        [HttpDelete("deleteClass/{id}")]
         public async Task<IActionResult> DeleteClass(long id)
         {
             var classEntity = await _context.ClassServices.FindAsync(id);
@@ -132,8 +132,9 @@ namespace GumAndHealth.Server.Controllers
             _context.ClassServices.Remove(classEntity);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return NoContent(); // 204 No Content
         }
+
 
         private bool ClassExists(long id)
         {
@@ -248,5 +249,17 @@ namespace GumAndHealth.Server.Controllers
             await _context.SaveChangesAsync();
             return NoContent(); // 204 No Content
         }
-    }
+    }   
 }
+
+
+
+
+
+
+
+
+
+
+
+
