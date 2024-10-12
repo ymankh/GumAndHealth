@@ -29,8 +29,7 @@
             <td>{{ classItem.endTime }}</td>
             <td>{{ classItem.instructorName }}</td>
             <td>
-              <a class="btn btn-info" [routerLink]="['/editClass/', classItem.id]">Edit</a>
-              <button class="btn btn-danger">Delete</button>
+              <a class="btn btn-info" [routerLink]="['/admin/edit-class', classItem.id]">Edit</a>
             </td>
           </tr>
         </tbody>
