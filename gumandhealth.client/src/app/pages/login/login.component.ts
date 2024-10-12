@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router'; // Import Router
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service'; // Ensure the correct path
 
 @Component({
   selector: 'app-login',
@@ -8,13 +9,14 @@ import { Router } from '@angular/router'; // Import Router
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  loginForm!: FormGroup; // Define loginForm
+  loginForm!: FormGroup;
   isLoading = false;
   loginError: string = '';
 
   constructor(
-    private fb: FormBuilder, // FormBuilder to create form
-    private router: Router // Inject Router for navigation
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService // Inject AuthService for handling login
   ) { }
 
   ngOnInit(): void {
@@ -25,21 +27,34 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
+  // Using async/await to handle login logic
+  async onSubmit(): Promise<void> {
     if (this.loginForm.valid) {
-      // Handle login logic here
       this.isLoading = true; // Show spinner when loading
-      // Mock login process for now
-      setTimeout(() => {
+
+      const { email, password } = this.loginForm.value;
+
+      try {
+        // Await login process through AuthService
+        await this.authService.login(email, password).toPromise();
+
         this.isLoading = false;
-        console.log('Login successful');
-        this.router.navigate(['/profile']); // Navigate to profile after login
-      }, 1500);
+        this.loginError = ''; // Clear error message
+
+        // Navigate to profile page after successful login
+        this.router.navigate(['/']);
+      } catch (error) {
+        // Handle login error and show the message
+        this.isLoading = false;
+        this.loginError = 'Login failed. Please check your credentials.';
+      }
+    } else {
+      // Mark all fields as touched to trigger validation errors
+      this.loginForm.markAllAsTouched();
     }
   }
 
   navigateToRegister(): void {
-    debugger;
     this.router.navigate(['/register']); // Navigate to register route
   }
 
