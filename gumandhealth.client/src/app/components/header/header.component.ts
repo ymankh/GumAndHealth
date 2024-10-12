@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
   constructor(public authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    // Subscribe to login status from AuthService
+     //Subscribe to login status from AuthService
     this.authService.isLoggedIn$.subscribe((status: boolean) => {
       this.isLoggedIn = status;
     });
