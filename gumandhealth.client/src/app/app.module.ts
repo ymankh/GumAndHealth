@@ -54,7 +54,7 @@ import { CartComponent } from './pages/cart/cart.component';
     ProductCardComponent,
     LoginComponent,
     TipsComponent,
-    ShopComponent
+    ShopComponent,
     CartComponent,
   ],
   imports: [
