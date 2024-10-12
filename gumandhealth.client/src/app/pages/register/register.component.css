@@ -1,0 +1,25 @@
+.register-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+}
+
+  .register-container div {
+    margin-bottom: 10px;
+  }
+
+button {
+  background-color: #28a745;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }

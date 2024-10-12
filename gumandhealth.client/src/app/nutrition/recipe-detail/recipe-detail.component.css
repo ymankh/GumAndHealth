@@ -1,34 +1,115 @@
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  color: black;
+body {
+  background-color: #f5f5f5;
+  direction: rtl;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 20px;
+.book-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  perspective: 2000px;
 }
 
-h2 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-  color: black;
+.book {
+  display: flex;
+  width: 100%;
+  max-width: 900px;
+  margin: 20px;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease-in-out;
+  transform-origin: left;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-p {
+  .book:hover {
+    transform: rotateY(-10deg);
+  }
+
+.book-left, .book-right {
+  width: 50%;
+  position: relative;
+  padding: 20px;
+  backface-visibility: hidden;
+}
+
+.book-left {
+  background-color: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #ddd;
+}
+
+  .book-left img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+.book-right {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+  .book-right h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    color: #333;
+  }
+
+.text-muted {
   font-size: 1.2rem;
-  line-height: 1.6;
-  color: black;
+  text-align: center;
 }
 
-h4 {
+.ingredients, .recipe-steps {
   margin-top: 20px;
-  color: black;
-  font-size: 1.5rem;
 }
 
-.btn {
+  .ingredients h4, .recipe-steps h4 {
+    font-size: 1.5rem;
+    color: forestgreen;
+  }
+
+  .ingredients ul, .recipe-steps ul {
+    padding-left: 0;
+    list-style-type: none;
+  }
+
+    .ingredients ul li, .recipe-steps ul li {
+      background-color: #f9f9f9;
+      padding: 10px;
+      margin-bottom: 5px;
+      border-radius: 5px;
+    }
+
+.book-footer {
+  text-align: center;
   margin-top: 30px;
+}
+
+  .book-footer a, .book-footer button {
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: #ffffff;
+    background-color: #007bff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+  }
+
+    .book-footer a:hover, .book-footer button:hover {
+      background-color: green;
+    }
+
+  .book-footer button {
+    background-color: #28a745;
+  }
+.container {
+  margin-top: 1rem; 
 }
