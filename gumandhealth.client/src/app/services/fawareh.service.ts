@@ -26,8 +26,11 @@ export class FawarehService {
     return this.http.get<any>(`${this.staticUrl}/Gyms/GetGymById/${id}`)
   }
 
-  addGymSubscription(data: any): Observable<any> { 
-    return this.http.post<any>(`${this.staticUrl}/GymsSubscription/AddNewGymSubscription`, data)
+  addGymSubscription(data: any): Observable<any> {
+    if (!this.auth.isUserLoggedIn()) {
+      throw new Error ("You have to login first")
+    }
+    return this.http.post<any>(`${this.staticUrl}/GymsSubscription/AddNewGymSubscription`, data, { headers: this.auth.headers()})
 
 
   }
