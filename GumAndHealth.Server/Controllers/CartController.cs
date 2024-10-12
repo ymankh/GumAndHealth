@@ -1,11 +1,10 @@
-﻿using GumAndHealth.Server.Models;
+﻿using GumAndHealth.Server.DTOs.CartItemDTOs;
+using GumAndHealth.Server.Models;
 using GumAndHealth.Server.Repositories;
+using GumAndHealth.Server.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using GumAndHealth.Server.DTOs.CartItemDTOs;
-using GumAndHealth.Server.Services;
 
 namespace GumAndHealth.Server.Controllers
 
@@ -16,7 +15,7 @@ namespace GumAndHealth.Server.Controllers
     [ApiController]
     public class CartController(CartRepository cartRepository, MyDbContext context, IConfiguration config, PayPalPaymentService payPalService) : ControllerBase
     {
-        private readonly string? _redirectUrl = config["PayPal:RedirectUrl"];
+        private readonly string? _redirectUrl = config["PayPal:RedirectUrl"] + "/api/Cart";
 
         [HttpGet]
         [Authorize]

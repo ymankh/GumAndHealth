@@ -54,9 +54,9 @@
           </div>
 
           <!-- Subscribe Button -->
-          <a routerLink="/subscribe/{{singleGymData.id}}" class="btn btn-success mt-4">
-            Subscribe Now
-          </a>
+          
+          <button class="subscribe-button" (click)="addUserSubscription(singleGymData.id)">Subscribe Now</button>
+
         </div>
       </div>
     </div>
