@@ -28,6 +28,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { ShopComponent } from './pages/shop/shop.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -56,15 +57,16 @@ import { RegisterComponent } from './pages/register/register.component';
     ShopComponent,
     CartComponent,
     RegisterComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    AppRoutingModule, 
+    AppRoutingModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
