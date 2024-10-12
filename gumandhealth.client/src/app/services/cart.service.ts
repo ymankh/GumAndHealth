@@ -46,7 +46,7 @@ export class CartService {
       .subscribe((response) => this.openPaymentPopup(response.approvalUrl));
   }
   // Fetch cart items from API (for online sync)
-  loadCartFromServer(cartId: number) {
+  loadCartFromServer() {
     if (!this.authService.isUserLoggedIn()) return;
     this.http
       .get<Cart>(`${root}/api/Cart}`, {
@@ -56,6 +56,10 @@ export class CartService {
         this.cartItems = cart.cartItems!;
         this.cartSubject.next(this.cartItems);
         this.saveCartToLocalStorage();
+        // Get cart items from local storage and send them to the server.
+        for (const item of this.cartItems) {
+          this.addToCart(item);
+        }
       });
   }
 
@@ -122,6 +126,10 @@ export class CartService {
     );
   }
 
+  getTotalItems(): number {
+    return this.cartItems.reduce((total, item) => total + item.quantity!, 0);
+  }
+
   private updateOnlineCart(item: CartItem) {
     if (!this.authService.isUserLoggedIn()) return;
     this.http
@@ -182,6 +190,6 @@ export class CartService {
       timeout: 3000,
     });
     this.clearCart();
-    router.navigate(['']);
+    this.router.navigate(['']);
   }
 }

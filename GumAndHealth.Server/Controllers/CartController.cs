@@ -7,10 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace GumAndHealth.Server.Controllers
-
-
 {
-
     [Route("api/[controller]")]
     [ApiController]
     public class CartController(CartRepository cartRepository, MyDbContext context, IConfiguration config, PayPalPaymentService payPalService) : ControllerBase
