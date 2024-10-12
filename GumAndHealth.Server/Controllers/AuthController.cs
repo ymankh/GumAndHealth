@@ -15,7 +15,7 @@ namespace GumAndHealth.Server.Controllers
         : ControllerBase
     {
         [HttpPost("login")]
-        public IActionResult Login([FromBody] UserLoginDto loginData)
+        public IActionResult Login([FromForm] UserLoginDto loginData)
         {
             // Get the user using the login data
             var user = authRepository.GetUser(loginData);

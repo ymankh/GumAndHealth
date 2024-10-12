@@ -11,6 +11,9 @@
     <None Remove="src\app\AppModule.ts" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="src\app\types\" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="src\app\ClassesR\" />
   </ItemGroup>
 </Project>

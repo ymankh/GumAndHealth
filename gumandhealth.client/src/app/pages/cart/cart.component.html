@@ -1,0 +1,48 @@
+<div class="container mt-4">
+  <h2>Your Cart</h2>
+
+  <!-- Display message if the cart is empty -->
+  <div *ngIf="cartItems.length === 0">
+    <p>Your cart is empty.</p>
+  </div>
+
+  <!-- Display cart items if the cart is not empty -->
+  <div *ngIf="cartItems.length > 0">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th class="text-center">Quantity</th>
+          <th class="text-right">Price</th>
+          <th class="text-right">Subtotal</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cartItems">
+          <td>{{ item.product?.name }}</td>
+          <td class="text-center">{{ item.quantity }}</td>
+          <td class="text-right">{{ item.product?.price | currency }}</td>
+          <td class="text-right">
+            {{ (item.product?.price ?? 0) * (item.quantity) | currency }}
+          </td>
+          <td class="text-center">
+            <button
+              class="btn btn-danger btn-sm"
+              (click)="removeItem(item.productId!)"
+            >
+              Remove
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between">
+      <h4>Total: {{ total | currency }}</h4>
+      <button class="btn btn-secondary" (click)="clearCart()">
+        Clear Cart
+      </button>
+    </div>
+  </div>
+</div>
