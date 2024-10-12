@@ -16,6 +16,7 @@ import { AdminClassesComponent } from './pages/admin-classes/admin-classes.compo
 import { AdminComponent } from './pages/admin/admin.component';
 import { ClassDetailsComponent } from './pages/class-details/class-details.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
+import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'singleGym', component: SingleGymComponent },
   { path: 'Admin', component: AdminComponent },
   { path: 'ClassDetails/:id', component: ClassDetailsComponent },
+  { path: 'login', component: LoginComponent },
 
 
   { path: 'recipe/:id', component: RecipeDetailComponent }, // مسار تفاصيل الوصفة

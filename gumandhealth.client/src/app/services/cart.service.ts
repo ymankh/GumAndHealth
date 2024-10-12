@@ -14,6 +14,7 @@ export class CartService {
   cart$ = this.cartSubject.asObservable();
 
   constructor(private http: HttpClient) {
+    
     // Load cart from localStorage if available
     const storedCart = localStorage.getItem('cart');
     if (storedCart) {

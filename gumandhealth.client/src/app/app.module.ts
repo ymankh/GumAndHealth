@@ -13,7 +13,7 @@ import { BlogComponent } from './pages/blog/blog.component';
 import { ClassesComponent } from './pages/classes/classes.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { ProfileComponent } from './profile/profile.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TipsComponent } from './nutrition/tips/tips.component';
 import { GymsComponent } from './pages/gyms/gyms.component';
 import { RecipesComponent } from './nutrition/recipes/recipes.component';
@@ -24,6 +24,7 @@ import { AdminClassesComponent } from './pages/admin-classes/admin-classes.compo
 import { ClassDetailsComponent } from './pages/class-details/class-details.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -48,9 +49,11 @@ import { ProductCardComponent } from './components/product-card/product-card.com
     AdminClassesComponent,
     ClassDetailsComponent,
     ProductsComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    LoginComponent,
   ],
   imports: [
+    ReactiveFormsModule,
     FormsModule,
     BrowserModule,
     HttpClientModule,
