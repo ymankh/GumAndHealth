@@ -15,10 +15,12 @@ import { SingleGymComponent } from './pages/single-gym/single-gym.component';
 import { AdminClassesComponent } from './pages/admin-classes/admin-classes.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { ClassDetailsComponent } from './pages/class-details/class-details.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'displayClasses', component: AdminClassesComponent },
+  {path: "store", component: ProductCardComponent},
   { path: 'recipes', component: RecipesComponent },
   { path: 'tips', component: TipsComponent },
   { path: 'about', component: AboutComponent },

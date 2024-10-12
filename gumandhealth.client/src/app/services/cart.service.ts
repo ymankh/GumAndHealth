@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-import { CartItem } from '../shared/interfaces';  // Assuming you have a CartItem interface
+import { CartItem } from '../shared/interfaces'; // Assuming you have a CartItem interface
+import iziToast from 'izitoast';
 
 @Injectable({
   providedIn: 'root',
@@ -32,8 +33,9 @@ export class CartService {
 
   // Add item to cart
   addToCart(item: CartItem): void {
-    const existingItem = this.cartItems.find(cartItem => cartItem.productId === item.productId);
-
+    const existingItem = this.cartItems.find(
+      (cartItem) => cartItem.productId === item.productId
+    );
     if (existingItem) {
       existingItem.quantity! += item.quantity!;
     } else {
@@ -41,11 +43,17 @@ export class CartService {
     }
     this.cartSubject.next(this.cartItems);
     this.saveCartToLocalStorage();
+    iziToast.success({
+      title: 'item added',
+      message: 'Successfully inserted to the cart',
+    });
   }
 
   // Remove item from cart
   removeFromCart(productId: number): void {
-    this.cartItems = this.cartItems.filter(item => item.productId !== productId);
+    this.cartItems = this.cartItems.filter(
+      (item) => item.productId !== productId
+    );
     this.cartSubject.next(this.cartItems);
     this.saveCartToLocalStorage();
   }
@@ -64,6 +72,10 @@ export class CartService {
 
   // Get total price of items in the cart (adjust this if you want to include product details)
   getTotalPrice(): number {
-    return this.cartItems.reduce((total, item) => total + (item.product?.price ?? 0) * (item.quantity ?? 1), 0);
+    return this.cartItems.reduce(
+      (total, item) =>
+        total + (item.product?.price ?? 0) * (item.quantity ?? 1),
+      0
+    );
   }
 }

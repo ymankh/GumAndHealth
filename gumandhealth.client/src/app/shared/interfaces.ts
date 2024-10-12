@@ -6,7 +6,7 @@ export interface Category {
   recipes: Recipe[];
 }
 export interface CartItem {
-  id: number;
+  id?: number;
   productId: number;
   cartId?: number;
   quantity: number;
@@ -16,8 +16,39 @@ export interface CartItem {
 
 export interface Product {
   id: number;
+  categoryId: number;
   name: string;
   price: number;
+  discount: number;
+  tags: string;
+  image1?: string;
+  image2?: string;
+  image3?: string;
+  image4?: string;
+  image5?: string;
+  image6?: string;
+  image7?: string;
+  description: string;
+  additionalInformation: string;
+  cartItems?: CartItem[];
+  category?: Category;
+  orderItems?: OrderItem[];
+}
+
+export interface OrderItem {
+  id: number;
+  productId: number;
+  orderId: number;
+  quantity: number;
+  product?: Product;
+  order?: Order;
+}
+
+interface Order {
+  id: number;
+  userId: number;
+  orderItems?: OrderItem[];
+  user?: User;
 }
 
 export interface Cart {
@@ -49,4 +80,13 @@ export interface Recipe {
   ingredients: string;
   recipe1: string;
   recipeCategory?: Category;
+}
+
+export interface ProductPagedResult
+{
+    totalCount :number;
+    totalPages : number; 
+    currentPage : number;
+    pageSize : number;
+    products :Product[];  
 }

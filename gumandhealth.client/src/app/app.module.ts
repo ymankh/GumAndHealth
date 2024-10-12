@@ -22,6 +22,8 @@ import { SingleGymComponent } from './pages/single-gym/single-gym.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { AdminClassesComponent } from './pages/admin-classes/admin-classes.component';
 import { ClassDetailsComponent } from './pages/class-details/class-details.component';
+import { ProductsComponent } from './pages/products/products.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { ClassDetailsComponent } from './pages/class-details/class-details.compo
     SingleGymComponent,
     AdminComponent,
     AdminClassesComponent,
-    ClassDetailsComponent
+    ClassDetailsComponent,
+    ProductsComponent,
+    ProductCardComponent
   ],
   imports: [
     FormsModule,
