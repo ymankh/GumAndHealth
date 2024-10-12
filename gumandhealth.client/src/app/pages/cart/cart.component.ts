@@ -39,4 +39,13 @@ export class CartComponent implements OnInit {
   clearCart(): void {
     this.cartService.clearCart();
   }
+  get totalItems(): number {
+    return this.cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  }
+  proceedToCheckout() {
+    throw new Error('Method not implemented.');
+  }
+  updateQuantity(item: CartItem) {
+    throw new Error('Method not implemented');
+  }
 }

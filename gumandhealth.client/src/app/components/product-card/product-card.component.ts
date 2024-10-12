@@ -22,6 +22,7 @@ export class ProductCardComponent implements OnInit {
   addToCart(product: Product) {
     this.cart.addToCart({
       productId: product.id,
+      product: product,
       quantity: 1,
     });
     console.log(product);
