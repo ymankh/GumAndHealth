@@ -24,6 +24,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { TestimonialsComponent } from './pages/testimonials/testimonials.component';
 import { NutritionComponent } from './nutrition/nutrition.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
 
 
 const routes: Routes = [
@@ -55,6 +56,9 @@ const routes: Routes = [
   { path: 'reset-password', component: ResetPasswordComponent },
   
   { path: '**', redirectTo: '', pathMatch: 'full' }, // Wildcard route to redirect invalid paths to home
+  { path: '**', redirectTo: '', pathMatch: 'full' },
+  { path: 'products/category/:id', component: ProductCardComponent } // or ProductsComponent if that's the correct name
+  // Wildcard route to redirect invalid paths to home
 ];
 
 @NgModule({
