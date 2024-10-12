@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'gyms', component: GymsComponent },
   { path: 'recipes', component: RecipesComponent },
   { path: 'recipes/:id', component: RecipeDetailComponent },
-  { path: 'gym/:id', component: SingleGymComponent },
+  { path: 'singleGym/:id', component: SingleGymComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'admin/classes', component: AdminClassesComponent },
   { path: 'class-details/:id', component: ClassDetailsComponent },

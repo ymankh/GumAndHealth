@@ -61,8 +61,8 @@ namespace GumAndHealth.Server.Controllers
                 GymServiceId = gymDTO.GymServiceId.Value,
                 StartDate = startDate,
                 EndDate = endDate,
-                UserId = 1, //user is fixed for now
-                //UserId = CurrentUser.Id,
+                //UserId = 1, //user is fixed for now
+                UserId = CurrentUser.Id,
                 PaymentId = newPayment.Id
             };
 
@@ -74,8 +74,8 @@ namespace GumAndHealth.Server.Controllers
                 throw new Exception("The redirect link for the paypal should be set correctly on the sitting app.");
 
             var totalPrice = gym.PricePerMonth!;
-            //var payment = _payPalService.CreatePayment(_redirectUrl ?? " ", (decimal)totalPrice, null, CurrentUser.Id);
-            var payment = _payPalService.CreatePayment(_redirectUrl ?? " ", (decimal)totalPrice, null, 2); //user is fixed for now
+            var payment = _payPalService.CreatePayment(_redirectUrl ?? " ", (decimal)totalPrice, null, CurrentUser.Id);
+            //var payment = _payPalService.CreatePayment(_redirectUrl ?? " ", (decimal)totalPrice, null, 2); //user is fixed for now
             var approvalUrl = payment.links.FirstOrDefault(l => l.rel.Equals("approval_url", StringComparison.OrdinalIgnoreCase))?.href;
 
             return Ok(new { approvalUrl });
