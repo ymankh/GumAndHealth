@@ -23,14 +23,14 @@
           </div>
           <div *ngFor="let schedule of getSchedulesByDay(day)">
             <div class="schedule-time">
-              {{ schedule.startTime }} - {{ schedule.endTime }} <!-- استخدم السلسلة الزمنية كما هي -->
+              {{ schedule.startTime }} - {{ schedule.endTime }}
             </div>
             <div class="schedule-instructor">
               <strong>Instructor:</strong> {{ schedule.instructorName }} <br />
               <strong>Bio:</strong> {{ schedule.instructorBio }} <br />
               <strong>Credentials:</strong> {{ schedule.instructorCredentials }}
             </div>
-                        <button (click)="joinClass(schedule.classScheduleId)" class="join-button">Join the class</button>
+            <button (click)="joinClass(schedule.classScheduleId)" class="join-button">Join the class</button>
             <hr />
           </div>
         </div>

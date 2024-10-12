@@ -1,0 +1,76 @@
+
+<form *ngIf="userProfile" #UpdateFormRawa="ngForm" (ngSubmit)="updateProfile(UpdateFormRawa.value)" style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; background-color: #f9f9f9;">
+  <input type="hidden" name="__RequestVerificationToken" value="TOKEN_VALUE">
+
+  <h2 style="text-align: center; margin-bottom: 20px;">Edit User Information</h2>
+
+  <div class="form-container">
+    <!-- Main Image Field -->
+    <div class="form-group" style="margin-bottom: 15px;">
+      <label for="Image" class="form-label" style="display: block; font-weight: bold; margin-bottom: 5px;">Main Image</label>
+      <input type="file" (change)="onImageSelected($event)" />
+
+      <span class="text-danger" id="Image-error" style="color: red; font-size: 0.875em;"></span>
+    </div>
+
+    <!-- Full Name Field -->
+    <div class="form-group" style="margin-bottom: 15px;">
+      <label for="fullName" class="form-label" style="font-weight: bold;">Full Name</label>
+      <input type="text" id="fullName" name="name" [(ngModel)]="userProfile.name" class="form-control" placeholder="Enter your full name" required />
+      <div *ngIf="UpdateFormRawa.controls['name']?.invalid && (UpdateFormRawa.controls['name']?.dirty || UpdateFormRawa.controls['name']?.touched)" class="text-danger">
+        يجب إدخال الاسم بالكامل.
+      </div>
+    </div>
+
+    <!-- Username Field -->
+    <div class="form-group" style="margin-bottom: 15px;">
+      <label for="username" class="form-label" style="font-weight: bold;">Username</label>
+      <input type="text" id="username" name="username" [(ngModel)]="userProfile.username" class="form-control" placeholder="Enter your username" required />
+      <div *ngIf="UpdateFormRawa.controls['username']?.invalid && (UpdateFormRawa.controls['username']?.dirty || UpdateFormRawa.controls['username']?.touched)" class="text-danger">
+        يجب إدخال اسم المستخدم.
+      </div>
+    </div>
+
+    <!-- Email Field -->
+    <div class="form-group" style="margin-bottom: 15px;">
+      <label for="email" class="form-label" style="font-weight: bold;">Email</label>
+      <input type="email" id="email" name="email" [(ngModel)]="userProfile.email" class="form-control" placeholder="Enter your email" required />
+      <div *ngIf="UpdateFormRawa.controls['email']?.invalid && (UpdateFormRawa.controls['email']?.dirty || UpdateFormRawa.controls['email']?.touched)" class="text-danger">
+        يجب إدخال بريد إلكتروني صالح.
+      </div>
+    </div>
+
+    <!-- Phone Field -->
+    <div class="form-group" style="margin-bottom: 15px;">
+      <label for="phoneNumber" class="form-label" style="font-weight: bold;">Phone</label>
+      <input type="tel" id="phoneNumber" name="phoneNumber" [(ngModel)]="userProfile.phoneNumber" class="form-control" placeholder="Enter your phone number" required />
+      <div *ngIf="UpdateFormRawa.controls['phoneNumber']?.invalid && (UpdateFormRawa.controls['phoneNumber']?.dirty || UpdateFormRawa.controls['phoneNumber']?.touched)" class="text-danger">
+        يجب إدخال رقم الهاتف.
+      </div>
+    </div>
+
+    <!-- City Field -->
+    <div class="form-group" style="margin-bottom: 15px;">
+      <label for="city" class="form-label" style="font-weight: bold;">City</label>
+      <input type="text" id="city" name="city" [(ngModel)]="userProfile.city" class="form-control" placeholder="Enter your city" required />
+      <div *ngIf="UpdateFormRawa.controls['city']?.invalid && (UpdateFormRawa.controls['city']?.dirty || UpdateFormRawa.controls['city']?.touched)" class="text-danger">
+        يجب إدخال المدينة.
+      </div>
+    </div>
+
+    <!-- Street Field -->
+    <div class="form-group" style="margin-bottom: 15px;">
+      <label for="street" class="form-label" style="font-weight: bold;">Street</label>
+      <input type="text" id="street" name="street" [(ngModel)]="userProfile.street" class="form-control" placeholder="Enter your street" required />
+      <div *ngIf="UpdateFormRawa.controls['street']?.invalid && (UpdateFormRawa.controls['street']?.dirty || UpdateFormRawa.controls['street']?.touched)" class="text-danger">
+        يجب إدخال الشارع.
+      </div>
+    </div>
+
+    <!-- Submit Buttons -->
+    <div class="form-group" style="text-align: center;">
+      <button type="submit" class="btn btn-primary" style="padding: 10px 20px;" [disabled]="UpdateFormRawa.invalid">Save</button>
+      <button type="button" class="btn btn-secondary" (click)="cancelEdit()" style="padding: 10px 20px;">Cancel</button>
+    </div>
+  </div>
+</form>

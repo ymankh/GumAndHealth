@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { CartItem } from '../../shared/interfaces';
+import iziToast from 'izitoast';
 
 @Component({
   selector: 'app-cart',
@@ -43,9 +44,20 @@ export class CartComponent implements OnInit {
     return this.cartItems.reduce((sum, item) => sum + item.quantity, 0);
   }
   proceedToCheckout() {
-    throw new Error('Method not implemented.');
+    this.cartService.checkout();
   }
   updateQuantity(item: CartItem) {
-    throw new Error('Method not implemented');
+    this.cartService.updateQuantity(item);
+  }
+
+  decrementQuantity(item: CartItem) {
+    if (item.quantity > 1) {
+      item.quantity--;
+      this.updateQuantity(item);
+    }
+  }
+  incrementQuantity(item: CartItem) {
+    item.quantity++;
+    this.updateQuantity(item);
   }
 }

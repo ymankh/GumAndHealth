@@ -24,10 +24,10 @@ namespace GumAndHealth.Server.Repositories
             return cart;
         }
 
-        public CartItem? UpdateOrCreateCartItem(UpdateCartItemDto updateCartItem)
+        public CartItem? UpdateOrCreateCartItem(UpdateCartItemDto updateCartItem, long userId)
         {
             // Get the cart item if existed
-            var cart = UserCart(updateCartItem.UserId);
+            var cart = UserCart(userId);
             var cartItem = context.CartItems
                 .FirstOrDefault(ci => ci.CartId == cart.Id && ci.ProductId == updateCartItem.ProductId);
             if (cartItem == null)
@@ -95,10 +95,29 @@ namespace GumAndHealth.Server.Repositories
                     Quantity = cartItem.Quantity
                 });
                 context.CartItems.Remove(cartItem);
+
             }
 
             context.SaveChanges();
             return order;
+        }
+
+        public void DeleteCartItem(long productId, long userId)
+        {
+            var cartItem = context.CartItems.FirstOrDefault(cItem => cItem.ProductId == productId);
+            if (cartItem == null) return;
+            context.CartItems.Remove(cartItem);
+            context.SaveChanges();
+        }
+
+        public void ClearCart(long userId)
+        {
+            var cartItems = UserCart(userId).CartItems;
+            foreach (var cartItem in cartItems)
+            {
+                context.CartItems.Remove(cartItem);
+            }
+            context.SaveChanges();
         }
     }
 }

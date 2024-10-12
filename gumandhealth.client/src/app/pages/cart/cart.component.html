@@ -1,4 +1,4 @@
-<div class="container-fluid mt-4">
+<div class="container mt-4 vh-100">
   <h2>Your Cart</h2>
 
   <!-- Display message if the cart is empty -->
@@ -10,48 +10,61 @@
   <div *ngIf="cartItems.length > 0" class="row">
     <!-- Cart Items Section -->
     <div class="col-md-8">
-      <table class="table table-hover">
-        <thead class="table-light">
-          <tr>
-            <th>Product</th>
-            <th class="text-center">Quantity</th>
-            <th class="text-end">Price</th>
-            <th class="text-end">Subtotal</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of cartItems">
-            <td>{{ item.product?.name }}</td>
-            <td class="text-center">
-              <input
-                type="number"
-                class="form-control form-control-sm text-center"
-                [(ngModel)]="item.quantity"
-                (ngModelChange)="updateQuantity(item)"
-                min="1"
-              />
-            </td>
-            <td class="text-end">{{ item.product?.price | currency }}</td>
-            <td class="text-end">
-              {{
-                (item.product?.price ?? 0) * item.quantity | currency
-              }}
-            </td>
-            <td class="text-center">
-              <button
-                class="btn btn-danger btn-sm"
-                (click)="removeItem(item.productId!)"
-              >
-                Remove
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <button class="btn btn-secondary" (click)="clearCart()">
-        Clear Cart
-      </button>
+      <div class="card">
+        <table class="table table-hover">
+          <thead class="table-light">
+            <tr>
+              <th>Product</th>
+              <th class="text-center">Quantity</th>
+              <th class="text-end">Price</th>
+              <th class="text-end">Subtotal</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of cartItems">
+              <td>{{ item.product?.name }}</td>
+              <td class="text-center input-group">
+                <button
+                  class="primary-btn btn"
+                  (click)="incrementQuantity(item)"
+                >
+                  +
+                </button>
+                <input
+                  type="number"
+                  class="form-control text-center"
+                  style="height: 100% !important"
+                  [(ngModel)]="item.quantity"
+                  (ngModelChange)="updateQuantity(item)"
+                  min="1"
+                />
+                <button
+                  class="primary-btn btn"
+                  (click)="decrementQuantity(item)"
+                >
+                  -
+                </button>
+              </td>
+              <td class="text-end">{{ item.product?.price | currency }}</td>
+              <td class="text-end">
+                {{ (item.product?.price ?? 0) * item.quantity | currency }}
+              </td>
+              <td class="text-center">
+                <button
+                  class="btn btn-danger btn-sm"
+                  (click)="removeItem(item.productId!)"
+                >
+                  Remove
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="btn btn-secondary" (click)="clearCart()">
+          Clear Cart
+        </button>
+      </div>
     </div>
 
     <!-- Checkout Section -->

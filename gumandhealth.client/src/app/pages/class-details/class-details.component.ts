@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RahafService } from '../../services/rahaf.service';
+import Swal from 'sweetalert2';
 
 interface Schedule {
   classScheduleId: number; 
@@ -45,50 +46,71 @@ export class ClassDetailsComponent implements OnInit {
     }
   }
 
-  // دالة لجلب الأيام الفريدة من المواعيد
   getUniqueDays(): string[] {
     const uniqueDays = new Set(this.classDetails?.schedules.map(schedule => schedule.availableDay));
     return Array.from(uniqueDays);
   }
 
-  // دالة لجلب المواعيد بحسب اليوم
   getSchedulesByDay(day: string): Schedule[] {
     return this.classDetails?.schedules.filter(schedule => schedule.availableDay === day) || [];
   }
 
-  
+  ///////////////////////////////////////////////////////////////////////////
   joinClass(classScheduleId: number) {
-    const startDate = new Date(); // اليوم الحالي
-    const endDate = new Date();
-    endDate.setMonth(startDate.getMonth() + 1); // الشهر القادم
+    this._ser.getClassByID(classScheduleId).subscribe(
+      (response) => {
+        if (response && response.ClassName && response.ClassPrice) {
+          const startDate = new Date();
+          const endDate = new Date(startDate);
+          endDate.setMonth(startDate.getMonth() + 1);
 
-    // البيانات التي سنرسلها إلى API للاشتراك
-    const body = {
-      classScheduleId: classScheduleId,
-      userId: 1, // احصل على userId من التخزين المحلي (أو أي قيمة أخرى تحتاجها)
-      startDate: startDate.toISOString(), // تحويل التاريخ إلى سلسلة نصية
-      endDate: endDate.toISOString() // تحويل التاريخ إلى سلسلة نصية
-    };
-
-    // إرسال طلب الاشتراك إلى API
-    this._ser.postPayment(body).subscribe((response: any) => {
-      // التحقق من نجاح الاشتراك
-      if (response.message === 'Subscription created successfully') {
-        const subscriptionId = response.subscriptionId; // الحصول على معرف الاشتراك
-        this.redirectToPayPal(subscriptionId); // توجيه المستخدم إلى PayPal
-      } else {
-        console.error('خطأ في إنشاء الاشتراك:', response);
+          Swal.fire({
+            title: 'Join the Class',
+            html: `
+            <p><strong>Class Name:</strong> ${response.ClassName}</p>
+            <p><strong>Start Date:</strong> ${startDate.toLocaleDateString()}</p>
+            <p><strong>End Date:</strong> ${endDate.toLocaleDateString()}</p>
+            <p><strong>Amount:</strong> ${response.ClassPrice} JOD</p>
+          `,
+            showCancelButton: true,
+            confirmButtonText: 'Confirm',
+            cancelButtonText: 'Cancel'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this._ser.createOrder(response.ClassPrice).subscribe(
+                orderResponse => {
+                  console.log('Order created:', orderResponse);
+                  Swal.fire('Success', 'Your order has been created.', 'success');
+                },
+                error => {
+                  console.error('Error creating order:', error);
+                  Swal.fire('Error', 'Failed to create order. Please try again.', 'error');
+                }
+              );
+            }
+          });
+        } else {
+          Swal.fire('Error', 'Class details are incomplete.', 'error');
+        }
+      },
+      (error) => {
+        console.error('Error fetching class details:', error);
+        Swal.fire('Error', 'Failed to fetch class details. Please try again.', 'error');
       }
-    }, (error) => {
-      console.error('خطأ في postPayment:', error);
-    });
+    );
   }
 
-  redirectToPayPal(subscriptionId: number) {
-    // نقل المستخدم إلى صفحة الدفع عبر PayPal
-    const redirectUrl = `https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_xclick&business=YOUR_PAYPAL_EMAIL&item_name=Class+Subscription&amount=10.00&currency_code=USD&return=https://localhost:7280/api/Subscription/PaymentSuccess/${subscriptionId}&cancel_return=https://localhost:7280/api/Subscription/PaymentCancel/${subscriptionId}`;
 
-    window.location.href = redirectUrl;
-  }
+
+
+
+
+
+
+
+
+
+
+
 
 }
