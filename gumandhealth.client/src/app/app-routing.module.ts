@@ -7,6 +7,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { BlogComponent } from './pages/blog/blog.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { ClassesComponent } from './pages/classes/classes.component';
+import { ShopComponent } from './pages/shop/shop.component';
 import { NutritionComponent } from './nutrition/nutrition.component';
 import { ProfileComponent } from './profile/profile.component';
 import { GymsComponent } from './pages/gyms/gyms.component';
@@ -40,6 +41,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
 
   { path: 'recipe/:id', component: RecipeDetailComponent }, // مسار تفاصيل الوصفة
+  { path: 'Shop', component: ShopComponent },
 
   { path: '**', component: HomeComponent, pathMatch: 'full' },
 

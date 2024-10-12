@@ -25,6 +25,7 @@ import { ClassDetailsComponent } from './pages/class-details/class-details.compo
 import { ProductsComponent } from './pages/products/products.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { LoginComponent } from './pages/login/login.component';
+import { ShopComponent } from './pages/shop/shop.component';
 import { CartComponent } from './pages/cart/cart.component';
 
 @NgModule({
@@ -52,6 +53,8 @@ import { CartComponent } from './pages/cart/cart.component';
     ProductsComponent,
     ProductCardComponent,
     LoginComponent,
+    TipsComponent,
+    ShopComponent
     CartComponent,
   ],
   imports: [
