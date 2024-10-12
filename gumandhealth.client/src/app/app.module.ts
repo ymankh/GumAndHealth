@@ -28,6 +28,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { ShopComponent } from './pages/shop/shop.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { TestimonialsComponent } from './pages/testimonials/testimonials.component';
 
@@ -58,6 +59,7 @@ import { TestimonialsComponent } from './pages/testimonials/testimonials.compone
     ShopComponent,
     CartComponent,
     RegisterComponent,
+    ResetPasswordComponent
     TipsComponent,
     EditProfileComponent,
     TestimonialsComponent
@@ -67,9 +69,9 @@ import { TestimonialsComponent } from './pages/testimonials/testimonials.compone
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    AppRoutingModule, 
+    AppRoutingModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

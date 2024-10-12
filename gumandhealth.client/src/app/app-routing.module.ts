@@ -21,7 +21,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { ShopComponent } from './pages/shop/shop.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { TestimonialsComponent } from './pages/testimonials/testimonials.component';
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -49,6 +51,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'shop', component: ShopComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
+  
   { path: '**', redirectTo: '', pathMatch: 'full' }, // Wildcard route to redirect invalid paths to home
 ];
 
