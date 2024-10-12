@@ -7,6 +7,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { BlogComponent } from './pages/blog/blog.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { ClassesComponent } from './pages/classes/classes.component';
+import { ShopComponent } from './pages/shop/shop.component';
 import { NutritionComponent } from './nutrition/nutrition.component';
 import { ProfileComponent } from './profile/profile.component';
 
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'nutrition', component:NutritionComponent},
   { path: 'Profile', component: ProfileComponent },
+  { path: 'Shop', component: ShopComponent },
 
   { path: '**', component: HomeComponent, pathMatch: 'full' },
 
