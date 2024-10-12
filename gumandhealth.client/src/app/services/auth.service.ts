@@ -29,36 +29,38 @@ export class AuthService {
     formData.append('Password', password);
 
     return new Observable<void>((observer) => {
-      this.http.post<{ token: string }>(`${root}/api/Auth/login`, formData).subscribe(
-        (response) => {
-          // Save token to localStorage
-          localStorage.setItem('token', response.token);
+      this.http
+        .post<{ token: string }>(`${root}/api/Auth/login`, formData)
+        .subscribe(
+          (response) => {
+            // Save token to localStorage
+            localStorage.setItem('token', response.token);
 
-          // Success toast notification
-          iziToast.success({
-            title: 'Login Successful',
-            message: 'You are now logged in',
-          });
+            // Success toast notification
+            iziToast.success({
+              title: 'Login Successful',
+              message: 'You are now logged in',
+            });
 
-          // Update login state
-          this.isLoggedInSubject.next(true);
+            // Update login state
+            this.isLoggedInSubject.next(true);
 
-          // Notify subscribers of success
-          observer.next();
-          observer.complete();
-        },
-        (error) => {
-          // Failure toast notification
-          iziToast.error({
-            title: 'Login Failed',
-            message: 'Invalid email or password',
-          });
-          console.error('Login error:', error);
+            // Notify subscribers of success
+            observer.next();
+            observer.complete();
+          },
+          (error) => {
+            // Failure toast notification
+            iziToast.error({
+              title: 'Login Failed',
+              message: 'Invalid email or password',
+            });
+            console.error('Login error:', error);
 
-          // Notify subscribers of the error
-          observer.error(error);
-        }
-      );
+            // Notify subscribers of the error
+            observer.error(error);
+          }
+        );
     });
   }
 
@@ -102,5 +104,12 @@ export class AuthService {
   // Method to fetch data from an API
   fetchData(apiUrl: string): Observable<any> {
     return this.http.get<any>(apiUrl);
+  }
+
+  headers() {
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    });
   }
 }
