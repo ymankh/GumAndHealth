@@ -20,6 +20,8 @@ export class ProductCardComponent implements OnInit {
     });
   }
   addToCart(product: Product) {
+    console.log(product);
+    
     this.cart.addToCart({
       productId: product.id,
       product: product,

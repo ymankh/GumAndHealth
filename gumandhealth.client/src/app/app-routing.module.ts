@@ -23,9 +23,9 @@ import { CartComponent } from './pages/cart/cart.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
+  { path: 'cart', component: CartComponent },
   { path: 'editClass/:id', component: AdminClassEditComponent },
   { path: 'ClassDetails/:id', component: ClassDetailsComponent },
-  { path: 'cart', component: CartComponent },
   { path: 'displayClasses', component: AdminClassesComponent },
   { path: 'store', component: ProductCardComponent },
   { path: 'recipes', component: RecipesComponent },
@@ -41,17 +41,16 @@ const routes: Routes = [
   { path: 'singleGym', component: SingleGymComponent },
   { path: 'Admin', component: AdminComponent },
 
-
   { path: 'ClassDetails/:id', component: ClassDetailsComponent },
   { path: 'login', component: LoginComponent },
 
   { path: 'recipe/:id', component: RecipeDetailComponent }, // مسار تفاصيل الوصفة
   { path: 'Shop', component: ShopComponent },
 
-  { path: '**', component: HomeComponent, pathMatch: 'full' },
+  // { path: '**', component: HomeComponent, pathMatch: 'full' },
 
   // to home
-  // { path: '**', redirectTo: '' },
+  { path: '**', redirectTo: '' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

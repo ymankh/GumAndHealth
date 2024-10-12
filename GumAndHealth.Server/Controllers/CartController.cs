@@ -27,17 +27,24 @@ namespace GumAndHealth.Server.Controllers
 
         [Authorize]
         [HttpPost("AddToCart")]
-        public IActionResult AddToCart(UpdateCartItemDto updatedCartItem)
+        public IActionResult AddToCart([FromBody] UpdateCartItemDto updatedCartItem)
         {
-            var cartItem = cartRepository.UpdateOrCreateCartItem(updatedCartItem);
+            var cartItem = cartRepository.UpdateOrCreateCartItem(updatedCartItem, CurrentUser.Id);
             return Ok(cartItem);
         }
 
         [Authorize]
-        [HttpDelete("DeleteCartItem")]
-        public IActionResult DeleteCartItem([FromBody] long productId)
+        [HttpDelete("DeleteCartItem/{productId:long}")]
+        public IActionResult DeleteCartItem(long productId)
         {
             cartRepository.DeleteCartItem(productId, CurrentUser.Id);
+            return NoContent();
+        }
+        [Authorize]
+        [HttpDelete("ClearCart")]
+        public IActionResult DeleteCartItem()
+        {
+            cartRepository.ClearCart(CurrentUser.Id);
             return NoContent();
         }
 

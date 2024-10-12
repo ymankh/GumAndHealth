@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { CartItem } from '../../shared/interfaces';
+import iziToast from 'izitoast';
 
 @Component({
   selector: 'app-cart',
@@ -43,6 +44,12 @@ export class CartComponent implements OnInit {
     return this.cartItems.reduce((sum, item) => sum + item.quantity, 0);
   }
   proceedToCheckout() {
+    iziToast.error({
+      title: 'The checkout is not implemented yet',
+      position: 'topCenter',
+      timeout: 3000,
+    });
+
     throw new Error('Method not implemented.');
   }
   updateQuantity(item: CartItem) {

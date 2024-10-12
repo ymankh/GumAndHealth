@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { root } from '../shared/constants';
@@ -27,24 +27,26 @@ export class AuthService {
     let formData = new FormData();
     formData.append('Email', email);
     formData.append('Password', password);
-    this.http.post<{ token: string }>(root + '/api/Auth/login', formData).subscribe(
-      (response) => {
-        localStorage.setItem('token', response.token);
-        iziToast.success({
-          title: 'Login Successful',
-          message: 'You are now logged in',
-        });
-        this.isLoggedInSubject.next(true);
-      },
-      (error) => {
-        iziToast.error({
-          title: 'Login Failed',
-          message: 'Invalid email or password',
-        });
-        // Handle login error (e.g., display error message)
-        console.error(error);
-      }
-    );
+    this.http
+      .post<{ token: string }>(root + '/api/Auth/login', formData)
+      .subscribe(
+        (response) => {
+          localStorage.setItem('token', response.token);
+          iziToast.success({
+            title: 'Login Successful',
+            message: 'You are now logged in',
+          });
+          this.isLoggedInSubject.next(true);
+        },
+        (error) => {
+          iziToast.error({
+            title: 'Login Failed',
+            message: 'Invalid email or password',
+          });
+          // Handle login error (e.g., display error message)
+          console.error(error);
+        }
+      );
 
     // Save login status in localStorage (for persistence)
     localStorage.setItem('isLoggedIn', 'true');
@@ -62,5 +64,20 @@ export class AuthService {
   // Method to get the current login state (useful for components needing immediate access)
   isUserLoggedIn(): boolean {
     return this.isLoggedInSubject.getValue();
+  }
+
+  // Method to get the headers for the API requests
+  // {
+  //   headers: this.headers,
+  // }
+  headers() {
+    if (!localStorage.getItem('token'))
+      throw Error('No token found in localStorage');
+
+    // Return headers with authorization token
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    });
   }
 }
