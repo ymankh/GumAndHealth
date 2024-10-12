@@ -24,6 +24,20 @@ export class CartService {
     }
   }
 
+  checkout() {
+    iziToast.warning({
+      title: 'Cannot checkout',
+      message: 'Please login to checkout',
+      position: 'topCenter',
+      timeout: 3000,
+    });
+    if (!this.authService.isUserLoggedIn()) return;
+    this.http
+      .get<{ approvalUrl: string }>(`${root}/api/Cart/Checkout`, {
+        headers: this.authService.headers(),
+      })
+      .subscribe((response) => console.log(response.approvalUrl));
+  }
   // Fetch cart items from API (for online sync)
   loadCartFromServer(cartId: number) {
     if (!this.authService.isUserLoggedIn()) return;
@@ -85,9 +99,6 @@ export class CartService {
     this.cartSubject.next(this.cartItems);
     localStorage.removeItem('cart');
     this.clearOnlineCart();
-
-
-    
   }
 
   // Save cart items to local storage for offline use

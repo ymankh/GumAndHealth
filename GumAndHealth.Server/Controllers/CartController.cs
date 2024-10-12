@@ -59,7 +59,7 @@ namespace GumAndHealth.Server.Controllers
         }
 
         [Authorize]
-        [HttpPost("checkout")]
+        [HttpGet("checkout")]
         public IActionResult CreatePayment()
         {
             if (string.IsNullOrEmpty(_redirectUrl))

@@ -44,13 +44,7 @@ export class CartComponent implements OnInit {
     return this.cartItems.reduce((sum, item) => sum + item.quantity, 0);
   }
   proceedToCheckout() {
-    iziToast.error({
-      title: 'The checkout is not implemented yet',
-      position: 'topCenter',
-      timeout: 3000,
-    });
-
-    throw new Error('Method not implemented.');
+    this.cartService.checkout();
   }
   updateQuantity(item: CartItem) {
     this.cartService.updateQuantity(item);
