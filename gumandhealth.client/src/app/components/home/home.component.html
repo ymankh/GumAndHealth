@@ -1,4 +1,26 @@
- <!-- Testimonial Carousel Section -->
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="fa fa-search"></i>
+          </span>
+        </div>
+        <input type="text" class="form-control" placeholder="Search for something..." [(ngModel)]="searchQuery">
+        <div class="input-group-append">
+          <button class="btn btn-success" (click)="performSearch()">Search</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -249,7 +271,7 @@
           <p>
             Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
-          <a href="#" class="primary-btn callto-btn">Join Now</a>
+          <a href="/register" class="primary-btn callto-btn">Join Now</a>
         </div>
       </div>
     </div>
@@ -274,21 +296,22 @@
   <a routerLink="/Gyms" class="primary-btn callto-btn">All Gyms</a>
 </div>
 <br />
-
-<br />
-<!-- Call To Section End -->
-<!-- Map Section Begin -->
-<div class="map">
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24182.553681405774!2d-73.99529774360377!3d40.744003480221!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259737e225aa1%3A0x652ff78189c0e104!2sStuyvesant%20Town-Peter%20Cooper%20Village%2C%20New%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sbd!4v1567961277124!5m2!1sen!2sbd"
-          height="585"
-          style="border: 0"
-          allowfullscreen></iframe>
-  <div class="map-address">
-    <div class="map-address-text">
-      <ul>
-        <li>Main Str, no 23, <br />NY, New York PK 23589</li>
-      </ul>
+<div class="container mt-5">
+  <div class="row">
+    <!-- حلقة لتكرار البطاقات بناءً على المنتجات -->
+    <div class="col-md-4" *ngFor="let product of products">
+      <div class="card mb-4">
+        <img [src]="product.imagePath" class="card-img-top" [alt]="product.name">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">{{ product.description }}</p>
+          <p class="card-text"><strong>Price:</strong> ${{ product.price }}</p>
+          <a routerLink="/" class="primary-btn callto-btn">View Details</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<!-- Map Section End -->
+
+<br />
+

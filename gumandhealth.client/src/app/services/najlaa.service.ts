@@ -8,6 +8,7 @@ import { Observable } from 'rxjs'; // Correct import for Observable
 export class NajlaaService {
 
   private apiUrl = 'https://localhost:7280/api/RecipeCategory'; // Adjust URL if needed
+  private apiUrl1 = 'https://localhost:7280/api/Home/search';
 
   constructor(private http: HttpClient) { }
 
@@ -20,7 +21,9 @@ export class NajlaaService {
   getRecipeCategory(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
-
+  search(query: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl1}?query=${query}`);
+  }
   deleteCategory(id: number): Observable<any> {
     return this.http.delete(`/${id}`);
   }
@@ -29,5 +32,8 @@ export class NajlaaService {
   }
   getGyms(): Observable<any> {
     return this.http.get<any>("https://localhost:7280/api/Home/GetAllGyms");
+  }
+  getProducts(): Observable<any> {
+    return this.http.get<any>("https://localhost:7280/api/Home");
   }
 }

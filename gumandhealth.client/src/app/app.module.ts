@@ -72,7 +72,8 @@ import { TestimonialsComponent } from './pages/testimonials/testimonials.compone
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
