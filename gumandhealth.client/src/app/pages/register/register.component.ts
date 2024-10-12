@@ -12,12 +12,19 @@ export class RegisterComponent {
   registerForm: FormGroup;
 
   constructor(private authService: AuthService, private fb: FormBuilder) {
-    // Initialize the form with FormBuilder
+    // Initialize the form with FormBuilder and a custom validator for matching passwords
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]],
-    });
+    }, { validators: this.passwordMatchValidator });
+  }
+
+  // Custom validator to check if passwords match
+  passwordMatchValidator(group: FormGroup): { [key: string]: boolean } | null {
+    const password = group.get('password')?.value;
+    const confirmPassword = group.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { mismatch: true };
   }
 
   // Method to handle the form submission
@@ -29,7 +36,7 @@ export class RegisterComponent {
       // Call the register method in AuthService
       this.authService.register(email, password).subscribe(
         (response) => {
-           iziToast.success({
+          iziToast.success({
             title: 'Registration Successful',
             message: 'You have been registered successfully!',
           });
@@ -44,10 +51,8 @@ export class RegisterComponent {
         }
       );
     } else {
-      iziToast.error({
-        title: 'Form Error',
-        message: 'Please fill out all required fields correctly',
-      });
+      // Mark all form controls as touched to show validation errors
+      this.registerForm.markAllAsTouched();
     }
   }
 }

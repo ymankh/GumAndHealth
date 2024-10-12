@@ -8,6 +8,7 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AdminClassEditComponent } from './pages/admin-class-edit/admin-class-edit.component';
 import { TipsComponent } from './nutrition/tips/tips.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { GymsComponent } from './pages/gyms/gyms.component';
 import { RecipesComponent } from './nutrition/recipes/recipes.component';
 import { RecipeDetailComponent } from './nutrition/recipe-detail/recipe-detail.component';
@@ -20,6 +21,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { ShopComponent } from './pages/shop/shop.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { TestimonialsComponent } from './pages/testimonials/testimonials.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 
 
@@ -35,7 +38,12 @@ const routes: Routes = [
   { path: 'gyms', component: GymsComponent },
   { path: 'recipes', component: RecipesComponent },
   { path: 'recipes/:id', component: RecipeDetailComponent },
-  { path: 'gym/:id', component: SingleGymComponent },
+  { path: 'nutrition', component: NutritionComponent },
+  { path: 'Profile', component: ProfileComponent },
+  { path: 'Testimonials', component: TestimonialsComponent },
+  { path: 'edit-profile/:id', component: EditProfileComponent},
+  { path: 'Gyms', component: GymsComponent },
+  { path: 'singleGym/:id', component: SingleGymComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'admin/classes', component: AdminClassesComponent },
   { path: 'class-details/:id', component: ClassDetailsComponent },
@@ -44,6 +52,9 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'shop', component: ShopComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
+  
+  { path: '**', redirectTo: '', pathMatch: 'full' }, // Wildcard route to redirect invalid paths to home
   { path: '**', redirectTo: '', pathMatch: 'full' },
   { path: 'products/category/:id', component: ProductCardComponent } // or ProductsComponent if that's the correct name
   // Wildcard route to redirect invalid paths to home
