@@ -10,10 +10,10 @@
             <th scope="col">Description</th>
             <th scope="col">Image</th>
             <th scope="col">Price</th>
-            <th scope="col">Available Day</th>
-            <th scope="col">Start Time</th>
-            <th scope="col">End Time</th>
-            <th scope="col">Instructor Name</th>
+            <th scope="col"> Day</th>
+            <th scope="col">Start </th>
+            <th scope="col">End </th>
+            <th scope="col">Instructor </th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -29,7 +29,7 @@
             <td>{{ classItem.endTime }}</td>
             <td>{{ classItem.instructorName }}</td>
             <td>
-              <button class="btn btn-info">Edit</button>
+              <a class="btn btn-info" [routerLink]="['/editClass/', classItem.id]">Edit</a>
               <button class="btn btn-danger">Delete</button>
             </td>
           </tr>

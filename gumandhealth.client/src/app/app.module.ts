@@ -13,6 +13,7 @@ import { BlogComponent } from './pages/blog/blog.component';
 import { ClassesComponent } from './pages/classes/classes.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AdminClassEditComponent } from './pages/admin-class-edit/admin-class-edit.component';
 import { FormsModule } from '@angular/forms';
 import { TipsComponent } from './nutrition/tips/tips.component';
 import { GymsComponent } from './pages/gyms/gyms.component';
@@ -25,6 +26,7 @@ import { ClassDetailsComponent } from './pages/class-details/class-details.compo
 
 @NgModule({
   declarations: [
+    AdminClassEditComponent,
     AppComponent,
     NutritionComponent,
     HomeComponent,
@@ -44,7 +46,7 @@ import { ClassDetailsComponent } from './pages/class-details/class-details.compo
     SingleGymComponent,
     AdminComponent,
     AdminClassesComponent,
-    ClassDetailsComponent
+    ClassDetailsComponent,
   ],
   imports: [
     FormsModule,
