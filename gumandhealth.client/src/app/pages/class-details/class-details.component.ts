@@ -56,7 +56,39 @@ export class ClassDetailsComponent implements OnInit {
     return this.classDetails?.schedules.filter(schedule => schedule.availableDay === day) || [];
   }
 
-  joinClass(id : number) {
+  
+  joinClass(classScheduleId: number) {
+    const startDate = new Date(); // اليوم الحالي
+    const endDate = new Date();
+    endDate.setMonth(startDate.getMonth() + 1); // الشهر القادم
 
+    // البيانات التي سنرسلها إلى API للاشتراك
+    const body = {
+      classScheduleId: classScheduleId,
+      userId: 1, // احصل على userId من التخزين المحلي (أو أي قيمة أخرى تحتاجها)
+      startDate: startDate.toISOString(), // تحويل التاريخ إلى سلسلة نصية
+      endDate: endDate.toISOString() // تحويل التاريخ إلى سلسلة نصية
+    };
+
+    // إرسال طلب الاشتراك إلى API
+    this._ser.postPayment(body).subscribe((response: any) => {
+      // التحقق من نجاح الاشتراك
+      if (response.message === 'Subscription created successfully') {
+        const subscriptionId = response.subscriptionId; // الحصول على معرف الاشتراك
+        this.redirectToPayPal(subscriptionId); // توجيه المستخدم إلى PayPal
+      } else {
+        console.error('خطأ في إنشاء الاشتراك:', response);
+      }
+    }, (error) => {
+      console.error('خطأ في postPayment:', error);
+    });
   }
+
+  redirectToPayPal(subscriptionId: number) {
+    // نقل المستخدم إلى صفحة الدفع عبر PayPal
+    const redirectUrl = `https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_xclick&business=YOUR_PAYPAL_EMAIL&item_name=Class+Subscription&amount=10.00&currency_code=USD&return=https://localhost:7280/api/Subscription/PaymentSuccess/${subscriptionId}&cancel_return=https://localhost:7280/api/Subscription/PaymentCancel/${subscriptionId}`;
+
+    window.location.href = redirectUrl;
+  }
+
 }

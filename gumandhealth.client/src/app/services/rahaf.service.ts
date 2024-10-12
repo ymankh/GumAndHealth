@@ -29,4 +29,10 @@ export class RahafService {
   getJadwal(): Observable<any> {
     return this.http.get<any>(`${this.staticData}/Classes/GetAllClassSchedules`)
   }
+
+  postPayment(body: any): Observable<any> {
+    return this.http.post<any>(`${this.staticData}/Classes/api/Subscription/JoinClass`, body);
+  }
+
+
 }
