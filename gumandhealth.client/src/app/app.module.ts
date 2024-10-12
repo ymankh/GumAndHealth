@@ -59,7 +59,7 @@ import { TestimonialsComponent } from './pages/testimonials/testimonials.compone
     ShopComponent,
     CartComponent,
     RegisterComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
     TipsComponent,
     EditProfileComponent,
     TestimonialsComponent
