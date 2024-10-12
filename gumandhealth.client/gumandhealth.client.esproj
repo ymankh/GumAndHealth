@@ -13,4 +13,7 @@
   <ItemGroup>
     <Folder Include="src\app\types\" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\app\ClassesR\" />
+  </ItemGroup>
 </Project>

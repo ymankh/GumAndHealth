@@ -13,8 +13,18 @@ import { BlogComponent } from './pages/blog/blog.component';
 import { ClassesComponent } from './pages/classes/classes.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { ProfileComponent } from './profile/profile.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TipsComponent } from './nutrition/tips/tips.component';
+import { GymsComponent } from './pages/gyms/gyms.component';
+import { RecipesComponent } from './nutrition/recipes/recipes.component';
+import { RecipeDetailComponent } from './nutrition/recipe-detail/recipe-detail.component';
+import { SingleGymComponent } from './pages/single-gym/single-gym.component';
+import { AdminComponent } from './pages/admin/admin.component';
+import { AdminClassesComponent } from './pages/admin-classes/admin-classes.component';
+import { ClassDetailsComponent } from './pages/class-details/class-details.component';
+import { ProductsComponent } from './pages/products/products.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
+import { LoginComponent } from './pages/login/login.component';
 import { ShopComponent } from './pages/shop/shop.component';
 
 @NgModule({
@@ -30,9 +40,23 @@ import { ShopComponent } from './pages/shop/shop.component';
     ContactComponent,
     ProfileComponent,
     TipsComponent,
+    GymsComponent,
+    RecipesComponent,
+    RecipeDetailComponent,
+    RecipeDetailComponent,
+    GymsComponent,
+    SingleGymComponent,
+    AdminComponent,
+    AdminClassesComponent,
+    ClassDetailsComponent,
+    ProductsComponent,
+    ProductCardComponent,
+    LoginComponent,
+    TipsComponent,
     ShopComponent
   ],
   imports: [
+    ReactiveFormsModule,
     FormsModule,
     BrowserModule,
     HttpClientModule,

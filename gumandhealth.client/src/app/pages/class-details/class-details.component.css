@@ -1,0 +1,57 @@
+.schedule-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.schedule-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.schedule-day {
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-left: 10px;
+}
+
+.schedule-time {
+  font-size: 1.2rem;
+  color: #333;
+  margin-top: 5px;
+}
+
+.schedule-instructor {
+  font-size: 1rem;
+  color: #555;
+}
+
+  .schedule-instructor strong {
+    color: #4CAF50; /* لون عناوين المعلومات */
+  }
+
+hr {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.join-button {
+  background-color: #4CAF50; /* لون أخضر فاتح */
+  color: white; /* نص أبيض */
+  border: none; /* إزالة الحدود */
+  padding: 10px 20px; /* حواف داخلية للزر */
+  text-align: center; /* توسيط النص */
+  text-decoration: none; /* إزالة أي خط تحت النص */
+  display: inline-block; /* جعل الزر عنصر بلوك */
+  font-size: 16px; /* حجم الخط */
+  margin: 10px 0; /* إضافة مسافة حول الزر */
+  border-radius: 5px; /* زوايا دائرية */
+  cursor: pointer; /* تغيير شكل المؤشر عند المرور على الزر */
+  transition: background-color 0.3s; /* تأثير انتقالي لتغيير اللون */
+}
+
+  .join-button:hover {
+    background-color: #45a049; /* لون أخضر داكن عند المرور */
+  }
