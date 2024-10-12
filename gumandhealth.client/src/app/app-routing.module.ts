@@ -23,6 +23,7 @@ import { CartComponent } from './pages/cart/cart.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { TestimonialsComponent } from './pages/testimonials/testimonials.component';
+import { NutritionComponent } from './nutrition/nutrition.component';
 
 
 const routes: Routes = [
