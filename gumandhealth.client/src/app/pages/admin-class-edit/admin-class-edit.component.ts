@@ -62,4 +62,32 @@ export class AdminClassEditComponent implements OnInit {
     const [hours, minutes] = time.split(':');
     return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:00`;
   }
+
+
+
+
+
+
+
+
+
+
+  ////////////////////////////
+  deleteClass(): void {
+    console.log('Delete class button clicked');
+    if (confirm('Are you sure you want to delete this class?')) {
+      console.log('Confirmation received');
+      console.log('Class ID to delete:', this.classItem.id);
+
+      this.classService.deleteClass(this.classItem.id).subscribe(() => {
+        console.log('Class deleted successfully');
+        this.router.navigate(['/displayClasses']);
+      }, error => {
+        console.error('Error deleting class:', error);
+        alert('An error occurred while deleting the class. Please try again.');
+      });
+    } else {
+      console.log('Deletion cancelled');
+    }
+  }
 }
