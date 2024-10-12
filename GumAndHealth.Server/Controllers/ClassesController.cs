@@ -1,8 +1,11 @@
-﻿using GumAndHealth.Server.Models;
+﻿using GumAndHealth.Server.DTOs;
+using GumAndHealth.Server.Models;
+using GumAndHealth.Server.Repositories;
 using GumAndHealth.Server.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PayPal.Api;
 namespace GumAndHealth.Server.Controllers
 {
     [Route("api/[controller]")]
@@ -10,12 +13,16 @@ namespace GumAndHealth.Server.Controllers
     public class ClassesController : ControllerBase
     {
         private readonly MyDbContext _db;
-        private readonly PayPalServiceR _payPalService;
-
-        public ClassesController(PayPalServiceR payPalService, MyDbContext db)
+        string _redirectUrl;
+        private PayPalServiceR payPalService;
+        public ClassesController(MyDbContext db, IConfiguration config, PayPalServiceR paypal)
         {
+
             _db = db;
-            _payPalService = payPalService;
+
+            _redirectUrl = config["PayPalR:RedirectUrl"] + "/api/Classes";
+
+            payPalService = paypal;
 
         }
         ///////////////////////////////////////////////////////////////////////////////////////
@@ -153,40 +160,121 @@ namespace GumAndHealth.Server.Controllers
 
         }
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-        [HttpPost("create-order")]
-        [Authorize]
-        public async Task<IActionResult> CreateOrder([FromBody] CreateOrderRequest request)
+        //[HttpPost("create-order")]
+        //public IActionResult CreateOrder([FromBody] CreateOrderRequest request)
+        //{
+
+        //    // Validate the request
+        //    if (request == null || request.Amount <= 0)
+        //    {
+        //        return BadRequest("Invalid order details.");
+        //    }
+
+        //    string returnUrl = "https://your-frontend.com/success";
+        //    string cancelUrl = "https://your-frontend.com/cancel";
+
+        //    try
+        //    {
+        //        // Use a supported currency code (make sure USD is appropriate for your needs)
+        //        var order =  _payPalService.CreateOrder(request.Amount, "USD", returnUrl, cancelUrl);
+        //        return Ok(order);
+        //    }
+        //    catch (PayPalHttp.HttpException httpEx)
+        //    {
+        //        // Handle PayPal specific exceptions
+        //        return StatusCode((int)httpEx.StatusCode, httpEx.Message);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Log the exception details (ex) here if needed for debugging
+        //        return StatusCode(500, "An error occurred while creating the PayPal order.");
+        //    }
+        //}
+
+        //[HttpPost("capture-order/{orderId}")]
+        //public async Task<IActionResult> CaptureOrder(string orderId)
+        //{
+        //    // Validate the order ID
+        //    if (string.IsNullOrWhiteSpace(orderId))
+        //    {
+        //        return BadRequest("Invalid order ID.");
+        //    }
+
+        //    try
+        //    {
+        //        var order = await _payPalService.CaptureOrder(orderId);
+        //        return Ok(order);
+        //    }
+        //    catch (PayPalHttp.HttpException httpEx)
+        //    {
+        //        // Handle PayPal specific exceptions
+        //        return StatusCode((int)httpEx.StatusCode, httpEx.Message);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Log the exception details (ex) here if needed for debugging
+        //        return StatusCode(500, "An error occurred while capturing the PayPal order.");
+        //    }
+        //}
+
+        //public class CreateOrderRequest
+        //{
+        //    public decimal Amount { get; set; }
+        //}
+
+        [HttpPost("checkout")]
+        public IActionResult CreatePayment([FromBody] PayRDTO payRDTO)
         {
-            if (request == null || request.Amount <= 0)
-            {
-                return BadRequest("Invalid order details.");
-            }
+            if (string.IsNullOrEmpty(_redirectUrl))
+                throw new Exception("The redirect link for the paypal should be set correctly on the sitting app.");
 
-            // يمكنك استبدال هذه الروابط بروابط الواجهة الأمامية الخاصة بك
-            string returnUrl = "https://your-frontend.com/success";
-            string cancelUrl = "https://your-frontend.com/cancel";
 
-            var order = await _payPalService.CreateOrder(request.Amount, "JOD", returnUrl, cancelUrl);
-            return Ok(order);
+            var totalPrice = _db.ClassServices.Where(x => x.Id == payRDTO.IdSubs).FirstOrDefault().PricePerMonth ?? 0;
+            var payment = payPalService.CreatePayment(_redirectUrl ?? " ", totalPrice, null, payRDTO.userID);
+            var approvalUrl = payment.links.FirstOrDefault(l => l.rel.Equals("approval_url", StringComparison.OrdinalIgnoreCase))?.href;
+
+            return Ok(new { approvalUrl });
         }
 
-        [HttpPost("capture-order/{orderId}")]
-        [Authorize]
-        public async Task<IActionResult> CaptureOrder(string orderId)
+        [HttpGet("success")]
+        public IActionResult ExecutePayment(long IdSubs, string paymentId, string PayerID, string token, int userID)
         {
-            if (string.IsNullOrWhiteSpace(orderId))
+            var executedPayment = payPalService.ExecutePayment(paymentId, PayerID);
+
+            if (executedPayment.state == "approved")
             {
-                return BadRequest("Invalid order ID.");
+                var classService = _db.ClassServices.Where(x=> x.Id == IdSubs).FirstOrDefault();
+
+                if (classService != null)
+                {
+                    var subscription = new ClassSubscription
+                    {
+                        ClassServiceId = classService.Id,
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now.AddMonths(1), 
+                        UserId = userID,
+                        PaymentId = long.Parse(paymentId) 
+                    };
+
+                    _db.ClassSubscriptions.Add(subscription);
+                    _db.SaveChanges();
+                }
+
+                string script = "<script>window.close();</script>";
+                return Content(script, "text/html");
             }
-
-            var order = await _payPalService.CaptureOrder(orderId);
-            return Ok(order);
+            else
+            {
+                return BadRequest("Payment not approved.");
+            }
         }
-    }
 
-    public class CreateOrderRequest
-    {
-        public decimal Amount { get; set; }
+
+        [HttpGet("cancel")]
+        public IActionResult CancelPayment()
+        {
+            return BadRequest("Payment canceled.");
+        }
     }
 
 }

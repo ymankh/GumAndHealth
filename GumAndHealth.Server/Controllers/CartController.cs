@@ -1,22 +1,18 @@
-﻿using GumAndHealth.Server.Models;
+﻿using GumAndHealth.Server.DTOs.CartItemDTOs;
+using GumAndHealth.Server.Models;
 using GumAndHealth.Server.Repositories;
+using GumAndHealth.Server.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using GumAndHealth.Server.DTOs.CartItemDTOs;
-using GumAndHealth.Server.Services;
 
 namespace GumAndHealth.Server.Controllers
-
-
 {
-
     [Route("api/[controller]")]
     [ApiController]
     public class CartController(CartRepository cartRepository, MyDbContext context, IConfiguration config, PayPalPaymentService payPalService) : ControllerBase
     {
-        private readonly string? _redirectUrl = config["PayPal:RedirectUrl"];
+        private readonly string? _redirectUrl = config["PayPal:RedirectUrl"] + "/api/Cart";
 
         [HttpGet]
         [Authorize]
@@ -27,11 +23,27 @@ namespace GumAndHealth.Server.Controllers
 
         [Authorize]
         [HttpPost("AddToCart")]
-        public IActionResult AddToCart(UpdateCartItemDto updatedCartItem)
+        public IActionResult AddToCart([FromBody] UpdateCartItemDto updatedCartItem)
         {
-            cartRepository.UpdateOrCreateCartItem(updatedCartItem);
-            return Ok();
+            var cartItem = cartRepository.UpdateOrCreateCartItem(updatedCartItem, CurrentUser.Id);
+            return Ok(cartItem);
         }
+
+        [Authorize]
+        [HttpDelete("DeleteCartItem/{productId:long}")]
+        public IActionResult DeleteCartItem(long productId)
+        {
+            cartRepository.DeleteCartItem(productId, CurrentUser.Id);
+            return NoContent();
+        }
+        [Authorize]
+        [HttpDelete("ClearCart")]
+        public IActionResult DeleteCartItem()
+        {
+            cartRepository.ClearCart(CurrentUser.Id);
+            return NoContent();
+        }
+
 
         private User CurrentUser
         {
@@ -44,7 +56,7 @@ namespace GumAndHealth.Server.Controllers
         }
 
         [Authorize]
-        [HttpPost("checkout")]
+        [HttpGet("checkout")]
         public IActionResult CreatePayment()
         {
             if (string.IsNullOrEmpty(_redirectUrl))
@@ -63,7 +75,7 @@ namespace GumAndHealth.Server.Controllers
         {
             var order = cartRepository.Checkout(userId, paymentId);
             var executedPayment = payPalService.ExecutePayment(paymentId, PayerID);
-            string script = "<script>window.close();</script>";
+            const string script = "<script>window.close();</script>";
             return Content(script, "text/html");
         }
 

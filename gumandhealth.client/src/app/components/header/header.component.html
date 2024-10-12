@@ -10,11 +10,9 @@
         <div class="col-lg-10 col-md-12">
           <nav class="main-menu mobile-menu">
             <ul>
-              <!-- Use correct Angular routerLink and routerLinkActive -->
-              <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
-              <!--<li><a routerLink="/about" routerLinkActive="active">About Us</a></li>-->
+              <li><a routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">Home</a></li>
               <li><a routerLink="/classes" routerLinkActive="active">Classes</a></li>
-              <li><a routerLink="/nutrition" routerLinkActive="active">nutrition</a></li>
+              <li><a routerLink="/nutrition" routerLinkActive="active">Nutrition</a></li>
               <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
               <li><a routerLink="/Profile" routerLinkActive="active">Profile</a></li>
               <li><a routerLink="/Gyms" routerLinkActive="active">Gyms</a></li>
@@ -23,12 +21,24 @@
               <li><a routerLink="/login" routerLinkActive="active">login</a></li>
 
 
+              <li><a routerLink="/gyms" routerLinkActive="active">Gyms</a></li>
+              <li><a routerLink="/shop" routerLinkActive="active">Shop</a></li>
+              <li><a routerLink="/admin" routerLinkActive="active">Admin</a></li> 
+              <li><a routerLink="/testimonials" routerLinkActive="active">Testimonials</a></li>
+              
+              
+              <li class="cart-link"><a routerLink="/cart" routerLinkActive="active"><i class="fa fa-cart-shopping"></i></a> <span class="cart-page">{{cartService.getTotalItems()}}</span> </li>
+              <!-- Show Profile and Logout when the user is logged in -->
+              <li *ngIf="isLoggedIn"><a routerLink="/profile" routerLinkActive="active">Profile</a></li>
+              <li *ngIf="isLoggedIn"><a (click)="onLogout()">Logout</a></li>
+              
+              <!-- Show Login when the user is not logged in -->
+              <li *ngIf="!isLoggedIn"><a routerLink="/login" routerLinkActive="active">Login</a></li>
+              
               <li class="phone-num">
                 <i class="fa fa-phone"></i><span>+546 990221 123</span>
               </li>
-              <li><a routerLink="/Shop" routerLinkActive="active">Shop</a></li>
-
-             
+              
               <li class="search-btn search-trigger">
                 <i class="fa fa-search"></i>
               </li>

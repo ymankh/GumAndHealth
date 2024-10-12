@@ -30,9 +30,25 @@ export class RahafService {
   getJadwal(): Observable<any> {
     return this.http.get<any>(`${this.staticData}/Classes/GetAllClassSchedules`);
   }
-
-  createOrder(amount: number): Observable<any> {
-    const orderRequest = { Amount: amount };
-    return this.http.post<any>(`${this.staticData}/Classes/create-order`, orderRequest);
+  postCreatePayment(data: any): Observable<any> {
+    return this.http.post<any>(`${this.staticData}/Classes/checkout`,data)
+  
+   
   }
+  executePayment(idSubs: number, paymentId: string, payerId: string, userID: number): Observable<any> {
+    return this.http.get<any>(`${this.staticData}/Classes/success`, {
+      params: {
+        IdSubs: idSubs,
+        paymentId: paymentId,
+        PayerID: payerId,
+        userID: userID
+      }
+    });
+  }
+  cancelPayment(): Observable<any> {
+    return this.http.get<any>(`${this.staticData}/Classes/cancel`);
+  }
+
+
+
 }
