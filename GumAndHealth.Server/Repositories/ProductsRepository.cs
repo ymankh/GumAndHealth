@@ -1,19 +1,26 @@
 ﻿using GumAndHealth.Server.DTOs.ProductsDTOs;
 using GumAndHealth.Server.Models;
-using PayPal.Api;
-using System.Drawing.Printing;
 using GumAndHealth.Server.shared;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GumAndHealth.Server.Repositories
 {
-    public class ProductsRepository(MyDbContext context)
+    public class ProductsRepository
     {
+        private readonly MyDbContext _context;  // Define _context properly
+
+        public ProductsRepository(MyDbContext context)
+        {
+            _context = context;  // Initialize _context
+        }
+
         public PagedResultDto GetPaginatedProduct(ProductFilterDto productFilter)
         {
             const int pageSize = 20;
 
             // Query the products
-            var products = context.Products.AsQueryable();
+            var products = _context.Products.AsQueryable();
 
             // Filter by search
             if (!string.IsNullOrEmpty(productFilter.Search))
@@ -58,6 +65,7 @@ namespace GumAndHealth.Server.Repositories
                 .Skip((productFilter.Page - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
+
             return new PagedResultDto
             {
                 TotalCount = totalProducts,
@@ -67,6 +75,7 @@ namespace GumAndHealth.Server.Repositories
                 Products = paginatedProducts
             };
         }
+
         public Product CreateProduct(CreateProductDto createProductDto)
         {
             var product = new Product
@@ -93,9 +102,15 @@ namespace GumAndHealth.Server.Repositories
             if (createProductDto.Image6 != null)
                 product.Image6 = ImageSaver.SaveImage(createProductDto.Image6);
 
-            context.Products.Add(product);
-            context.SaveChanges();
+            _context.Products.Add(product);
+            _context.SaveChanges();
             return product;
+        }
+
+        // Add the method to get products by category ID
+        public IEnumerable<Product> GetProductsByCategoryId(int categoryId)
+        {
+            return _context.Products.Where(p => p.CategoryId == categoryId).ToList();
         }
     }
 }
