@@ -28,6 +28,7 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { LoginComponent } from './pages/login/login.component';
 import { ShopComponent } from './pages/shop/shop.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { RecipeCategoryAdminComponent } from './pages/admin/recipe-category-admin/recipe-category-admin.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,8 @@ import { CartComponent } from './pages/cart/cart.component';
     TipsComponent,
     ShopComponent,
     CartComponent,
+    RecipeCategoryAdminComponent,
+
   ],
   imports: [
     ReactiveFormsModule,

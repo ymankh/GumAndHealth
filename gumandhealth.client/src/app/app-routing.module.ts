@@ -20,6 +20,7 @@ import { ClassDetailsComponent } from './pages/class-details/class-details.compo
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { LoginComponent } from './pages/login/login.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { RecipeCategoryAdminComponent } from './pages/admin/recipe-category-admin/recipe-category-admin.component';
 
 
 const routes: Routes = [
@@ -43,6 +44,7 @@ const routes: Routes = [
   { path: 'products/:id', component: ProductCardComponent },
   { path: 'Admin', component: AdminComponent },
 
+  { path: 'recipe-category-admin', component: RecipeCategoryAdminComponent },
 
   { path: 'ClassDetails/:id', component: ClassDetailsComponent },
   { path: 'login', component: LoginComponent },

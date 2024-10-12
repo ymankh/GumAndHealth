@@ -21,9 +21,13 @@ export class NajlaaService {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 
- 
+  deleteCategory(id: number): Observable<any> {
+    return this.http.delete(`/${id}`);
+  }
   getRecipeById(id: number): Observable<any> {
     return this.http.get(`https://localhost:7280/api/Recipe/GetRecipeByCategory?recipeCategoryId=${id}`);
   }
-
+  getGyms(): Observable<any> {
+    return this.http.get<any>("https://localhost:7280/api/Home/GetAllGyms");
+  }
 }
