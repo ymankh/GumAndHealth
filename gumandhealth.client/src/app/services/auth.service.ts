@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { root } from '../shared/constants';
 import iziToast from 'izitoast';
 
@@ -8,76 +8,99 @@ import iziToast from 'izitoast';
   providedIn: 'root',
 })
 export class AuthService {
-  // Create a BehaviorSubject with initial login status (false means not logged in)
+  // BehaviorSubject to track login status
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
 
-  // Expose the BehaviorSubject as an observable so components can subscribe to it
+  // Expose the BehaviorSubject as an observable
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
-  constructor(readonly http: HttpClient) {
-    // Optionally check if the user is already logged in (e.g., from localStorage)
-    const storedLoginStatus = localStorage.getItem('token');
-    if (storedLoginStatus) {
-      this.isLoggedInSubject.next(true); // Set initial state to logged in if found in localStorage
+  constructor(private http: HttpClient) {
+    // Check if user is already logged in by checking the localStorage token
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.isLoggedInSubject.next(true); // Set logged-in state if token is found
     }
   }
 
   // Method to log in a user
-  login(email: string, password: string): void {
-    let formData = new FormData();
+  login(email: string, password: string): Observable<void> {
+    const formData = new FormData();
     formData.append('Email', email);
     formData.append('Password', password);
-    this.http
-      .post<{ token: string }>(root + '/api/Auth/login', formData)
-      .subscribe(
+
+    return new Observable<void>((observer) => {
+      this.http.post<{ token: string }>(`${root}/api/Auth/login`, formData).subscribe(
         (response) => {
+          // Save token to localStorage
           localStorage.setItem('token', response.token);
+
+          // Success toast notification
           iziToast.success({
             title: 'Login Successful',
             message: 'You are now logged in',
           });
+
+          // Update login state
           this.isLoggedInSubject.next(true);
+
+          // Notify subscribers of success
+          observer.next();
+          observer.complete();
         },
         (error) => {
+          // Failure toast notification
           iziToast.error({
             title: 'Login Failed',
             message: 'Invalid email or password',
           });
-          // Handle login error (e.g., display error message)
-          console.error(error);
+          console.error('Login error:', error);
+
+          // Notify subscribers of the error
+          observer.error(error);
         }
       );
-
-    // Save login status in localStorage (for persistence)
-    localStorage.setItem('isLoggedIn', 'true');
+    });
   }
 
-  // Method to log out a user
+  // Method to log out the user
   logout(): void {
-    // Perform logout logic (e.g., clear user data, invalidate session)
+    // Clear login state and token from localStorage
     this.isLoggedInSubject.next(false);
+    localStorage.removeItem('token');
 
-    // Remove login status from localStorage
-    localStorage.removeItem('isLoggedIn');
+    // Logout notification
+    iziToast.info({
+      title: 'Logout Successful',
+      message: 'You are now logged out',
+    });
   }
 
-  // Method to get the current login state (useful for components needing immediate access)
+  // Method to check if the user is currently logged in
   isUserLoggedIn(): boolean {
     return this.isLoggedInSubject.getValue();
   }
 
-  // Method to get the headers for the API requests
-  // {
-  //   headers: this.headers,
-  // }
-  headers() {
-    if (!localStorage.getItem('token'))
-      throw Error('No token found in localStorage');
+  // Method to register a new user
+  register(email: string, password: string): Observable<any> {
+    const formData = new FormData();
+    formData.append('Email', email);
+    formData.append('Password', password);
 
-    // Return headers with authorization token
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    });
+    // Post registration data to the backend
+    return this.http.post<any>(`${root}/api/Auth/register`, formData);
+  }
+
+  // Method to reset password
+  resetPassword(email: string): Observable<any> {
+    const formData = new FormData();
+    formData.append('Email', email);
+
+    // Make an HTTP POST request to your backend API for password reset
+    return this.http.post<any>(`${root}/api/Auth/reset-password`, formData);
+  }
+
+  // Method to fetch data from an API
+  fetchData(apiUrl: string): Observable<any> {
+    return this.http.get<any>(apiUrl);
   }
 }

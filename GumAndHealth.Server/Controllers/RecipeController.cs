@@ -1,4 +1,5 @@
-﻿using GumAndHealth.Server.Models;
+﻿using GumAndHealth.Server.DTOs.RecipeDTO;
+using GumAndHealth.Server.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -6,8 +7,8 @@ using System;
 
 namespace GumAndHealth.Server.Controllers
 {
-   
-        [Route("api/[controller]")]
+
+    [Route("api/[controller]")]
         [ApiController]
         public class RecipeController : ControllerBase
         {
@@ -37,13 +38,68 @@ namespace GumAndHealth.Server.Controllers
                 return recipe;
             }
 
-        [HttpGet("GetRecipesByCategory")]
-        public IActionResult GetRecipesByCategory(long recipeCategoryId)
+        [HttpGet("GetRecipeByCategory")]
+        public async Task<IActionResult> GetRecipeByCategory(long recipeCategoryId)
         {
-            var recipes = _context.Recipes
-                                  .Find(recipeCategoryId);
-            return Ok(recipes);
+            // استخدم FirstOrDefaultAsync لجلب الوصفة الأولى التي تتطابق مع الفئة
+            var recipe = await _context.Recipes
+                                       .FirstOrDefaultAsync(r => r.RecipeCategoryId == recipeCategoryId);
+
+            // تأكد من أن الوصفة موجودة قبل إعادة النتيجة
+            if (recipe == null)
+            {
+                return NotFound("No recipe found for this category.");
+            }
+
+            return Ok(recipe);
         }
+
+        // إضافة وصفة جديدة
+        [HttpPost]
+        [Route("AddRecipe")]
+        public async Task<IActionResult> AddRecipe([FromForm] RecipeDto recipeDto)
+        {
+            if (recipeDto.Image != null)
+            {
+                // اسم الملف
+                var fileName = Path.GetFileName(recipeDto.Image.FileName);
+
+                // مسار حفظ الصورة
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "C://Users/Orange/source/repos/GumAndHealth/gumandhealth.client/src/assets/img", fileName);
+
+                // تأكد من وجود المجلد
+                if (!Directory.Exists(Path.GetDirectoryName(filePath)))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+                }
+
+                // حفظ الصورة في المسار المحدد
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await recipeDto.Image.CopyToAsync(stream);
+                }
+
+                // إضافة الوصفة إلى قاعدة البيانات
+                var newRecipe = new Recipe
+                {
+                    Name = recipeDto.Name,
+                    Description = recipeDto.Description,
+                    RecipeCategoryId = recipeDto.RecipeCategoryId,
+                    CaloriesCount = recipeDto.CaloriesCount,
+                    Ingredients = recipeDto.Ingredients,
+                    Recipe1 = recipeDto.Recipe1,
+                    Image = fileName // حفظ اسم الصورة فقط (المسار النسبي)
+                };
+
+                _context.Recipes.Add(newRecipe);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { success = true, message = "Recipe added successfully" });
+            }
+
+            return BadRequest(new { success = false, message = "Image is required" });
+        }
+
 
     }
 

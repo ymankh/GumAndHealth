@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "izitoast": "^1.4.0",
+    "jspdf": "^2.5.2",
     "sweetalert2": "^11.14.2"
   },
   "devDependencies": {

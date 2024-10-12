@@ -1,12 +1,27 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service'; // Adjust the path according to your folder structure
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css',
+  styleUrls: ['./header.component.css'], // Corrected 'styleUrl' to 'styleUrls'
 })
-export class HeaderComponent {
-  constructor() {}
-  ngOnInit() {}
+export class HeaderComponent implements OnInit {
+  isLoggedIn: boolean = false;
+
+  constructor(public authService: AuthService, private router: Router) { }
+
+  ngOnInit(): void {
+    // Subscribe to login status from AuthService
+    this.authService.isLoggedIn$.subscribe((status: boolean) => {
+      this.isLoggedIn = status;
+    });
+  }
+
+  // Handle logout functionality
+  onLogout(): void {
+    this.authService.logout(); // Call logout from the service
+    this.router.navigate(['/login']); // Redirect to the login page after logout
+  }
 }

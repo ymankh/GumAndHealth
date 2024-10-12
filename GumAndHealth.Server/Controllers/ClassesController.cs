@@ -1,4 +1,6 @@
 ﻿using GumAndHealth.Server.Models;
+using GumAndHealth.Server.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 namespace GumAndHealth.Server.Controllers
@@ -8,10 +10,13 @@ namespace GumAndHealth.Server.Controllers
     public class ClassesController : ControllerBase
     {
         private readonly MyDbContext _db;
+        private readonly PayPalServiceR _payPalService;
 
-        public ClassesController(MyDbContext db)
+        public ClassesController(PayPalServiceR payPalService, MyDbContext db)
         {
             _db = db;
+            _payPalService = payPalService;
+
         }
         ///////////////////////////////////////////////////////////////////////////////////////
 
@@ -41,6 +46,7 @@ namespace GumAndHealth.Server.Controllers
             {
                 ClassId = classDetails.Id,
                 ClassName = classDetails.Name,
+                ClassPrice = classDetails.PricePerMonth,
                 ClassImage = classDetails.ImagePath,
                 Description = classDetails.Description,
                 Schedules = classDetails.ClassSchedules.Select(cs => new
@@ -146,6 +152,42 @@ namespace GumAndHealth.Server.Controllers
             return NotFound();
 
         }
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        [HttpPost("create-order")]
+        [Authorize]
+        public async Task<IActionResult> CreateOrder([FromBody] CreateOrderRequest request)
+        {
+            if (request == null || request.Amount <= 0)
+            {
+                return BadRequest("Invalid order details.");
+            }
 
+            // يمكنك استبدال هذه الروابط بروابط الواجهة الأمامية الخاصة بك
+            string returnUrl = "https://your-frontend.com/success";
+            string cancelUrl = "https://your-frontend.com/cancel";
+
+            var order = await _payPalService.CreateOrder(request.Amount, "JOD", returnUrl, cancelUrl);
+            return Ok(order);
+        }
+
+        [HttpPost("capture-order/{orderId}")]
+        [Authorize]
+        public async Task<IActionResult> CaptureOrder(string orderId)
+        {
+            if (string.IsNullOrWhiteSpace(orderId))
+            {
+                return BadRequest("Invalid order ID.");
+            }
+
+            var order = await _payPalService.CaptureOrder(orderId);
+            return Ok(order);
+        }
     }
+
+    public class CreateOrderRequest
+    {
+        public decimal Amount { get; set; }
+    }
+
 }
+

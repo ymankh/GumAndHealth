@@ -23,7 +23,7 @@ export class NajlaaService {
 
  
   getRecipeById(id: number): Observable<any> {
-    return this.http.get(`https://localhost:7280/api/Recipe/GetRecipesByCategory?recipeCategoryId=${id}`);
+    return this.http.get(`https://localhost:7280/api/Recipe/GetRecipeByCategory?recipeCategoryId=${id}`);
   }
 
 }

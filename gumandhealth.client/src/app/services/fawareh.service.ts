@@ -10,7 +10,7 @@ export class FawarehService {
 
   constructor(private http: HttpClient) { }
 
-  staticUrl = "https://localhost:44325/api"
+  staticUrl = "https://localhost:7280/api"
 
 
 
@@ -25,8 +25,11 @@ export class FawarehService {
     return this.http.get<any>(`${this.staticUrl}/Gyms/GetGymById/${id}`)
   }
 
+  addGymSubscription(data: any): Observable<any> { 
+    return this.http.post<any>(`${this.staticUrl}/GymsSubscription/AddNewGymSubscription`, data)
 
 
+  }
 
 
 

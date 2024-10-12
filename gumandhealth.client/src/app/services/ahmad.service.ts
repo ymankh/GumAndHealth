@@ -29,6 +29,8 @@ export class AhmadService {
     return this.http.put<any>(`${this.apiUrl}classCrud/putClass/${id}`, classItem);
   }
 
-
+  deleteClass(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}classCrud/deleteClass/${id}`);
+  }
 
 }
