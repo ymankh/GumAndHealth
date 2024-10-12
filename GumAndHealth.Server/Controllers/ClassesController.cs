@@ -46,6 +46,7 @@ namespace GumAndHealth.Server.Controllers
             {
                 ClassId = classDetails.Id,
                 ClassName = classDetails.Name,
+                ClassPrice = classDetails.PricePerMonth,
                 ClassImage = classDetails.ImagePath,
                 Description = classDetails.Description,
                 Schedules = classDetails.ClassSchedules.Select(cs => new
