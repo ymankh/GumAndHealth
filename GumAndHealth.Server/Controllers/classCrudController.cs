@@ -165,5 +165,88 @@ namespace GumAndHealth.Server.Controllers
 
             return Ok(classes);
         }
+
+
+
+
+        // New method to get a specific class by ID
+        [HttpGet("getClass/{id}")]
+        public async Task<ActionResult<allClass>> GetClassById(long id)
+        {
+            var classItem = await _context.ClassServices
+                .Include(cs => cs.ClassSchedules)
+                .ThenInclude(cs => cs.Instructor)
+                .Where(cs => cs.Id == id)
+                .Select(cs => new allClass
+                {
+                    Id = cs.Id,
+                    Name = cs.Name,
+                    Description = cs.Description,
+                    ImagePath = cs.ImagePath,
+                    PricePerMonth = cs.PricePerMonth ?? 0,
+                    AvailableDay = cs.ClassSchedules.Select(c => c.AvailableDay).FirstOrDefault(),
+                    StartTime = cs.ClassSchedules.Select(c => c.StartTime).FirstOrDefault() ?? new TimeOnly(),
+                    EndTime = cs.ClassSchedules.Select(c => c.EndTime).FirstOrDefault() ?? new TimeOnly(),
+                    InstructorName = cs.ClassSchedules.Select(c => c.Instructor.FullName).FirstOrDefault()
+                })
+                .FirstOrDefaultAsync();
+
+            if (classItem == null)
+            {
+                return NotFound(); // Return 404 if class not found
+            }
+
+            return Ok(classItem);
+        }
+
+
+
+
+
+
+        /// <summary>
+        /// ///////////
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="updatedClass"></param>
+        /// <returns></returns>
+        // New method to update a class
+        [HttpPut("putClass/{id}")]
+        public async Task<IActionResult> UpdateClass(long id, [FromBody] allClass updatedClass)
+        {
+            if (id != updatedClass.Id)
+            {
+                return BadRequest("Class ID mismatch.");
+            }
+
+            var existingClass = await _context.ClassServices
+                .Include(cs => cs.ClassSchedules)
+                .FirstOrDefaultAsync(cs => cs.Id == id);
+
+            if (existingClass == null)
+            {
+                return NotFound("Class not found.");
+            }
+
+            // Update properties
+            existingClass.Name = updatedClass.Name;
+            existingClass.Description = updatedClass.Description;
+            existingClass.ImagePath = updatedClass.ImagePath;
+            existingClass.PricePerMonth = updatedClass.PricePerMonth;
+
+            // Update schedules if necessary (you may want to handle this separately)
+            // Assuming there's only one schedule for simplicity:
+            var schedule = existingClass.ClassSchedules.FirstOrDefault();
+            if (schedule != null)
+            {
+                schedule.AvailableDay = updatedClass.AvailableDay;
+                schedule.StartTime = updatedClass.StartTime;
+                schedule.EndTime = updatedClass.EndTime;
+            }
+
+            // Save changes
+            await _context.SaveChangesAsync();
+            return NoContent(); // 204 No Content
+        }
     }
 }
