@@ -13,7 +13,8 @@ import { BlogComponent } from './pages/blog/blog.component';
 import { ClassesComponent } from './pages/classes/classes.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { ProfileComponent } from './profile/profile.component';
-import { FormsModule } from '@angular/forms';
+import { AdminClassEditComponent } from './pages/admin-class-edit/admin-class-edit.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TipsComponent } from './nutrition/tips/tips.component';
 import { GymsComponent } from './pages/gyms/gyms.component';
 import { RecipesComponent } from './nutrition/recipes/recipes.component';
@@ -21,9 +22,16 @@ import { RecipeDetailComponent } from './nutrition/recipe-detail/recipe-detail.c
 import { SingleGymComponent } from './pages/single-gym/single-gym.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { AdminClassesComponent } from './pages/admin-classes/admin-classes.component';
+import { ClassDetailsComponent } from './pages/class-details/class-details.component';
+import { ProductsComponent } from './pages/products/products.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
+import { LoginComponent } from './pages/login/login.component';
+import { ShopComponent } from './pages/shop/shop.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 @NgModule({
   declarations: [
+    AdminClassEditComponent,
     AppComponent,
     NutritionComponent,
     HomeComponent,
@@ -38,15 +46,22 @@ import { AdminClassesComponent } from './pages/admin-classes/admin-classes.compo
     GymsComponent,
     RecipesComponent,
     RecipeDetailComponent,
-    RecipeDetailComponent ,
+    RecipeDetailComponent,
     GymsComponent,
     SingleGymComponent,
     AdminComponent,
-    AdminClassesComponent
-
-    
+    AdminClassesComponent,
+    ClassDetailsComponent,
+    ClassDetailsComponent,
+    ProductsComponent,
+    ProductCardComponent,
+    LoginComponent,
+    TipsComponent,
+    ShopComponent,
+    CartComponent,
   ],
   imports: [
+    ReactiveFormsModule,
     FormsModule,
     BrowserModule,
     HttpClientModule,

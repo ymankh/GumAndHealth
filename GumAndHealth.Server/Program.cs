@@ -32,6 +32,7 @@ namespace GumAndHealth.Server
             builder.Services.AddScoped<CartRepository>();
             builder.Services.AddScoped<PayPalPaymentService>();
             builder.Services.AddScoped<ProductsRepository>();
+            builder.Services.AddScoped<CategoryRepository>();
 
             //Add JWT Bearer Authentication
             builder.Services.AddAuthentication(options =>

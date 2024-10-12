@@ -1,4 +1,5 @@
-﻿using GumAndHealth.Server.Models;
+﻿using GumAndHealth.Server.DTOs.CategoriesDTOs;
+using GumAndHealth.Server.Models;
 using GumAndHealth.Server.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,13 @@ namespace GumAndHealth.Server.Controllers
         public IActionResult GetCategories()
         {
             return Ok(categoryRepository.GetCategories());
+        }
+
+        [HttpPost]
+        public IActionResult CreateCategories([FromForm] CreateCategoryDto createCategoryDto)
+        {
+            var newCategory = categoryRepository.CreateCategory(createCategoryDto);
+            return Ok(newCategory);
         }
     }
 
