@@ -27,6 +27,7 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { LoginComponent } from './pages/login/login.component';
 import { ShopComponent } from './pages/shop/shop.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { RecipeCategoryAdminComponent } from './pages/admin/recipe-category-admin/recipe-category-admin.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
@@ -58,6 +59,8 @@ import { TestimonialsComponent } from './pages/testimonials/testimonials.compone
     LoginComponent,
     ShopComponent,
     CartComponent,
+    RecipeCategoryAdminComponent,
+
     RegisterComponent,
     ResetPasswordComponent,
     TipsComponent,

@@ -1,17 +1,40 @@
-<!-- Page Preloder -->
-<!-- <div id="preloder">
-  <div class="loader"></div>
-</div> -->
-<!-- Header Section Begin -->
+ <!-- Testimonial Carousel Section -->
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://localhost:7280/api/RecipeCategory/getImage/slide1home.png" class="d-block w-100" alt="Slide 1">
 
-<!-- Header End -->
-<!-- Hero Section Begin -->
+    </div>
+    <div class="carousel-item">
+      <img src="https://localhost:7280/api/RecipeCategory/getImage/slide2home.png" class="d-block w-100" alt="Slide 2">
+    </div>
+    <div class="carousel-item">
+      <img src="https://localhost:7280/api/RecipeCategory/getImage/slide3home.png" class="d-block w-100" alt="Slide 3">
+    </div>
+    <div class="carousel-item">
+      <img src="https://localhost:7280/api/RecipeCategory/getImage/slide4home.png" class="d-block w-100" alt="Slide 4">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
 <div class="hero-slider">
   <div class="hero-items owl-carousel">
-    <div
-      class="single-hero-item set-bg"
-      [style.backgroundImage]="'url(/assets/img/slide-1.jpg)'"
-    >
+    <div class="single-hero-item set-bg"
+         [style.backgroundImage]="'url(/assets/img/slide-1.jpg)'">
       <div class="container">
         <div class="row">
           <div class="col-lg-8">
@@ -30,10 +53,8 @@
       </div>
     </div>
 
-    <div
-      class="single-hero-item set-bg"
-      [style.backgroundImage]="'url(/assets/img/slide-2.jpg)'"
-    >
+    <div class="single-hero-item set-bg"
+         [style.backgroundImage]="'url(/assets/img/slide-2.jpg)'">
       <div class="container">
         <div class="row">
           <div class="col-lg-8">
@@ -52,10 +73,8 @@
       </div>
     </div>
 
-    <div
-      class="single-hero-item set-bg"
-      [style.backgroundImage]="'url(/assets/img/slide-3.jpg)'"
-    >
+    <div class="single-hero-item set-bg"
+         [style.backgroundImage]="'url(/assets/img/slide-3.jpg)'">
       <div class="container">
         <div class="row">
           <div class="col-lg-8">
@@ -77,48 +96,6 @@
 </div>
 <!-- Hero Section End -->
 <!-- Class Booking Section Begin -->
-<div class="booking-classes">
-  <div class="container-fluid">
-    <div class="booking-text">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="row">
-            <div class="col-lg-12">
-              <div
-                class="booking-heading set-bg"
-                [style.backgroundImage]="'url(/assets/img/booking.jpg)'"
-              >
-                <div class="booking-inner-text">
-                  <h2>Book Your First Class</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="booking-form">
-            <form action="#">
-              <div class="row">
-                <div class="col-lg-6">
-                  <input type="text" placeholder="Your Name" />
-                  <input type="text" placeholder="Your Phone" />
-                </div>
-                <div class="col-lg-6">
-                  <input type="email" placeholder="E-mail Address" />
-                  <input type="submit" value="Submit" class="submit-btn" />
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 <!-- Class Booking Section End -->
 <!-- Services Section Begin -->
 <section class="services-section spad">
@@ -166,10 +143,8 @@
 </section>
 <!-- Services Section End -->
 <!-- Client Says Section Begin -->
-<section
-  class="client-says set-bg"
-  [style.backgroundImage]="'url(/assets/img/client-bg.jpg)'"
->
+<section class="client-says set-bg"
+         [style.backgroundImage]="'url(/assets/img/client-bg.jpg)'">
   <div class="container">
     <div class="row">
       <div class="col-lg-9">
@@ -195,16 +170,23 @@
           <div class="section-title">
             <h2>Lifestyle & Diet</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis
-              ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas
-              accumsan lacus vel facilisis. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-              labore et dolore magna aliqua. Quis ipsum suspendisse ultrices
-              gravida. Risus commodo viverra maecenas accumsan lacus vel
-              facilisis.
+              "Maintaining a healthy lifestyle starts with taking care
+              of both your body and mind. Choose food that fuels your
+              energy and empowers your performance, and exercise regularly
+              to strengthen your body and clear your mind. Always remember,
+              every healthy choice you make today is an investment in a
+              brighter, more vibrant future. You deserve the best, so
+              start today with a small step toward a life full of health and vitality."
+
+
+
+
+
+
+
             </p>
-            <a href="#" class="primary-btn">Read More</a>
+            <a routerLink="/nutrition" class="primary-btn">Read More</a>
+
           </div>
         </div>
       </div>
@@ -273,15 +255,34 @@
     </div>
   </div>
 </section>
+<div class="container mt-5">
+  <div class="row">
+    <!-- حلقة لتكرار البطاقات بناءً على البيانات -->
+    <div class="col-md-4" *ngFor="let gym of gyms">
+      <div class="card">
+        <img [src]="gym.imagePath" class="card-img-top" [alt]="gym.name">
+        <div class="card-body">
+          <h5 class="card-title">{{ gym.name }}</h5>
+          <p class="card-text">{{ gym.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<div class="text-center">
+  <a routerLink="/Gyms" class="primary-btn callto-btn">All Gyms</a>
+</div>
+<br />
+
+<br />
 <!-- Call To Section End -->
 <!-- Map Section Begin -->
 <div class="map">
-  <iframe
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24182.553681405774!2d-73.99529774360377!3d40.744003480221!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259737e225aa1%3A0x652ff78189c0e104!2sStuyvesant%20Town-Peter%20Cooper%20Village%2C%20New%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sbd!4v1567961277124!5m2!1sen!2sbd"
-    height="585"
-    style="border: 0"
-    allowfullscreen
-  ></iframe>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24182.553681405774!2d-73.99529774360377!3d40.744003480221!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259737e225aa1%3A0x652ff78189c0e104!2sStuyvesant%20Town-Peter%20Cooper%20Village%2C%20New%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sbd!4v1567961277124!5m2!1sen!2sbd"
+          height="585"
+          style="border: 0"
+          allowfullscreen></iframe>
   <div class="map-address">
     <div class="map-address-text">
       <ul>

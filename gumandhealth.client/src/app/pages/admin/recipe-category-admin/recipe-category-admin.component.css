@@ -1,0 +1,14 @@
+.table img {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.table td {
+  vertical-align: middle;
+}
+table caption {
+  caption-side: top; /* هذا يضمن أن الـ <caption> يظهر في أعلى الجدول */
+  font-size: 3rem; /* حجم الخط */
+  font-weight: bold; /* لجعل النص عريضًا */
+  margin-bottom: 10px; /* المسافة بين الـ <caption> والجدول */
+}
