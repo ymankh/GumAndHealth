@@ -83,7 +83,7 @@
                 <thead>
                   <tr>
                     <th>Subscription ID</th>
-                    <th>Service Name</th>
+                    <th>Service Name</th> <!-- يجب أن يكون "Gym Name" بدلاً من "Service Name" -->
                     <th>Start Date</th>
                     <th>End Date</th>
                   </tr>
@@ -91,7 +91,7 @@
                 <tbody>
                   <tr *ngFor="let sub of userSubscriptions">
                     <td>{{ sub.id }}</td>
-                    <td>{{ sub.name }}</td>
+                    <td>{{ sub.gymName }}</td> <!-- تحديث الوصول إلى gymName -->
                     <td>{{ sub.startDate }}</td>
                     <td>{{ sub.endDate }}</td>
                   </tr>
@@ -124,7 +124,7 @@
             </div>
           </div>
         </div>
-</div>
+
       </div>
     </div>
   </div>

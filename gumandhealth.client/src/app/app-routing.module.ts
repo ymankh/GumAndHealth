@@ -29,6 +29,10 @@ import { RecipeCategoryAdminComponent } from './pages/admin/recipe-category-admi
 import { RecipeCategoryAdminPostComponent } from './pages/admin/recipe-category-admin-post/recipe-category-admin-post.component';
 import { ViewDetilesAdminComponent } from './pages/admin/view-detiles-admin/view-detiles-admin.component';
 import { RecipeAdminPostComponent } from './pages/admin/recipe-admin-post/recipe-admin-post.component';
+import { GetInstructorComponent } from './pages/admin/get-instructor/get-instructor.component';
+import { EditInstructorComponent } from './pages/admin/edit-instructor/edit-instructor.component';
+
+
 
 
 const routes: Routes = [
@@ -58,6 +62,8 @@ const routes: Routes = [
   { path: 'singleGym', component: SingleGymComponent },
   { path: 'products/:id', component: ProductCardComponent },
   { path: 'Admin', component: AdminComponent },
+  { path: 'GetInstructor', component: GetInstructorComponent },
+  { path: 'EditInstructor', component: EditInstructorComponent },
 
   { path: 'recipe-category-admin', component: RecipeCategoryAdminComponent },
 
