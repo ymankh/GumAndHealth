@@ -1,0 +1,34 @@
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-success text-white">
+      <h3 class="mb-0">Update Recipe Category</h3>
+    </div>
+    <div class="card-body">
+      <form (submit)="onSubmit()" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="name">Category Name</label>
+          <input type="text" class="form-control" id="name" [(ngModel)]="recipeCategory.name" name="name" required>
+        </div>
+
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea class="form-control" id="description" [(ngModel)]="recipeCategory.description" name="description" required></textarea>
+        </div>
+
+        <!-- عرض الصورة القديمة -->
+        <div class="form-group">
+          <label>Current Image</label><br>
+          <img  [src]="getCurrentImageUrl()" class="img-thumbnail" alt="Old Image" width="200" height="200">
+        </div>
+
+        <div class="form-group">
+          <label for="image">Upload New Image (Optional)</label>
+          <input type="file" class="form-control-file" id="image" (change)="onFileSelected($event)">
+        </div>
+
+        <button type="submit" class="btn btn-success mt-3">Update Category</button>
+      </form>
+    </div>
+  </div>
+</div>

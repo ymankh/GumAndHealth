@@ -76,6 +76,11 @@ namespace GumAndHealth.Server.Repositories
             };
         }
 
+        public List<Product> GetAllProducts()
+        {
+            return _context.Products.ToList();
+        }
+
         public Product CreateProduct(CreateProductDto createProductDto)
         {
             var product = new Product
@@ -112,5 +117,65 @@ namespace GumAndHealth.Server.Repositories
         {
             return _context.Products.Where(p => p.CategoryId == categoryId).ToList();
         }
+
+        public List<Product> GetProductsByPriceRange(decimal minPrice, decimal maxPrice)
+        {
+            return _context.Products
+                .Where(p => p.Price >= minPrice && p.Price <= maxPrice)
+                .ToList();
+        }
+
+
+        public List<Category> GetAllCategories()
+        {
+            return _context.Categories.ToList(); // Assuming you have a Categories table
+        }
+        public Product UpdateProduct(int id, UpdateProductDto updateProductDto)
+        {
+            // Find the product by ID
+            var product = _context.Products.FirstOrDefault(p => p.Id == id);
+
+            if (product == null)
+            {
+                return null; // Product not found
+            }
+
+            // Update the fields that can be changed
+            product.Name = updateProductDto.Name;
+            product.Description = updateProductDto.Description;
+            product.Price = updateProductDto.Price;
+
+            // Check if a new image is uploaded
+            if (updateProductDto.Image != null)
+            {
+                // Assuming you have a method to save images and return the file path
+                product.Image1 = ImageSaver.SaveImage(updateProductDto.Image);
+            }
+
+            // Save changes to the database
+            _context.SaveChanges();
+
+            return product;
+        }
+
+        public bool DeleteProduct(int id)
+        {
+            // Find the product by ID
+            var product = _context.Products.FirstOrDefault(p => p.Id == id);
+
+            if (product == null)
+            {
+                return false; // Product not found
+            }
+
+            // Remove the product from the database
+            _context.Products.Remove(product);
+
+            // Save changes to the database
+            _context.SaveChanges();
+
+            return true; // Successfully deleted
+        }
+
     }
 }

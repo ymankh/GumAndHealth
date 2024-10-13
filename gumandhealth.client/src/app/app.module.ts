@@ -36,6 +36,9 @@ import { RecipeCategoryAdminPostComponent } from './pages/admin/recipe-category-
 import { ViewDetilesAdminComponent } from './pages/admin/view-detiles-admin/view-detiles-admin.component';
 import { RecipeAdminPostComponent } from './pages/admin/recipe-admin-post/recipe-admin-post.component';
 import { AdminScheduleComponent } from './pages/admin-schedule/admin-schedule.component';
+import { AdminProductsComponent } from './pages/admin/adminproducts/adminproducts.component';
+import { RecipeCategoryAdminPutComponent } from './pages/admin/recipe-category-admin-put/recipe-category-admin-put.component';
+import { RecipeAdminPutComponent } from './pages/admin/recipe-admin-put/recipe-admin-put.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +77,10 @@ import { AdminScheduleComponent } from './pages/admin-schedule/admin-schedule.co
     ViewDetilesAdminComponent,
     RecipeAdminPostComponent,
     AdminScheduleComponent,
+    AdminProductsComponent,
+    RecipeCategoryAdminPutComponent,
+    RecipeAdminPutComponent,
+    AdminProductsComponent,
   ],
   imports: [
     BrowserModule,
