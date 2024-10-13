@@ -156,21 +156,24 @@ namespace GumAndHealth.Server.Controllers
                 return NotFound(new { success = false, message = "Category not found" });
             }
 
-            // التحقق من وجود وصفات مرتبطة
+            // العثور على الوصفات المرتبطة
             var relatedRecipes = await _context.Recipes
                 .Where(r => r.RecipeCategoryId == id)
                 .ToListAsync();
 
+            // حذف الوصفات المرتبطة إذا وُجدت
             if (relatedRecipes.Any())
             {
-                return Conflict(new { success = false, message = "Cannot delete category as it has related recipes" });
+                _context.Recipes.RemoveRange(relatedRecipes);
             }
 
+            // حذف الفئة الأصلية
             _context.RecipesCategories.Remove(category);
             await _context.SaveChangesAsync();
 
-            return Ok(new { success = true, message = "Category deleted successfully" });
+            return Ok(new { success = true, message = "Category and related recipes deleted successfully" });
         }
+
         [HttpGet("getImage/{imageName}")]
         public IActionResult getService(string imageName)
         {

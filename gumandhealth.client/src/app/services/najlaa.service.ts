@@ -25,7 +25,9 @@ export class NajlaaService {
   getRecipeCategories(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
-  
+  deleteCategory(id: number) {
+    return this.http.delete<{ success: boolean, message: string }>(`https://localhost:7280/api/RecipeCategory/${id}`);
+  }
   // دالة لإرسال التصنيف الجديد إلى الـ API
   postRecipeCategory(formData: FormData): Observable<any> {
     return this.http.post(`https://localhost:7280/api/RecipeCategory/api/RecipeCategory`, formData);
@@ -40,9 +42,7 @@ export class NajlaaService {
   search(query: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl1}?query=${query}`);
   }
-  deleteCategory(id: number): Observable<any> {
-    return this.http.delete(`/${id}`);
-  }
+ 
   getRecipeById(id: number): Observable<any> {
     return this.http.get(`https://localhost:7280/api/Recipe/GetRecipeByCategory?recipeCategoryId=${id}`);
   }

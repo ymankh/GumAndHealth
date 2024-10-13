@@ -25,6 +25,7 @@ export class RecipeCategoryAdminPutComponent implements OnInit {
 
   // استدعاء البيانات عند تحميل الصفحة
   ngOnInit(): void {
+    
     this.categoryId = this.route.snapshot.paramMap.get('id');
 
     if (this.categoryId) {
