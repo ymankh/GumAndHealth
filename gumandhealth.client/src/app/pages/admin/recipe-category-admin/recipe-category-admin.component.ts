@@ -22,7 +22,7 @@ export class RecipeCategoryAdminComponent implements OnInit {
   // دالة لتعديل الفئة
   editCategory(id: number) {
     console.log(`Editing category with ID: ${id}`);
-    this.router.navigate([`/edit-category/${id}`]); // الانتقال إلى صفحة التعديل
+    this.router.navigate([`/recipe-category-admin-put/${id}`]); // الانتقال إلى صفحة التعديل
   }
   addCategory() {
     // توجيه المستخدم إلى صفحة إضافة فئة جديدة

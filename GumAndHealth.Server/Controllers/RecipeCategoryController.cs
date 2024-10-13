@@ -121,7 +121,10 @@ namespace GumAndHealth.Server.Controllers
                     // تحديث مسار الصورة فقط في حال تم تحميل صورة جديدة
                     category.ImagePath = fileName; // تخزين فقط اسم الصورة وليس المسار الكامل
                 }
-
+                else
+                {
+                    category.ImagePath = category.ImagePath;
+                }
                 // تحديث البيانات الأخرى
                 category.Name = recipeCategoryDto.Name;
                 category.Description = recipeCategoryDto.Description;

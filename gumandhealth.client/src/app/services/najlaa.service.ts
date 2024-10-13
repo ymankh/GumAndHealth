@@ -11,7 +11,16 @@ export class NajlaaService {
   private apiUrl1 = 'https://localhost:7280/api/Home/search';
 
   constructor(private http: HttpClient) { }
-
+  putRecipeCategory(id: string, formData: FormData) {
+    return this.http.put(`https://localhost:7280/api/RecipeCategory/api/RecipeCategory/${id}`, formData);
+  }
+  getRecipeCategoryput(id: string) {
+    return this.http.get(`https://localhost:7280/api/RecipeCategory/${id}`);
+  }
+  // تحديث وصفة موجودة
+  updateRecipe(id: number, recipeData: FormData): Observable<any> {
+    return this.http.put<any>(`https://localhost:7280/api/Recipe/api/Recipe/${id}`, recipeData);
+  }
   // Get all recipe categories
   getRecipeCategories(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
