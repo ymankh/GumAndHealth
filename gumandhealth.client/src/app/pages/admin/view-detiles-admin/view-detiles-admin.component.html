@@ -1,51 +1,67 @@
-<div class="container mt-5">
-  <!-- زر إضافة وصفة جديدة في أعلى الصفحة -->
-  <div class="text-right mb-3">
-    <a routerLink="/recipe-admin-post" class="btn btn-success">Add New Recipe</a>
+<div class="container mt-5 d-flex justify-content-center">
+  <div class="card shadow-lg p-4 w-50">
+    <!-- تقليل العرض إلى 50% مع إضافة بعض الحواف والتظليل -->
+    <!-- زر إضافة وصفة جديدة -->
+    <div class="text-right mb-4">
+      <a routerLink="/recipe-admin-post" class="btn btn-dark rounded-pill shadow-sm">Add New Recipe</a>
+    </div>
+
+    <!-- جدول تفاصيل الوصفة -->
+    <table class="table table-borderless text-center">
+      <!-- إزالة الحدود لتبدو أنيقة -->
+      <!-- عرض صورة الوصفة -->
+      <tr>
+        <td colspan="2" class="text-center">
+          <img src="https://localhost:7280/api/RecipeCategory/getImage/{{recipe.image}}"
+               alt="{{ recipe.name }} Image"
+               class="img-thumbnail rounded shadow-sm"
+               style="width:100%; max-width:300px;">
+        </td>
+      </tr>
+
+      <!-- عرض اسم الوصفة -->
+      <tr>
+        <th class="text-muted">Name</th>
+        <td class="font-weight-bold">{{ recipe.name }}</td>
+      </tr>
+
+      <!-- وصف الوصفة -->
+      <tr>
+        <th class="text-muted">Description</th>
+        <td>{{ recipe.description }}</td>
+      </tr>
+
+      <!-- عدد السعرات الحرارية -->
+      <tr>
+        <th class="text-muted">Calories</th>
+        <td class="text-success font-weight-bold">{{ recipe.caloriesCount }}</td>
+      </tr>
+
+      <!-- عرض المكونات -->
+      <tr>
+        <th class="text-muted">Ingredients</th>
+        <td>
+          <ul class="list-unstyled mb-0">
+            <li *ngFor="let ingredient of recipe.ingredients">{{ ingredient }}</li>
+          </ul>
+        </td>
+      </tr>
+
+      <!-- طريقة التحضير -->
+      <tr>
+        <th class="text-muted">Recipe</th>
+        <td>{{ recipe.recipe1 }}</td>
+      </tr>
+
+      <!-- الأزرار (التعديل والعودة) -->
+      <tr>
+        <td colspan="2" class="text-center pt-4">
+          <button class="btn btn-warning btn-sm mr-2 shadow-sm rounded-pill" (click)="updateRecipe(recipe.recipeCategoryId)">Edit</button>
+          <a routerLink="/recipe-category-admin" class="btn btn-secondary shadow-sm rounded-pill">Back to Recipes</a>
+        </td>
+      </tr>
+    </table>
   </div>
-
-  <table class="table table-bordered">
-    <!-- الجهة اليسرى (الصورة) -->
-    <tr>
-      <td colspan="2">
-        <img src="https://localhost:7280/api/RecipeCategory/getImage/{{recipe.image}}" alt="{{ recipe.name }} Image" style="width:100%; max-width:300px;">
-      </td>
-    </tr>
-
-    <!-- الجهة اليمنى (المعلومات) -->
-    <tr>
-      <th>Name</th>
-      <td>{{ recipe.name }}</td>
-    </tr>
-    <tr>
-      <th>Description</th>
-      <td>{{ recipe.description }}</td>
-    </tr>
-    <tr>
-      <th>Calories</th>
-      <td class="text-success">{{ recipe.caloriesCount }}</td>
-    </tr>
-    <tr>
-      <th>Ingredients</th>
-      <td>
-        <ul>
-          <li>{{ recipe.ingredients }}</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <th>Recipe</th>
-      <td>{{ recipe.recipe1 }}</td>
-    </tr>
-
-    <!-- الأزرار -->
-    <tr>
-      <td colspan="2">
-        <button class="btn btn-warning btn-sm mr-2" (click)="updateRecipe(recipe.recipeCategoryId)">Edit</button>
-        <br />            <br />
-        <!-- زر الرجوع إلى قائمة الوصفات -->
-        <a routerLink="/recipe-category-admin" class="btn btn-secondary">Back to Recipes</a>
-      </td>
-    </tr>
-  </table>
 </div>
+
+<app-admin></app-admin>

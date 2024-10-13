@@ -1,34 +1,43 @@
-<div class="container mt-4">
-  <div class="card shadow-sm">
-    <div class="card-header bg-success text-white">
+<div class="container mt-5 d-flex justify-content-center">
+  <div class="card shadow-sm w-50">
+    <!-- البطاقة محددة بعرض 50% لتكون أصغر ومتمركزة -->
+    <div class="card-header bg-dark text-white text-center">
       <h3 class="mb-0">Update Recipe Category</h3>
     </div>
     <div class="card-body">
       <form (submit)="onSubmit()" enctype="multipart/form-data">
+
+        <!-- حقل اسم الفئة -->
         <div class="form-group">
           <label for="name">Category Name</label>
           <input type="text" class="form-control" id="name" [(ngModel)]="recipeCategory.name" name="name" required>
         </div>
 
-
+        <!-- حقل الوصف -->
         <div class="form-group">
           <label for="description">Description</label>
           <textarea class="form-control" id="description" [(ngModel)]="recipeCategory.description" name="description" required></textarea>
         </div>
 
-        <!-- عرض الصورة القديمة -->
+        <!-- عرض الصورة الحالية -->
         <div class="form-group">
           <label>Current Image</label><br>
-          <img  [src]="getCurrentImageUrl()" class="img-thumbnail" alt="Old Image" width="200" height="200">
+          <img [src]="getCurrentImageUrl()" class="img-thumbnail" alt="Old Image" width="200" height="200">
         </div>
 
+        <!-- تحميل صورة جديدة (اختياري) -->
         <div class="form-group">
           <label for="image">Upload New Image (Optional)</label>
           <input type="file" class="form-control-file" id="image" (change)="onFileSelected($event)">
         </div>
 
-        <button type="submit" class="btn btn-success mt-3">Update Category</button>
+        <!-- زر تحديث الفئة -->
+        <div class="d-flex justify-content-end">
+          <button type="submit" class="btn btn-dark mt-3">Update Category</button>
+        </div>
       </form>
     </div>
   </div>
 </div>
+
+<app-admin></app-admin>

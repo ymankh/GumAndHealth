@@ -1,8 +1,7 @@
 <div class="container mt-5">
-
   <!-- زر إضافة فئة جديدة -->
-  <div class="text-right mb-3">
-    <button class="btn btn-success" (click)="addCategory()">Add New Category</button>
+  <div class="text-end mb-3">
+    <button class="btn btn-dark" (click)="addCategory()">Add New Category</button>
   </div>
 
   <!-- بدء الجدول مع توسيطه -->
@@ -29,17 +28,15 @@
           </td>
           <td>{{ category.name }}</td>
           <td>{{ category.description }}</td>
-          <td>
+          <td class="text-end">
             <!-- زر التعديل -->
-            <button class="btn btn-warning btn-sm mr-2" (click)="editCategory(category.id)">Edit</button>
-            <br />     <br />
-            <button class="btn btn-danger btn-sm mr-2" (click)="confirmDeleteCategory(category.id)">Delete</button>
-            <br />   <br />
-
-            <button class="btn btn-info btn-sm mr-2" (click)="viewRecipe(category.id)">viewRecipe</button>
-
+            <button class="btn btn-warning btn-sm mb-2" (click)="editCategory(category.id)">Edit</button>
+            <br />
             <!-- زر الحذف -->
-            <!--<button class="btn btn-danger btn-sm" (click)="deleteCategory(category.id)">Delete</button>-->
+            <button class="btn btn-danger btn-sm mb-2" (click)="confirmDeleteCategory(category.id)">Delete</button>
+            <br />
+            <!-- زر عرض الوصفة -->
+            <button class="btn btn-info btn-sm mb-2" (click)="viewRecipe(category.id)">View Recipe</button>
           </td>
         </tr>
       </tbody>

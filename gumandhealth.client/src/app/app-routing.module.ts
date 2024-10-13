@@ -33,6 +33,7 @@ import { RecipeCategoryAdminPutComponent } from './pages/admin/recipe-category-a
 import { RecipeAdminPutComponent } from './pages/admin/recipe-admin-put/recipe-admin-put.component';
 
 import { AdminProductsComponent } from './pages/admin/adminproducts/adminproducts.component'; // Import the AdminProductsComponent
+import { OrderAdminComponent } from './pages/admin/order-admin/order-admin.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -73,6 +74,8 @@ const routes: Routes = [
   { path: 'PostRecipe', component: RecipeCategoryAdminPostComponent },
   { path: 'recipe-category-admin-put/:id', component: RecipeCategoryAdminPutComponent },
   { path: 'recipe-admin-put/:id', component: RecipeAdminPutComponent },
+  {
+    path: 'order - admin', component: OrderAdminComponent },
 
   { path: 'view-detiles-admin/:id', component: ViewDetilesAdminComponent },
   { path: 'recipe-admin-post', component: RecipeAdminPostComponent },

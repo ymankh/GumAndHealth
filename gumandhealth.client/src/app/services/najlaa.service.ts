@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs'; // Correct import for Observable
 
 @Injectable({
@@ -52,4 +52,34 @@ export class NajlaaService {
   getProducts(): Observable<any> {
     return this.http.get<any>("https://localhost:7280/api/Home");
   }
+
+
+
+
+
+  private apiUrl12 = 'https://localhost:7280/api/order'; 
+
+
+  // دالة لجلب جميع الطلبات
+  getAllOrders(): Observable<any> {
+    return this.http.get(`${this.apiUrl12}/orders`);
+  }
+
+  // دالة للبحث عن الطلبات بناءً على الشروط (اسم المستخدم، تاريخ الطلب، أو اسم المنتج)
+  searchOrders(userName?: string, orderDate?: string, productName?: string): Observable<any> {
+    let params = new HttpParams();
+    if (userName) {
+      params = params.append('userName', userName);
+    }
+    if (orderDate) {
+      params = params.append('orderDate', orderDate);
+    }
+    if (productName) {
+      params = params.append('productName', productName);
+    }
+
+    return this.http.get(`${this.apiUrl12}/search-orders`, { params });
+  }
+
+
 }
