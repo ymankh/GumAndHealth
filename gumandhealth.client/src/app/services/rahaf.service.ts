@@ -31,14 +31,16 @@ export class RahafService {
     return this.http.get<any>(`${this.staticData}/Classes/GetAllClassSchedules`);
   }
   postCreatePayment(data: any): Observable<any> {
+    console.log("data is :",data)
     return this.http.post<any>(`${this.staticData}/Classes/checkout`,data)
   
-   
   }
+
   executePayment(idSubs: number, paymentId: string, payerId: string, userID: number): Observable<any> {
+    debugger
     return this.http.get<any>(`${this.staticData}/Classes/success`, {
       params: {
-        IdSubs: idSubs,
+        idSubs: idSubs,
         paymentId: paymentId,
         PayerID: payerId,
         userID: userID

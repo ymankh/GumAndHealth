@@ -160,67 +160,7 @@ namespace GumAndHealth.Server.Controllers
 
         }
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //[HttpPost("create-order")]
-        //public IActionResult CreateOrder([FromBody] CreateOrderRequest request)
-        //{
-
-        //    // Validate the request
-        //    if (request == null || request.Amount <= 0)
-        //    {
-        //        return BadRequest("Invalid order details.");
-        //    }
-
-        //    string returnUrl = "https://your-frontend.com/success";
-        //    string cancelUrl = "https://your-frontend.com/cancel";
-
-        //    try
-        //    {
-        //        // Use a supported currency code (make sure USD is appropriate for your needs)
-        //        var order =  _payPalService.CreateOrder(request.Amount, "USD", returnUrl, cancelUrl);
-        //        return Ok(order);
-        //    }
-        //    catch (PayPalHttp.HttpException httpEx)
-        //    {
-        //        // Handle PayPal specific exceptions
-        //        return StatusCode((int)httpEx.StatusCode, httpEx.Message);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Log the exception details (ex) here if needed for debugging
-        //        return StatusCode(500, "An error occurred while creating the PayPal order.");
-        //    }
-        //}
-
-        //[HttpPost("capture-order/{orderId}")]
-        //public async Task<IActionResult> CaptureOrder(string orderId)
-        //{
-        //    // Validate the order ID
-        //    if (string.IsNullOrWhiteSpace(orderId))
-        //    {
-        //        return BadRequest("Invalid order ID.");
-        //    }
-
-        //    try
-        //    {
-        //        var order = await _payPalService.CaptureOrder(orderId);
-        //        return Ok(order);
-        //    }
-        //    catch (PayPalHttp.HttpException httpEx)
-        //    {
-        //        // Handle PayPal specific exceptions
-        //        return StatusCode((int)httpEx.StatusCode, httpEx.Message);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Log the exception details (ex) here if needed for debugging
-        //        return StatusCode(500, "An error occurred while capturing the PayPal order.");
-        //    }
-        //}
-
-        //public class CreateOrderRequest
-        //{
-        //    public decimal Amount { get; set; }
-        //}
+   
 
         [HttpPost("checkout")]
         public IActionResult CreatePayment([FromBody] PayRDTO payRDTO)
@@ -229,44 +169,41 @@ namespace GumAndHealth.Server.Controllers
                 throw new Exception("The redirect link for the paypal should be set correctly on the sitting app.");
 
 
-            var totalPrice = _db.ClassServices.Where(x => x.Id == payRDTO.IdSubs).FirstOrDefault().PricePerMonth ?? 0;
-            var payment = payPalService.CreatePayment(_redirectUrl ?? " ", totalPrice, null, payRDTO.userID);
+            var totalPrice = _db.ClassServices.Where(x => x.Id == payRDTO.idSubs).FirstOrDefault().PricePerMonth ?? 0;
+
+            var payment = payPalService.CreatePayment(_redirectUrl ?? " ", totalPrice, null, payRDTO.userID, payRDTO.idSubs);
             var approvalUrl = payment.links.FirstOrDefault(l => l.rel.Equals("approval_url", StringComparison.OrdinalIgnoreCase))?.href;
 
             return Ok(new { approvalUrl });
         }
 
         [HttpGet("success")]
-        public IActionResult ExecutePayment(long IdSubs, string paymentId, string PayerID, string token, int userID)
+        public IActionResult ExecutePayment( string paymentId, string PayerID, string token, int userID, long subsId)
         {
-            var executedPayment = payPalService.ExecutePayment(paymentId, PayerID);
 
-            if (executedPayment.state == "approved")
+
+
+            var subscription = new ClassSubscription()
             {
-                var classService = _db.ClassServices.Where(x=> x.Id == IdSubs).FirstOrDefault();
+                ClassServiceId = subsId,
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddMonths(1),
+                UserId = userID,
+                //PaymentId = paymentId
+            };
 
-                if (classService != null)
-                {
-                    var subscription = new ClassSubscription
-                    {
-                        ClassServiceId = classService.Id,
-                        StartDate = DateTime.Now,
-                        EndDate = DateTime.Now.AddMonths(1), 
-                        UserId = userID,
-                        PaymentId = long.Parse(paymentId) 
-                    };
-
-                    _db.ClassSubscriptions.Add(subscription);
+            _db.ClassSubscriptions.Add(subscription);
                     _db.SaveChanges();
-                }
 
-                string script = "<script>window.close();</script>";
-                return Content(script, "text/html");
-            }
-            else
-            {
-                return BadRequest("Payment not approved.");
-            }
+                
+
+
+            var executedPayment = payPalService.ExecutePayment(paymentId, PayerID, userID, subsId);
+            const string script = "<script>window.close();</script>";
+            return Content(script, "text/html");
+
+            
+           
         }
 
 
