@@ -34,6 +34,8 @@ import { RecipeAdminPutComponent } from './pages/admin/recipe-admin-put/recipe-a
 import { AdminScheduleComponent } from './pages/admin-schedule/admin-schedule.component';
 
 import { AdminProductsComponent } from './pages/admin/adminproducts/adminproducts.component'; // Import the AdminProductsComponent
+import { EditScheduleComponent } from './pages/admin/edit-schedule/edit-schedule.component';
+import { AllScheduleComponent } from './pages/admin/all-schedule/all-schedule.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -63,6 +65,10 @@ const routes: Routes = [
   { path: 'singleGym', component: SingleGymComponent },
   { path: 'products/:id', component: ProductCardComponent },
   { path: 'Admin', component: AdminComponent },
+  { path: 'edit-schedule/:id', component: EditScheduleComponent },
+  { path: 'Allschedule', component: AllScheduleComponent },
+
+
 
   { path: 'recipe-category-admin', component: RecipeCategoryAdminComponent },
 

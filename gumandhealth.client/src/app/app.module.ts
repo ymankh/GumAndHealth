@@ -39,6 +39,8 @@ import { AdminScheduleComponent } from './pages/admin-schedule/admin-schedule.co
 import { AdminProductsComponent } from './pages/admin/adminproducts/adminproducts.component';
 import { RecipeCategoryAdminPutComponent } from './pages/admin/recipe-category-admin-put/recipe-category-admin-put.component';
 import { RecipeAdminPutComponent } from './pages/admin/recipe-admin-put/recipe-admin-put.component';
+import { EditScheduleComponent } from './pages/admin/edit-schedule/edit-schedule.component';
+import { AllScheduleComponent } from './pages/admin/all-schedule/all-schedule.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +83,8 @@ import { RecipeAdminPutComponent } from './pages/admin/recipe-admin-put/recipe-a
     RecipeCategoryAdminPutComponent,
     RecipeAdminPutComponent,
     AdminProductsComponent,
+    EditScheduleComponent,
+    AllScheduleComponent,
   ],
   imports: [
     BrowserModule,
