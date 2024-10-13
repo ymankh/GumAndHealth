@@ -29,6 +29,8 @@ import { RecipeCategoryAdminComponent } from './pages/admin/recipe-category-admi
 import { RecipeCategoryAdminPostComponent } from './pages/admin/recipe-category-admin-post/recipe-category-admin-post.component';
 import { ViewDetilesAdminComponent } from './pages/admin/view-detiles-admin/view-detiles-admin.component';
 import { RecipeAdminPostComponent } from './pages/admin/recipe-admin-post/recipe-admin-post.component';
+import { RecipeCategoryAdminPutComponent } from './pages/admin/recipe-category-admin-put/recipe-category-admin-put.component';
+import { RecipeAdminPutComponent } from './pages/admin/recipe-admin-put/recipe-admin-put.component';
 
 import { AdminProductsComponent } from './pages/admin/adminproducts/adminproducts.component'; // Import the AdminProductsComponent
 
@@ -69,6 +71,9 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'PostRecipe', component: RecipeCategoryAdminPostComponent },
+  { path: 'recipe-category-admin-put/:id', component: RecipeCategoryAdminPutComponent },
+  { path: 'recipe-admin-put/:id', component: RecipeAdminPutComponent },
+
   { path: 'view-detiles-admin/:id', component: ViewDetilesAdminComponent },
   { path: 'recipe-admin-post', component: RecipeAdminPostComponent },
   { path: 'admin/products', component: AdminProductsComponent },
