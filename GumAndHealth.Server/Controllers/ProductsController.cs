@@ -1,7 +1,6 @@
 ﻿using GumAndHealth.Server.DTOs.ProductsDTOs;
 using GumAndHealth.Server.Models;
 using GumAndHealth.Server.Repositories;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -51,6 +50,25 @@ namespace GumAndHealth.Server.Controllers
         {
             var newProduct = _productRepository.CreateProduct(createProductDto);
             return Ok(newProduct);
+        }
+
+        // GET: api/Products/ByPriceRange
+        [HttpGet("ByPriceRange")]
+        public IActionResult GetProductsByPriceRange([FromQuery] decimal minPrice, [FromQuery] decimal maxPrice)
+        {
+            if (minPrice < 0 || maxPrice < minPrice)
+            {
+                return BadRequest("Invalid price range.");
+            }
+
+            var products = _productRepository.GetProductsByPriceRange(minPrice, maxPrice);
+
+            if (products == null || !products.Any())
+            {
+                return NotFound("No products found within the specified price range.");
+            }
+
+            return Ok(products);
         }
     }
 }

@@ -19,4 +19,12 @@ export class ProductServiceService {
   getProductsByCategoryId(categoryId: number): Observable<Product[]> {
     return this.http.get<Product[]>(`${root}/api/products/category/${categoryId}`); // Assuming this endpoint returns an array of products
   }
+
+
+  
+
+  // Fetch products by price range
+  getProductsByPriceRange(minPrice: number, maxPrice: number): Observable<Product[]> {
+    return this.http.get<Product[]>(`${root}/api/products/ByPriceRange?minPrice=${minPrice}&maxPrice=${maxPrice}`);
+  }
 }
