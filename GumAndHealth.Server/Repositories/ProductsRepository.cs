@@ -112,5 +112,12 @@ namespace GumAndHealth.Server.Repositories
         {
             return _context.Products.Where(p => p.CategoryId == categoryId).ToList();
         }
+
+        public List<Product> GetProductsByPriceRange(decimal minPrice, decimal maxPrice)
+        {
+            return _context.Products
+                .Where(p => p.Price >= minPrice && p.Price <= maxPrice)
+                .ToList();
+        }
     }
 }

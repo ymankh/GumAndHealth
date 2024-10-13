@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductServiceService } from '../../services/product-service.service';
 import { CartService } from '../../services/cart.service';
-import { Product } from '../../shared/interfaces';
+import { Product, Category } from '../../shared/interfaces'; // Import Category here
 import { root } from '../../shared/constants';
 
 export interface ProductWithDescription extends Product {
   showDescription?: boolean; // Add an optional showDescription property
 }
+
+
 
 @Component({
   selector: 'app-product-card',
@@ -16,7 +18,12 @@ export interface ProductWithDescription extends Product {
 })
 export class ProductCardComponent implements OnInit {
   products: ProductWithDescription[] = [];
+  filteredProducts: ProductWithDescription[] = []; // Property for filtered products
+  categories: Category[] = []; // Add this property to store categories
+  minPrice: number = 0; // Default minimum price
+  maxPrice: number = 1000; // Default maximum price
   categoryId: number | null = null;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -87,6 +94,26 @@ export class ProductCardComponent implements OnInit {
   // Dynamically construct image URLs
   imageurl(image: string | undefined): string {
     return image ? `${root}/${image}` : 'path/to/default/image.jpg'; // Add fallback for missing images
+  }
+
+  filterByPrice(): void {
+    this.filteredProducts = this.products.filter(
+      (product) => product.price >= this.minPrice && product.price <= this.maxPrice
+    );
+  }
+
+  // Method for handling category selection (optional, can be improved)
+  onCategorySelect(categoryId: number): void {
+    this.productService.getProductsByCategoryId(categoryId).subscribe(
+      (response) => {
+        this.filteredProducts = response.filter(
+          (product) => product.price >= this.minPrice && product.price <= this.maxPrice
+        );
+      },
+      (error) => {
+        console.error('Error loading category products', error);
+      }
+    );
   }
 
   // Toggle description visibility
