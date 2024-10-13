@@ -2,7 +2,7 @@
 {
     public class PayRDTO
     {
-        public long IdSubs { get; set; }
+        public long idSubs { get; set; }
        public long userID { get; set; }
     }
 }
