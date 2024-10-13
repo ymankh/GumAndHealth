@@ -1,1 +1,36 @@
-<p>adminproducts works!</p>
+<h2>{{ isEditMode ? 'Edit Product' : 'Add New Product' }}</h2>
+<form (submit)="isEditMode ? updateProduct() : createProduct()">
+  <div>
+    <label>Name:</label>
+    <input [(ngModel)]="newProduct.name" name="name" required />
+  </div>
+  <div>
+    <label>Description:</label>
+    <input [(ngModel)]="newProduct.description" name="description" required />
+  </div>
+  <div>
+    <label>Price:</label>
+    <input type="number" [(ngModel)]="newProduct.price" name="price" required />
+  </div>
+  <div>
+    <label>Category ID:</label>
+    <input type="number" [(ngModel)]="newProduct.categoryId" name="categoryId" required />
+  </div>
+  <div>
+    <label>Discount:</label>
+    <input type="number" [(ngModel)]="newProduct.discount" name="discount" />
+  </div>
+  <div>
+    <label>Tags:</label>
+    <input [(ngModel)]="newProduct.tags" name="tags" />
+  </div>
+  <div>
+    <label>Additional Information:</label>
+    <textarea [(ngModel)]="newProduct.additionalInformation" name="additionalInformation"></textarea>
+  </div>
+  <div>
+    <label>Image URL:</label>
+    <input [(ngModel)]="newProduct.image1" name="image1" />
+  </div>
+  <button type="submit">{{ isEditMode ? 'Update' : 'Create' }}</button>
+</form>

@@ -36,4 +36,41 @@ getAllProducts(): Observable<Product[]> {
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(`${root}/api/Products/AllCategories`); // Ensure URL matches the backend's category endpoint
   }
+
+
+  createProduct(product: Product): Observable<Product> {
+    const formData = new FormData();
+
+    formData.append('name', product.name);
+    formData.append('description', product.description);
+    formData.append('price', product.price.toString());
+
+    // Check if image exists and only append if it is not undefined
+    if (product.image1) {
+      formData.append('image', product.image1); // Adjust this if you're using image blobs
+    }
+
+    return this.http.post<Product>(`${root}/api/Products`, formData);
+  }
+
+
+  updateProduct(id: number, product: Product): Observable<Product> {
+    const formData = new FormData();
+
+    formData.append('name', product.name);
+    formData.append('description', product.description);
+    formData.append('price', product.price.toString());
+
+    // Check if image exists and only append if it is not undefined
+    if (product.image1) {
+      formData.append('image', product.image1); // Adjust accordingly if you're using image blobs
+    }
+
+    return this.http.put<Product>(`${root}/api/Products/${id}`, formData);
+  }
+
+  // Delete product
+  deleteProduct(id: number): Observable<void> {
+    return this.http.delete<void>(`${root}/api/Products/${id}`);
+  }
 }
