@@ -69,6 +69,7 @@ export class AuthService {
     // Clear login state and token from localStorage
     this.isLoggedInSubject.next(false);
     localStorage.removeItem('token');
+    localStorage.removeItem('userId');
 
     // Logout notification
     iziToast.info({
