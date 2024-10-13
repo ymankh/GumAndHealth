@@ -1,4 +1,5 @@
-﻿using GumAndHealth.Server.DTOs.UserProfile;
+﻿using GumAndHealth.Server.DTOs.RawaahOrder;
+using GumAndHealth.Server.DTOs.UserProfile;
 using GumAndHealth.Server.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -269,23 +270,33 @@ namespace GumAndHealth.Server.Controllers
             return Ok(gymSubscriptions);
         }
 
-        [HttpGet("GetAllOrders/{id}")]
-        public async Task<IActionResult> GetAllOrders(long id)
+        [HttpGet("orders/{userId}")]
+        public async Task<ActionResult<IEnumerable<GetOrderDTO>>> GetOrdersByUserId(int userId)
         {
-   
-
             var orders = await _context.Orders
-                .Where(o => o.UserId == id)
-
+                .Where(o => o.UserId == userId) 
+                .Include(o => o.User) 
+                .Include(o => o.OrderItems) 
+                .ThenInclude(oi => oi.Product) 
                 .ToListAsync();
-            if (!orders.Any())
+
+            var orderDTOs = orders.Select(o => new GetOrderDTO
             {
-                return NotFound("لا توجد طلبات لهذا المستخدم.");
-            }
+                Id = o.Id,
+                UserName = o.User != null ? o.User.Name : "Unknown", 
+                OrderDate = o.OrderDate,
+                TotalAmount = o.TotalAmount,
+                Status = o.Status,
+                OrderItems = o.OrderItems.Select(oi => new OrderItemDTO
+                {
+                    Id = oi.Id,
+                    ProductName = oi.Product != null ? oi.Product.Name : "Unknown", // عرض اسم المنتج
+                    Quantity = (int)oi.Quantity,
+                    Price = (decimal)(oi.Product != null ? oi.Product.Price : 0) // عرض السعر بناءً على الـ ProductId
+                }).ToList()
+            }).ToList();
 
-          
-
-            return Ok(orders);
+            return Ok(orderDTOs);
         }
 
     }

@@ -80,7 +80,7 @@ export class RawaahService {
 
   // جلب الطلبات الخاصة بالمستخدم
   getUserOrders(userId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/UserProfile/GetAllOrders/${userId}`, { headers: this.headers });
+    return this.http.get(`${this.baseUrl}/UserProfile/orders/${userId}`, { headers: this.headers });
   }
 
   // جلب الاشتراكات الخاصة بالمستخدم
