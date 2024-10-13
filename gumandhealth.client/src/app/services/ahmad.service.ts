@@ -38,4 +38,24 @@ export class AhmadService {
     return this.http.delete<void>(`${this.apiUrl}classCrud/deleteClass/${id}`);
   }
 
+
+
+
+
+  ////////////////////////// for scedule
+
+  addSchedule(scheduleData: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}scdule/AddNewClassSchedule`, scheduleData);
+  }
+
+
+
+
+
+  updateSchedule(id: number, scheduleData: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}scdule/UpdateClassSchedule/${id}`, scheduleData);
+  }
+
+
+
 }

@@ -29,6 +29,7 @@ import { RecipeCategoryAdminComponent } from './pages/admin/recipe-category-admi
 import { RecipeCategoryAdminPostComponent } from './pages/admin/recipe-category-admin-post/recipe-category-admin-post.component';
 import { ViewDetilesAdminComponent } from './pages/admin/view-detiles-admin/view-detiles-admin.component';
 import { RecipeAdminPostComponent } from './pages/admin/recipe-admin-post/recipe-admin-post.component';
+import { AdminScheduleComponent } from './pages/admin-schedule/admin-schedule.component';
 
 
 const routes: Routes = [
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent },
   { path: 'classes', component: ClassesComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'Schedule', component: AdminScheduleComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'admin/edit-class/:id', component: AdminClassEditComponent },
   { path: 'nutrition/tips', component: TipsComponent },
