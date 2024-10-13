@@ -76,6 +76,11 @@ namespace GumAndHealth.Server.Repositories
             };
         }
 
+        public List<Product> GetAllProducts()
+        {
+            return _context.Products.ToList();
+        }
+
         public Product CreateProduct(CreateProductDto createProductDto)
         {
             var product = new Product
@@ -118,6 +123,12 @@ namespace GumAndHealth.Server.Repositories
             return _context.Products
                 .Where(p => p.Price >= minPrice && p.Price <= maxPrice)
                 .ToList();
+        }
+
+
+        public List<Category> GetAllCategories()
+        {
+            return _context.Categories.ToList(); // Assuming you have a Categories table
         }
     }
 }
