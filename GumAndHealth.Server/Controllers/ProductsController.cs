@@ -88,6 +88,45 @@ namespace GumAndHealth.Server.Controllers
             return Ok(products);
         }
 
+
+        [HttpPost]
+        public IActionResult CreateProduct([FromForm] CreateProductDto createProductDto)
+        {
+            var newProduct = _productRepository.CreateProduct(createProductDto);
+            return Ok(newProduct);
+        }
+
+
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateProduct(int id, [FromForm] UpdateProductDto updateProductDto)
+        {
+            // Find the product by ID in the repository
+            var updatedProduct = _productRepository.UpdateProduct(id, updateProductDto);
+
+            if (updatedProduct == null)
+            {
+                return NotFound($"Product with ID {id} not found.");
+            }
+
+            return Ok(updatedProduct);
+        }
+
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteProduct(int id)
+        {
+            // Call the repository method to delete the product
+            var result = _productRepository.DeleteProduct(id);
+
+            if (!result)
+            {
+                return NotFound($"Product with ID {id} not found.");
+            }
+
+            return Ok($"Product with ID {id} was successfully deleted.");
+        }
+
         // Additional methods...
     }
 

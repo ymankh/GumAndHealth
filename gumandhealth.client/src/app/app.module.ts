@@ -35,6 +35,7 @@ import { TestimonialsComponent } from './pages/testimonials/testimonials.compone
 import { RecipeCategoryAdminPostComponent } from './pages/admin/recipe-category-admin-post/recipe-category-admin-post.component';
 import { ViewDetilesAdminComponent } from './pages/admin/view-detiles-admin/view-detiles-admin.component';
 import { RecipeAdminPostComponent } from './pages/admin/recipe-admin-post/recipe-admin-post.component';
+import { AdminproductsComponent } from './pages/admin/adminproducts/adminproducts.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { RecipeAdminPostComponent } from './pages/admin/recipe-admin-post/recipe
     RecipeCategoryAdminPostComponent,
     ViewDetilesAdminComponent,
     RecipeAdminPostComponent,
+    AdminproductsComponent,
   ],
   imports: [
     BrowserModule,
