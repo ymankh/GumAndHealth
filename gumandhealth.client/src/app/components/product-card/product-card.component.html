@@ -6,12 +6,19 @@
         <div class="card-body text-center">
           <h5 class="product-name">{{ product.name }}</h5>
           <p class="product-price">{{ product.price | currency:'JD':true }}</p>
-          <small class="text-muted">{{ product.description }}</small>
         </div>
         <div class="add-to-cart-overlay">
           <button class="btn btn-add-to-cart" (click)="addToCart(product)">
             Add to Cart
           </button>
+          <button class="btn btn-show-description" (click)="toggleDescription(product)">
+            {{ product.showDescription ? 'Hide Description' : 'Show Description' }}
+          </button>
+        </div>
+
+        <!-- Description Section -->
+        <div *ngIf="product.showDescription" class="product-description">
+          <p>{{ product.description }}</p>
         </div>
       </div>
     </div>

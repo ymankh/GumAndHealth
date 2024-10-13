@@ -65,12 +65,13 @@ namespace GumAndHealth.Server.Controllers
                 var fileName = Path.GetFileName(recipeDto.Image.FileName);
 
                 // مسار حفظ الصورة
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "C://Users/Orange/source/repos/GumAndHealth/gumandhealth.client/src/assets/img", fileName);
+                var basePath = Path.Combine(Directory.GetCurrentDirectory(), "images");
+                var filePath = Path.Combine(basePath, fileName);
 
-                // تأكد من وجود المجلد
-                if (!Directory.Exists(Path.GetDirectoryName(filePath)))
+                // تأكد من أن المجلد موجود
+                if (!Directory.Exists(basePath))
                 {
-                    Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+                    Directory.CreateDirectory(basePath);
                 }
 
                 // حفظ الصورة في المسار المحدد
@@ -99,7 +100,6 @@ namespace GumAndHealth.Server.Controllers
 
             return BadRequest(new { success = false, message = "Image is required" });
         }
-
 
     }
 
