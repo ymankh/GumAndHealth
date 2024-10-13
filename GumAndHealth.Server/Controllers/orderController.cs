@@ -18,7 +18,7 @@ namespace GumAndHealth.Server.Controllers
         }
 
         [HttpGet("orders")]
-        public async Task<ActionResult<IEnumerable<GetOrderDTO>>> GetAllOrders()
+        public async Task<ActionResult<IEnumerable<GetOrderDTO1>>> GetAllOrders()
         {
             var orders = await _context.Orders
                 .Include(o => o.User)  // نحصل على المستخدم المرتبط بكل طلب
@@ -26,14 +26,14 @@ namespace GumAndHealth.Server.Controllers
                 .ThenInclude(oi => oi.Product)  // نفترض أن لكل عنصر منتج مرتبط
                 .ToListAsync();
 
-            var orderDTOs = orders.Select(o => new GetOrderDTO
+            var orderDTOs = orders.Select(o => new GetOrderDTO1
             {
                 Id = o.Id,
                 UserName = o.User != null ? o.User.Name : "Unknown",  // عرض اسم المستخدم أو "غير معروف"
                 OrderDate = o.OrderDate,
                 TotalAmount = o.TotalAmount,
                 Status = o.Status,
-                OrderItems = o.OrderItems.Select(oi => new OrderItemDTO
+                OrderItems = o.OrderItems.Select(oi => new OrderItemDTO1
                 {
                     Id = oi.Id,
                     ProductName = oi.Product != null ? oi.Product.Name : "Unknown",  // عرض اسم المنتج
@@ -45,7 +45,7 @@ namespace GumAndHealth.Server.Controllers
             return Ok(orderDTOs);
         }
         [HttpGet("search-orders")]
-        public async Task<ActionResult<IEnumerable<GetOrderDTO>>> SearchOrders(string? userName, DateTime? orderDate, string? productName)
+        public async Task<ActionResult<IEnumerable<GetOrderDTO1>>> SearchOrders(string? userName, DateTime? orderDate, string? productName)
         {
             // نبدأ الاستعلام من الجدول الأساسي
             var query = _context.Orders
@@ -76,14 +76,14 @@ namespace GumAndHealth.Server.Controllers
             var orders = await query.ToListAsync();
 
             // تحويل النتائج إلى DTOs
-            var orderDTOs = orders.Select(o => new GetOrderDTO
+            var orderDTOs = orders.Select(o => new GetOrderDTO1
             {
                 Id = o.Id,
                 UserName = o.User != null ? o.User.Name : "Unknown",
                 OrderDate = o.OrderDate,
                 TotalAmount = o.TotalAmount,
                 Status = o.Status,
-                OrderItems = o.OrderItems.Select(oi => new OrderItemDTO
+                OrderItems = o.OrderItems.Select(oi => new OrderItemDTO1
                 {
                     Id = oi.Id,
                     ProductName = oi.Product != null ? oi.Product.Name : "Unknown",
