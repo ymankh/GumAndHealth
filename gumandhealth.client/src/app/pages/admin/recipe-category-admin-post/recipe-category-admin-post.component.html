@@ -1,0 +1,30 @@
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-success text-white">
+      <h3 class="mb-0">Add Recipe Category</h3>
+    </div>
+    <div class="card-body">
+      <form (submit)="onSubmit()" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="name">Category Name</label>
+          <input type="text" class="form-control" id="name" [(ngModel)]="recipeCategory.name" name="name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea class="form-control" id="description" [(ngModel)]="recipeCategory.description" name="description" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="image">Upload Image</label>
+          <input type="file" class="form-control-file" id="image" (change)="onFileSelected($event)">
+        </div>
+
+        <button type="submit" class="btn btn-success mt-3">Add Category</button> <!-- زر أخضر اللون -->
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<br /><br /><br /><br /><br />

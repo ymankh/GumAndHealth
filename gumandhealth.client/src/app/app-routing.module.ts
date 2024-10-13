@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { AdminComponent } from './pages/admin/admin.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './pages/about/about.component';
@@ -13,7 +14,6 @@ import { GymsComponent } from './pages/gyms/gyms.component';
 import { RecipesComponent } from './nutrition/recipes/recipes.component';
 import { RecipeDetailComponent } from './nutrition/recipe-detail/recipe-detail.component';
 import { SingleGymComponent } from './pages/single-gym/single-gym.component';
-import { AdminComponent } from './pages/admin/admin.component';
 import { AdminClassesComponent } from './pages/admin-classes/admin-classes.component';
 import { ClassDetailsComponent } from './pages/class-details/class-details.component';
 import { ProductsComponent } from './pages/products/products.component';
@@ -26,24 +26,29 @@ import { TestimonialsComponent } from './pages/testimonials/testimonials.compone
 import { NutritionComponent } from './nutrition/nutrition.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { RecipeCategoryAdminComponent } from './pages/admin/recipe-category-admin/recipe-category-admin.component';
+import { RecipeCategoryAdminPostComponent } from './pages/admin/recipe-category-admin-post/recipe-category-admin-post.component';
+import { ViewDetilesAdminComponent } from './pages/admin/view-detiles-admin/view-detiles-admin.component';
+import { RecipeAdminPostComponent } from './pages/admin/recipe-admin-post/recipe-admin-post.component';
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'blog', component: BlogComponent },
+  { path: 'admin', component: AdminComponent },
   { path: 'classes', component: ClassesComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'admin/edit-class', component: AdminClassEditComponent },
+  { path: 'admin/edit-class/:id', component: AdminClassEditComponent },
   { path: 'nutrition/tips', component: TipsComponent },
   { path: 'gyms', component: GymsComponent },
   { path: 'recipes', component: RecipesComponent },
   { path: 'recipes/:id', component: RecipeDetailComponent },
+  { path: 'gym/:id', component: SingleGymComponent },
   { path: 'nutrition', component: NutritionComponent },
   { path: 'Profile', component: ProfileComponent },
   { path: 'Testimonials', component: TestimonialsComponent },
-  { path: 'edit-profile/:id', component: EditProfileComponent},
+  { path: 'edit-profile/:id', component: EditProfileComponent },
   { path: 'Gyms', component: GymsComponent },
   { path: 'singleGym/:id', component: SingleGymComponent },
   { path: 'admin', component: AdminComponent },
@@ -62,10 +67,16 @@ const routes: Routes = [
   { path: 'shop', component: ShopComponent },
   { path: 'cart', component: CartComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
-  
+  { path: 'PostRecipe', component: RecipeCategoryAdminPostComponent },
+  { path: 'view-detiles-admin/:id', component: ViewDetilesAdminComponent },
+  { path: 'recipe-admin-post', component: RecipeAdminPostComponent },
+
+  { path: 'products/category/:id', component: ProductCardComponent }, // or ProductsComponent if that's the correct name
   { path: '**', redirectTo: '', pathMatch: 'full' }, // Wildcard route to redirect invalid paths to home
+  { path: 'reset-password', component: ResetPasswordComponent }, { path: 'products/category/:id', component: ProductCardComponent }, // or ProductsComponent if that's the correct name
+
+  
   { path: '**', redirectTo: '', pathMatch: 'full' },
-  { path: 'products/category/:id', component: ProductCardComponent } // or ProductsComponent if that's the correct name
   // Wildcard route to redirect invalid paths to home
 ];
 

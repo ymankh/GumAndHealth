@@ -28,11 +28,27 @@
   font-weight: bold;
   color: forestgreen;
 }
+
 .product-price {
-  color: #6fd20d; /* Matching the green from your template */
+  color: #6fd20d;
   font-weight: bold;
   font-size: 1.2rem;
 }
+
+/* Add to Cart and Show Description Buttons */
+.btn-add-to-cart, .btn-show-description {
+  background-color: #6fd20d;
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+  .btn-add-to-cart:hover, .btn-show-description:hover {
+    background-color: #5eb109; /* Darker green on hover */
+  }
 
 /* Add to Cart Overlay Styling */
 .add-to-cart-overlay {
@@ -44,23 +60,11 @@
   background: rgba(0, 0, 0, 0.5);
   opacity: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   transition: opacity 0.3s ease;
 }
-
-.btn-add-to-cart {
-  background-color: #6fd20d; /* Matching the green from your template */
-  border: none;
-  color: white;
-  font-weight: bold;
-  padding: 10px 20px;
-  border-radius: 5px;
-}
-
-  .btn-add-to-cart:hover {
-    background-color: #5eb109; /* A slightly darker green for hover */
-  }
 
 /* Hover Effects */
 .product-card:hover .product-image {
@@ -74,13 +78,29 @@
 .product-card:hover {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
+
+.product-description {
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #ddd;
+  color: #555;
+}
 .col-md-4 {
-  margin-bottom: 34%;
-  margin-top: 10%;
+  margin-bottom: 19%;
+  margin-top: 17%;
 }
-/* Product Price Styling */
-.product-price {
-  color: #6fd20d !important; /* Use the green color from your template and add !important */
-  font-weight: bold;
-  font-size: 1.2rem;
+.price-range input[type=range] {
+  width: 100%;
 }
+
+.price-range {
+  margin-bottom: 20px;
+}
+
+.card {
+  transition: transform 0.3s ease;
+}
+
+  .card:hover {
+    transform: scale(1.05);
+  }

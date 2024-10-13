@@ -13,7 +13,7 @@ export class NutritionComponent {
   // دالة التوجيه
   navigateToRecipes(categoryId: number): void {
     if (categoryId === 1) {
-      this.router.navigate(['/tips']);
+      this.router.navigate(['nutrition/tips']);
     } else if (categoryId === 2) {
       // التوجيه إلى صفحة الوصفات
       this.router.navigate(['/recipes']);

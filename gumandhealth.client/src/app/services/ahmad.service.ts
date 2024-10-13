@@ -26,7 +26,12 @@ export class AhmadService {
   }
 
   updateClass(id: number, classItem: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}classCrud/putClass/${id}`, classItem);
+    return this.http.put<any>(`${this.apiUrl}classCrud/putClass/${id}`, classItem, {
+      headers: {
+        'Content-Type': 'application/json-patch+json', // Ensure correct header
+        'Accept': '*/*'
+      }
+    });
   }
 
   deleteClass(id: number): Observable<void> {

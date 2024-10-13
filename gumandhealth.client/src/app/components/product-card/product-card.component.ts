@@ -2,8 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductServiceService } from '../../services/product-service.service';
 import { CartService } from '../../services/cart.service';
-import { Product } from '../../shared/interfaces';
+import { Product, Category } from '../../shared/interfaces'; // Import Category here
 import { root } from '../../shared/constants';
+
+export interface ProductWithDescription extends Product {
+  showDescription?: boolean; // Add an optional showDescription property
+}
+
+
 
 @Component({
   selector: 'app-product-card',
@@ -11,8 +17,13 @@ import { root } from '../../shared/constants';
   styleUrls: ['./product-card.component.css'],
 })
 export class ProductCardComponent implements OnInit {
-  products: Product[] = [];
+  products: ProductWithDescription[] = [];
+  filteredProducts: ProductWithDescription[] = []; // Property for filtered products
+  categories: Category[] = []; // Add this property to store categories
+  minPrice: number = 0; // Default minimum price
+  maxPrice: number = 1000; // Default maximum price
   categoryId: number | null = null;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -37,7 +48,11 @@ export class ProductCardComponent implements OnInit {
   loadProductsForCategory(id: number): void {
     this.productService.getProductsByCategoryId(id).subscribe(
       (products) => {
-        this.products = products; // Adjust the response handling to match your API response
+        // Map each product to include showDescription: false initially
+        this.products = products.map((product) => ({
+          ...product,
+          showDescription: false,
+        }));
       },
       (error) => {
         console.error('Error fetching products for category', error);
@@ -49,7 +64,11 @@ export class ProductCardComponent implements OnInit {
   loadAllProducts(): void {
     this.productService.getProducts().subscribe(
       (response) => {
-        this.products = response; // Directly assign the response, since it's an array of Product[]
+        // Map each product to include showDescription: false initially
+        this.products = response.map((product) => ({
+          ...product,
+          showDescription: false,
+        }));
       },
       (error) => {
         console.error('Error fetching all products', error);
@@ -75,5 +94,30 @@ export class ProductCardComponent implements OnInit {
   // Dynamically construct image URLs
   imageurl(image: string | undefined): string {
     return image ? `${root}/${image}` : 'path/to/default/image.jpg'; // Add fallback for missing images
+  }
+
+  filterByPrice(): void {
+    this.filteredProducts = this.products.filter(
+      (product) => product.price >= this.minPrice && product.price <= this.maxPrice
+    );
+  }
+
+  // Method for handling category selection (optional, can be improved)
+  onCategorySelect(categoryId: number): void {
+    this.productService.getProductsByCategoryId(categoryId).subscribe(
+      (response) => {
+        this.filteredProducts = response.filter(
+          (product) => product.price >= this.minPrice && product.price <= this.maxPrice
+        );
+      },
+      (error) => {
+        console.error('Error loading category products', error);
+      }
+    );
+  }
+
+  // Toggle description visibility
+  toggleDescription(product: ProductWithDescription): void {
+    product.showDescription = !product.showDescription;
   }
 }

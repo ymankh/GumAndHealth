@@ -26,9 +26,12 @@ export class RecipeCategoryAdminComponent implements OnInit {
   }
   addCategory() {
     // توجيه المستخدم إلى صفحة إضافة فئة جديدة
-    this.router.navigate(['/add-recipe-category']);
+    this.router.navigate(['/PostRecipe']);
   }
+  viewRecipe(id: number) {
+    this.router.navigate([`/view-detiles-admin/${id}`]); 
 
+  }
   // دالة لحذف الفئة
   deleteCategory(id: number) {
     if (confirm('Are you sure you want to delete this category?')) {
