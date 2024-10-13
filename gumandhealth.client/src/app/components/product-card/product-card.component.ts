@@ -5,13 +5,17 @@ import { CartService } from '../../services/cart.service';
 import { Product } from '../../shared/interfaces';
 import { root } from '../../shared/constants';
 
+export interface ProductWithDescription extends Product {
+  showDescription?: boolean; // Add an optional showDescription property
+}
+
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.css'],
 })
 export class ProductCardComponent implements OnInit {
-  products: Product[] = [];
+  products: ProductWithDescription[] = [];
   categoryId: number | null = null;
 
   constructor(
@@ -37,7 +41,11 @@ export class ProductCardComponent implements OnInit {
   loadProductsForCategory(id: number): void {
     this.productService.getProductsByCategoryId(id).subscribe(
       (products) => {
-        this.products = products; // Adjust the response handling to match your API response
+        // Map each product to include showDescription: false initially
+        this.products = products.map((product) => ({
+          ...product,
+          showDescription: false,
+        }));
       },
       (error) => {
         console.error('Error fetching products for category', error);
@@ -49,7 +57,11 @@ export class ProductCardComponent implements OnInit {
   loadAllProducts(): void {
     this.productService.getProducts().subscribe(
       (response) => {
-        this.products = response; // Directly assign the response, since it's an array of Product[]
+        // Map each product to include showDescription: false initially
+        this.products = response.map((product) => ({
+          ...product,
+          showDescription: false,
+        }));
       },
       (error) => {
         console.error('Error fetching all products', error);
@@ -75,5 +87,10 @@ export class ProductCardComponent implements OnInit {
   // Dynamically construct image URLs
   imageurl(image: string | undefined): string {
     return image ? `${root}/${image}` : 'path/to/default/image.jpg'; // Add fallback for missing images
+  }
+
+  // Toggle description visibility
+  toggleDescription(product: ProductWithDescription): void {
+    product.showDescription = !product.showDescription;
   }
 }

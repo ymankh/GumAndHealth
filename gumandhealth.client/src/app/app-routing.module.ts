@@ -53,11 +53,10 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'shop', component: ShopComponent },
   { path: 'cart', component: CartComponent },
-  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'reset-password', component: ResetPasswordComponent }, { path: 'products/category/:id', component: ProductCardComponent }, // or ProductsComponent if that's the correct name
+
   
-  { path: '**', redirectTo: '', pathMatch: 'full' }, // Wildcard route to redirect invalid paths to home
   { path: '**', redirectTo: '', pathMatch: 'full' },
-  { path: 'products/category/:id', component: ProductCardComponent } // or ProductsComponent if that's the correct name
   // Wildcard route to redirect invalid paths to home
 ];
 
