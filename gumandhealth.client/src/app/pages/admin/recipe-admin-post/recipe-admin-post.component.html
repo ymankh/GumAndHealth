@@ -27,6 +27,15 @@
     </div>
 
     <div class="form-group">
+      <label for="recipeCategory">Category</label>
+      <select id="recipeCategory" formControlName="recipeCategoryId" class="form-control">
+        <option *ngFor="let category of recipeCategories" [value]="category.id">
+          {{ category.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
       <label for="image">Image</label>
       <input id="image" type="file" (change)="onFileSelected($event)" class="form-control-file" />
     </div>
