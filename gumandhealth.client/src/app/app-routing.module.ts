@@ -30,7 +30,7 @@ import { RecipeCategoryAdminPostComponent } from './pages/admin/recipe-category-
 import { ViewDetilesAdminComponent } from './pages/admin/view-detiles-admin/view-detiles-admin.component';
 import { RecipeAdminPostComponent } from './pages/admin/recipe-admin-post/recipe-admin-post.component';
 
-import { AdminproductsComponent } from './pages/admin/adminproducts/adminproducts.component'; // Import the AdminProductsComponent
+import { AdminProductsComponent } from './pages/admin/adminproducts/adminproducts.component'; // Import the AdminProductsComponent
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -71,7 +71,7 @@ const routes: Routes = [
   { path: 'PostRecipe', component: RecipeCategoryAdminPostComponent },
   { path: 'view-detiles-admin/:id', component: ViewDetilesAdminComponent },
   { path: 'recipe-admin-post', component: RecipeAdminPostComponent },
-  { path: 'admin/products', component: AdminproductsComponent },
+  { path: 'admin/products', component: AdminProductsComponent },
   { path: 'products/category/:id', component: ProductCardComponent }, // or ProductsComponent if that's the correct name
   { path: '**', redirectTo: '', pathMatch: 'full' }, // Wildcard route to redirect invalid paths to home
   { path: 'reset-password', component: ResetPasswordComponent }, { path: 'products/category/:id', component: ProductCardComponent }, // or ProductsComponent if that's the correct name
