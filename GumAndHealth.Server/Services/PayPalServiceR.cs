@@ -26,7 +26,7 @@ namespace GumAndHealth.Server.Services
             return new APIContext(oauthToken);
         }
 
-        public Payment CreatePayment(string redirectUrl, decimal total, string? message, long userId)
+        public Payment CreatePayment(string redirectUrl, decimal total, string? message, long userId, long subsId)
         {
             var apiContext = GetAPIContext();
 
@@ -50,7 +50,7 @@ namespace GumAndHealth.Server.Services
                 redirect_urls = new RedirectUrls
                 {
                     cancel_url = $"{redirectUrl}/cancel",
-                    return_url = $"{redirectUrl}/success?userId={userId}"
+                    return_url = $"{redirectUrl}/success?userId={userId}&subsId={subsId}"
                 }
             };
 
@@ -58,7 +58,7 @@ namespace GumAndHealth.Server.Services
             return payment.Create(apiContext);
         }
 
-        public Payment ExecutePayment(string paymentId, string payerId)
+        public Payment ExecutePayment(string paymentId, string payerId, int userId, long subscriptionId)
         {
             var apiContext = GetAPIContext();
             var paymentExecution = new PaymentExecution { payer_id = payerId };
@@ -66,5 +66,6 @@ namespace GumAndHealth.Server.Services
 
             return payment.Execute(apiContext, paymentExecution);
         }
+        
     }
 }
