@@ -32,7 +32,13 @@ import { RecipeAdminPostComponent } from './pages/admin/recipe-admin-post/recipe
 import { GetInstructorComponent } from './pages/admin/get-instructor/get-instructor.component';
 import { EditInstructorComponent } from './pages/admin/edit-instructor/edit-instructor.component';
 
+import { RecipeCategoryAdminPutComponent } from './pages/admin/recipe-category-admin-put/recipe-category-admin-put.component';
+import { RecipeAdminPutComponent } from './pages/admin/recipe-admin-put/recipe-admin-put.component';
+import { AdminScheduleComponent } from './pages/admin-schedule/admin-schedule.component';
 
+import { AdminProductsComponent } from './pages/admin/adminproducts/adminproducts.component'; // Import the AdminProductsComponent
+import { EditScheduleComponent } from './pages/admin/edit-schedule/edit-schedule.component';
+import { AllScheduleComponent } from './pages/admin/all-schedule/all-schedule.component';
 
 
 const routes: Routes = [
@@ -42,6 +48,7 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent },
   { path: 'classes', component: ClassesComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'Schedule', component: AdminScheduleComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'admin/edit-class/:id', component: AdminClassEditComponent },
   { path: 'nutrition/tips', component: TipsComponent },
@@ -64,6 +71,10 @@ const routes: Routes = [
   { path: 'Admin', component: AdminComponent },
   { path: 'GetInstructor', component: GetInstructorComponent },
   { path: 'EditInstructor', component: EditInstructorComponent },
+  { path: 'edit-schedule/:id', component: EditScheduleComponent },
+  { path: 'Allschedule', component: AllScheduleComponent },
+
+
 
   { path: 'recipe-category-admin', component: RecipeCategoryAdminComponent },
 
@@ -74,9 +85,12 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'PostRecipe', component: RecipeCategoryAdminPostComponent },
+  { path: 'recipe-category-admin-put/:id', component: RecipeCategoryAdminPutComponent },
+  { path: 'recipe-admin-put/:id', component: RecipeAdminPutComponent },
+
   { path: 'view-detiles-admin/:id', component: ViewDetilesAdminComponent },
   { path: 'recipe-admin-post', component: RecipeAdminPostComponent },
-
+  { path: 'admin/products', component: AdminProductsComponent },
   { path: 'products/category/:id', component: ProductCardComponent }, // or ProductsComponent if that's the correct name
   { path: '**', redirectTo: '', pathMatch: 'full' }, // Wildcard route to redirect invalid paths to home
   { path: 'reset-password', component: ResetPasswordComponent }, { path: 'products/category/:id', component: ProductCardComponent }, // or ProductsComponent if that's the correct name

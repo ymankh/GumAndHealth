@@ -10,8 +10,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ViewDetilesAdminComponent {
   recipe: any; // لتخزين تفاصيل الوصفة
+    router: any;
 
   constructor(private route: ActivatedRoute, private najlaaService: NajlaaService) { }
+  updateRecipe(id: number) {
+    debugger;
+
+    this.router.navigate(['/recipe-admin-put', id]); // Navigates to the editing page with the recipe ID
+  }
+
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id'); // الحصول على معرف الوصفة من المسار

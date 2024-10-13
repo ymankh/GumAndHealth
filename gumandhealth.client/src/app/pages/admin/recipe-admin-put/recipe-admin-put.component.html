@@ -1,31 +1,52 @@
 <div class="container mt-5">
   <h2>Edit Recipe</h2>
   <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+    <!-- Recipe Name -->
     <div class="form-group">
       <label for="name">Recipe Name</label>
       <input id="name" formControlName="name" class="form-control" type="text" />
+      <div *ngIf="recipeForm.get('name')?.invalid && recipeForm.get('name')?.touched" class="alert alert-danger">
+        Recipe name is required.
+      </div>
     </div>
 
+    <!-- Description -->
     <div class="form-group">
       <label for="description">Description</label>
       <textarea id="description" formControlName="description" class="form-control"></textarea>
+      <div *ngIf="recipeForm.get('description')?.invalid && recipeForm.get('description')?.touched" class="alert alert-danger">
+        Description is required.
+      </div>
     </div>
 
+    <!-- Calories Count -->
     <div class="form-group">
       <label for="caloriesCount">Calories Count</label>
       <input id="caloriesCount" formControlName="caloriesCount" class="form-control" type="number" />
+      <div *ngIf="recipeForm.get('caloriesCount')?.invalid && recipeForm.get('caloriesCount')?.touched" class="alert alert-danger">
+        Calories count is required and must be a valid number.
+      </div>
     </div>
 
+    <!-- Ingredients -->
     <div class="form-group">
       <label for="ingredients">Ingredients</label>
       <textarea id="ingredients" formControlName="ingredients" class="form-control"></textarea>
+      <div *ngIf="recipeForm.get('ingredients')?.invalid && recipeForm.get('ingredients')?.touched" class="alert alert-danger">
+        Ingredients are required.
+      </div>
     </div>
 
+    <!-- Recipe Steps -->
     <div class="form-group">
       <label for="recipe1">Recipe Steps</label>
       <textarea id="recipe1" formControlName="recipe1" class="form-control"></textarea>
+      <div *ngIf="recipeForm.get('recipe1')?.invalid && recipeForm.get('recipe1')?.touched" class="alert alert-danger">
+        Recipe steps are required.
+      </div>
     </div>
 
+    <!-- Recipe Category -->
     <div class="form-group">
       <label for="recipeCategory">Category</label>
       <select id="recipeCategory" formControlName="recipeCategoryId" class="form-control">
@@ -33,13 +54,19 @@
           {{ category.name }}
         </option>
       </select>
+      <div *ngIf="recipeForm.get('recipeCategoryId')?.invalid && recipeForm.get('recipeCategoryId')?.touched" class="alert alert-danger">
+        Please select a category.
+      </div>
     </div>
 
+    <!-- Image -->
     <div class="form-group">
       <label for="image">Image</label>
+      <img *ngIf="currentImage" [src]="currentImage" alt="Current Recipe Image" class="img-thumbnail mb-2" />
       <input id="image" type="file" (change)="onFileSelected($event)" class="form-control-file" />
     </div>
 
+    <!-- Submit Button -->
     <button type="submit" class="btn btn-primary" [disabled]="recipeForm.invalid">Update Recipe</button>
   </form>
 </div>

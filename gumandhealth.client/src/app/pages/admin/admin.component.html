@@ -116,6 +116,9 @@
             </div>
           </li>
           <li class="sidebar-dropdown">
+            <a routerLink="/Schedule">
+              <i class="far fa-gem"></i>
+              <span>Schedule</span>
             <a routerLink="/GetInstructor">
               GetInstructor
             </a>
@@ -165,9 +168,10 @@
             </div>
           </li>
           <li class="sidebar-dropdown">
-            <a href="#">
+            <a [routerLink]="['/edit-schedule']">
+             
               <i class="fa fa-globe"></i>
-              <span>Maps</span>
+              <span>edit schedule</span>
             </a>
             <div class="sidebar-submenu">
               <ul>
@@ -184,10 +188,10 @@
             <span>Extra</span>
           </li>
           <li>
-            <a href="#">
-              <i class="fa fa-book"></i>
-              <span>Documentation</span>
-              <span class="badge badge-pill badge-primary">Beta</span>
+            <a routerLink="/Allschedule">
+            <i class="fa fa-book"></i>
+            <span>Allschedule </span>
+            <span class="badge badge-pill badge-primary">Beta</span>
             </a>
           </li>
           <li>

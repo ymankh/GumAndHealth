@@ -1,0 +1,39 @@
+<div class="col-sm-12 col-xl-4" style="margin-left:20%; margin-top:5%;">
+  <div class="bg-light rounded h-100 p-4">
+    <h6 class="mb-4">Edit Schedule</h6>
+    <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Class</label>
+        <div class="col-sm-10">
+          <input formControlName="classId" type="number" class="form-control" />
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Day</label>
+        <div class="col-sm-10">
+          <input formControlName="availableDay" class="form-control" />
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Start</label>
+        <div class="col-sm-10">
+          <input type="time" formControlName="startTime" class="form-control" />
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">End</label>
+        <div class="col-sm-10">
+          <input type="time" formControlName="endTime" class="form-control" />
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Instructor</label>
+        <div class="col-sm-10">
+          <input formControlName="instructorId" type="number" class="form-control" />
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Update Schedule</button>
+    </form>
+  </div>
+</div>
