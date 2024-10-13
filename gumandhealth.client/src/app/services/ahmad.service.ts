@@ -38,4 +38,31 @@ export class AhmadService {
     return this.http.delete<void>(`${this.apiUrl}classCrud/deleteClass/${id}`);
   }
 
+
+
+
+
+  ////////////////////////// for scedule
+
+  addSchedule(scheduleData: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}scdule/AddNewClassSchedule`, scheduleData);
+  }
+
+
+
+
+
+  getScheduleById(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/GetScheduleById/${id}`); // Adjust endpoint as necessary
+  }
+
+  updateSchedule(id: number, scheduleData: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/UpdateClassSchedule/${id}`, scheduleData);
+  }
+
+  // New method to get all schedules
+  getAllSchedules(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}scdule/GetAllSchedules`); // Adjust the endpoint as needed
+  }
+
 }

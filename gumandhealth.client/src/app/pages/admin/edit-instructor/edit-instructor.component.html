@@ -1,0 +1,47 @@
+<form *ngIf="instructor" #UpdateFormRawa="ngForm" (ngSubmit)="updateInstructor(UpdateFormRawa)" style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; background-color: #f9f9f9;">
+  <h2 style="text-align: center; margin-bottom: 20px;">Edit Instructor Information</h2>
+
+  <div class="form-container">
+    <!-- Full Name Field -->
+    <div class="form-group" style="margin-bottom: 15px;">
+      <label for="fullName" class="form-label" style="font-weight: bold;">Full Name</label>
+      <input type="text" id="fullName" name="fullName" [(ngModel)]="instructor.fullName" class="form-control" placeholder="Enter full name" required />
+      <div *ngIf="UpdateFormRawa.controls['fullName']?.invalid && (UpdateFormRawa.controls['fullName']?.dirty || UpdateFormRawa.controls['fullName']?.touched)" class="text-danger">
+        Full name is required.
+      </div>
+    </div>
+
+    <!-- Bio Field -->
+    <div class="form-group" style="margin-bottom: 15px;">
+      <label for="bio" class="form-label" style="font-weight: bold;">Bio</label>
+      <textarea id="bio" name="bio" [(ngModel)]="instructor.bio" class="form-control" placeholder="Enter bio" required></textarea>
+      <div *ngIf="UpdateFormRawa.controls['bio']?.invalid && (UpdateFormRawa.controls['bio']?.dirty || UpdateFormRawa.controls['bio']?.touched)" class="text-danger">
+        Bio is required.
+      </div>
+    </div>
+
+    <!-- Credentials Field -->
+    <div class="form-group" style="margin-bottom: 15px;">
+      <label for="credentials" class="form-label" style="font-weight: bold;">Credentials</label>
+      <input type="text" id="credentials" name="credentials" [(ngModel)]="instructor.credentials" class="form-control" placeholder="Enter credentials" required />
+      <div *ngIf="UpdateFormRawa.controls['credentials']?.invalid && (UpdateFormRawa.controls['credentials']?.dirty || UpdateFormRawa.controls['credentials']?.touched)" class="text-danger">
+        Credentials are required.
+      </div>
+    </div>
+
+    <!-- Image Upload Field -->
+    <div class="form-group" style="margin-bottom: 15px;">
+      <label for="image" class="form-label" style="font-weight: bold;">Upload Image</label>
+      <input type="file" id="image" (change)="onImageSelected($event)" class="form-control" />
+      <div *ngIf="!imageFile && (UpdateFormRawa.dirty || UpdateFormRawa.touched)" class="text-danger">
+        Please select an image.
+      </div>
+    </div>
+
+    <!-- Submit Buttons -->
+    <div class="form-group" style="text-align: center;">
+      <button type="submit" class="btn btn-primary" style="padding: 10px 20px;" [disabled]="UpdateFormRawa.invalid">Save</button>
+      <button type="button" class="btn btn-secondary" (click)="cancelEdit()" style="padding: 10px 20px;">Cancel</button>
+    </div>
+  </div>
+</form>

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0.784122">
+﻿<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0.784122">
   <PropertyGroup>
     <StartupCommand>npm start</StartupCommand>
     <JavaScriptTestFramework>Jasmine</JavaScriptTestFramework>
@@ -8,12 +8,13 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\gumandhealth.client\browser\</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="src\app\ClassesR\**" />
+    <TypeScriptConfiguration Remove="src\app\ClassesR\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="src\app\AppModule.ts" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\app\types\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\app\ClassesR\" />
   </ItemGroup>
 </Project>

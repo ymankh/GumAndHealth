@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace GumAndHealth.Server.Models;
 
@@ -16,8 +17,8 @@ public partial class ClassSchedule
     public TimeOnly? EndTime { get; set; }
 
     public int? InstructorId { get; set; }
-
+    
     public virtual ClassService? Class { get; set; }
-
+    
     public virtual Instructor? Instructor { get; set; }
 }

@@ -3,7 +3,7 @@
     "izitoast": "^1.4.0",
     "jspdf": "^2.5.2",
     "jspdf-autotable": "^3.8.3",
-    "sweetalert2": "^11.14.3"
+    "sweetalert2": "^11.14.2"
   },
   "devDependencies": {
     "@types/jquery": "^3.5.31"
