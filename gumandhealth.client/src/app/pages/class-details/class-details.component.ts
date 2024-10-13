@@ -86,22 +86,20 @@ export class ClassDetailsComponent implements OnInit {
     });
   }
   paymentData: any = {
-    "idSubs": 0,
+    "idSubs": 1,
     "userID": 0
   }
   AddSubscription(idSubs: any, Iduser: any) {
-
+    debugger
     this.paymentData.idSubs = idSubs
     this.paymentData.userID = Iduser
-
+    console.log("payment data :", this.paymentData);
     this._ser.postCreatePayment(this.paymentData).subscribe((data) => {
-      // Define the popup dimensions
       const width = 600;
       const height = 700;
       const left = (screen.width / 2) - (width / 2);
       const top = (screen.height / 2) - (height / 2);
 
-      // Open the PayPal URL in a popup
       const popupWindow = window.open(
         data.approvalUrl,
         'PayPal Payment',
