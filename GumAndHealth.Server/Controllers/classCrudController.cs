@@ -57,66 +57,78 @@ namespace GumAndHealth.Server.Controllers
         }
 
         // POST: api/ClassCrudApps
-        [HttpPost]
-        public async Task<ActionResult<ClassCrudApp>> PostClass(ClassCrudApp classDto)
-        {
-            var classEntity = new ClassService
-            {
-                Name = classDto.Name,
-                Description = classDto.Description,
-                ImagePath = classDto.ImagePath,
-                PricePerMonth = classDto.PricePerMonth
-            };
+        //[HttpPost]
+        //public async Task<ActionResult<ClassCrudApp>> PostClass(ClassCrudApp classDto)
+        //{
+        //    var classEntity = new ClassService
+        //    {
+        //        Name = classDto.Name,
+        //        Description = classDto.Description,
+        //        ImagePath = classDto.ImagePath,
+        //        PricePerMonth = classDto.PricePerMonth
+        //    };
 
-            _context.ClassServices.Add(classEntity);
-            await _context.SaveChangesAsync();
+        //    _context.ClassServices.Add(classEntity);
+        //    await _context.SaveChangesAsync();
 
-            classDto.Id = classEntity.Id;
+        //    classDto.Id = classEntity.Id;
 
-            return CreatedAtAction(nameof(GetClass), new { id = classDto.Id }, classDto);
-        }
+        //    return CreatedAtAction(nameof(GetClass), new { id = classDto.Id }, classDto);
+        //}
 
         // PUT: api/ClassCrudApps/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutClass(long id, ClassCrudApp classDto)
+
+
+        [HttpPut("putClassdashboard")]
+        public async Task<IActionResult> UpdateClass([FromBody] newClassDto updatedClass)
         {
-            if (id != classDto.Id)
+            if (updatedClass?.ClassService == null)
             {
-                return BadRequest();
+                return BadRequest("Invalid class data.");
             }
 
-            var classEntity = await _context.ClassServices.FindAsync(id);
+            var existingClass = await _context.ClassServices
+                .Include(cs => cs.ClassSchedules)
+                .FirstOrDefaultAsync(cs => cs.Id == updatedClass.ClassService.Id);
 
-            if (classEntity == null)
+            if (existingClass == null)
             {
-                return NotFound();
+                return NotFound("Class not found.");
             }
 
-            classEntity.Name = classDto.Name;
-            classEntity.Description = classDto.Description;
-            classEntity.ImagePath = classDto.ImagePath;
-            classEntity.PricePerMonth = classDto.PricePerMonth;
+            // Update properties of the ClassService
+            existingClass.Name = updatedClass.ClassService.Name;
+            existingClass.Description = updatedClass.ClassService.Description;
+            existingClass.ImagePath = updatedClass.ClassService.ImagePath;
+            existingClass.PricePerMonth = updatedClass.ClassService.PricePerMonth;
 
-            _context.Entry(classEntity).State = EntityState.Modified;
-
-            try
+            // Update schedules if needed
+            // Update schedules if needed
+            foreach (var schedule in existingClass.ClassSchedules)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ClassExists(id))
+                var updatedSchedule = updatedClass.ClassService.ClassSchedules.FirstOrDefault(s => s.Id == schedule.Id);
+                if (updatedSchedule != null)
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
+                    schedule.AvailableDay = updatedSchedule.AvailableDay;
+
+                    // Convert TimeSpan to TimeOnly
+                    schedule.StartTime = TimeOnly.FromTimeSpan(updatedSchedule.StartTime);
+                    schedule.EndTime = TimeOnly.FromTimeSpan(updatedSchedule.EndTime);
+
+                    schedule.InstructorId = updatedSchedule.InstructorId; // Ensure this matches the type
                 }
             }
 
-            return NoContent();
+
+            await _context.SaveChangesAsync();
+            return NoContent(); // 204 No Content
         }
+
+
+
+
+
+
 
         // DELETE: api/ClassCrudApps/5
         [HttpDelete("deleteClass/{id}")]
@@ -234,15 +246,20 @@ namespace GumAndHealth.Server.Controllers
             existingClass.Description = updatedClass.Description;
             existingClass.ImagePath = updatedClass.ImagePath;
             existingClass.PricePerMonth = updatedClass.PricePerMonth;
-
+            
             // Update schedules if necessary (you may want to handle this separately)
             // Assuming there's only one schedule for simplicity:
-            var schedule = existingClass.ClassSchedules.FirstOrDefault();
+            var schedule = _context.ClassSchedules.FirstOrDefault();
             if (schedule != null)
             {
                 schedule.AvailableDay = updatedClass.AvailableDay;
                 schedule.StartTime = updatedClass.StartTime;
                 schedule.EndTime = updatedClass.EndTime;
+            }
+            var insrtucturename =_context.Instructors.FirstOrDefault();
+            if (insrtucturename != null) {
+
+                insrtucturename.FullName = updatedClass.InstructorName;
             }
 
             // Save changes

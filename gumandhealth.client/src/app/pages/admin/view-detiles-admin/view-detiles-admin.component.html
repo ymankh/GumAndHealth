@@ -1,0 +1,49 @@
+<div class="container mt-5">
+  <!-- زر إضافة وصفة جديدة في أعلى الصفحة -->
+  <div class="text-right mb-3">
+    <a routerLink="/recipe-admin-post" class="btn btn-success">Add New Recipe</a>
+  </div>
+
+  <table class="table table-bordered">
+    <!-- الجهة اليسرى (الصورة) -->
+    <tr>
+      <td colspan="2">
+        <img src="https://localhost:7280/api/RecipeCategory/getImage/{{recipe.image}}" alt="{{ recipe.name }} Image" style="width:100%; max-width:300px;">
+      </td>
+    </tr>
+
+    <!-- الجهة اليمنى (المعلومات) -->
+    <tr>
+      <th>Name</th>
+      <td>{{ recipe.name }}</td>
+    </tr>
+    <tr>
+      <th>Description</th>
+      <td>{{ recipe.description }}</td>
+    </tr>
+    <tr>
+      <th>Calories</th>
+      <td class="text-success">{{ recipe.caloriesCount }}</td>
+    </tr>
+    <tr>
+      <th>Ingredients</th>
+      <td>
+        <ul>
+          <li>{{ recipe.ingredients }}</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <th>Recipe</th>
+      <td>{{ recipe.recipe1 }}</td>
+    </tr>
+
+    <!-- الأزرار -->
+    <tr>
+      <td colspan="2">
+        <!-- زر الرجوع إلى قائمة الوصفات -->
+        <a routerLink="/recipe-category-admin" class="btn btn-secondary">Back to Recipes</a>
+      </td>
+    </tr>
+  </table>
+</div>

@@ -5,6 +5,7 @@ import { Cart, CartItem } from '../shared/interfaces'; // Assuming you have a Ca
 import iziToast from 'izitoast';
 import { AuthService } from './auth.service';
 import { root } from '../shared/constants';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,11 @@ export class CartService {
 
   cart$ = this.cartSubject.asObservable();
 
-  constructor(private http: HttpClient, readonly authService: AuthService) {
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    readonly authService: AuthService
+  ) {
     // Load cart from localStorage if available
     const storedCart = localStorage.getItem('cart');
     if (storedCart) {
@@ -24,8 +29,24 @@ export class CartService {
     }
   }
 
+  checkout() {
+    if (!this.authService.isUserLoggedIn()) {
+      iziToast.warning({
+        title: 'Cannot checkout',
+        message: 'Please login to checkout',
+        position: 'topCenter',
+        timeout: 3000,
+      });
+      return;
+    }
+    this.http
+      .get<{ approvalUrl: string }>(`${root}/api/Cart/Checkout`, {
+        headers: this.authService.headers(),
+      })
+      .subscribe((response) => this.openPaymentPopup(response.approvalUrl));
+  }
   // Fetch cart items from API (for online sync)
-  loadCartFromServer(cartId: number) {
+  loadCartFromServer() {
     if (!this.authService.isUserLoggedIn()) return;
     this.http
       .get<Cart>(`${root}/api/Cart}`, {
@@ -35,6 +56,10 @@ export class CartService {
         this.cartItems = cart.cartItems!;
         this.cartSubject.next(this.cartItems);
         this.saveCartToLocalStorage();
+        // Get cart items from local storage and send them to the server.
+        for (const item of this.cartItems) {
+          this.addToCart(item);
+        }
       });
   }
 
@@ -85,9 +110,6 @@ export class CartService {
     this.cartSubject.next(this.cartItems);
     localStorage.removeItem('cart');
     this.clearOnlineCart();
-
-
-    
   }
 
   // Save cart items to local storage for offline use
@@ -102,6 +124,10 @@ export class CartService {
         total + (item.product?.price ?? 0) * (item.quantity ?? 1),
       0
     );
+  }
+
+  getTotalItems(): number {
+    return this.cartItems.reduce((total, item) => total + item.quantity!, 0);
   }
 
   private updateOnlineCart(item: CartItem) {
@@ -143,5 +169,27 @@ export class CartService {
         () => console.log('Cart cleared'),
         (error) => console.log(error)
       );
+  }
+  private openPaymentPopup(url: string): void {
+    // Open the payment link in a new popup window
+    const popup = window.open(url, '_blank', 'width=800,height=600');
+
+    // Check if the popup is closed
+    const popupChecker = setInterval(() => {
+      if (popup?.closed) {
+        clearInterval(popupChecker); // Stop checking once the window is closed
+        this.onPopupClose(); // Perform the action after window is closed
+      }
+    }, 500); // Check every 500 milliseconds
+  }
+  private onPopupClose(): void {
+    iziToast.success({
+      title: 'Payment Successful',
+      message: 'Thank you for your purchase!',
+      position: 'topCenter',
+      timeout: 3000,
+    });
+    this.clearCart();
+    this.router.navigate(['']);
   }
 }

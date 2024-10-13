@@ -30,12 +30,12 @@ export class AuthService {
 
     return new Observable<void>((observer) => {
       this.http
-        .post<{ token: string }>(`${root}/api/Auth/login`, formData)
+        .post<{ token: string, id: string }>(`${root}/api/Auth/login`, formData)
         .subscribe(
           (response) => {
             // Save token to localStorage
             localStorage.setItem('token', response.token);
-
+            localStorage.setItem('userId', response.id)
             // Success toast notification
             iziToast.success({
               title: 'Login Successful',

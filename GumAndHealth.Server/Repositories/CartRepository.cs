@@ -95,6 +95,7 @@ namespace GumAndHealth.Server.Repositories
                     Quantity = cartItem.Quantity
                 });
                 context.CartItems.Remove(cartItem);
+
             }
 
             context.SaveChanges();
@@ -106,6 +107,7 @@ namespace GumAndHealth.Server.Repositories
             var cartItem = context.CartItems.FirstOrDefault(cItem => cItem.ProductId == productId);
             if (cartItem == null) return;
             context.CartItems.Remove(cartItem);
+            context.SaveChanges();
         }
 
         public void ClearCart(long userId)

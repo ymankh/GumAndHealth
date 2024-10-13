@@ -24,7 +24,7 @@ namespace GumAndHealth.Server.Controllers
                 return Unauthorized(new { message = "Bad Credentials" });
             }
             var token = generateJwt.Generate(user.Id);
-            return Ok(new { token });
+            return Ok(new { token = token, id = user.Id });
         }
 
         [HttpPost("register")]

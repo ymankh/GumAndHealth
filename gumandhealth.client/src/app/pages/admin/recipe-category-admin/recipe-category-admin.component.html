@@ -1,0 +1,49 @@
+<div class="container mt-5">
+
+  <!-- زر إضافة فئة جديدة -->
+  <div class="text-right mb-3">
+    <button class="btn btn-success" (click)="addCategory()">Add New Category</button>
+  </div>
+
+  <!-- بدء الجدول مع توسيطه -->
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped mx-auto" style="width: 80%;">
+
+      <!-- العنوان يظهر في أعلى الجدول -->
+      <caption class="text-center">List of Available Recipe Categories</caption>
+
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Image</th>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let category of recipeCategories; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>
+            <img src="https://localhost:7280/api/RecipeCategory/getImage/{{category.imagePath}}" class="img-thumbnail" alt="{{ category.name }} Image" style="width: 100px;">
+          </td>
+          <td>{{ category.name }}</td>
+          <td>{{ category.description }}</td>
+          <td>
+            <!-- زر التعديل -->
+            <button class="btn btn-warning btn-sm mr-2" (click)="editCategory(category.id)">Edit</button>
+            <br />            <br />
+
+            <button class="btn btn-info btn-sm mr-2" (click)="viewRecipe(category.id)">viewRecipe</button>
+
+            <!-- زر الحذف -->
+            <!--<button class="btn btn-danger btn-sm" (click)="deleteCategory(category.id)">Delete</button>-->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- انتهاء الجدول -->
+</div>
+
+<app-admin></app-admin>
