@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NajlaaService } from '../../../services/najlaa.service'; // استيراد الخدمة
 import { Router } from '@angular/router'; // استيراد Router
@@ -8,9 +8,10 @@ import { Router } from '@angular/router'; // استيراد Router
   templateUrl: './recipe-admin-post.component.html',
   styleUrls: ['./recipe-admin-post.component.css'] // تصحيح اسم الخاصية
 })
-export class RecipeAdminPostComponent {
+export class RecipeAdminPostComponent implements OnInit {
   recipeForm: FormGroup;
   selectedFile: File | null = null;
+  recipeCategories: any[] = []; // لتخزين قائمة الفئات
 
   constructor(
     private fb: FormBuilder,
@@ -24,7 +25,16 @@ export class RecipeAdminPostComponent {
       caloriesCount: ['', Validators.required],
       ingredients: ['', Validators.required],
       recipe1: ['', Validators.required],
-      recipeCategoryId: [1, Validators.required] // افتراضياً تم وضعه للقسم
+      recipeCategoryId: ['', Validators.required] // إضافة حقل اختيار الفئة
+    });
+  }
+
+  ngOnInit(): void {
+    // جلب قائمة الفئات عند تحميل الصفحة
+    this.najlaaService.getRecipeCategories().subscribe((categories: any[]) => {
+      this.recipeCategories = categories;
+    }, error => {
+      console.error('Error fetching recipe categories', error);
     });
   }
 

@@ -16,6 +16,7 @@ export class NajlaaService {
   getRecipeCategories(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
+  
   // دالة لإرسال التصنيف الجديد إلى الـ API
   postRecipeCategory(formData: FormData): Observable<any> {
     return this.http.post(`https://localhost:7280/api/RecipeCategory/api/RecipeCategory`, formData);
