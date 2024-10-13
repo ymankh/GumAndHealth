@@ -64,7 +64,7 @@ export class RecipeAdminPostComponent implements OnInit {
       next: (response: any) => {
         console.log('Recipe added successfully', response);
         // توجيه المستخدم إلى صفحة أخرى بعد النجاح
-        this.router.navigate(['/recipes']);
+        this.router.navigate(['/recipe-category-admin']);
       },
       error: (error: any) => {
         console.error('Error occurred while adding recipe', error);
