@@ -43,6 +43,8 @@ import { AdminProductsComponent } from './pages/admin/adminproducts/adminproduct
 import { EditScheduleComponent } from './pages/admin/edit-schedule/edit-schedule.component';
 import { AllScheduleComponent } from './pages/admin/all-schedule/all-schedule.component';
 import { OrderAdminComponent } from './pages/admin/order-admin/order-admin.component';
+import { AdminShowClassesComponent } from './pages/admin/admin-show-classes/admin-show-classes.component';
+import { AddNewClassComponent } from './pages/admin/add-new-class/add-new-class.component';
 
 
 const routes: Routes = [
@@ -77,6 +79,10 @@ const routes: Routes = [
   { path: 'EditInstructor', component: EditInstructorComponent },
   { path: 'edit-schedule/:id', component: EditScheduleComponent },
   { path: 'Allschedule', component: AllScheduleComponent },
+  { path: 'AllClasses', component: AdminShowClassesComponent },
+  { path: 'AddNewClass', component: AddNewClassComponent },
+
+
 
 
 

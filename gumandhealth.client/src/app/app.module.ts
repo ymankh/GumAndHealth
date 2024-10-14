@@ -48,6 +48,7 @@ import { AllScheduleComponent } from './pages/admin/all-schedule/all-schedule.co
 import { GetInstructorComponent } from './pages/admin/get-instructor/get-instructor.component';
 import { EditInstructorComponent } from './pages/admin/edit-instructor/edit-instructor.component';
 import { AdminShowClassesComponent } from './pages/admin/admin-show-classes/admin-show-classes.component';
+import { AddNewClassComponent } from './pages/admin/add-new-class/add-new-class.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { AdminShowClassesComponent } from './pages/admin/admin-show-classes/admi
     GetInstructorComponent,
       EditInstructorComponent,
       AdminShowClassesComponent,
+      AddNewClassComponent,
   ],
   imports: [
     BrowserModule,
