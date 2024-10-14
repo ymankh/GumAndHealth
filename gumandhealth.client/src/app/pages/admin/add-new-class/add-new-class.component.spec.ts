@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminClassesComponent } from './admin-classes.component';
+import { AddNewClassComponent } from './add-new-class.component';
 
-describe('AdminClassesComponent', () => {
-  let component: AdminClassesComponent;
-  let fixture: ComponentFixture<AdminClassesComponent>;
+describe('AddNewClassComponent', () => {
+  let component: AddNewClassComponent;
+  let fixture: ComponentFixture<AddNewClassComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AdminClassesComponent]
+      declarations: [AddNewClassComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AdminClassesComponent);
+    fixture = TestBed.createComponent(AddNewClassComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

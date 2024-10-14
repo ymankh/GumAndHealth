@@ -14,7 +14,7 @@ import { GymsComponent } from './pages/gyms/gyms.component';
 import { RecipesComponent } from './nutrition/recipes/recipes.component';
 import { RecipeDetailComponent } from './nutrition/recipe-detail/recipe-detail.component';
 import { SingleGymComponent } from './pages/single-gym/single-gym.component';
-import { AdminClassesComponent } from './pages/admin-classes/admin-classes.component';
+
 import { ClassDetailsComponent } from './pages/class-details/class-details.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -43,6 +43,8 @@ import { AdminProductsComponent } from './pages/admin/adminproducts/adminproduct
 import { EditScheduleComponent } from './pages/admin/edit-schedule/edit-schedule.component';
 import { AllScheduleComponent } from './pages/admin/all-schedule/all-schedule.component';
 import { OrderAdminComponent } from './pages/admin/order-admin/order-admin.component';
+import { AdminShowClassesComponent } from './pages/admin/admin-show-classes/admin-show-classes.component';
+import { AddNewClassComponent } from './pages/admin/add-new-class/add-new-class.component';
 import { GetProductComponent } from './pages/admin/get-product/get-product.component';
 import { EditProductComponent } from './pages/admin/edit-product/edit-product.component';
 
@@ -67,7 +69,7 @@ const routes: Routes = [
   { path: 'edit-profile/:id', component: EditProfileComponent },
   { path: 'Gyms', component: GymsComponent },
   { path: 'singleGym/:id', component: SingleGymComponent },
-  { path: 'admin/classes', component: AdminClassesComponent },
+
   { path: 'class-details/:id', component: ClassDetailsComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'singleGym', component: SingleGymComponent },
@@ -77,6 +79,10 @@ const routes: Routes = [
   { path: 'EditInstructor', component: EditInstructorComponent },
   { path: 'edit-schedule/:id', component: EditScheduleComponent },
   { path: 'Allschedule', component: AllScheduleComponent },
+  { path: 'AllClasses', component: AdminShowClassesComponent },
+  { path: 'AddNewClass', component: AddNewClassComponent },
+
+
 
 
 

@@ -3,6 +3,7 @@
     "izitoast": "^1.4.0",
     "jspdf": "^2.5.2",
     "jspdf-autotable": "^3.8.3",
+    "ngx-toastr": "^19.0.0",
     "sweetalert2": "^11.14.2"
   },
   "devDependencies": {

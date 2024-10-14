@@ -1,69 +1,49 @@
 import { Component, OnInit } from '@angular/core';
 import { AhmadService } from '../../services/ahmad.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FawarehService } from '../../services/fawareh.service';
 
 @Component({
   selector: 'app-admin-class-edit',
   templateUrl: './admin-class-edit.component.html',
   styleUrls: ['./admin-class-edit.component.css']
 })
-export class AdminClassEditComponent implements OnInit {
-  classItem: any = {};
+export class AdminClassEditComponent {
 
-  constructor(
-    private classService: AhmadService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) { }
+  imageFile: any
+  changeImage(event: any) {
 
-  ngOnInit(): void {
-    const classId = +this.route.snapshot.paramMap.get('id')!;
-    this.classService.getClassById(classId).subscribe(
-      data => {
-        this.classItem = data;
-      },
-      error => {
-        console.error('Error fetching class:', error);
-      }
-    );
+    this.imageFile = event.target.files[0]
+
   }
-  
-  updateClass(): void {
+ 
+
+  constructor(private _ser: FawarehService, private _route: ActivatedRoute, private _router: Router) { }
+
+
+  classId: any;
+  ngOnInit() {
+    this.classId = this._route.snapshot.paramMap.get("id");
+  }
+
+
+  updateClass(data: any) {
     debugger
-    const payload = {
-      id: this.classItem.id,
-      name: this.classItem.name,
-      description: this.classItem.description,
-      imagePath: this.classItem.imagePath,
-      pricePerMonth: this.classItem.pricePerMonth,
-      availableDay: this.classItem.availableDay,
-      startTime: this.formatTime(this.classItem.startTime), // Ensure HH:mm:ss format
-      endTime: this.formatTime(this.classItem.endTime),
-      instructorName: this.classItem.instructorName
-    };
+    var formdata = new FormData();
 
-    console.log('Payload being sent:', JSON.stringify(payload, null, 2));
-    debugger
-    this.classService.updateClass(this.classItem.id, payload).subscribe(
-      () => {
-        console.log('Class updated successfully');
-        this.router.navigate(['/admin/classes']);
-      },
-      error => {
-        console.error('Error updating class:', error);
-        if (error.error && error.error.errors) {
-          console.log('Validation errors:', error.error.errors);
-        }
-      }
-    );
+
+    for (let item in data) {
+      formdata.append(item, data[item])
+    }
+
+    formdata.append("imagePath", this.imageFile)
+
+    this._ser.editClass(this.classId, formdata).subscribe((data) => {
+      alert("Service Updated Successfully !")
+      //this._router.navigate(["/dashboard"])
+    });
   }
-
-  formatTime(time: string): string {
-    if (!time) return "";
-    const [hours, minutes] = time.split(':');
-    return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:00`;
-  }
-
+}
 
 
 
@@ -75,21 +55,22 @@ export class AdminClassEditComponent implements OnInit {
 
 
   ////////////////////////////
-  deleteClass(): void {
-    console.log('Delete class button clicked');
-    if (confirm('Are you sure you want to delete this class?')) {
-      console.log('Confirmation received');
-      console.log('Class ID to delete:', this.classItem.id);
+  //  deleteClass(): void {
+  //    console.log('Delete class button clicked');
+  //    if (confirm('Are you sure you want to delete this class?')) {
+  //      console.log('Confirmation received');
+  //      console.log('Class ID to delete:', this.classItem.id);
 
-      this.classService.deleteClass(this.classItem.id).subscribe(() => {
-        console.log('Class deleted successfully');
-        this.router.navigate(['admin/classes']);
-      }, error => {
-        console.error('Error deleting class:', error);
-        alert('An error occurred while deleting the class. Please try again.');
-      });
-    } else {
-      console.log('Deletion cancelled');
-    }
-  }
-}
+  //      this.classService.deleteClass(this.classItem.id).subscribe(() => {
+  //        console.log('Class deleted successfully');
+  //        this.router.navigate(['admin/classes']);
+  //      }, error => {
+  //        console.error('Error deleting class:', error);
+  //        alert('An error occurred while deleting the class. Please try again.');
+  //      });
+  //    } else {
+  //      console.log('Deletion cancelled');
+  //    }
+  //  }
+  //}
+

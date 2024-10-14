@@ -20,7 +20,7 @@ import { GymsComponent } from './pages/gyms/gyms.component';
 import { RecipesComponent } from './nutrition/recipes/recipes.component';
 import { RecipeDetailComponent } from './nutrition/recipe-detail/recipe-detail.component';
 import { SingleGymComponent } from './pages/single-gym/single-gym.component';
-import { AdminClassesComponent } from './pages/admin-classes/admin-classes.component';
+//import { AdminClassesComponent } from './pages/admin-classes/admin-classes.component';
 import { ClassDetailsComponent } from './pages/class-details/class-details.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
@@ -48,6 +48,7 @@ import { AllScheduleComponent } from './pages/admin/all-schedule/all-schedule.co
 import { GetInstructorComponent } from './pages/admin/get-instructor/get-instructor.component';
 import { EditInstructorComponent } from './pages/admin/edit-instructor/edit-instructor.component';
 import { AdminShowClassesComponent } from './pages/admin/admin-show-classes/admin-show-classes.component';
+import { AddNewClassComponent } from './pages/admin/add-new-class/add-new-class.component';
 
 import { GetProductComponent } from './pages/admin/get-product/get-product.component';
 import { EditProductComponent } from './pages/admin/edit-product/edit-product.component';
@@ -61,7 +62,7 @@ import { AdminUserComponent } from './pages/admin/admin-user/admin-user.componen
     HeaderComponent,
     FooterComponent,
     AdminComponent,
-    AdminClassesComponent,
+    //AdminClassesComponent,
     AdminClassEditComponent,
     AboutComponent,
     BlogComponent,
@@ -104,6 +105,7 @@ import { AdminUserComponent } from './pages/admin/admin-user/admin-user.componen
     GetInstructorComponent,
       EditInstructorComponent,
       AdminShowClassesComponent,
+      AddNewClassComponent,
       GetProductComponent,
       EditProductComponent,
       AdminUserComponent,
