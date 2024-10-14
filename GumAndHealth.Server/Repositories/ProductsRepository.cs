@@ -81,6 +81,11 @@ namespace GumAndHealth.Server.Repositories
             return _context.Products.ToList();
         }
 
+        public Product GetProductById(int id)
+        {
+            return _context.Products.FirstOrDefault(p => p.Id == id);
+        }
+
         public Product CreateProduct(CreateProductDto createProductDto)
         {
             var product = new Product

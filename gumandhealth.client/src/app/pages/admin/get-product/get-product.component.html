@@ -1,0 +1,56 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">List of Instructors</h2>
+  <table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <!--<th>Image</th>-->
+        <th>Category Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Fixing *ngFor directive and correcting variable name -->
+      <tr *ngFor="let product of products">
+        <td>{{ product.id }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price }} JOD</td>
+        <td>{{ product.description }}</td>
+
+        <!-- عرض الصورة -->
+        <!--<td>-->
+       
+          <!-- عرض الصورة باستخدام الرابط المخزن مباشرة -->
+          <!--<img *ngIf="product.image1 && product.image1 !== ''"
+               [src]="product.image1"
+               alt="{{ product.name }}"
+               class="img-thumbnail"
+               style="width: 100px; height: auto;">-->
+          <!-- عرض صورة افتراضية في حالة عدم توفر صورة -->
+          <!--<img *ngIf="!product.image1 || product.image1 === ''"
+               src="path_to_default_image/default_image.png"
+               alt="No image available"
+               class="img-thumbnail"
+               style="width: 100px; height: auto;">
+        </td>-->
+
+     
+
+        <td>{{ product.categoryName }}</td>
+
+        <td>
+          <button class="btn btn-warning btn-sm" (click)="editProduct(product.id)">Edit</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteProduct(product.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <app-edit-product *ngIf="selectedProduct"
+                    [product]="selectedProduct"
+                    (close)="closeModal()">
+  </app-edit-product>
+</div>

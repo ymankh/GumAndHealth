@@ -50,6 +50,9 @@ import { EditInstructorComponent } from './pages/admin/edit-instructor/edit-inst
 import { AdminShowClassesComponent } from './pages/admin/admin-show-classes/admin-show-classes.component';
 import { AddNewClassComponent } from './pages/admin/add-new-class/add-new-class.component';
 
+import { GetProductComponent } from './pages/admin/get-product/get-product.component';
+import { EditProductComponent } from './pages/admin/edit-product/edit-product.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -102,6 +105,8 @@ import { AddNewClassComponent } from './pages/admin/add-new-class/add-new-class.
       EditInstructorComponent,
       AdminShowClassesComponent,
       AddNewClassComponent,
+      GetProductComponent,
+      EditProductComponent,
   ],
   imports: [
     BrowserModule,
