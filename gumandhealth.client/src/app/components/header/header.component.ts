@@ -108,7 +108,7 @@ export class HeaderComponent implements OnInit {
   }
   shouldShowSearch(): boolean {
     // تحديد الصفحات التي تريد إخفاء أو إظهار البحث فيها
-    const hiddenRoutes = ['/admin', '/login', '/profile', '/reset-password', '/cart','/register']; // صفحات لا نريد إظهار البحث فيها
+    const hiddenRoutes = ['/admin', '/login', '/profile', '/reset-password', '/cart', '/register', '/about', '/contact', '/password-reset', '/admin-login', '/virifyOtp','/reset-password']; // صفحات لا نريد إظهار البحث فيها
     return !hiddenRoutes.includes(this.router.url); // يظهر البحث إذا لم تكن الصفحة الحالية ضمن القائمة
   }
 
