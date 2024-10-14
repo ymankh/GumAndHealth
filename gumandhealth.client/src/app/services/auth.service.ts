@@ -97,10 +97,33 @@ export class AuthService {
   resetPassword(email: string): Observable<any> {
     const formData = new FormData();
     formData.append('Email', email);
+    localStorage.setItem('userEmail', email)
+    // Make an HTTP POST request to your backend API for password reset
+    return this.http.post<any>(`${root}/api/PasswordReset/request-reset`, formData);
+  }
+
+  passwordReset(password: string): Observable<any> {
+    debugger;
+    var email = localStorage.getItem('userEmail');
+    var opject = {
+      "email": email,
+      "password": password
+    }
+    return this.http.put<any>(`${root}/api/Auth`, opject);
+  }
+
+  virifyOtp(otp: string): Observable<any> {
+    var email = localStorage.getItem('userEmail');
+    var opject =  {
+      "email" : email,
+      "otp" : otp
+    };
 
     // Make an HTTP POST request to your backend API for password reset
-    return this.http.post<any>(`${root}/api/Auth/reset-password`, formData);
+    return this.http.post<any>(`${root}/api/PasswordReset/verify-otp`, opject);
   }
+
+
 
   // Method to fetch data from an API
   fetchData(apiUrl: string): Observable<any> {

@@ -35,6 +35,9 @@ import { TestimonialsComponent } from './pages/testimonials/testimonials.compone
 import { RecipeCategoryAdminPostComponent } from './pages/admin/recipe-category-admin-post/recipe-category-admin-post.component';
 import { ViewDetilesAdminComponent } from './pages/admin/view-detiles-admin/view-detiles-admin.component';
 import { RecipeAdminPostComponent } from './pages/admin/recipe-admin-post/recipe-admin-post.component';
+import { VirifyOtpComponent } from './pages/virify-otp/virify-otp.component';
+import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
+import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +75,9 @@ import { RecipeAdminPostComponent } from './pages/admin/recipe-admin-post/recipe
     RecipeCategoryAdminPostComponent,
     ViewDetilesAdminComponent,
     RecipeAdminPostComponent,
+    VirifyOtpComponent,
+    AdminLoginComponent,
+    PasswordResetComponent,
   ],
   imports: [
     BrowserModule,

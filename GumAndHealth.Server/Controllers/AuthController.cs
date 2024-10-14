@@ -15,16 +15,16 @@ namespace GumAndHealth.Server.Controllers
         : ControllerBase
     {
         [HttpPost("login")]
-        public IActionResult Login([FromForm] UserLoginDto loginData)
+        public IActionResult Login([FromForm] UserLoginDto user)
         {
-            // Get the user using the login data
-            var user = authRepository.GetUser(loginData);
-            if (user == null)
+            
+            var dbuser = context.Users.FirstOrDefault(u => u.Email == user.Email);
+           if (dbuser == null || !PasswordHasher.VerifyPasswordHash(user.Password, dbuser.PasswordHash, dbuser.PasswordSalt))
             {
                 return Unauthorized(new { message = "Bad Credentials" });
             }
-            var token = generateJwt.Generate(user.Id);
-            return Ok(new { token = token, id = user.Id });
+            var token = generateJwt.Generate(dbuser.Id);
+            return Ok(new { token = token, id = dbuser.Id });
         }
 
         [HttpPost("register")]

@@ -5,17 +5,16 @@ import iziToast from 'izitoast';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  selector: 'app-password-reset',
+  templateUrl: './password-reset.component.html',
+  styleUrl: './password-reset.component.css'
 })
-export class RegisterComponent {
+export class PasswordResetComponent  {
   registerForm: FormGroup;
 
   constructor(private authService: AuthService, private fb: FormBuilder, private router: Router) {
     // Initialize the form with FormBuilder and a custom validator for matching passwords
     this.registerForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]],
     }, { validators: this.passwordMatchValidator });
@@ -30,25 +29,25 @@ export class RegisterComponent {
 
   // Method to handle the form submission
   onSubmit(): void {
+    debugger;
     if (this.registerForm.valid) {
-      const email = this.registerForm.get('email')?.value;
       const password = this.registerForm.get('password')?.value;
 
       // Call the register method in AuthService
-      this.authService.register(email, password).subscribe(
+      this.authService.passwordReset(password).subscribe(
         (response) => {
           iziToast.success({
-            title: 'Registration Successful',
-            message: 'You have been registered successfully!',
+            title: 'Password changed Successfully',
+            message: 'Password changed Successfully!',
           });
           this.router.navigate(['/login']);
         },
         (error) => {
           iziToast.error({
-            title: 'Registration Failed',
-            message: 'There was an error registering the user',
+            title: 'Password reset Failed',
+            message: 'There was an error resetting the password',
           });
-          console.error('Registration error:', error);
+          console.error('password error:', error);
         }
       );
     } else {
