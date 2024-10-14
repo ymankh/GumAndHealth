@@ -44,6 +44,8 @@ import { EditScheduleComponent } from './pages/admin/edit-schedule/edit-schedule
 import { AllScheduleComponent } from './pages/admin/all-schedule/all-schedule.component';
 import { GetInstructorComponent } from './pages/admin/get-instructor/get-instructor.component';
 import { EditInstructorComponent } from './pages/admin/edit-instructor/edit-instructor.component';
+import { GetProductComponent } from './pages/admin/get-product/get-product.component';
+import { EditProductComponent } from './pages/admin/edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +94,8 @@ import { EditInstructorComponent } from './pages/admin/edit-instructor/edit-inst
 
     GetInstructorComponent,
       EditInstructorComponent,
+      GetProductComponent,
+      EditProductComponent,
   ],
   imports: [
     BrowserModule,
