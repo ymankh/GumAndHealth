@@ -20,7 +20,7 @@ import { GymsComponent } from './pages/gyms/gyms.component';
 import { RecipesComponent } from './nutrition/recipes/recipes.component';
 import { RecipeDetailComponent } from './nutrition/recipe-detail/recipe-detail.component';
 import { SingleGymComponent } from './pages/single-gym/single-gym.component';
-import { AdminClassesComponent } from './pages/admin-classes/admin-classes.component';
+//import { AdminClassesComponent } from './pages/admin-classes/admin-classes.component';
 import { ClassDetailsComponent } from './pages/class-details/class-details.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
@@ -61,7 +61,7 @@ import { EditProductComponent } from './pages/admin/edit-product/edit-product.co
     HeaderComponent,
     FooterComponent,
     AdminComponent,
-    AdminClassesComponent,
+    //AdminClassesComponent,
     AdminClassEditComponent,
     AboutComponent,
     BlogComponent,
