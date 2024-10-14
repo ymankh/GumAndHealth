@@ -47,3 +47,6 @@
     .submit-row button:hover {
       background-color: #0056b3;
     }
+::ng-deep app-header {
+  display: none !important;
+}

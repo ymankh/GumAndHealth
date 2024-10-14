@@ -1,6 +1,15 @@
 <div class="col-10" style="margin-left:17%">
   <div class="bg-  rounded h-100 p-4">
     <h6 class="mb-4">Classes</h6>
+
+    <div class="mb-3">
+      <a class="btn btn-success" [routerLink]="['/AddNewClass']">Add New Class</a>
+    </div>
+
+
+
+
+
     <div class="table-responsive">
       <table class="table">
         <thead>
@@ -10,28 +19,28 @@
             <th scope="col">Description</th>
             <th scope="col">Image</th>
             <th scope="col">Price</th>
-            <th scope="col"> Day</th>
-            <th scope="col">Start </th>
-            <th scope="col">End </th>
-            <th scope="col">Instructor </th>
+
             <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let classItem of classes">
+          <tr *ngFor="let classItem of allClasses">
             <td>{{ classItem.id }}</td>
             <td>{{ classItem.name }}</td>
             <td>{{ classItem.description }}</td>
-            <td><img [src]="classItem.imagePath" alt="{{ classItem.name }}" width="50"></td>
+            <td>
+              <img [src]="'https://localhost:7280/api/Classes/getImages/' + classItem.imagePath" style="width: 50px">
+            </td>
             <td>{{ classItem.pricePerMonth }}</td>
-            <td>{{ classItem.availableDay }}</td>
-            <td>{{ classItem.startTime }}</td>
-            <td>{{ classItem.endTime }}</td>
-            <td>{{ classItem.instructorName }}</td>
+
+
             <td>
               <a class="btn btn-info" [routerLink]="['/admin/edit-class', classItem.id]">Edit</a>
+              <a class="btn btn-danger ms-2" (click)="deleteClass(classItem.id)">Delete</a>
+
             </td>
-          </tr>
+
+
         </tbody>
       </table>
 

@@ -64,9 +64,13 @@ export class NajlaaService {
   getAllOrders(): Observable<any> {
     return this.http.get(`${this.apiUrl12}/orders`);
   }
-
+  // جلب وصفة بناءً على الـ id
+  getRecipeById123(id: number): Observable<any> {
+    return this.http.get<any>(`https://localhost:7280/api/Recipe/${id}`);
+  }
   // دالة للبحث عن الطلبات بناءً على الشروط (اسم المستخدم، تاريخ الطلب، أو اسم المنتج)
   searchOrders(userName?: string, orderDate?: string, productName?: string): Observable<any> {
+
     let params = new HttpParams();
     if (userName) {
       params = params.append('userName', userName);

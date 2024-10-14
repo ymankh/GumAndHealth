@@ -166,3 +166,11 @@
     margin: 0 auto;
   }
 }
+::ng-deep app-header {
+  display: none !important;
+}
+
+
+::ng-deep app-footer {
+  display: none !important;
+}

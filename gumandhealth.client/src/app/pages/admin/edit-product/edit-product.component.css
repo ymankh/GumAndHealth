@@ -1,0 +1,11 @@
+.modal.show.d-block {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.img-thumbnail {
+  max-width: 100px;
+}
+::ng-deep app-footer {
+  display: none !important;
+}
