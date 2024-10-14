@@ -21,7 +21,7 @@ export interface ClassDto {
 })
 export class AdminClassesComponent implements OnInit {
   classes: ClassDto[] = []; // Initialize the array to store classes
-  private apiUrl = 'https://localhost:44325/api/classCrud/allClasses';
+  private apiUrl = 'https://localhost:7280/api/classCrud/allClasses';
 
   constructor(private http: HttpClient) { }
 
