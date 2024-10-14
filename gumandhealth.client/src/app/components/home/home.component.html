@@ -282,7 +282,7 @@
     <!-- حلقة لتكرار البطاقات بناءً على البيانات -->
     <div class="col-md-4" *ngFor="let gym of gyms">
       <div class="card">
-        <img [src]="gym.imagePath" class="card-img-top" [alt]="gym.name">
+        <img src="https://localhost:7280/api/RecipeCategory/getImage/{{gym.imagePath}}" class="card-img-top" [alt]="gym.name">
         <div class="card-body">
           <h5 class="card-title">{{ gym.name }}</h5>
           <p class="card-text">{{ gym.description }}</p>
@@ -301,7 +301,7 @@
     <!-- حلقة لتكرار البطاقات بناءً على المنتجات -->
     <div class="col-md-4" *ngFor="let product of products">
       <div class="card mb-4">
-        <img [src]="product.imagePath" class="card-img-top" [alt]="product.name">
+        <img src="https://localhost:7280/api/RecipeCategory/getImage123/{{product.imagePath}}" class="card-img-top" [alt]="product.name">
         <div class="card-body">
           <h5 class="card-title">{{ product.name }}</h5>
           <p class="card-text">{{ product.description }}</p>

@@ -191,6 +191,32 @@ namespace GumAndHealth.Server.Controllers
             }
 
         }
+        [HttpGet("getImage123/{imageName}")]
+        public IActionResult getService123(string imageName)
+        {
+            // المسار الأول داخل مجلد images
+            var pathImageInImages = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "images", imageName);
+
+            // المسار الثاني داخل مجلد products
+            var pathImageInProducts = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "products", imageName);
+
+            // التحقق من وجود الصورة في مجلد images
+            if (System.IO.File.Exists(pathImageInImages))
+            {
+                return PhysicalFile(pathImageInImages, "image/png");
+            }
+            // التحقق من وجود الصورة في مجلد products إذا لم تكن موجودة في images
+            else if (System.IO.File.Exists(pathImageInProducts))
+            {
+                return PhysicalFile(pathImageInProducts, "image/png");
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+
 
 
     }
