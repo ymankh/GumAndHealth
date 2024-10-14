@@ -1,0 +1,9 @@
+app-header {
+  display: none !important;
+}
+  app-header header,
+  app-header header .container-fluid,
+  app-header header .inner-header,
+  app-header header .row {
+    display: none !important;
+  }

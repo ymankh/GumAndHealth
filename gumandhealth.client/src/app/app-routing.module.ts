@@ -31,6 +31,9 @@ import { ViewDetilesAdminComponent } from './pages/admin/view-detiles-admin/view
 import { RecipeAdminPostComponent } from './pages/admin/recipe-admin-post/recipe-admin-post.component';
 import { GetInstructorComponent } from './pages/admin/get-instructor/get-instructor.component';
 import { EditInstructorComponent } from './pages/admin/edit-instructor/edit-instructor.component';
+import { VirifyOtpComponent } from './pages/virify-otp/virify-otp.component';
+import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
+import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
 
 import { RecipeCategoryAdminPutComponent } from './pages/admin/recipe-category-admin-put/recipe-category-admin-put.component';
 import { RecipeAdminPutComponent } from './pages/admin/recipe-admin-put/recipe-admin-put.component';
@@ -48,7 +51,6 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'blog', component: BlogComponent },
-  { path: 'admin', component: AdminComponent },
   { path: 'classes', component: ClassesComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'Schedule', component: AdminScheduleComponent },
@@ -65,13 +67,12 @@ const routes: Routes = [
   { path: 'edit-profile/:id', component: EditProfileComponent },
   { path: 'Gyms', component: GymsComponent },
   { path: 'singleGym/:id', component: SingleGymComponent },
-  { path: 'admin', component: AdminComponent },
   { path: 'admin/classes', component: AdminClassesComponent },
   { path: 'class-details/:id', component: ClassDetailsComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'singleGym', component: SingleGymComponent },
   { path: 'products/:id', component: ProductCardComponent },
-  { path: 'Admin', component: AdminComponent },
+  { path: 'Dashboard', component: AdminComponent },
   { path: 'GetInstructor', component: GetInstructorComponent },
   { path: 'EditInstructor', component: EditInstructorComponent },
   { path: 'edit-schedule/:id', component: EditScheduleComponent },
@@ -102,10 +103,11 @@ const routes: Routes = [
   { path: 'recipe-admin-post', component: RecipeAdminPostComponent },
   { path: 'admin/products', component: AdminProductsComponent },
   { path: 'products/category/:id', component: ProductCardComponent }, // or ProductsComponent if that's the correct name
-  { path: '**', redirectTo: '', pathMatch: 'full' }, // Wildcard route to redirect invalid paths to home
-  { path: 'reset-password', component: ResetPasswordComponent }, { path: 'products/category/:id', component: ProductCardComponent }, // or ProductsComponent if that's the correct name
-
-  
+  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'products/category/:id', component: ProductCardComponent }, // or ProductsComponent if that's the correct name
+  { path: 'virifyOtp', component: VirifyOtpComponent },
+  { path: 'admin', component: AdminLoginComponent },
+  { path: 'password-reset', component: PasswordResetComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
   // Wildcard route to redirect invalid paths to home
 ];

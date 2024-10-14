@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service'; // Ensure the correct path
+import { HosamService } from '../../services/hosam.service'; // Ensure the correct path
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  selector: 'app-admin-login',
+  templateUrl: './admin-login.component.html',
+  styleUrl: './admin-login.component.css'
 })
-export class LoginComponent implements OnInit {
+export class AdminLoginComponent implements OnInit {
   loginForm!: FormGroup;
   isLoading = false;
   loginError: string = '';
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService // Inject AuthService for handling login
+    private hosamService: HosamService // Inject AuthService for handling login
   ) { }
 
   ngOnInit(): void {
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
 
       try {
         // Await login process through AuthService
-        await this.authService.login(email, password).toPromise();
+        await this.hosamService.login(email, password).toPromise();
 
         this.isLoading = false;
         this.loginError = ''; // Clear error message
@@ -62,3 +62,4 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/reset-password']); // Navigate to reset password route
   }
 }
+

@@ -33,3 +33,6 @@ tbody tr:hover {
   padding: 15px; /* Padding inside the edit component */
   background-color: #fff; /* White background for the edit component */
 }
+::ng-deep app-header {
+  display: none !important;
+}
