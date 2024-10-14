@@ -1,24 +1,28 @@
 <h2 style="text-align: center; margin-top: 20px;">Users List</h2>
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let user of users">
-      <td>{{ user.id }}</td>
-      <td>{{ user.name }}</td>
-      <td>{{ user.email }}</td>
-      <td>
-        <img src="https://localhost:7280/api/UserProfile/getImages/{{user?.image }}" alt="Profile Picture" class="rounded-circle" style="width: 50px; height: 50px;">
-      </td>
-      <td>
-        <button (click)="goToUserDetails(user.id)">View Details</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="table-container">
+  <table class="styled-table">
+    <thead class="thead-dark">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Profile Picture</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+          <img src="https://localhost:7280/api/UserProfile/getImages/{{user?.image }}" alt="Profile Picture" class="rounded-circle">
+        </td>
+        <td>
+          <button (click)="goToUserDetails(user.id)" class="view-button">View Details</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<app-admin></app-admin>

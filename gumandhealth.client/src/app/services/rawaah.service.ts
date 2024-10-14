@@ -84,8 +84,8 @@ export class RawaahService {
   }
 
 
-  getUserSubscriptions(userId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/UserProfile/GetAllSubscription/${userId}`, { headers: this.headers });
+  getUserSubscriptions(userId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/UserProfile/GetAllSubscription/${userId}`, { headers: this.headers });
   }
 
   
