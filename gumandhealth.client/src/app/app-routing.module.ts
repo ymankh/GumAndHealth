@@ -43,6 +43,7 @@ import { AdminProductsComponent } from './pages/admin/adminproducts/adminproduct
 import { EditScheduleComponent } from './pages/admin/edit-schedule/edit-schedule.component';
 import { AllScheduleComponent } from './pages/admin/all-schedule/all-schedule.component';
 import { OrderAdminComponent } from './pages/admin/order-admin/order-admin.component';
+import { GetAllUserComponent } from './pages/admin/get-all-user/get-all-user.component';
 
 
 const routes: Routes = [
@@ -95,6 +96,7 @@ const routes: Routes = [
     path: 'order - admin', component: OrderAdminComponent },
 
   { path: 'view-detiles-admin/:id', component: ViewDetilesAdminComponent },
+  { path: 'GetAllUser', component: GetAllUserComponent },
   { path: 'recipe-admin-post', component: RecipeAdminPostComponent },
   { path: 'admin/products', component: AdminProductsComponent },
   { path: 'products/category/:id', component: ProductCardComponent }, // or ProductsComponent if that's the correct name

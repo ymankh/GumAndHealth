@@ -78,15 +78,20 @@ export class RawaahService {
     return this.http.put<void>(`${this.baseUrl}/UserProfile/UpdateUserProfile/${userId}`, updatedData, { headers: this.headers });
   }
 
-  // جلب الطلبات الخاصة بالمستخدم
+
   getUserOrders(userId: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/UserProfile/orders/${userId}`, { headers: this.headers });
   }
 
-  // جلب الاشتراكات الخاصة بالمستخدم
+
   getUserSubscriptions(userId: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/UserProfile/GetAllSubscription/${userId}`, { headers: this.headers });
   }
+
+  getAllUsers(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/UserProfile`);
+  }
+
 }
 
 
