@@ -6,3 +6,6 @@
 .img-thumbnail {
   max-width: 100px;
 }
+::ng-deep app-footer {
+  display: none !important;
+}

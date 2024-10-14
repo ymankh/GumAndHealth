@@ -298,6 +298,12 @@ namespace GumAndHealth.Server.Controllers
 
             return Ok(orderDTOs);
         }
-
+        ///////////////////////////
+        /// 
+        [HttpGet]
+        public IActionResult GetAllUsers()
+        {
+            return Ok(_context.Users.ToList());
+        }
     }
 }

@@ -47,6 +47,7 @@ import { AdminShowClassesComponent } from './pages/admin/admin-show-classes/admi
 import { AddNewClassComponent } from './pages/admin/add-new-class/add-new-class.component';
 import { GetProductComponent } from './pages/admin/get-product/get-product.component';
 import { EditProductComponent } from './pages/admin/edit-product/edit-product.component';
+import { GetAllUserComponent } from './pages/admin/get-all-user/get-all-user.component';
 
 
 const routes: Routes = [
@@ -106,6 +107,7 @@ const routes: Routes = [
 
 
   { path: 'view-detiles-admin/:id', component: ViewDetilesAdminComponent },
+  { path: 'GetAllUser', component: GetAllUserComponent },
   { path: 'recipe-admin-post', component: RecipeAdminPostComponent },
   { path: 'admin/products', component: AdminProductsComponent },
   { path: 'products/category/:id', component: ProductCardComponent }, // or ProductsComponent if that's the correct name

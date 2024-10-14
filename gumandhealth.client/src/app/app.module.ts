@@ -47,11 +47,13 @@ import { EditScheduleComponent } from './pages/admin/edit-schedule/edit-schedule
 import { AllScheduleComponent } from './pages/admin/all-schedule/all-schedule.component';
 import { GetInstructorComponent } from './pages/admin/get-instructor/get-instructor.component';
 import { EditInstructorComponent } from './pages/admin/edit-instructor/edit-instructor.component';
+import { GetAllUserComponent } from './pages/admin/get-all-user/get-all-user.component';
 import { AdminShowClassesComponent } from './pages/admin/admin-show-classes/admin-show-classes.component';
 import { AddNewClassComponent } from './pages/admin/add-new-class/add-new-class.component';
 
 import { GetProductComponent } from './pages/admin/get-product/get-product.component';
 import { EditProductComponent } from './pages/admin/edit-product/edit-product.component';
+import { AdminUserComponent } from './pages/admin/admin-user/admin-user.component';
 
 @NgModule({
   declarations: [
@@ -103,10 +105,12 @@ import { EditProductComponent } from './pages/admin/edit-product/edit-product.co
 
     GetInstructorComponent,
       EditInstructorComponent,
+      GetAllUserComponent,
       AdminShowClassesComponent,
       AddNewClassComponent,
       GetProductComponent,
       EditProductComponent,
+      AdminUserComponent,
   ],
   imports: [
     BrowserModule,
