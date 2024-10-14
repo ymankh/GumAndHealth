@@ -33,3 +33,23 @@
     </div>
   </div>
 </header>
+<br />
+<div *ngIf="shouldShowSearch()" class="container mt-4" style="
+    margin-top: 0px !important;
+">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="fa fa-search"></i>
+          </span>
+        </div>
+        <input type="text" class="form-control" placeholder="Search for something..." [(ngModel)]="searchQuery">
+        <div class="input-group-append">
+          <button class="btn btn-success" (click)="performSearch()">Search</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

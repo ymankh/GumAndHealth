@@ -31,6 +31,9 @@ import { ViewDetilesAdminComponent } from './pages/admin/view-detiles-admin/view
 import { RecipeAdminPostComponent } from './pages/admin/recipe-admin-post/recipe-admin-post.component';
 import { GetInstructorComponent } from './pages/admin/get-instructor/get-instructor.component';
 import { EditInstructorComponent } from './pages/admin/edit-instructor/edit-instructor.component';
+import { VirifyOtpComponent } from './pages/virify-otp/virify-otp.component';
+import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
+import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
 
 import { RecipeCategoryAdminPutComponent } from './pages/admin/recipe-category-admin-put/recipe-category-admin-put.component';
 import { RecipeAdminPutComponent } from './pages/admin/recipe-admin-put/recipe-admin-put.component';
@@ -95,10 +98,11 @@ const routes: Routes = [
   { path: 'recipe-admin-post', component: RecipeAdminPostComponent },
   { path: 'admin/products', component: AdminProductsComponent },
   { path: 'products/category/:id', component: ProductCardComponent }, // or ProductsComponent if that's the correct name
-  { path: '**', redirectTo: '', pathMatch: 'full' }, // Wildcard route to redirect invalid paths to home
-  { path: 'reset-password', component: ResetPasswordComponent }, { path: 'products/category/:id', component: ProductCardComponent }, // or ProductsComponent if that's the correct name
-
-  
+  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'products/category/:id', component: ProductCardComponent }, // or ProductsComponent if that's the correct name
+  { path: 'virifyOtp', component: VirifyOtpComponent },
+  { path: 'admin-login', component: AdminLoginComponent },
+  { path: 'password-reset', component: PasswordResetComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
   // Wildcard route to redirect invalid paths to home
 ];

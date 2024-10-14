@@ -30,7 +30,7 @@ namespace GumAndHealth.Server.Controllers
             }
             var otp = _otpService.GenerateOtp(user.Email);
             await _emailService.SendOtpEmailAsync(user.Email, otp);
-            return Ok("OTP sent to email.");
+            return Ok(user);
         }
 
         private Task<User> GetUserByEmailAsync(string email)
@@ -53,7 +53,7 @@ namespace GumAndHealth.Server.Controllers
             {
                 _otpService.ClearOtp(dto.Email);
 
-                return Ok("OTP verified, you can now reset your password.");
+                return Ok(user);
             }
             return BadRequest("Invalid OTP.");
         }
