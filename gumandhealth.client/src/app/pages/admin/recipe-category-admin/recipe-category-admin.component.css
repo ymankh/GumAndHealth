@@ -12,3 +12,30 @@ table caption {
   font-weight: bold; /* لجعل النص عريضًا */
   margin-bottom: 10px; /* المسافة بين الـ <caption> والجدول */
 }
+app-header {
+  display: none !important;
+}
+
+  app-header header,
+  app-header header .container-fluid,
+  app-header header .inner-header,
+  app-header header .row {
+    display: none !important;
+  }
+
+
+
+
+::ng-deep app-header {
+  display: none !important;
+}
+.table-responsive {
+  margin-left: 10%;
+}
+button.btn.btn-dark {
+  margin-bottom: -120%;
+  margin-right: 32%;
+}
+::ng-deep app-footer {
+  display: none !important;
+}

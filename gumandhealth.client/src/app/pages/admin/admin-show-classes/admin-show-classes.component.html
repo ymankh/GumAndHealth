@@ -1,1 +1,50 @@
-<p>admin-show-classes works!</p>
+<div class="col-10" style="margin-left:17%">
+  <div class="bg-  rounded h-100 p-4">
+    <h6 class="mb-4">Classes</h6>
+
+    <div class="mb-3">
+      <a class="btn btn-success" [routerLink]="['/AddNewClass']">Add New Class</a>
+    </div>
+
+
+
+
+
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Class Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Image</th>
+            <th scope="col">Price</th>
+
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let classItem of allClasses">
+            <td>{{ classItem.id }}</td>
+            <td>{{ classItem.name }}</td>
+            <td>{{ classItem.description }}</td>
+            <td>
+              <img [src]="'https://localhost:7280/api/Classes/getImages/' + classItem.imagePath" style="width: 50px">
+            </td>
+            <td>{{ classItem.pricePerMonth }}</td>
+
+
+            <td>
+              <a class="btn btn-info" [routerLink]="['/admin/edit-class', classItem.id]">Edit</a>
+              <a class="btn btn-danger ms-2" (click)="deleteClass(classItem.id)">Delete</a>
+
+            </td>
+
+
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+<app-admin></app-admin>

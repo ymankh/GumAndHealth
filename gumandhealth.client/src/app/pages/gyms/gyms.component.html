@@ -20,7 +20,7 @@
       <div class="col-lg-4 col-md-6" *ngFor="let item of allGyms">
         <div class="single-classes-item gymSingle card shadow-sm">
           <div class="gym-card-image">
-            <img src="../../../assets/img/Gyms/{{item.imagePath}}" alt="Gym Image" class="img-fluid">
+            <img src="https://localhost:7280/api/RecipeCategory/getImage/{{item.imagePath}}" alt="Gym Image" class="img-fluid">
           </div>
           <div class="gym-card-body gymBody p-3">
             <h4>{{item.name}}</h4>
@@ -31,7 +31,6 @@
             </div>
             <!-- Button to go to gym details -->
             <a routerLink="/singleGym/{{item.id}}" class="btn btn-primary mt-3">View Details</a>
-            <a routerLink="/singleGym" class="btn btn-primary mt-3">Single Gym</a>
           </div>
         </div>
       </div>

@@ -29,6 +29,20 @@ namespace GumAndHealth.Server.Controllers
             return Ok(paginatedProducts);
         }
 
+        // GET: api/Products/{id}
+        [HttpGet("{id}")]
+        public IActionResult GetProductById(int id)
+        {
+            var product = _productRepository.GetProductById(id);
+
+            if (product == null)
+            {
+                return NotFound($"Product with ID {id} not found.");
+            }
+
+            return Ok(product);
+        }
+
         // GET: api/Products/AllProducts
         [HttpGet("AllProducts")]
         public IActionResult GetAllProducts()
@@ -163,5 +177,107 @@ namespace GumAndHealth.Server.Controllers
 
             return Ok($"Product with ID {id} was successfully deleted.");
         }
+        ////////////////////////////////////////////////
+        ///
+
+
+        // GET: api/Products/{id}
+        [HttpGet("GetProductByIdNew/{id}")]
+        public IActionResult GetProductByIdNew(int id)
+        {
+            var product = _context.Products
+                .Where(p => p.Id == id)
+                .Select(p => new
+                {
+                    p.Id,
+                    p.Name,
+                    p.Description,
+                    p.Price,
+                    p.Image1,
+                    p.CategoryId,
+                    CategoryName = p.Category.Name  // إضافة اسم الـ Category
+                })
+                .FirstOrDefault();
+
+            if (product == null)
+            {
+                return NotFound($"Product with ID {id} not found.");
+            }
+
+            return Ok(product);
+        }
+
+
+        // GET: api/Products/AllProducts
+
+        [HttpGet("AllProductsNew")]
+        public IActionResult GetAllProductsNew()
+        {
+            var products = _context.Products
+                .Select(p => new
+                {
+                    p.Id,
+                    p.Name,
+                    p.Description,
+                    p.Price,
+                    p.Image1,
+                    p.CategoryId,
+                    CategoryName = p.Category.Name  // إضافة اسم الـ Category
+                })
+                .ToList();
+
+            if (products == null || !products.Any())
+            {
+                return NotFound("No products found.");
+            }
+
+            return Ok(products);
+        }
+
+
+        [HttpPut("UpdateProductNew/{id}")]
+        public IActionResult UpdateProductNew(int id, [FromForm] UpdateProductDto updateProductDto)
+        {
+            var updatedProduct = _productRepository.UpdateProduct(id, updateProductDto);
+
+            if (updatedProduct == null)
+            {
+                return NotFound($"Product with ID {id} not found.");
+            }
+
+            // الحصول على اسم الـ Category بعد التحديث
+            var category = _context.Categories.FirstOrDefault(c => c.Id == updatedProduct.CategoryId);
+            var categoryName = category?.Name ?? "Category not found";
+
+            return Ok(new
+            {
+                updatedProduct.Id,
+                updatedProduct.Name,
+                updatedProduct.Description,
+                updatedProduct.Price,
+                updatedProduct.Image1,
+                updatedProduct.CategoryId,
+                CategoryName = categoryName  // إضافة اسم الـ Category بعد التحديث
+            });
+        }
+
+        [HttpGet("getImages/{ImageName}")]
+
+        public IActionResult getImage(string ImageName)
+        {
+            var pathImage = Path.Combine(Directory.GetCurrentDirectory(), "images", ImageName);
+
+            if (System.IO.File.Exists(pathImage))
+            {
+                return PhysicalFile(pathImage, "image/jpeg");
+
+            }
+            return NotFound();
+
+
+        }
+
+
+
     }
 }

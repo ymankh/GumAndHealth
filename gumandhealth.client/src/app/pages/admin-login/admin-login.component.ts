@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service'; // Ensure the correct path
+import { HosamService } from '../../services/hosam.service'; // Ensure the correct path
 
 @Component({
   selector: 'app-admin-login',
@@ -16,7 +16,7 @@ export class AdminLoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService // Inject AuthService for handling login
+    private hosamService: HosamService // Inject AuthService for handling login
   ) { }
 
   ngOnInit(): void {
@@ -36,13 +36,13 @@ export class AdminLoginComponent implements OnInit {
 
       try {
         // Await login process through AuthService
-        await this.authService.login(email, password).toPromise();
+        await this.hosamService.login(email, password).toPromise();
 
         this.isLoading = false;
         this.loginError = ''; // Clear error message
 
         // Navigate to profile page after successful login
-        this.router.navigate(['/']);
+        this.router.navigate(['/Dashboard']);
       } catch (error) {
         // Handle login error and show the message
         this.isLoading = false;

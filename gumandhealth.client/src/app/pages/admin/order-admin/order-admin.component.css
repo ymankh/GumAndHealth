@@ -75,6 +75,16 @@ button.btn.btn-success.rounded-pill.shadow-sm.px-4.py-2 {
 .col-lg-10.col-md-12 {
   display: none !important;
 }
-#app-header {
+app-header {
+  display: none !important;
+}
+
+
+
+
+::ng-deep app-header {
+  display: none !important;
+}
+::ng-deep app-footer {
   display: none !important;
 }

@@ -1,0 +1,75 @@
+.container.mt-4 {
+  margin-left: 20%;
+}
+/* Container styling for better page layout */
+.container {
+  margin: 0 auto;
+  max-width: 1000px; /* Limit the max width for a centered look */
+  padding: 20px;
+}
+
+/* Table styling */
+.table {
+  width: 100%; /* Ensure table takes full width of the container */
+  border-collapse: collapse; /* Merge borders for a clean look */
+  margin-top: 20px;
+}
+
+/* Table header styling */
+.thead-dark {
+  background-color: #343a40;
+  color: white;
+}
+
+/* Table rows and columns */
+.table th, .table td {
+  text-align: center; /* Center align text inside table cells */
+  padding: 12px; /* Add padding for better readability */
+  border: 1px solid #ddd; /* Light border between cells */
+}
+
+/* Table row hover effect */
+.table tbody tr:hover {
+  background-color: #f5f5f5; /* Light gray hover effect */
+}
+
+/* Responsive image styling */
+.img-thumbnail {
+  max-width: 100px; /* Set a max width for thumbnail images */
+  height: auto;
+}
+
+/* Button styling */
+button.btn {
+  margin-right: 5px; /* Space between buttons */
+  padding: 5px 10px; /* Add padding inside buttons */
+  font-size: 14px;
+}
+
+/* For small screens - Mobile responsiveness */
+@media (max-width: 768px) {
+  .table {
+    font-size: 12px; /* Reduce font size on smaller screens */
+  }
+
+    .table th, .table td {
+      padding: 8px; /* Reduce padding on smaller screens */
+    }
+
+  button.btn {
+    font-size: 12px; /* Reduce button text size */
+  }
+}
+.d-flex {
+  margin-bottom: 20px; /* Add space between the header and the table */
+}
+
+button.btn-primary {
+  font-weight: bold;
+  padding: 10px 15px;
+}
+
+
+::ng-deep app-footer {
+  display: none !important;
+}
