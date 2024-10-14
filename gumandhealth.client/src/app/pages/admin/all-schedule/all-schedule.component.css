@@ -166,3 +166,6 @@
     margin: 0 auto;
   }
 }
+::ng-deep app-header {
+  display: none !important;
+}
