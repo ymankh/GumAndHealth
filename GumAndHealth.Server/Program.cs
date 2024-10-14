@@ -1,4 +1,5 @@
 using System.Text;
+using GumAndHealth.Server.Controllers;
 using GumAndHealth.Server.DTOs;
 using GumAndHealth.Server.Helpers;
 using GumAndHealth.Server.Models;
@@ -167,7 +168,8 @@ namespace GumAndHealth.Server
             builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
             builder.Services.AddSingleton<OtpService>();
-
+            builder.Services.AddScoped<ClassesController>(); // Register ClassesController
+            builder.Services.AddHostedService<EmailReminderService>();
             builder.Services.AddMemoryCache();
 
             ////Endhosam***************************************

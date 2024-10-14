@@ -236,7 +236,7 @@ namespace GumAndHealth.Server.Controllers
             var reminderDate = currentDate.AddDays(5).Date;
 
             var subscriptions = await _db.ClassSubscriptions
-                .Where(sub => sub.EndDate.HasValue && sub.EndDate.Value.Date == reminderDate)
+                .Where(sub => sub.EndDate.HasValue && sub.EndDate.Value.Date <= reminderDate)
                 .Include(sub => sub.User)
                 .ToListAsync();
 
@@ -250,7 +250,7 @@ namespace GumAndHealth.Server.Controllers
                 if (subscription.User != null && !string.IsNullOrWhiteSpace(subscription.User.Email))
                 {
                     string subject = "Subscription Reminder";
-                    string body = $"<p>Your subscription for Class Service ID {subscription.ClassServiceId} will end in 5 days.</p>";
+                    string body = $"<p>Your subscription  will end in{subscription.EndDate} </p>";
 
                     await _emailServiceR.SendEmailRAsync(subscription.User.Email, subject, body);
                 }
@@ -263,24 +263,20 @@ namespace GumAndHealth.Server.Controllers
         [HttpGet("GetAllSubscription/{id}")]
         public async Task<IActionResult> GetAllSubscription(long id)
         {
-            // Fetch gym subscriptions for the user
             var gymSubscriptions = await _db.GymSubscriptions
                 .Where(s => s.UserId == id)
                 .ToListAsync();
 
-            // Fetch class subscriptions for the user, including the class service details
             var classSubscriptions = await _db.ClassSubscriptions
                 .Where(s => s.UserId == id)
-                .Include(s => s.ClassService) // Include the related ClassService entity
+                .Include(s => s.ClassService) 
                 .ToListAsync();
 
-            // If no subscriptions are found for either gym or classes, return NotFound
             if (!gymSubscriptions.Any() && !classSubscriptions.Any())
             {
                 return NotFound("لا توجد اشتراكات لهذا المستخدم.");
             }
 
-            // Combine both gym and class subscriptions in a single response object
             var result = new
             {
                 GymSubscriptions = gymSubscriptions,
@@ -289,7 +285,7 @@ namespace GumAndHealth.Server.Controllers
                     s.Id,
                     s.StartDate,
                     s.EndDate,
-                    ClassServiceName = s.ClassService?.Name, // Include the service name
+                    ClassServiceName = s.ClassService?.Name,
                 })
             };
 
