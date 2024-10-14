@@ -49,6 +49,8 @@ import { GetInstructorComponent } from './pages/admin/get-instructor/get-instruc
 import { EditInstructorComponent } from './pages/admin/edit-instructor/edit-instructor.component';
 import { AdminShowClassesComponent } from './pages/admin/admin-show-classes/admin-show-classes.component';
 
+import { GetProductComponent } from './pages/admin/get-product/get-product.component';
+import { EditProductComponent } from './pages/admin/edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
@@ -101,6 +103,8 @@ import { AdminShowClassesComponent } from './pages/admin/admin-show-classes/admi
     GetInstructorComponent,
       EditInstructorComponent,
       AdminShowClassesComponent,
+      GetProductComponent,
+      EditProductComponent,
   ],
   imports: [
     BrowserModule,

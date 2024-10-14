@@ -43,6 +43,8 @@ import { AdminProductsComponent } from './pages/admin/adminproducts/adminproduct
 import { EditScheduleComponent } from './pages/admin/edit-schedule/edit-schedule.component';
 import { AllScheduleComponent } from './pages/admin/all-schedule/all-schedule.component';
 import { OrderAdminComponent } from './pages/admin/order-admin/order-admin.component';
+import { GetProductComponent } from './pages/admin/get-product/get-product.component';
+import { EditProductComponent } from './pages/admin/edit-product/edit-product.component';
 
 
 const routes: Routes = [
@@ -91,6 +93,11 @@ const routes: Routes = [
   { path: 'recipe-admin-put/:id', component: RecipeAdminPutComponent },
   {
     path: 'order - admin', component: OrderAdminComponent },
+
+  { path: 'getAllProducts', component: GetProductComponent},
+  { path: 'editProducts', component: EditProductComponent },
+
+
 
   { path: 'view-detiles-admin/:id', component: ViewDetilesAdminComponent },
   { path: 'recipe-admin-post', component: RecipeAdminPostComponent },

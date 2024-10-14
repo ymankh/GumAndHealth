@@ -1,0 +1,53 @@
+<div class="modal" tabindex="-1" [ngClass]="{'show d-block': product}" *ngIf="product">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Product</h5>
+        <button type="button" class="close" (click)="cancelEdit()">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #editProductForm="ngForm" (ngSubmit)="updateProduct(editProductForm)">
+
+          <!-- Product Name -->
+          <div class="form-group">
+            <label for="productName">Name</label>
+            <input type="text" class="form-control" id="productName" [(ngModel)]="product.name" name="name" required>
+          </div>
+
+          <!-- Product Price -->
+          <div class="form-group">
+            <label for="productPrice">Price</label>
+            <input type="number" class="form-control" id="productPrice" [(ngModel)]="product.price" name="price" required>
+          </div>
+
+          <!-- Product Description -->
+          <div class="form-group">
+            <label for="productDescription">Description</label>
+            <textarea class="form-control" id="productDescription" [(ngModel)]="product.description" name="description" required></textarea>
+          </div>
+
+          <!-- Category Name -->
+          <div class="form-group">
+            <label for="categoryName">Category Name</label>
+            <input type="text" id="categoryName" class="form-control" [(ngModel)]="product.categoryName" name="categoryName" required>
+          </div>
+
+          <!-- Image Selection -->
+          <div class="form-group">
+            <label for="image">Product Image</label>
+            <input type="file" (change)="onImageSelected($event)" class="form-control">
+          </div>
+
+          <!-- Modal Actions -->
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <button type="button" class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
