@@ -123,6 +123,6 @@ export class AdminProductsComponent implements OnInit {
       additionalInformation: ''
     };
     this.selectedFile = null; // Reset file input
-    this.isEditMode = false; // Reset editing mode
+    this.isEditMode = false; // Reset editing mode //wow
   }
 }
