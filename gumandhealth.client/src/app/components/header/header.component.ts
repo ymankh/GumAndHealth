@@ -24,4 +24,10 @@ export class HeaderComponent implements OnInit {
     this.authService.logout(); // Call logout from the service
     this.router.navigate(['/']); // Redirect to the login page after logout
   }
+
+
+  isAdminPage(): boolean {
+    // Returns true if the current URL contains 'admin'
+    return this.router.url.includes('/admin');
+  }
 }

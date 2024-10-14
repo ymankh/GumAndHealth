@@ -53,3 +53,28 @@ h1 {
   width: 70%;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+
+
+h1.text-center.mb-4.font-weight-bold {
+  margin-top: 11%;
+}
+
+
+
+button.btn.btn-primary.rounded-pill.w-100.shadow {
+  background-color: #82d026;
+}
+
+
+button.btn.btn-success.rounded-pill.shadow-sm.px-4.py-2 {
+  background-color: #82d026;
+}
+
+
+.col-lg-10.col-md-12 {
+  display: none !important;
+}
+#app-header {
+  display: none !important;
+}
