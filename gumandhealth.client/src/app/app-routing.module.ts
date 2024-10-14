@@ -29,10 +29,18 @@ import { RecipeCategoryAdminComponent } from './pages/admin/recipe-category-admi
 import { RecipeCategoryAdminPostComponent } from './pages/admin/recipe-category-admin-post/recipe-category-admin-post.component';
 import { ViewDetilesAdminComponent } from './pages/admin/view-detiles-admin/view-detiles-admin.component';
 import { RecipeAdminPostComponent } from './pages/admin/recipe-admin-post/recipe-admin-post.component';
+import { GetInstructorComponent } from './pages/admin/get-instructor/get-instructor.component';
+import { EditInstructorComponent } from './pages/admin/edit-instructor/edit-instructor.component';
+
 import { RecipeCategoryAdminPutComponent } from './pages/admin/recipe-category-admin-put/recipe-category-admin-put.component';
 import { RecipeAdminPutComponent } from './pages/admin/recipe-admin-put/recipe-admin-put.component';
+import { AdminScheduleComponent } from './pages/admin-schedule/admin-schedule.component';
 
 import { AdminProductsComponent } from './pages/admin/adminproducts/adminproducts.component'; // Import the AdminProductsComponent
+import { EditScheduleComponent } from './pages/admin/edit-schedule/edit-schedule.component';
+import { AllScheduleComponent } from './pages/admin/all-schedule/all-schedule.component';
+import { OrderAdminComponent } from './pages/admin/order-admin/order-admin.component';
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -41,6 +49,7 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent },
   { path: 'classes', component: ClassesComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'Schedule', component: AdminScheduleComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'admin/edit-class/:id', component: AdminClassEditComponent },
   { path: 'nutrition/tips', component: TipsComponent },
@@ -61,6 +70,12 @@ const routes: Routes = [
   { path: 'singleGym', component: SingleGymComponent },
   { path: 'products/:id', component: ProductCardComponent },
   { path: 'Admin', component: AdminComponent },
+  { path: 'GetInstructor', component: GetInstructorComponent },
+  { path: 'EditInstructor', component: EditInstructorComponent },
+  { path: 'edit-schedule/:id', component: EditScheduleComponent },
+  { path: 'Allschedule', component: AllScheduleComponent },
+
+
 
   { path: 'recipe-category-admin', component: RecipeCategoryAdminComponent },
 
@@ -73,6 +88,8 @@ const routes: Routes = [
   { path: 'PostRecipe', component: RecipeCategoryAdminPostComponent },
   { path: 'recipe-category-admin-put/:id', component: RecipeCategoryAdminPutComponent },
   { path: 'recipe-admin-put/:id', component: RecipeAdminPutComponent },
+  {
+    path: 'order - admin', component: OrderAdminComponent },
 
   { path: 'view-detiles-admin/:id', component: ViewDetilesAdminComponent },
   { path: 'recipe-admin-post', component: RecipeAdminPostComponent },

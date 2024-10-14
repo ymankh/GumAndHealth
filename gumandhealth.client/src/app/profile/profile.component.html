@@ -74,7 +74,7 @@
             </div>
           </div>
         </div>
-        <!-- Subscription Table -->
+ 
         <div class="profile-container">
           <div class="card">
             <div class="card-body">
@@ -91,7 +91,7 @@
                 <tbody>
                   <tr *ngFor="let sub of userSubscriptions">
                     <td>{{ sub.id }}</td>
-                    <td>{{ sub.name }}</td>
+                    <td>{{ sub.gymName }}</td>
                     <td>{{ sub.startDate }}</td>
                     <td>{{ sub.endDate }}</td>
                   </tr>
@@ -107,25 +107,60 @@
                 <thead>
                   <tr>
                     <th>Order ID</th>
-                    <th>Product Name</th>
-                    <th>Status</th>
+                    <th>TotalAmount</th>
                     <th>Date</th>
+                    <th>Items</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let order of userOrders">
                     <td>{{ order.id }}</td>
-                    <td>{{ order.productName }}</td>
-                    <td>{{ order.status }}</td>
-                    <td>{{ order.date }}</td>
+                    <td>{{ order.totalAmount }}</td>
+                    <td>{{ order.orderDate  }}</td> <!-- تنسيق التاريخ -->
+                    <td>
+                      <ul>
+                        <li *ngFor="let order of order.orderItems">
+                          {{ order.productName }} ({{ order.quantity }}) - ${{ order.price }}
+                        </li>
+                      </ul>
+                    </td>
                   </tr>
                 </tbody>
               </table>
+              <div *ngIf="userOrders.length === 0" class="alert alert-info">
+                No orders found for this user. <!-- رسالة عند عدم وجود طلبات -->
+              </div>
             </div>
           </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
-</div>
-      </div>
     </div>
   </div>
 

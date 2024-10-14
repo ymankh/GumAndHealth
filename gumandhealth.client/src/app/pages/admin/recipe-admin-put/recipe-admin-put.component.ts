@@ -33,6 +33,7 @@ export class RecipeAdminPutComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    debugger;
     // Fetch categories when the component initializes
     this.najlaaService.getRecipeCategories().subscribe(
       (categories: any[]) => {

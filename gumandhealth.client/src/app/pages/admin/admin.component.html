@@ -107,6 +107,7 @@
                 </li>
 
 
+
                 <li>
                   <a href="#">Orders</a>
                 </li>
@@ -117,9 +118,11 @@
             </div>
           </li>
           <li class="sidebar-dropdown">
-            <a href="#">
+        
               <i class="far fa-gem"></i>
-              <span>Components</span>
+              <span>Schedule</span>
+            <a routerLink="/GetInstructor">
+              GetInstructor
             </a>
 
             <a routerLink="/admin/products">
@@ -145,15 +148,39 @@
                 </li>
               </ul>
             </div>
+          <div class="sidebar-submenu">
+            <ul>
+              <li>
+                <a href="#">General</a>
+              </li>
+              <li>
+                <a href="#">Panels</a>
+              </li>
+              <li>
+                <a href="#">Tables</a>
+              </li>
+              <li>
+                <a href="#">Icons</a>
+              </li>
+              <li>
+                <a href="#">Forms</a>
+              </li>
+            </ul>
+          </div>
           </li>
           <li class="sidebar-dropdown">
             <!--<a href="#">
     <i class="fa fa-chart-line"></i>
     <span>Charts</span>
   </a>-->
+          
+
             <a routerLink="/recipe-category-admin">
-              Recipe
-            </a>
+              <span>
+                <i class="fa fa-chart-line"></i>
+                Recipe
+                </span>
+</a>
             <div class="sidebar-submenu">
               <ul>
                 <li>
@@ -172,9 +199,9 @@
             </div>
           </li>
           <li class="sidebar-dropdown">
-            <a href="#">
+            <a href="/order - admin">
               <i class="fa fa-globe"></i>
-              <span>Maps</span>
+              <span>order</span>
             </a>
             <div class="sidebar-submenu">
               <ul>
@@ -191,10 +218,10 @@
             <span>Extra</span>
           </li>
           <li>
-            <a href="#">
-              <i class="fa fa-book"></i>
-              <span>Documentation</span>
-              <span class="badge badge-pill badge-primary">Beta</span>
+            <a routerLink="/Allschedule">
+            <i class="fa fa-book"></i>
+            <span>Allschedule </span>
+            <span class="badge badge-pill badge-primary">Beta</span>
             </a>
           </li>
           <li>

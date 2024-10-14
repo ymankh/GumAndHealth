@@ -1,0 +1,55 @@
+.rounded-pill {
+  border-radius: 50px !important;
+}
+
+.shadow {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary, .btn-success {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.table-bordered th, .table-bordered td {
+  border: 1px solid #dee2e6;
+}
+
+.badge-success {
+  background-color: #28a745;
+}
+
+.badge-warning {
+  background-color: #ffc107;
+}
+
+.mb-3, .mb-4, .mb-5 {
+  margin-bottom: 1.5rem !important;
+}
+
+.form-control {
+  padding: 10px 15px;
+  font-size: 16px;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #343a40;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.table thead th {
+  text-transform: uppercase;
+}
+
+.table {
+  margin-bottom: 2rem;
+  width: 70%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
