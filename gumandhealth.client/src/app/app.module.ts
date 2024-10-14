@@ -35,6 +35,9 @@ import { TestimonialsComponent } from './pages/testimonials/testimonials.compone
 import { RecipeCategoryAdminPostComponent } from './pages/admin/recipe-category-admin-post/recipe-category-admin-post.component';
 import { ViewDetilesAdminComponent } from './pages/admin/view-detiles-admin/view-detiles-admin.component';
 import { RecipeAdminPostComponent } from './pages/admin/recipe-admin-post/recipe-admin-post.component';
+import { VirifyOtpComponent } from './pages/virify-otp/virify-otp.component';
+import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
+import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
 import { AdminScheduleComponent } from './pages/admin-schedule/admin-schedule.component';
 import { AdminProductsComponent } from './pages/admin/adminproducts/adminproducts.component';
 import { RecipeCategoryAdminPutComponent } from './pages/admin/recipe-category-admin-put/recipe-category-admin-put.component';
@@ -44,6 +47,7 @@ import { EditScheduleComponent } from './pages/admin/edit-schedule/edit-schedule
 import { AllScheduleComponent } from './pages/admin/all-schedule/all-schedule.component';
 import { GetInstructorComponent } from './pages/admin/get-instructor/get-instructor.component';
 import { EditInstructorComponent } from './pages/admin/edit-instructor/edit-instructor.component';
+import { AdminShowClassesComponent } from './pages/admin/admin-show-classes/admin-show-classes.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +85,9 @@ import { EditInstructorComponent } from './pages/admin/edit-instructor/edit-inst
     RecipeCategoryAdminPostComponent,
     ViewDetilesAdminComponent,
     RecipeAdminPostComponent,
+    VirifyOtpComponent,
+    AdminLoginComponent,
+    PasswordResetComponent,
     AdminScheduleComponent,
     AdminProductsComponent,
     RecipeCategoryAdminPutComponent,
@@ -92,6 +99,7 @@ import { EditInstructorComponent } from './pages/admin/edit-instructor/edit-inst
 
     GetInstructorComponent,
       EditInstructorComponent,
+      AdminShowClassesComponent,
   ],
   imports: [
     BrowserModule,

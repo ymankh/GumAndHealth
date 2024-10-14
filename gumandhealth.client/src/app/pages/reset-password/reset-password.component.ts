@@ -29,15 +29,16 @@ export class ResetPasswordComponent implements OnInit {
     if (this.resetForm.valid) {
       this.isLoading = true;
       const { email } = this.resetForm.value;
-
+      debugger
       // Call the AuthService to handle the password reset
       this.authService.resetPassword(email).subscribe(
         (response) => {
+          debugger
           this.isLoading = false;
           console.log('Password reset email sent:', response);
 
-          // Navigate to the login page after the reset email is sent
-          this.router.navigate(['/login']);
+          // Navigate to the  page after the reset email is sent
+          this.router.navigate(['/virifyOtp']);
         },
         (error) => {
           this.isLoading = false;

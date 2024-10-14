@@ -1,0 +1,40 @@
+<div class="login-container">
+  <form [formGroup]="otpForm" (ngSubmit)="onSubmit()">
+    <h2>Verify Code</h2>
+
+    <!-- Code Input Field -->
+    <div class="form-group">
+      <label for="otp">Enter the code sent to your email:</label>
+      <input type="text"
+             class="form-control"
+             id="otp"
+             formControlName="otp"
+             placeholder="Enter code"
+             required
+             [ngClass]="{
+          'is-invalid': otpForm.get('otp')?.invalid && otpForm.get('otp')?.touched
+        }" />
+      <div *ngIf="otpForm.get('otp')?.invalid && otpForm.get('otp')?.touched" class="error-message">
+        Please enter a valid code.
+      </div>
+    </div>
+
+    <!-- Display reset error -->
+    <div *ngIf="resetError" class="alert alert-danger">
+      {{ resetError }}
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit"
+            class="btn btn-primary w-100"
+            [disabled]="isLoading || otpForm.invalid">
+      <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      Verify Code
+    </button>
+
+    <!-- Back to Login Button -->
+    <button type="button" class="btn btn-secondary w-100 mt-2" routerLink="/login">
+      Back to Login
+    </button>
+  </form>
+</div>
