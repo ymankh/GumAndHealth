@@ -2,6 +2,7 @@
 using GumAndHealth.Server.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace GumAndHealth.Server.Controllers
 {
@@ -84,7 +85,11 @@ namespace GumAndHealth.Server.Controllers
                 return BadRequest("Please enter an Id higher than 0");
             }
 
-            var scheduleDetails = _db.ClassSchedules.FirstOrDefault(cs => cs.Id == id);
+            var scheduleDetails = _db.ClassSchedules
+                .Include(cs => cs.Class)        // Include Class details
+                .Include(cs => cs.Instructor)   // Include Instructor details
+                .FirstOrDefault(cs => cs.Id == id);
+
             if (scheduleDetails == null)
             {
                 return NotFound("Class schedule not found");
@@ -94,26 +99,45 @@ namespace GumAndHealth.Server.Controllers
             {
                 ScheduleId = scheduleDetails.Id,
                 ClassId = scheduleDetails.ClassId,
+                ClassName = scheduleDetails.Class.Name,       // Assuming Class entity has a Name property
                 AvailableDay = scheduleDetails.AvailableDay,
                 StartTime = scheduleDetails.StartTime,
                 EndTime = scheduleDetails.EndTime,
-                InstructorId = scheduleDetails.InstructorId
+                InstructorId = scheduleDetails.InstructorId,
+                InstructorName = scheduleDetails.Instructor.FullName // Assuming Instructor entity has a Name property
             };
 
             return Ok(response);
         }
 
 
+
         [HttpGet("GetAllSchedules")]
         public IActionResult GetAllSchedules()
         {
-            var schedules = _db.ClassSchedules.ToList();
+            var schedules = _db.ClassSchedules
+                .Include(s => s.Class)       // Assuming you have a navigation property for Class
+                .Include(s => s.Instructor)  // Assuming you have a navigation property for Instructor
+                .Select(s => new
+                {
+                    s.Id,
+                    s.ClassId,
+                    ClassName = s.Class.Name,           // Adjust according to your actual property names
+                    s.AvailableDay,
+                    s.StartTime,
+                    s.EndTime,
+                    s.InstructorId,
+                    InstructorName = s.Instructor.FullName  // Adjust according to your actual property names
+                })
+                .ToList();
+
             if (schedules == null || !schedules.Any())
             {
                 return NotFound("There are no class schedules");
             }
             return Ok(schedules);
         }
+
 
     }
 }

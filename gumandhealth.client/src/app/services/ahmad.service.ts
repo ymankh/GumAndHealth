@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { root } from '../shared/constants';
 import { Observable } from 'rxjs';
+import { ScheduleDTO } from '../pages/admin/edit-schedule/ScheduleDTO';
 
 
 
@@ -53,16 +54,23 @@ export class AhmadService {
 
 
   getScheduleById(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/GetScheduleById/${id}`); // Adjust endpoint as necessary
+    return this.http.get<any>(`https://localhost:44325/api/scdule/GetScheduleByID/${id}`);
   }
 
-  updateSchedule(id: number, scheduleData: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/UpdateClassSchedule/${id}`, scheduleData);
+
+  updateSchedule(id: number, scheduleData: ScheduleDTO): Observable<any> {
+    return this.http.put(`  https://localhost:44325/api/scdule/UpdateClassSchedule/${id}`, scheduleData);
   }
+
 
   // New method to get all schedules
   getAllSchedules(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}scdule/GetAllSchedules`); // Adjust the endpoint as needed
   }
+
+  deleteSchedule(id: number): Observable<any> {
+    return this.http.delete<any>(`https://localhost:44325/api/scdule/DeleteClassSchedule/${id}`);
+  }
+
 
 }
