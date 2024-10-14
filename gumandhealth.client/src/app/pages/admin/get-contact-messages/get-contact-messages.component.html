@@ -1,0 +1,20 @@
+<div class="container mt-12">
+  <h2 class="text-center mb-12">Contact Messages</h2>
+
+  <div *ngIf="messages.length === 0" class="alert alert-warning text-center" role="alert">
+    No messages available.
+  </div>
+
+  <div class="message-container">
+    <div class="message-card" *ngFor="let contact of messages">
+      <div class="message-header">
+        <h5>{{ contact.name }}</h5>
+        <span class="email">{{ contact.email }}</span>
+      </div>
+      <div class="message-body">
+        <p>{{ contact.message }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<app-admin></app-admin>

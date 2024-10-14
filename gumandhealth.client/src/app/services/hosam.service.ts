@@ -30,7 +30,7 @@ export class HosamService {
           (response) => {
             // Save token to localStorage
             localStorage.setItem('token', response.token);
-            localStorage.setItem('userId', response.id)
+            localStorage.setItem('AdminId', response.id)
             // Success toast notification
             iziToast.success({
               title: 'Login Successful',
