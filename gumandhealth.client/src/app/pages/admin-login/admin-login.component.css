@@ -95,3 +95,6 @@ button.btn-link {
 .spinner-border {
   margin-right: 5px;
 }
+::ng-deep app-footer {
+  display: none !important;
+}

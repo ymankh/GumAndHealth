@@ -51,6 +51,7 @@ import { AdminShowClassesComponent } from './pages/admin/admin-show-classes/admi
 
 import { GetProductComponent } from './pages/admin/get-product/get-product.component';
 import { EditProductComponent } from './pages/admin/edit-product/edit-product.component';
+import { AdminUserComponent } from './pages/admin/admin-user/admin-user.component';
 
 @NgModule({
   declarations: [
@@ -105,6 +106,7 @@ import { EditProductComponent } from './pages/admin/edit-product/edit-product.co
       AdminShowClassesComponent,
       GetProductComponent,
       EditProductComponent,
+      AdminUserComponent,
   ],
   imports: [
     BrowserModule,
