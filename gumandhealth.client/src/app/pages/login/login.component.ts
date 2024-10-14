@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         this.loginError = ''; // Clear error message
 
         // Navigate to profile page after successful login
-        this.router.navigate(['/Dashboard']);
+        this.router.navigate(['/']);
       } catch (error) {
         // Handle login error and show the message
         this.isLoading = false;
