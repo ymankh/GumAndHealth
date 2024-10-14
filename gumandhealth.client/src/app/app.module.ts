@@ -54,6 +54,7 @@ import { AddNewClassComponent } from './pages/admin/add-new-class/add-new-class.
 import { GetProductComponent } from './pages/admin/get-product/get-product.component';
 import { EditProductComponent } from './pages/admin/edit-product/edit-product.component';
 import { AdminUserComponent } from './pages/admin/admin-user/admin-user.component';
+import { GetContactMessagesComponent } from './pages/admin/get-contact-messages/get-contact-messages.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +112,7 @@ import { AdminUserComponent } from './pages/admin/admin-user/admin-user.componen
       GetProductComponent,
       EditProductComponent,
       AdminUserComponent,
+      GetContactMessagesComponent,
   ],
   imports: [
     BrowserModule,
