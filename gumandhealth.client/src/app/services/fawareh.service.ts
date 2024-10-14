@@ -37,6 +37,42 @@ export class FawarehService {
 
 
 
+  ///////// Classes Admin Side /////////
+
+  getAllClasses(): Observable<any> {
+    return this.http.get<any>(`${this.staticUrl}/allClasses/GetAllClasses1`)
+  }
+
+
+
+
+  /////// Edit Classes Admin Side ////
+
+
+ editClass(id: any, data: any): Observable<any> {
+   return this.http.put(`${this.staticUrl}/allClasses/UpdateClassService/${id}`, data)
+
+  }
+
+
+
+  /////// Add Classes Admin Side ////
+
+  addClass(data: any): Observable<any> {
+    return this.http.post(`${this.staticUrl}/allClasses/AddNewClassService`, data)
+
+  }
+
+
+
+  /// Delete Class Admin Side //////////
+  private apiUrl = 'https://localhost:7280/api/allClasses'; // Base URL
+
+  deleteClassService(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/DeleteClassService/${id}`);
+  }
+
+
 
 
 

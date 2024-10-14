@@ -43,13 +43,16 @@ import { AdminProductsComponent } from './pages/admin/adminproducts/adminproduct
 import { EditScheduleComponent } from './pages/admin/edit-schedule/edit-schedule.component';
 import { AllScheduleComponent } from './pages/admin/all-schedule/all-schedule.component';
 import { OrderAdminComponent } from './pages/admin/order-admin/order-admin.component';
+import { AdminShowClassesComponent } from './pages/admin/admin-show-classes/admin-show-classes.component';
+import { AddNewClassComponent } from './pages/admin/add-new-class/add-new-class.component';
+import { GetProductComponent } from './pages/admin/get-product/get-product.component';
+import { EditProductComponent } from './pages/admin/edit-product/edit-product.component';
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'blog', component: BlogComponent },
-  { path: 'admin', component: AdminComponent },
   { path: 'classes', component: ClassesComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'Schedule', component: AdminScheduleComponent },
@@ -66,17 +69,20 @@ const routes: Routes = [
   { path: 'edit-profile/:id', component: EditProfileComponent },
   { path: 'Gyms', component: GymsComponent },
   { path: 'singleGym/:id', component: SingleGymComponent },
-  { path: 'admin', component: AdminComponent },
   { path: 'admin/classes', component: AdminClassesComponent },
   { path: 'class-details/:id', component: ClassDetailsComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'singleGym', component: SingleGymComponent },
   { path: 'products/:id', component: ProductCardComponent },
-  { path: 'Admin', component: AdminComponent },
+  { path: 'Dashboard', component: AdminComponent },
   { path: 'GetInstructor', component: GetInstructorComponent },
   { path: 'EditInstructor', component: EditInstructorComponent },
   { path: 'edit-schedule/:id', component: EditScheduleComponent },
   { path: 'Allschedule', component: AllScheduleComponent },
+  { path: 'AllClasses', component: AdminShowClassesComponent },
+  { path: 'AddNewClass', component: AddNewClassComponent },
+
+
 
 
 
@@ -94,6 +100,11 @@ const routes: Routes = [
   {
     path: 'order - admin', component: OrderAdminComponent },
 
+  { path: 'getAllProducts', component: GetProductComponent},
+  { path: 'editProducts', component: EditProductComponent },
+
+
+
   { path: 'view-detiles-admin/:id', component: ViewDetilesAdminComponent },
   { path: 'recipe-admin-post', component: RecipeAdminPostComponent },
   { path: 'admin/products', component: AdminProductsComponent },
@@ -101,7 +112,7 @@ const routes: Routes = [
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'products/category/:id', component: ProductCardComponent }, // or ProductsComponent if that's the correct name
   { path: 'virifyOtp', component: VirifyOtpComponent },
-  { path: 'admin-login', component: AdminLoginComponent },
+  { path: 'admin', component: AdminLoginComponent },
   { path: 'password-reset', component: PasswordResetComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
   // Wildcard route to redirect invalid paths to home

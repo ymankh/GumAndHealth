@@ -1,4 +1,4 @@
-<header class="header-section">
+<header class="header-section" *ngIf="!isAdminPage()">
   <div class="container-fluid">
     <div class="inner-header">
       <div class="row">
@@ -17,7 +17,8 @@
               <li><a routerLink="/gyms" routerLinkActive="active">Gyms</a></li>
               <li><a routerLink="/shop" routerLinkActive="active">Shop</a></li>
               <li><a routerLink="/admin" routerLinkActive="active">Admin</a></li>
-              <li><a routerLink="/testimonials" routerLinkActive="active">Testimonials</a></li>
+              <li><a routerLink="/admin" routerLinkActive="active">Admin</a></li>
+             
               <li class="cart-link"><a routerLink="/cart" routerLinkActive="active"><i class="fa fa-cart-shopping"></i></a> <span class="cart-page">{{cartService.getTotalItems()}}</span> </li>
 
               <li *ngIf="isLoggedIn"><a routerLink="/profile" routerLinkActive="active">Profile</a></li>
@@ -34,8 +35,9 @@
   </div>
 </header>
 <br />
-<br />
-<div *ngIf="shouldShowSearch()" class="container mt-4">
+<div *ngIf="shouldShowSearch()" class="container mt-4" style="
+    margin-top: 0px !important;
+">
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="input-group mb-3">

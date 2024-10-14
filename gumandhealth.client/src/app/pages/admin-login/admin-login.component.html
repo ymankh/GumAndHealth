@@ -1,1 +1,36 @@
-<p>admin-login works!</p>
+<div class="login-container">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <h2>Login</h2>
+
+    <!-- Email Field -->
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input id="email" formControlName="email" type="email" class="form-control" placeholder="Enter your email" required />
+      <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error-message">
+        Email is required and should be valid.
+      </div>
+    </div>
+
+    <!-- Password Field -->
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input id="password" formControlName="password" type="password" class="form-control" placeholder="Enter your password" required />
+      <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message">
+        Password must be at least 6 characters long.
+      </div>
+    </div>
+
+    <!-- Display login error -->
+    <div *ngIf="loginError" class="alert alert-danger">
+      {{ loginError }}
+    </div>
+
+    <!-- Button Group -->
+    <button type="submit" class="btn btn-primary w-100" [disabled]="loginForm.invalid || isLoading">
+      <!-- Show loading spinner if in progress -->
+      <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      Login
+    </button>
+
+  </form>
+</div>
