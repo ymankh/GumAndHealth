@@ -93,4 +93,68 @@ export class HomeComponent implements OnInit {
       this.gyms = data; // الحصول على بيانات الصالات
     });
   }
-}
+
+
+  testimonials = [
+    {
+      name: 'John Doe',
+      role: 'Fitness Enthusiast',
+      image: 'instructor7.png',
+      message: 'This gym has changed my life! The trainers are amazing and the equipment is top-notch.'
+    },
+    {
+      name: 'Jane Smith',
+      role: 'Yoga Instructor',
+      image: 'instructor6.png',
+      message: 'I love the yoga classes here! The ambiance is perfect, and the community is so supportive.'
+    },
+    {
+      name: 'Alex Brown',
+      role: 'Bodybuilder',
+      image: 'instructor5.png',
+      message: 'If you are serious about fitness, this is the place to be. Great machines and a motivating environment.'
+    },
+    {
+      name: 'Emily Clark',
+      role: 'Personal Trainer',
+      image: 'instructor4.png',
+      message: 'Being a trainer here has allowed me to help others reach their fitness goals. It’s the best gym I’ve worked in.'
+    },
+    {
+      name: 'Michael Johnson',
+      role: 'CrossFit Athlete',
+      image: 'instructor3.png',
+      message: 'The CrossFit programs here are outstanding! I’ve seen huge improvements in my strength and endurance.'
+    },
+    {
+      name: 'Sarah Williams',
+      role: 'Pilates Instructor',
+      image: 'instructor2.png',
+      message: 'Pilates classes here are top-notch. The equipment is well-maintained, and the instructors are fantastic!'
+    },
+    {
+      name: 'James Lee',
+      role: 'Martial Arts Expert',
+      image: 'instructor1.png',
+      message: 'The martial arts section is well-equipped, and the coaches are experienced professionals.'
+    },
+    {
+      name: 'Anna Garcia',
+      role: 'Nutritionist',
+      image: 'download3.jfif',
+      message: 'As a nutritionist, I appreciate how the gym encourages healthy eating habits along with fitness training.'
+    },
+    {
+      name: 'David Martinez',
+      role: 'Strength Trainer',
+      image: 'download2.jfif',
+      message: 'The strength training facilities here are excellent. The atmosphere pushes you to do your best every day.'
+    },
+    {
+      name: 'Laura Turner',
+      role: 'Cardio Enthusiast',
+      image: 'download1.jfif',
+      message: 'I enjoy the wide range of cardio equipment available. It’s easy to stay motivated and track my progress.'
+    }
+  ];
+  }

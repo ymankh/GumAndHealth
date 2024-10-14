@@ -29,3 +29,13 @@ app-header {
 ::ng-deep app-header {
   display: none !important;
 }
+.table-responsive {
+  margin-left: 10%;
+}
+button.btn.btn-dark {
+  margin-bottom: -120%;
+  margin-right: 32%;
+}
+::ng-deep app-footer {
+  display: none !important;
+}

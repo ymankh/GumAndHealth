@@ -300,3 +300,45 @@
   <a routerLink="/shop" class="primary-btn callto-btn">All product</a>
 </div>
 <br />
+<div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+  <h5 class="font-weight-bold mb-4 text-center">
+    What our clients are saying<br>about our services.
+  </h5>
+
+  <div class="carousel-indicators">
+    <button *ngFor="let testimonial of testimonials; let i = index"
+            type="button"
+            data-bs-target="#testimonialCarousel"
+            [attr.data-bs-slide-to]="i"
+            [class.active]="i === 0"
+            [attr.aria-current]="i === 0 ? 'true' : null"
+            [attr.aria-label]="'Slide ' + (i + 1)">
+    </button>
+  </div>
+
+  <div class="carousel-inner">
+    <div *ngFor="let testimonial of testimonials; let i = index" class="carousel-item" [class.active]="i === 0">
+      <div class="testimonial-content text-center p-4">
+        <img src="https://localhost:7280/api/RecipeCategory/getImage/{{testimonial.image}}"
+             class="rounded-circle mb-4"
+             alt="{{testimonial.name}}'s image"
+             width="150" height="150">
+        <h5>{{ testimonial.name }}</h5>
+        <p class="text-muted">{{ testimonial.role }}</p>
+        <p>"{{ testimonial.message }}"</p>
+      </div>
+    </div>
+  </div>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+
+  <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+

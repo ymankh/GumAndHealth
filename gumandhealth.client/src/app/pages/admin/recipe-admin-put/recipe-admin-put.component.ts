@@ -33,7 +33,6 @@ export class RecipeAdminPutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    debugger;
     // Fetch categories when the component initializes
     this.najlaaService.getRecipeCategories().subscribe(
       (categories: any[]) => {
@@ -51,10 +50,17 @@ export class RecipeAdminPutComponent implements OnInit {
 
   loadRecipe(id: number) {
     // Load the recipe data based on the ID
-    this.najlaaService.getRecipeById(id).subscribe(
+    this.najlaaService.getRecipeById123(id).subscribe(
       (recipe: any) => {
-        this.recipeForm.patchValue(recipe);
-        this.currentImage = recipe.imageUrl; // Set the current image for display
+        this.recipeForm.patchValue({
+          name: recipe.name,
+          description: recipe.description,
+          caloriesCount: recipe.caloriesCount,
+          ingredients: recipe.ingredients,
+          recipe1: recipe.recipe1,
+          recipeCategoryId: recipe.recipeCategoryId
+        });
+        this.currentImage = recipe.image; // Set the current image for display
       },
       (error) => {
         console.error('Error fetching recipe data', error);
@@ -89,7 +95,7 @@ export class RecipeAdminPutComponent implements OnInit {
       next: (response: any) => {
         console.log('Recipe updated successfully', response);
         // Navigate to the recipe listing or any other appropriate page
-        this.router.navigate(['/recipe-category-admin']);
+        this.router.navigate(['/view-detiles-admin', this.recipeForm.get('recipeCategoryId')?.value]);
       },
       error: (error: any) => {
         console.error('Error occurred while updating recipe', error);

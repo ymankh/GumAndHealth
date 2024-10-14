@@ -7,3 +7,10 @@ app-header {
   app-header header .row {
     display: none !important;
   }
+::ng-deep app-footer {
+  display: none !important;
+
+
+}
+/*rr*/
+/*rrr*/

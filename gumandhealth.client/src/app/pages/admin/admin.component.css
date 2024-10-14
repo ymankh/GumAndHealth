@@ -11,3 +11,13 @@ app-header {
 ::ng-deep app-header {
   display: none !important;
 }
+.sidebar-submenu {
+  display: none; /* Hide all submenus by default */
+}
+
+  .sidebar-submenu.active {
+    display: block; /* Show the submenu when it's active */
+  }
+::ng-deep app-footer {
+  display: none !important;
+}
