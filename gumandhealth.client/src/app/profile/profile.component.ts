@@ -219,11 +219,37 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  // تحميل الطلبات
+  //// تحميل الطلبات
+  //loadUserOrders(): void {
+  //  this.apiService.getUserOrders(this.userId).subscribe(
+  //    (data: any) => {
+  //      this.userOrders = Array.isArray(data) ? data : []; // التأكد من أن البيانات مصفوفة
+  //    },
+  //    (error) => {
+  //      console.error('Error fetching user orders:', error);
+  //    }
+  //  );
+  //}
+
+  //// تحميل الاشتراكات
+  //loadUserSubscriptions(): void {
+  //  this.apiService.getUserSubscriptions(this.userId).subscribe(
+  //    (data: any) => {
+  //      this.userSubscriptions = Array.isArray(data) ? data : []; // التأكد من أن البيانات مصفوفة
+  //    },
+  //    (error) => {
+  //      console.error('Error fetching user subscriptions:', error);
+  //    }
+  //  );
+  //}
+
+
+
+
   loadUserOrders(): void {
     this.apiService.getUserOrders(this.userId).subscribe(
       (data: any) => {
-        this.userOrders = Array.isArray(data) ? data : []; // التأكد من أن البيانات مصفوفة
+        this.userOrders = Array.isArray(data) ? data : [];
       },
       (error) => {
         console.error('Error fetching user orders:', error);
@@ -231,15 +257,20 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  // تحميل الاشتراكات
   loadUserSubscriptions(): void {
     this.apiService.getUserSubscriptions(this.userId).subscribe(
       (data: any) => {
-        this.userSubscriptions = Array.isArray(data) ? data : []; // التأكد من أن البيانات مصفوفة
+        this.userSubscriptions = Array.isArray(data) ? data : [];
       },
       (error) => {
         console.error('Error fetching user subscriptions:', error);
       }
     );
   }
+
+  isActive(endDate: string): boolean {
+    const today = new Date();
+    return new Date(endDate) >= today;
+  }
+
 }
