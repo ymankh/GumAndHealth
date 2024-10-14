@@ -47,6 +47,8 @@ import { AdminShowClassesComponent } from './pages/admin/admin-show-classes/admi
 import { AddNewClassComponent } from './pages/admin/add-new-class/add-new-class.component';
 import { GetProductComponent } from './pages/admin/get-product/get-product.component';
 import { EditProductComponent } from './pages/admin/edit-product/edit-product.component';
+import { GetGymAllComponent } from './pages/admin/get-gym-all/get-gym-all.component';
+import { POSTGymComponent } from './pages/admin/post-gym/post-gym.component';
 
 
 const routes: Routes = [
@@ -104,6 +106,8 @@ const routes: Routes = [
   { path: 'editProducts', component: EditProductComponent },
 
 
+  { path: 'get-gym-all', component:GetGymAllComponent },
+  { path: 'post-gym', component: POSTGymComponent },
 
   { path: 'view-detiles-admin/:id', component: ViewDetilesAdminComponent },
   { path: 'recipe-admin-post', component: RecipeAdminPostComponent },

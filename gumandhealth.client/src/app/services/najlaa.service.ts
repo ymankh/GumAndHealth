@@ -55,11 +55,17 @@ export class NajlaaService {
 
 
 
-
+  deleteGymService(id: number): Observable<any> {
+    return this.http.delete(`https://localhost:7280/api/GymNajlaa/${id}`);
+  }
 
   private apiUrl12 = 'https://localhost:7280/api/order'; 
-
-
+  addGymService(formData: FormData): Observable<any> {
+    return this.http.post('https://localhost:7280/api/GymNajlaa', formData);
+  }
+  getGymServices(): Observable<any[]> {
+    return this.http.get<any[]>(`https://localhost:7280/api/GymNajlaa`);
+  }
   // دالة لجلب جميع الطلبات
   getAllOrders(): Observable<any> {
     return this.http.get(`${this.apiUrl12}/orders`);

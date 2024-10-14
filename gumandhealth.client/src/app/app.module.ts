@@ -52,6 +52,8 @@ import { AddNewClassComponent } from './pages/admin/add-new-class/add-new-class.
 
 import { GetProductComponent } from './pages/admin/get-product/get-product.component';
 import { EditProductComponent } from './pages/admin/edit-product/edit-product.component';
+import { GetGymAllComponent } from './pages/admin/get-gym-all/get-gym-all.component';
+import { POSTGymComponent } from './pages/admin/post-gym/post-gym.component';
 
 @NgModule({
   declarations: [
@@ -107,6 +109,8 @@ import { EditProductComponent } from './pages/admin/edit-product/edit-product.co
       AddNewClassComponent,
       GetProductComponent,
       EditProductComponent,
+      GetGymAllComponent,
+      POSTGymComponent,
   ],
   imports: [
     BrowserModule,
