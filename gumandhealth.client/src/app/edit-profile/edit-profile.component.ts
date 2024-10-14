@@ -46,23 +46,51 @@ export class EditProfileComponent {
   }
 
 
+  //updateProfile(data: any): void {
+  //  debugger;
+  //  const formData = new FormData();
+
+  //  // إضافة بيانات النموذج إلى FormData
+  //  for (let key in data) {
+  //    formData.append(key, data[key]);
+  //  }
+
+  //  console.log('Form data:', formData); // تحقق من بيانات النموذج
+  //  console.log('Image file before update:', this.imageFile); // تحقق من القيمة
+
+  //  // إضافة الصورة إذا تم اختيارها
+  //  if (this.imageFile) {
+  //    formData.append('image', this.imageFile); // إضافة ملف الصورة
+  //  } else {
+  //    console.log('No image file to upload.'); // رسالة في حالة عدم اختيار ملف
+  //  }
+
+  //  // استدعاء الخدمة لتحديث ملف المستخدم
+  //  this.apiService.updateUserProfile(this.userId, formData).subscribe(
+  //    () => {
+  //      console.log('User profile updated successfully');
+  //      this.router.navigate(['/profile']); // العودة إلى صفحة عرض البيانات بعد التحديث
+  //    },
+  //    (error) => {
+  //      console.error('Error updating user profile:', error);
+  //      alert('فشل في تحديث ملف التعريف: ' + error.message);
+  //    }
+  //  );
+  //}
+
   updateProfile(data: any): void {
-    debugger;
     const formData = new FormData();
 
     // إضافة بيانات النموذج إلى FormData
-    for (let key in data) {
-      formData.append(key, data[key]);
+    for (const key in data) {
+      if (data[key]) {
+        formData.append(key, data[key]);
+      }
     }
-
-    console.log('Form data:', formData); // تحقق من بيانات النموذج
-    console.log('Image file before update:', this.imageFile); // تحقق من القيمة
 
     // إضافة الصورة إذا تم اختيارها
     if (this.imageFile) {
-      formData.append('image', this.imageFile); // إضافة ملف الصورة
-    } else {
-      console.log('No image file to upload.'); // رسالة في حالة عدم اختيار ملف
+      formData.append('image', this.imageFile);
     }
 
     // استدعاء الخدمة لتحديث ملف المستخدم
@@ -77,6 +105,7 @@ export class EditProfileComponent {
       }
     );
   }
+
 
 
   cancelEdit(): void {

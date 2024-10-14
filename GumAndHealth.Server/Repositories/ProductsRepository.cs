@@ -76,36 +76,39 @@ namespace GumAndHealth.Server.Repositories
             };
         }
 
+        public List<Product> GetAllProducts()
+        {
+            return _context.Products.ToList();
+        }
+
         public Product CreateProduct(CreateProductDto createProductDto)
         {
             var product = new Product
             {
-                AdditionalInformation = createProductDto.AdditionalInformation,
+                Name = createProductDto.Name,
+                Description = createProductDto.Description,
+                Price = createProductDto.Price,
                 CategoryId = createProductDto.CategoryId,
                 Discount = createProductDto.Discount,
-                Description = createProductDto.Description,
-                Name = createProductDto.Name,
-                Price = createProductDto.Price,
                 Tags = createProductDto.Tags,
+                AdditionalInformation = createProductDto.AdditionalInformation,
             };
 
+            // Save images and set the image paths in the Product entity
             if (createProductDto.Image1 != null)
                 product.Image1 = ImageSaver.SaveImage(createProductDto.Image1);
             if (createProductDto.Image2 != null)
                 product.Image2 = ImageSaver.SaveImage(createProductDto.Image2);
             if (createProductDto.Image3 != null)
                 product.Image3 = ImageSaver.SaveImage(createProductDto.Image3);
-            if (createProductDto.Image4 != null)
-                product.Image4 = ImageSaver.SaveImage(createProductDto.Image4);
-            if (createProductDto.Image5 != null)
-                product.Image5 = ImageSaver.SaveImage(createProductDto.Image5);
-            if (createProductDto.Image6 != null)
-                product.Image6 = ImageSaver.SaveImage(createProductDto.Image6);
 
+            // Save product to the database
             _context.Products.Add(product);
             _context.SaveChanges();
+
             return product;
         }
+
 
         // Add the method to get products by category ID
         public IEnumerable<Product> GetProductsByCategoryId(int categoryId)
@@ -119,5 +122,62 @@ namespace GumAndHealth.Server.Repositories
                 .Where(p => p.Price >= minPrice && p.Price <= maxPrice)
                 .ToList();
         }
+
+
+        public List<Category> GetAllCategories()
+        {
+            return _context.Categories.ToList(); // Assuming you have a Categories table
+        }
+        public Product UpdateProduct(int id, UpdateProductDto updateProductDto)
+        {
+            var product = _context.Products.FirstOrDefault(p => p.Id == id);
+            if (product == null) return null;
+
+            // Update fields
+            product.Name = updateProductDto.Name;
+            product.Description = updateProductDto.Description;
+            product.Price = updateProductDto.Price;
+            product.CategoryId = updateProductDto.CategoryId;
+
+            // Check if a new image was uploaded and save it
+            if (updateProductDto.Image != null)
+            {
+                product.Image1 = ImageSaver.SaveImage(updateProductDto.Image);
+            }
+
+            _context.SaveChanges();
+            return product;
+        }
+
+        public bool DeleteProduct(int id)
+        {
+            // Find the product by ID
+            var product = _context.Products.FirstOrDefault(p => p.Id == id);
+
+            if (product == null)
+            {
+                return false; // Product not found
+            }
+
+            // Remove the product from the database
+            _context.Products.Remove(product);
+
+            // Save changes to the database
+            _context.SaveChanges();
+
+            return true; // Successfully deleted
+        }
+
+
+        public void AddProduct(Product product)
+        {
+            _context.Products.Add(product);
+        }
+
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
+        }
+
     }
 }

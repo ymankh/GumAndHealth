@@ -53,6 +53,72 @@ namespace GumAndHealth.Server.Controllers
 
             return Ok(recipe);
         }
+        [HttpPut]
+        [Route("api/Recipe/{id}")]
+        public async Task<IActionResult> UpdateRecipe(long id, [FromForm] RecipeDto recipeDto)
+        {
+            try
+            {
+                // البحث عن الوصفة الموجودة بناءً على المعرّف
+                var recipe = await _context.Recipes.FindAsync(id);
+                if (recipe == null)
+                {
+                    return NotFound(new { success = false, message = "Recipe not found" });
+                }
+
+                // التحقق من وجود صورة جديدة
+                if (recipeDto.Image != null)
+                {
+                    // الحصول على المسار الكامل من المجلد الحالي
+                    var baseImagePath = Path.Combine(Directory.GetCurrentDirectory(), "images");
+
+                    // التأكد من أن الدليل موجود
+                    if (!Directory.Exists(baseImagePath))
+                    {
+                        Directory.CreateDirectory(baseImagePath);
+                    }
+
+                    // إنشاء المسار الكامل للملف
+                    var fileName = Path.GetFileName(recipeDto.Image.FileName);
+                    var filePath = Path.Combine(baseImagePath, fileName);
+
+                    // حفظ الصورة الجديدة في المسار المحدد
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await recipeDto.Image.CopyToAsync(stream);
+                    }
+
+                    // تحديث مسار الصورة فقط في حال تم تحميل صورة جديدة
+                    recipe.Image = fileName; // تخزين فقط اسم الصورة وليس المسار الكامل
+                }
+                else
+                {
+                    recipe.Image = recipe.Image;
+                }
+
+                // تحديث البيانات الأخرى
+                recipe.Name = recipeDto.Name;
+                recipe.Description = recipeDto.Description;
+                recipe.RecipeCategoryId = recipeDto.RecipeCategoryId;
+                recipe.CaloriesCount = recipeDto.CaloriesCount;
+                recipe.Ingredients = recipeDto.Ingredients;
+                recipe.Recipe1 = recipeDto.Recipe1;
+
+                // حفظ التغييرات في قاعدة البيانات
+                _context.Recipes.Update(recipe);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { success = true, message = "Recipe updated successfully" });
+            }
+            catch (Exception ex)
+            {
+                // تسجيل الخطأ بشكل أكثر تفصيلاً
+                var errorMessage = $"Error updating recipe: {ex.Message}. StackTrace: {ex.StackTrace}";
+                Console.WriteLine(errorMessage);
+
+                return StatusCode(500, new { success = false, message = errorMessage });
+            }
+        }
 
         // إضافة وصفة جديدة
         [HttpPost]

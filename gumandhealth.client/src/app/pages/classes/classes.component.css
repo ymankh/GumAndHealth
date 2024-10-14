@@ -1,24 +1,62 @@
-.hero-text h2 {
-  font-size: 36px; /* ضبط حجم الخط */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* إضافة ظل للنص لتحسين الوضوح */
-  color: white; /* لون النص */
-}
 .hero-section {
-  position: relative; /* يجعل العنصر يحتوي على موضع نسبي */
-  height: 400px; /* اضبط ارتفاع القسم حسب الحاجة */
-  background-size: cover; /* تأكد من أن الصورة تغطي الخلفية بالكامل */
-  background-position: center; /* مركز الصورة */
+  position: relative;
+  height: 400px; /* يمكن تعديل الارتفاع حسب الحاجة */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 
 .hero-text {
-  position: absolute; /* نص فوق الصورة */
-  top: 50%; /* تحريك النص إلى منتصف القسم عموديًا */
-  left: 50%; /* تحريك النص إلى منتصف القسم أفقيًا */
-  transform: translate(-50%, -50%); /* مركزة النص تمامًا */
-  color: white; /* لون النص */
-  text-align: center; /* مركز النص */
-  z-index: 10; /* تأكد من أن النص فوق أي عنصر آخر */
-  padding: 10px; /* إضافة بعض الحشو لجعل النص واضح */
-  background-color: rgba(0, 0, 0, 0.5); /* إضافة خلفية داكنة شفافة للنص لتحسين الوضوح */
-  border-radius: 5px; /* جعل الحواف دائرية */
+  transform: translate(-60%, -87%);
+  color: #fff; /* جعل النص أبيض */
+  text-align: center;
+  font-size: 3rem; /* حجم الخط */
+  font-weight: bold;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5); /* إضافة ظل للنص لجعله بارزًا على الخلفية */
 }
+
+.set-bg {
+  background-size: cover;
+  background-position: center;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px; /* مسافة أسفل الـ search */
+}
+
+.search-input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd; /* لون الحدود */
+  border-radius: 25px; /* جعل الحواف دائرية */
+  outline: none; /* إزالة الإطار الخارجي عند التحديد */
+  width: 300px; /* عرض حقل الإدخال */
+  transition: box-shadow 0.3s; /* تأثير الانتقال عند التركيز */
+}
+
+  .search-input:focus {
+    box-shadow: 0 0 8px rgba(130, 208, 38, 0.8); /* تأثير ضوء عند التركيز */
+  }
+
+.search-button {
+  background-color: #82D026; /* لون الخلفية */
+  color: white; /* لون النص */
+  border: none; /* إزالة الحدود */
+  padding: 10px 20px; /* حواف داخلية */
+  font-size: 1rem; /* حجم الخط */
+  border-radius: 25px; /* جعل الحواف دائرية */
+  margin-left: 10px; /* مسافة بين الـ input والزر */
+  cursor: pointer; /* مؤشر اليد عند التمرير */
+  transition: background-color 0.3s; /* تأثير الانتقال عند التمرير */
+}
+
+  .search-button:hover {
+    background-color: #6EB522; /* تغيير لون الخلفية عند التمرير */
+  }
+

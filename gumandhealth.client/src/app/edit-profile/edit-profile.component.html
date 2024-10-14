@@ -1,4 +1,3 @@
-
 <form *ngIf="userProfile" #UpdateFormRawa="ngForm" (ngSubmit)="updateProfile(UpdateFormRawa.value)" style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; background-color: #f9f9f9;">
   <input type="hidden" name="__RequestVerificationToken" value="TOKEN_VALUE">
 
@@ -8,8 +7,7 @@
     <!-- Main Image Field -->
     <div class="form-group" style="margin-bottom: 15px;">
       <label for="Image" class="form-label" style="display: block; font-weight: bold; margin-bottom: 5px;">Main Image</label>
-      <input type="file" (change)="onImageSelected($event)" />
-
+      <input type="file" (change)="onImageSelected($event)" class="form-control" />
       <span class="text-danger" id="Image-error" style="color: red; font-size: 0.875em;"></span>
     </div>
 

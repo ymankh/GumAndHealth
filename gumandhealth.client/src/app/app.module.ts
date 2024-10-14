@@ -38,6 +38,15 @@ import { RecipeAdminPostComponent } from './pages/admin/recipe-admin-post/recipe
 import { VirifyOtpComponent } from './pages/virify-otp/virify-otp.component';
 import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
 import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
+import { AdminScheduleComponent } from './pages/admin-schedule/admin-schedule.component';
+import { AdminProductsComponent } from './pages/admin/adminproducts/adminproducts.component';
+import { RecipeCategoryAdminPutComponent } from './pages/admin/recipe-category-admin-put/recipe-category-admin-put.component';
+import { RecipeAdminPutComponent } from './pages/admin/recipe-admin-put/recipe-admin-put.component';
+import { OrderAdminComponent } from './pages/admin/order-admin/order-admin.component';
+import { EditScheduleComponent } from './pages/admin/edit-schedule/edit-schedule.component';
+import { AllScheduleComponent } from './pages/admin/all-schedule/all-schedule.component';
+import { GetInstructorComponent } from './pages/admin/get-instructor/get-instructor.component';
+import { EditInstructorComponent } from './pages/admin/edit-instructor/edit-instructor.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +87,17 @@ import { PasswordResetComponent } from './pages/password-reset/password-reset.co
     VirifyOtpComponent,
     AdminLoginComponent,
     PasswordResetComponent,
+    AdminScheduleComponent,
+    AdminProductsComponent,
+    RecipeCategoryAdminPutComponent,
+    RecipeAdminPutComponent,
+    AdminProductsComponent,
+    OrderAdminComponent,
+    EditScheduleComponent,
+    AllScheduleComponent,
+
+    GetInstructorComponent,
+      EditInstructorComponent,
   ],
   imports: [
     BrowserModule,

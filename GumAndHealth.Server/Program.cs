@@ -1,4 +1,5 @@
 using System.Text;
+using GumAndHealth.Server.DTOs;
 using GumAndHealth.Server.Helpers;
 using GumAndHealth.Server.Models;
 using GumAndHealth.Server.Repositories;
@@ -160,6 +161,7 @@ namespace GumAndHealth.Server
 
             // Add EmailService as a dependency
             builder.Services.AddTransient<EmailService>();
+            builder.Services.AddTransient<EmailServiceR>();
 
             // Load configuration settings (like SMTP details)
             builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);

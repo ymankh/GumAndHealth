@@ -121,7 +121,10 @@ namespace GumAndHealth.Server.Controllers
                     // تحديث مسار الصورة فقط في حال تم تحميل صورة جديدة
                     category.ImagePath = fileName; // تخزين فقط اسم الصورة وليس المسار الكامل
                 }
-
+                else
+                {
+                    category.ImagePath = category.ImagePath;
+                }
                 // تحديث البيانات الأخرى
                 category.Name = recipeCategoryDto.Name;
                 category.Description = recipeCategoryDto.Description;
@@ -153,21 +156,24 @@ namespace GumAndHealth.Server.Controllers
                 return NotFound(new { success = false, message = "Category not found" });
             }
 
-            // التحقق من وجود وصفات مرتبطة
+            // العثور على الوصفات المرتبطة
             var relatedRecipes = await _context.Recipes
                 .Where(r => r.RecipeCategoryId == id)
                 .ToListAsync();
 
+            // حذف الوصفات المرتبطة إذا وُجدت
             if (relatedRecipes.Any())
             {
-                return Conflict(new { success = false, message = "Cannot delete category as it has related recipes" });
+                _context.Recipes.RemoveRange(relatedRecipes);
             }
 
+            // حذف الفئة الأصلية
             _context.RecipesCategories.Remove(category);
             await _context.SaveChangesAsync();
 
-            return Ok(new { success = true, message = "Category deleted successfully" });
+            return Ok(new { success = true, message = "Category and related recipes deleted successfully" });
         }
+
         [HttpGet("getImage/{imageName}")]
         public IActionResult getService(string imageName)
         {
@@ -185,6 +191,32 @@ namespace GumAndHealth.Server.Controllers
             }
 
         }
+        [HttpGet("getImage123/{imageName}")]
+        public IActionResult getService123(string imageName)
+        {
+            // المسار الأول داخل مجلد images
+            var pathImageInImages = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "images", imageName);
+
+            // المسار الثاني داخل مجلد products
+            var pathImageInProducts = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "products", imageName);
+
+            // التحقق من وجود الصورة في مجلد images
+            if (System.IO.File.Exists(pathImageInImages))
+            {
+                return PhysicalFile(pathImageInImages, "image/png");
+            }
+            // التحقق من وجود الصورة في مجلد products إذا لم تكن موجودة في images
+            else if (System.IO.File.Exists(pathImageInProducts))
+            {
+                return PhysicalFile(pathImageInProducts, "image/png");
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+
 
 
     }

@@ -1,0 +1,87 @@
+<div class="container mt-5 d-flex justify-content-center">
+  <div class="card shadow-sm w-50">
+    <!-- البطاقة محددة بعرض 50% لتكون أصغر ومتمركزة -->
+    <div class="card-header bg-dark text-white text-center">
+      <h2 class="mb-0">Edit Recipe</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+        <div class="row justify-content-end">
+          <!-- Recipe Name -->
+          <div class="form-group col-md-12 mb-3">
+            <label for="name" class="font-weight-bold">Recipe Name</label>
+            <input id="name" formControlName="name" class="form-control rounded-pill shadow-sm" type="text" />
+            <div *ngIf="recipeForm.get('name')?.invalid && recipeForm.get('name')?.touched" class="alert alert-danger">
+              Recipe name is required.
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="form-group col-md-12 mb-3">
+            <label for="description" class="font-weight-bold">Description</label>
+            <textarea id="description" formControlName="description" class="form-control rounded-pill shadow-sm"></textarea>
+            <div *ngIf="recipeForm.get('description')?.invalid && recipeForm.get('description')?.touched" class="alert alert-danger">
+              Description is required.
+            </div>
+          </div>
+
+          <!-- Calories Count -->
+          <div class="form-group col-md-12 mb-3">
+            <label for="caloriesCount" class="font-weight-bold">Calories Count</label>
+            <input id="caloriesCount" formControlName="caloriesCount" class="form-control rounded-pill shadow-sm" type="number" />
+            <div *ngIf="recipeForm.get('caloriesCount')?.invalid && recipeForm.get('caloriesCount')?.touched" class="alert alert-danger">
+              Calories count is required and must be a valid number.
+            </div>
+          </div>
+
+          <!-- Ingredients -->
+          <div class="form-group col-md-12 mb-3">
+            <label for="ingredients" class="font-weight-bold">Ingredients</label>
+            <textarea id="ingredients" formControlName="ingredients" class="form-control rounded-pill shadow-sm"></textarea>
+            <div *ngIf="recipeForm.get('ingredients')?.invalid && recipeForm.get('ingredients')?.touched" class="alert alert-danger">
+              Ingredients are required.
+            </div>
+          </div>
+
+          <!-- Recipe Steps -->
+          <div class="form-group col-md-12 mb-3">
+            <label for="recipe1" class="font-weight-bold">Recipe Steps</label>
+            <textarea id="recipe1" formControlName="recipe1" class="form-control rounded-pill shadow-sm"></textarea>
+            <div *ngIf="recipeForm.get('recipe1')?.invalid && recipeForm.get('recipe1')?.touched" class="alert alert-danger">
+              Recipe steps are required.
+            </div>
+          </div>
+
+          <!-- Recipe Category -->
+          <div class="form-group col-md-12 mb-3">
+            <label for="recipeCategory" class="font-weight-bold">Category</label>
+            <select id="recipeCategory" formControlName="recipeCategoryId" class="form-control rounded-pill shadow-sm">
+              <option *ngFor="let category of recipeCategories" [value]="category.id">
+                {{ category.name }}
+              </option>
+            </select>
+            <div *ngIf="recipeForm.get('recipeCategoryId')?.invalid && recipeForm.get('recipeCategoryId')?.touched" class="alert alert-danger">
+              Please select a category.
+            </div>
+          </div>
+
+          <!-- Image -->
+          <div class="form-group col-md-12 mb-3">
+            <label for="image" class="font-weight-bold">Image</label>
+            <img *ngIf="currentImage" [src]="currentImage" alt="Current Recipe Image" class="img-thumbnail mb-2" />
+            <input id="image" type="file" (change)="onFileSelected($event)" class="form-control-file" />
+          </div>
+
+          <!-- Submit Button -->
+          <div class="form-group col-md-12 d-flex justify-content-end">
+            <button type="submit" class="btn btn-dark rounded-pill shadow" [disabled]="recipeForm.invalid">
+              Update Recipe
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<app-admin></app-admin>

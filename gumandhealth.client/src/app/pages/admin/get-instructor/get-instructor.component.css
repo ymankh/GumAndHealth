@@ -1,0 +1,35 @@
+.container {
+  max-width: 800px; /* Limits the width of the table */
+  margin: auto; /* Centers the container */
+}
+
+.table {
+  border-radius: 10px; /* Rounds the corners of the table */
+  overflow: hidden; /* Hides any overflow from the table */
+}
+
+.thead-dark {
+  background-color: #343a40; /* Dark background for the table header */
+  color: white; /* White text for better contrast */
+}
+
+.btn {
+  margin-right: 5px; /* Space between buttons */
+}
+
+h2 {
+  color: #333; /* Dark text color for the heading */
+  font-weight: 600; /* Bold font weight for better visibility */
+}
+
+tbody tr:hover {
+  background-color: #f2f2f2; /* Light grey background on hover for rows */
+}
+
+.app-edit-instructor {
+  margin-top: 20px; /* Spacing above the edit component */
+  border: 1px solid #ddd; /* Border for the edit component */
+  border-radius: 10px; /* Rounded corners for the edit component */
+  padding: 15px; /* Padding inside the edit component */
+  background-color: #fff; /* White background for the edit component */
+}

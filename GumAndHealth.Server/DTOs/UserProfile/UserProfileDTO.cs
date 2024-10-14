@@ -16,5 +16,4 @@
         public string? PostalCode { get; set; }
         public string? AddressLine { get; set; }
     }
-
 }
