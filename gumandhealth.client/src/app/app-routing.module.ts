@@ -48,6 +48,7 @@ import { AddNewClassComponent } from './pages/admin/add-new-class/add-new-class.
 import { GetProductComponent } from './pages/admin/get-product/get-product.component';
 import { EditProductComponent } from './pages/admin/edit-product/edit-product.component';
 import { GetAllUserComponent } from './pages/admin/get-all-user/get-all-user.component';
+import { GetContactMessagesComponent } from './pages/admin/get-contact-messages/get-contact-messages.component';
 
 
 const routes: Routes = [
@@ -58,6 +59,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'Schedule', component: AdminScheduleComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'Messages', component: GetContactMessagesComponent },
   { path: 'admin/edit-class/:id', component: AdminClassEditComponent },
   { path: 'nutrition/tips', component: TipsComponent },
   { path: 'gyms', component: GymsComponent },
@@ -70,6 +72,7 @@ const routes: Routes = [
   { path: 'edit-profile/:id', component: EditProfileComponent },
   { path: 'Gyms', component: GymsComponent },
   { path: 'singleGym/:id', component: SingleGymComponent },
+
 
   { path: 'class-details/:id', component: ClassDetailsComponent },
   { path: 'products', component: ProductsComponent },

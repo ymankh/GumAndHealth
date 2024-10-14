@@ -13,7 +13,13 @@ import { ScheduleDTO } from '../pages/admin/edit-schedule/ScheduleDTO';
 })
 export class AhmadService {
   constructor(private http: HttpClient) { }
-  
+
+
+
+  getAllMessages(): Observable<any[]> {
+    return this.http.get<any[]>("https://localhost:44325/api/Contacts");
+  }
+
 
   addContact(data: any): Observable<any> {
     debugger
