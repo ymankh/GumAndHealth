@@ -21,6 +21,6 @@ export class RecipesComponent implements OnInit {
 
   // دالة لاستعراض التفاصيل (اختياري)
   viewRecipeDetails(id: number): void {
-    this.router.navigate(['/recipe', id]); // استخدام Router للانتقال إلى صفحة التفاصيل
+    this.router.navigate(['recipes', id]); // استخدام Router للانتقال إلى صفحة التفاصيل
   }
 }

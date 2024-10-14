@@ -7,6 +7,7 @@ import { NutritionComponent } from './nutrition/nutrition.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AdminComponent } from './pages/admin/admin.component';
 import { AboutComponent } from './pages/about/about.component';
 import { BlogComponent } from './pages/blog/blog.component';
 import { ClassesComponent } from './pages/classes/classes.component';
@@ -19,7 +20,6 @@ import { GymsComponent } from './pages/gyms/gyms.component';
 import { RecipesComponent } from './nutrition/recipes/recipes.component';
 import { RecipeDetailComponent } from './nutrition/recipe-detail/recipe-detail.component';
 import { SingleGymComponent } from './pages/single-gym/single-gym.component';
-import { AdminComponent } from './pages/admin/admin.component';
 import { AdminClassesComponent } from './pages/admin-classes/admin-classes.component';
 import { ClassDetailsComponent } from './pages/class-details/class-details.component';
 import { ProductsComponent } from './pages/products/products.component';
@@ -27,10 +27,23 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { LoginComponent } from './pages/login/login.component';
 import { ShopComponent } from './pages/shop/shop.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { RecipeCategoryAdminComponent } from './pages/admin/recipe-category-admin/recipe-category-admin.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { TestimonialsComponent } from './pages/testimonials/testimonials.component';
+import { RecipeCategoryAdminPostComponent } from './pages/admin/recipe-category-admin-post/recipe-category-admin-post.component';
+import { ViewDetilesAdminComponent } from './pages/admin/view-detiles-admin/view-detiles-admin.component';
+import { RecipeAdminPostComponent } from './pages/admin/recipe-admin-post/recipe-admin-post.component';
+import { AdminScheduleComponent } from './pages/admin-schedule/admin-schedule.component';
+import { AdminProductsComponent } from './pages/admin/adminproducts/adminproducts.component';
+import { RecipeCategoryAdminPutComponent } from './pages/admin/recipe-category-admin-put/recipe-category-admin-put.component';
+import { RecipeAdminPutComponent } from './pages/admin/recipe-admin-put/recipe-admin-put.component';
+import { OrderAdminComponent } from './pages/admin/order-admin/order-admin.component';
+import { EditScheduleComponent } from './pages/admin/edit-schedule/edit-schedule.component';
+import { AllScheduleComponent } from './pages/admin/all-schedule/all-schedule.component';
+import { GetInstructorComponent } from './pages/admin/get-instructor/get-instructor.component';
+import { EditInstructorComponent } from './pages/admin/edit-instructor/edit-instructor.component';
 
 @NgModule({
   declarations: [
@@ -39,37 +52,54 @@ import { TestimonialsComponent } from './pages/testimonials/testimonials.compone
     HomeComponent,
     HeaderComponent,
     FooterComponent,
+    AdminComponent,
+    AdminClassesComponent,
+    AdminClassEditComponent,
     AboutComponent,
     BlogComponent,
     ClassesComponent,
     ContactComponent,
     ProfileComponent,
-    AdminClassEditComponent,
     TipsComponent,
     GymsComponent,
     RecipesComponent,
     RecipeDetailComponent,
     SingleGymComponent,
-    AdminComponent,
-    AdminClassesComponent,
     ClassDetailsComponent,
     ProductsComponent,
     ProductCardComponent,
     LoginComponent,
     ShopComponent,
     CartComponent,
+    RecipeCategoryAdminComponent,
+
     RegisterComponent,
     ResetPasswordComponent,
     TipsComponent,
     EditProfileComponent,
-    TestimonialsComponent
+    TestimonialsComponent,
+    RecipeCategoryAdminPostComponent,
+    ViewDetilesAdminComponent,
+    RecipeAdminPostComponent,
+    AdminScheduleComponent,
+    AdminProductsComponent,
+    RecipeCategoryAdminPutComponent,
+    RecipeAdminPutComponent,
+    AdminProductsComponent,
+    OrderAdminComponent,
+    EditScheduleComponent,
+    AllScheduleComponent,
+
+    GetInstructorComponent,
+      EditInstructorComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

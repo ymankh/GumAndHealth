@@ -27,8 +27,9 @@ export class AdminClassEditComponent implements OnInit {
       }
     );
   }
-
+  
   updateClass(): void {
+    debugger
     const payload = {
       id: this.classItem.id,
       name: this.classItem.name,
@@ -36,17 +37,17 @@ export class AdminClassEditComponent implements OnInit {
       imagePath: this.classItem.imagePath,
       pricePerMonth: this.classItem.pricePerMonth,
       availableDay: this.classItem.availableDay,
-      startTime: this.formatTime(this.classItem.startTime),
+      startTime: this.formatTime(this.classItem.startTime), // Ensure HH:mm:ss format
       endTime: this.formatTime(this.classItem.endTime),
       instructorName: this.classItem.instructorName
     };
 
     console.log('Payload being sent:', JSON.stringify(payload, null, 2));
-
+    debugger
     this.classService.updateClass(this.classItem.id, payload).subscribe(
       () => {
         console.log('Class updated successfully');
-        this.router.navigate(['/displayClasses']);
+        this.router.navigate(['/admin/classes']);
       },
       error => {
         console.error('Error updating class:', error);
@@ -72,6 +73,7 @@ export class AdminClassEditComponent implements OnInit {
 
 
 
+
   ////////////////////////////
   deleteClass(): void {
     console.log('Delete class button clicked');
@@ -81,7 +83,7 @@ export class AdminClassEditComponent implements OnInit {
 
       this.classService.deleteClass(this.classItem.id).subscribe(() => {
         console.log('Class deleted successfully');
-        this.router.navigate(['/displayClasses']);
+        this.router.navigate(['admin/classes']);
       }, error => {
         console.error('Error deleting class:', error);
         alert('An error occurred while deleting the class. Please try again.');

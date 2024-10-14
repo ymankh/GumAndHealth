@@ -57,59 +57,79 @@ export class ClassDetailsComponent implements OnInit {
 
   ///////////////////////////////////////////////////////////////////////////
   joinClass(classScheduleId: number) {
-    this._ser.getClassByID(classScheduleId).subscribe(
-      (response) => {
-        if (response && response.ClassName && response.ClassPrice) {
-          const startDate = new Date();
-          const endDate = new Date(startDate);
-          endDate.setMonth(startDate.getMonth() + 1);
+    this._ser.getClassByID(classScheduleId).subscribe((response) => {
+      console.log('API Response:', response);
 
-          Swal.fire({
-            title: 'Join the Class',
-            html: `
-            <p><strong>Class Name:</strong> ${response.ClassName}</p>
-            <p><strong>Start Date:</strong> ${startDate.toLocaleDateString()}</p>
-            <p><strong>End Date:</strong> ${endDate.toLocaleDateString()}</p>
-            <p><strong>Amount:</strong> ${response.ClassPrice} JOD</p>
-          `,
-            showCancelButton: true,
-            confirmButtonText: 'Confirm',
-            cancelButtonText: 'Cancel'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this._ser.createOrder(response.ClassPrice).subscribe(
-                orderResponse => {
-                  console.log('Order created:', orderResponse);
-                  Swal.fire('Success', 'Your order has been created.', 'success');
-                },
-                error => {
-                  console.error('Error creating order:', error);
-                  Swal.fire('Error', 'Failed to create order. Please try again.', 'error');
-                }
-              );
-            }
-          });
-        } else {
-          Swal.fire('Error', 'Class details are incomplete.', 'error');
-        }
-      },
-      (error) => {
-        console.error('Error fetching class details:', error);
-        Swal.fire('Error', 'Failed to fetch class details. Please try again.', 'error');
+      if (response && response.className && response.classPrice) {
+        const startDate = new Date();
+        const endDate = new Date(startDate);
+        endDate.setMonth(startDate.getMonth() + 1);
+
+        Swal.fire({
+          title: 'Join the Class',
+          html: `
+          <p><strong>Class Name:</strong> ${response.className}</p>
+          <p><strong>Start Date:</strong> ${startDate.toLocaleDateString()}</p>
+          <p><strong>End Date:</strong> ${endDate.toLocaleDateString()}</p>
+          <p><strong>Amount:</strong> ${response.classPrice} JOD</p>
+        `,
+          showCancelButton: true,
+          confirmButtonText: 'Confirm',
+          cancelButtonText: 'Cancel',
+          icon: 'info'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.AddSubscription(classScheduleId, 1);
+          }
+        });
       }
-    );
+    });
   }
+  paymentData: any = {
+    "idSubs": 1,
+    "userID": 0
+  }
+  AddSubscription(idSubs: any, Iduser: any) {
+    debugger
+    this.paymentData.idSubs = idSubs
+    this.paymentData.userID = Iduser
+    console.log("payment data :", this.paymentData);
+    this._ser.postCreatePayment(this.paymentData).subscribe((data) => {
+      const width = 600;
+      const height = 700;
+      const left = (screen.width / 2) - (width / 2);
+      const top = (screen.height / 2) - (height / 2);
 
+      const popupWindow = window.open(
+        data.approvalUrl,
+        'PayPal Payment',
+        `width = ${ width }, height = ${ height }, top = ${ top }, scrollbars = yes, resizable = yes`
+      );
 
+      const checkWindowClosed = setInterval(() => {
+        if (popupWindow && popupWindow.closed) {
+          clearInterval(checkWindowClosed);
+          Swal.fire({
+            icon: "success",
+            title: "Subscribed Successfully!",
+            showConfirmButton: false,
+            timer: 2000
+          });
+        }
+      }, 500);
 
+    },
+      (error) => {
+        console.error("Error creating payment:", error); // طباعة تفاصيل الخطأ
 
-
-
-
-
-
-
-
+        Swal.fire({
+          icon: "warning",
+          title: `${ error.error }`,
+          showConfirmButton: false,
+          timer: 2000
+      });
+  });
+}
 
 
 

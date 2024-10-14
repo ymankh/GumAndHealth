@@ -1,19 +1,64 @@
-<div class="container">
-  <div class="row">
-    <div *ngFor="let product of products" class="col-md-4">
-      <div class="card product-card mb-4">
-        <img [src]="imageurl(product.image1)" class="card-img-top product-image" alt="Product Image" />
-        <div class="card-body text-center">
-          <h5 class="product-name">{{ product.name }}</h5>
-          <p class="product-price">{{ product.price | currency:'JD':true }}</p>
-          <small class="text-muted">{{ product.description }}</small>
+<!-- Section-->
+<section class="py-5">
+  <div class="container px-4 px-lg-5 mt-5">
+    <div class="row">
+      <!-- Filter Section -->
+      <div class="col-lg-3">
+        <!-- Categories Dropdown in HTML -->
+        <h3 class="fw-bold">CATEGORIES</h3>
+        <select class="form-select" [(ngModel)]="selectedCategoryId" (change)="filterByCategory()">
+          <option [value]="null" disabled>Select a Category</option> <!-- Placeholder for category selection -->
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+
+        <!-- New Button to Fetch All Categories -->
+        <button class="btn btn-secondary mt-3" (click)="fetchAllCategories()">All Categories</button>
+
+
+
+
+        <h4 class="fw-bold mt-4">PRICE</h4>
+        <div class="price-range">
+          <input type="range" class="form-range" min="0" max="1000" step="0.5" [(ngModel)]="minPrice" (change)="filterByPrice()" />
+          <input type="range" class="form-range" min="0" max="1000" step="0.5" [(ngModel)]="maxPrice" (change)="filterByPrice()" />
+
+          <div class="d-flex justify-content-between">
+            <input type="number" [(ngModel)]="minPrice" class="price-input" placeholder="Min" />
+            <span class="price-range-divider"> - </span>
+            <input type="number" [(ngModel)]="maxPrice" class="price-input" placeholder="Max" />
+          </div>
         </div>
-        <div class="add-to-cart-overlay">
-          <button class="btn btn-add-to-cart" (click)="addToCart(product)">
-            Add to Cart
-          </button>
+        <!-- New Button to Fetch All Categories -->
+        <button class="btn btn-secondary mt-3" (click)="fetchAllCategories()">Filter</button>
+      </div>
+
+      <!-- Product Cards Section -->
+      <div class="col-lg-9">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          <div *ngFor="let product of filteredProducts" class="col">
+            <div class="card product-card">
+              <img [src]="imageurl(product.image1)" class="card-img-top product-image" alt="Product Image" />
+              <div class="card-body text-center">
+                <h5 class="product-name">{{ product.name }}</h5>
+                <p class="product-price">{{ product.price | currency:'JD':true }}</p>
+              </div>
+              <div class="add-to-cart-overlay">
+                <button class="btn btn-add-to-cart" (click)="addToCart(product)">Add to Cart</button>
+                <button class="btn btn-show-description" (click)="toggleDescription(product)">
+                  {{ product.showDescription ? 'Hide Description' : 'Show Description' }}
+                </button>
+              </div>
+
+              <!-- Description Section -->
+              <div *ngIf="product.showDescription" class="product-description">
+                <p>{{ product.description }}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>

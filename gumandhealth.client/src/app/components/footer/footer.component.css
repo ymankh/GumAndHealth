@@ -1,0 +1,24 @@
+.footer-links {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+  .footer-links a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+  }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+.social-links a {
+  font-size: 20px;
+  margin: 0 10px;
+  color: #fff;
+}
+
+  .social-links a:hover {
+    color: #007bff;
+  }

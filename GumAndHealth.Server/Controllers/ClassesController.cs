@@ -1,8 +1,13 @@
-﻿using GumAndHealth.Server.Models;
+﻿using GumAndHealth.Server.DTOs;
+using GumAndHealth.Server.Models;
+using GumAndHealth.Server.Repositories;
 using GumAndHealth.Server.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PayPal.Api;
+using PayPalCheckoutSdk.Orders;
+
 namespace GumAndHealth.Server.Controllers
 {
     [Route("api/[controller]")]
@@ -10,13 +15,20 @@ namespace GumAndHealth.Server.Controllers
     public class ClassesController : ControllerBase
     {
         private readonly MyDbContext _db;
-        private readonly PayPalServiceR _payPalService;
+        private readonly EmailServiceR _emailServiceR;
 
-        public ClassesController(PayPalServiceR payPalService, MyDbContext db)
+        string _redirectUrl;
+        private PayPalServiceR payPalService;
+        public ClassesController(MyDbContext db, IConfiguration config, PayPalServiceR paypal, EmailServiceR emailServiceR)
         {
-            _db = db;
-            _payPalService = payPalService;
 
+            _db = db;
+
+            _redirectUrl = config["PayPalR:RedirectUrl"] + "/api/Classes";
+
+            payPalService = paypal;
+
+            _emailServiceR = emailServiceR;
         }
         ///////////////////////////////////////////////////////////////////////////////////////
 
@@ -153,40 +165,139 @@ namespace GumAndHealth.Server.Controllers
 
         }
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-        [HttpPost("create-order")]
-        [Authorize]
-        public async Task<IActionResult> CreateOrder([FromBody] CreateOrderRequest request)
+
+
+        [HttpPost("checkout")]
+        public IActionResult CreatePayment([FromBody] PayRDTO payRDTO)
         {
-            if (request == null || request.Amount <= 0)
-            {
-                return BadRequest("Invalid order details.");
-            }
+            if (string.IsNullOrEmpty(_redirectUrl))
+                throw new Exception("The redirect link for the paypal should be set correctly on the sitting app.");
 
-            // يمكنك استبدال هذه الروابط بروابط الواجهة الأمامية الخاصة بك
-            string returnUrl = "https://your-frontend.com/success";
-            string cancelUrl = "https://your-frontend.com/cancel";
 
-            var order = await _payPalService.CreateOrder(request.Amount, "JOD", returnUrl, cancelUrl);
-            return Ok(order);
+            var totalPrice = _db.ClassServices.Where(x => x.Id == payRDTO.idSubs).FirstOrDefault().PricePerMonth ?? 0;
+
+            var payment = payPalService.CreatePayment(_redirectUrl ?? " ", totalPrice, null, payRDTO.userID, payRDTO.idSubs);
+            var approvalUrl = payment.links.FirstOrDefault(l => l.rel.Equals("approval_url", StringComparison.OrdinalIgnoreCase))?.href;
+
+            return Ok(new { approvalUrl });
         }
 
-        [HttpPost("capture-order/{orderId}")]
-        [Authorize]
-        public async Task<IActionResult> CaptureOrder(string orderId)
+        [HttpGet("success")]
+        public IActionResult ExecutePayment(string paymentId, string PayerID, string token, int userID, long subsId)
         {
-            if (string.IsNullOrWhiteSpace(orderId))
+
+
+
+            var subscription = new ClassSubscription()
             {
-                return BadRequest("Invalid order ID.");
+                ClassServiceId = subsId,
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddMonths(1),
+                UserId = userID,
+                //PaymentId = paymentId
+            };
+
+            _db.ClassSubscriptions.Add(subscription);
+            _db.SaveChanges();
+
+
+
+
+            var executedPayment = payPalService.ExecutePayment(paymentId, PayerID, userID, subsId);
+            const string script = "<script>window.close();</script>";
+            return Content(script, "text/html");
+
+
+
+        }
+
+
+        [HttpGet("cancel")]
+        public IActionResult CancelPayment()
+        {
+            return BadRequest("Payment canceled.");
+        }
+
+
+        //[HttpPost]
+        //public async Task<IActionResult> SendRememberEmailAsync(string toEmail)
+        //{
+        //    string subject = "Notification about subscribition";
+        //    string body = $"<p>Your subscribition will end by 5 days,</p>";
+
+        //    await _emailServiceR.SendEmailRAsync(toEmail, subject, body);
+        //    return Ok();
+        //}
+
+        [HttpPost("send-reminder-emails")]
+        public async Task<IActionResult> SendReminderEmailsAsync()
+        {
+            var currentDate = DateTime.Now;
+            var reminderDate = currentDate.AddDays(5).Date;
+
+            var subscriptions = await _db.ClassSubscriptions
+                .Where(sub => sub.EndDate.HasValue && sub.EndDate.Value.Date == reminderDate)
+                .Include(sub => sub.User)
+                .ToListAsync();
+
+            if (!subscriptions.Any())
+            {
+                return Ok("No subscriptions ending in 5 days.");
             }
 
-            var order = await _payPalService.CaptureOrder(orderId);
-            return Ok(order);
-        }
-    }
+            foreach (var subscription in subscriptions)
+            {
+                if (subscription.User != null && !string.IsNullOrWhiteSpace(subscription.User.Email))
+                {
+                    string subject = "Subscription Reminder";
+                    string body = $"<p>Your subscription for Class Service ID {subscription.ClassServiceId} will end in 5 days.</p>";
 
-    public class CreateOrderRequest
-    {
-        public decimal Amount { get; set; }
+                    await _emailServiceR.SendEmailRAsync(subscription.User.Email, subject, body);
+                }
+            }
+
+            return Ok("Reminder emails sent successfully.");
+        }
+        //////////////////////////////////////////////////////////////////////////
+
+        [HttpGet("GetAllSubscription/{id}")]
+        public async Task<IActionResult> GetAllSubscription(long id)
+        {
+            // Fetch gym subscriptions for the user
+            var gymSubscriptions = await _db.GymSubscriptions
+                .Where(s => s.UserId == id)
+                .ToListAsync();
+
+            // Fetch class subscriptions for the user, including the class service details
+            var classSubscriptions = await _db.ClassSubscriptions
+                .Where(s => s.UserId == id)
+                .Include(s => s.ClassService) // Include the related ClassService entity
+                .ToListAsync();
+
+            // If no subscriptions are found for either gym or classes, return NotFound
+            if (!gymSubscriptions.Any() && !classSubscriptions.Any())
+            {
+                return NotFound("لا توجد اشتراكات لهذا المستخدم.");
+            }
+
+            // Combine both gym and class subscriptions in a single response object
+            var result = new
+            {
+                GymSubscriptions = gymSubscriptions,
+                ClassSubscriptions = classSubscriptions.Select(s => new
+                {
+                    s.Id,
+                    s.StartDate,
+                    s.EndDate,
+                    ClassServiceName = s.ClassService?.Name, // Include the service name
+                })
+            };
+
+            return Ok(result);
+        }
+
+
+
     }
 
 }

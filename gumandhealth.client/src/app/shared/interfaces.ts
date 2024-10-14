@@ -90,3 +90,8 @@ export interface ProductPagedResult
     pageSize : number;
     products :Product[];  
 }
+
+
+export interface ProductWithDescription extends Product {
+  showDescription: boolean;
+}

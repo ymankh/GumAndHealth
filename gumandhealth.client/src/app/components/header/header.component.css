@@ -1,0 +1,19 @@
+.cart-link {
+    position: relative;
+  }
+  
+  .cart-page {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #82d026;
+    color: white;
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  

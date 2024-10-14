@@ -7,10 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace GumAndHealth.Server.Controllers
-
-
 {
-
     [Route("api/[controller]")]
     [ApiController]
     public class CartController(CartRepository cartRepository, MyDbContext context, IConfiguration config, PayPalPaymentService payPalService) : ControllerBase
@@ -78,7 +75,7 @@ namespace GumAndHealth.Server.Controllers
         {
             var order = cartRepository.Checkout(userId, paymentId);
             var executedPayment = payPalService.ExecutePayment(paymentId, PayerID);
-            string script = "<script>window.close();</script>";
+            const string script = "<script>window.close();</script>";
             return Content(script, "text/html");
         }
 

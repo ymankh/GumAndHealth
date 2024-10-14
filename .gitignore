@@ -366,3 +366,7 @@ FodyWeavers.xsd
 /GumAndHealth.Server/Models/MyDbContext.cs
 /GumAndHealth.Server/fit.json
 /GumAndHealth.Server/images
+/SQLQuery2.sql
+/.gitignore
+/.gitignore
+/.gitignore
