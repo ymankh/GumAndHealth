@@ -52,6 +52,7 @@ import { GetContactMessagesComponent } from './pages/admin/get-contact-messages/
 import { PostScheduleComponent } from './pages/admin/post-schedule/post-schedule.component';
 import { GetGymAllComponent } from './pages/admin/get-gym-all/get-gym-all.component';
 import { POSTGymComponent } from './pages/admin/post-gym/post-gym.component';
+import { PutGymComponent } from './pages/admin/put-gym/put-gym.component';
 
 
 const routes: Routes = [
@@ -111,6 +112,7 @@ const routes: Routes = [
   { path: 'getAllProducts', component: GetProductComponent},
   { path: 'editProducts', component: EditProductComponent },
 
+  { path: 'put-gym/:id', component: PutGymComponent }, // Edit gym route
 
   { path: 'get-gym-all', component:GetGymAllComponent },
   { path: 'post-gym', component: POSTGymComponent },

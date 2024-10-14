@@ -52,6 +52,14 @@ export class NajlaaService {
   getProducts(): Observable<any> {
     return this.http.get<any>("https://localhost:7280/api/Home");
   }
+  // Update Gym Service by ID
+  updateGymService(id: number, formData: FormData): Observable<any> {
+    return this.http.put(`https://localhost:7280/api/GymNajlaa/${id}`, formData);
+  }
+  getGymService1(id: number): Observable<any> {
+    const url = `https://localhost:7280/api/GymNajlaa/${id}`;
+    return this.http.get<any>(url);
+  }
 
 
 
