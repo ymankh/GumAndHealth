@@ -49,6 +49,7 @@ import { GetInstructorComponent } from './pages/admin/get-instructor/get-instruc
 import { EditInstructorComponent } from './pages/admin/edit-instructor/edit-instructor.component';
 import { AdminShowClassesComponent } from './pages/admin/admin-show-classes/admin-show-classes.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
