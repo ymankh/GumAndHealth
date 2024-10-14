@@ -117,4 +117,10 @@ export class HeaderComponent implements OnInit {
   
 
 
+
+
+  isAdminPage(): boolean {
+    // Returns true if the current URL contains 'admin'
+    return this.router.url.includes('/admin');
+  }
 }
