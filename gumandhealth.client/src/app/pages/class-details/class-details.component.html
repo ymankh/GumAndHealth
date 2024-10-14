@@ -1,16 +1,18 @@
 <!-- Class Details Section Begin -->
 <div class="class-details-section spad">
   <div class="container">
-    <div class="class-header">
-      <div class="class-info">
+    <div class="class-header row align-items-center">
+      <div class="class-info col-lg-8 col-md-7">
         <h2>{{ classDetails?.className }}</h2>
         <div class="class-description">
           <p>{{ classDetails?.description }}</p>
         </div>
       </div>
-      <img [src]="'https://localhost:7280/api/Classes/getImages/' + classDetails?.classImage"
-           alt="{{ classDetails?.className }}"
-           class="class-image" />
+      <div class="class-image-container col-lg-4 col-md-5 text-center">
+        <img [src]="'https://localhost:7280/api/Classes/getImages/' + classDetails?.classImage"
+             alt="{{ classDetails?.className }}"
+             class="class-image img-fluid" />
+      </div>
     </div>
 
     <div class="class-schedules">

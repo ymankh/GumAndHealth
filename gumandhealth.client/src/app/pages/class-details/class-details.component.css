@@ -1,25 +1,76 @@
+.class-details-section {
+  padding: 50px 0;
+}
+
+.class-header {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.class-info {
+  margin-bottom: 20px;
+}
+
+.class-description {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+.class-image-container {
+  margin-bottom: 20px;
+}
+
+.class-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .class-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .class-info {
+    margin-bottom: 15px;
+  }
+
+  .class-image-container {
+    margin-bottom: 15px;
+  }
+}
+
+.class-schedules {
+  margin-top: 30px;
+}
+
 .schedule-item {
   margin-bottom: 20px;
-  padding: 15px;
+  padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  background-color: #f7f7f7;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .schedule-header {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .schedule-day {
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin-left: 10px;
 }
 
 .schedule-time {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: #333;
   margin-top: 5px;
 }
@@ -36,7 +87,10 @@
 hr {
   margin-top: 10px;
   margin-bottom: 10px;
+  border: none;
+  border-top: 1px solid #ddd;
 }
+
 .join-button {
   background-color: #4CAF50; /* لون أخضر فاتح */
   color: white; /* نص أبيض */
@@ -55,3 +109,20 @@ hr {
   .join-button:hover {
     background-color: #45a049; /* لون أخضر داكن عند المرور */
   }
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .class-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .schedule-item {
+    padding: 15px;
+  }
+
+  .join-button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}

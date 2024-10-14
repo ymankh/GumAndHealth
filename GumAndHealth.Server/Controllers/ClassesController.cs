@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PayPal.Api;
+using PayPalCheckoutSdk.Orders;
+
 namespace GumAndHealth.Server.Controllers
 {
     [Route("api/[controller]")]
@@ -13,9 +15,11 @@ namespace GumAndHealth.Server.Controllers
     public class ClassesController : ControllerBase
     {
         private readonly MyDbContext _db;
+        private readonly EmailServiceR _emailServiceR;
+
         string _redirectUrl;
         private PayPalServiceR payPalService;
-        public ClassesController(MyDbContext db, IConfiguration config, PayPalServiceR paypal)
+        public ClassesController(MyDbContext db, IConfiguration config, PayPalServiceR paypal, EmailServiceR emailServiceR)
         {
 
             _db = db;
@@ -24,6 +28,7 @@ namespace GumAndHealth.Server.Controllers
 
             payPalService = paypal;
 
+            _emailServiceR = emailServiceR;
         }
         ///////////////////////////////////////////////////////////////////////////////////////
 
@@ -160,7 +165,7 @@ namespace GumAndHealth.Server.Controllers
 
         }
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-   
+
 
         [HttpPost("checkout")]
         public IActionResult CreatePayment([FromBody] PayRDTO payRDTO)
@@ -178,7 +183,7 @@ namespace GumAndHealth.Server.Controllers
         }
 
         [HttpGet("success")]
-        public IActionResult ExecutePayment( string paymentId, string PayerID, string token, int userID, long subsId)
+        public IActionResult ExecutePayment(string paymentId, string PayerID, string token, int userID, long subsId)
         {
 
 
@@ -193,17 +198,17 @@ namespace GumAndHealth.Server.Controllers
             };
 
             _db.ClassSubscriptions.Add(subscription);
-                    _db.SaveChanges();
+            _db.SaveChanges();
 
-                
+
 
 
             var executedPayment = payPalService.ExecutePayment(paymentId, PayerID, userID, subsId);
             const string script = "<script>window.close();</script>";
             return Content(script, "text/html");
 
-            
-           
+
+
         }
 
 
@@ -212,6 +217,87 @@ namespace GumAndHealth.Server.Controllers
         {
             return BadRequest("Payment canceled.");
         }
+
+
+        //[HttpPost]
+        //public async Task<IActionResult> SendRememberEmailAsync(string toEmail)
+        //{
+        //    string subject = "Notification about subscribition";
+        //    string body = $"<p>Your subscribition will end by 5 days,</p>";
+
+        //    await _emailServiceR.SendEmailRAsync(toEmail, subject, body);
+        //    return Ok();
+        //}
+
+        [HttpPost("send-reminder-emails")]
+        public async Task<IActionResult> SendReminderEmailsAsync()
+        {
+            var currentDate = DateTime.Now;
+            var reminderDate = currentDate.AddDays(5).Date;
+
+            var subscriptions = await _db.ClassSubscriptions
+                .Where(sub => sub.EndDate.HasValue && sub.EndDate.Value.Date == reminderDate)
+                .Include(sub => sub.User)
+                .ToListAsync();
+
+            if (!subscriptions.Any())
+            {
+                return Ok("No subscriptions ending in 5 days.");
+            }
+
+            foreach (var subscription in subscriptions)
+            {
+                if (subscription.User != null && !string.IsNullOrWhiteSpace(subscription.User.Email))
+                {
+                    string subject = "Subscription Reminder";
+                    string body = $"<p>Your subscription for Class Service ID {subscription.ClassServiceId} will end in 5 days.</p>";
+
+                    await _emailServiceR.SendEmailRAsync(subscription.User.Email, subject, body);
+                }
+            }
+
+            return Ok("Reminder emails sent successfully.");
+        }
+        //////////////////////////////////////////////////////////////////////////
+
+        [HttpGet("GetAllSubscription/{id}")]
+        public async Task<IActionResult> GetAllSubscription(long id)
+        {
+            // Fetch gym subscriptions for the user
+            var gymSubscriptions = await _db.GymSubscriptions
+                .Where(s => s.UserId == id)
+                .ToListAsync();
+
+            // Fetch class subscriptions for the user, including the class service details
+            var classSubscriptions = await _db.ClassSubscriptions
+                .Where(s => s.UserId == id)
+                .Include(s => s.ClassService) // Include the related ClassService entity
+                .ToListAsync();
+
+            // If no subscriptions are found for either gym or classes, return NotFound
+            if (!gymSubscriptions.Any() && !classSubscriptions.Any())
+            {
+                return NotFound("لا توجد اشتراكات لهذا المستخدم.");
+            }
+
+            // Combine both gym and class subscriptions in a single response object
+            var result = new
+            {
+                GymSubscriptions = gymSubscriptions,
+                ClassSubscriptions = classSubscriptions.Select(s => new
+                {
+                    s.Id,
+                    s.StartDate,
+                    s.EndDate,
+                    ClassServiceName = s.ClassService?.Name, // Include the service name
+                })
+            };
+
+            return Ok(result);
+        }
+
+
+
     }
 
 }

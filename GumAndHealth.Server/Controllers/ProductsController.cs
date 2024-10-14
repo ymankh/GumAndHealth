@@ -2,23 +2,26 @@
 using GumAndHealth.Server.Models;
 using GumAndHealth.Server.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
 using System.Linq;
 
 namespace GumAndHealth.Server.Controllers
 {
-    // Change route for AllProducts to avoid conflicts with the default GET route.
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
     {
         private readonly ProductsRepository _productRepository;
+        private readonly MyDbContext _context;
 
-        public ProductsController(ProductsRepository productRepository)
+        // Inject both MyDbContext and ProductsRepository
+        public ProductsController(ProductsRepository productRepository, MyDbContext context)
         {
             _productRepository = productRepository;
+            _context = context;
         }
 
-        // Default GET for paginated products (if pagination is required)
+        // GET: api/Products
         [HttpGet]
         public IActionResult AllProducts([FromQuery] ProductFilterDto productFilter)
         {
@@ -26,7 +29,7 @@ namespace GumAndHealth.Server.Controllers
             return Ok(paginatedProducts);
         }
 
-        // GET: api/Products/AllProducts to fetch ALL products
+        // GET: api/Products/AllProducts
         [HttpGet("AllProducts")]
         public IActionResult GetAllProducts()
         {
@@ -39,7 +42,7 @@ namespace GumAndHealth.Server.Controllers
             return Ok(products);
         }
 
-        // GET: api/Products/AllCategories to fetch ALL categories
+        // GET: api/Products/AllCategories
         [HttpGet("AllCategories")]
         public IActionResult GetAllCategories()
         {
@@ -70,7 +73,7 @@ namespace GumAndHealth.Server.Controllers
             return Ok(products);
         }
 
-
+        // GET: api/Products/ByPriceRange
         [HttpGet("ByPriceRange")]
         public IActionResult GetProductsByPriceRange([FromQuery] decimal minPrice, [FromQuery] decimal maxPrice)
         {
@@ -88,20 +91,55 @@ namespace GumAndHealth.Server.Controllers
             return Ok(products);
         }
 
-
-        [HttpPost]
-        public IActionResult CreateProduct([FromForm] CreateProductDto createProductDto)
+        // POST: api/Products/AddProduct
+        [HttpPost("AddProduct")]
+        public IActionResult AddProduct([FromForm] CreateProductDto createProductDto)
         {
-            var newProduct = _productRepository.CreateProduct(createProductDto);
-            return Ok(newProduct);
+            string fileName = null;
+
+            if (createProductDto.Image1 != null)
+            {
+                // Define where the image will be saved
+                var uploads = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads/products");
+
+                // Ensure the folder exists
+                if (!Directory.Exists(uploads))
+                {
+                    Directory.CreateDirectory(uploads);
+                }
+
+                // Generate a unique file name for the image
+                fileName = Guid.NewGuid().ToString() + Path.GetExtension(createProductDto.Image1.FileName);
+                var filePath = Path.Combine(uploads, fileName);
+
+                // Save the image to the file system
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    createProductDto.Image1.CopyTo(stream);
+                }
+            }
+
+            // Create the new product object
+            var product = new Product
+            {
+                Name = createProductDto.Name,
+                Description = createProductDto.Description,
+                Price = createProductDto.Price,
+                CategoryId = createProductDto.CategoryId,
+                Image1 = fileName != null ? "/uploads/products/" + fileName : null
+            };
+
+            // Add the product to the database
+            _context.Products.Add(product);
+            _context.SaveChanges();
+
+            return Ok(product);
         }
 
-
-
+        // PUT: api/Products/{id}
         [HttpPut("{id}")]
         public IActionResult UpdateProduct(int id, [FromForm] UpdateProductDto updateProductDto)
         {
-            // Find the product by ID in the repository
             var updatedProduct = _productRepository.UpdateProduct(id, updateProductDto);
 
             if (updatedProduct == null)
@@ -112,11 +150,10 @@ namespace GumAndHealth.Server.Controllers
             return Ok(updatedProduct);
         }
 
-
+        // DELETE: api/Products/{id}
         [HttpDelete("{id}")]
         public IActionResult DeleteProduct(int id)
         {
-            // Call the repository method to delete the product
             var result = _productRepository.DeleteProduct(id);
 
             if (!result)
@@ -126,8 +163,5 @@ namespace GumAndHealth.Server.Controllers
 
             return Ok($"Product with ID {id} was successfully deleted.");
         }
-
-        // Additional methods...
     }
-
 }

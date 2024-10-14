@@ -42,7 +42,7 @@ export class ProductCardComponent implements OnInit {
 
   // Load all products initially
   loadAllProducts(): void {
-    this.productService.getProducts().subscribe(
+    this.productService.getAllProducts().subscribe(
       (response) => {
         this.products = response.map((product) => ({
           ...product,
