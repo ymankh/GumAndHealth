@@ -20,7 +20,7 @@ import { GymsComponent } from './pages/gyms/gyms.component';
 import { RecipesComponent } from './nutrition/recipes/recipes.component';
 import { RecipeDetailComponent } from './nutrition/recipe-detail/recipe-detail.component';
 import { SingleGymComponent } from './pages/single-gym/single-gym.component';
-import { AdminClassesComponent } from './pages/admin-classes/admin-classes.component';
+//import { AdminClassesComponent } from './pages/admin-classes/admin-classes.component';
 import { ClassDetailsComponent } from './pages/class-details/class-details.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
@@ -47,11 +47,15 @@ import { EditScheduleComponent } from './pages/admin/edit-schedule/edit-schedule
 import { AllScheduleComponent } from './pages/admin/all-schedule/all-schedule.component';
 import { GetInstructorComponent } from './pages/admin/get-instructor/get-instructor.component';
 import { EditInstructorComponent } from './pages/admin/edit-instructor/edit-instructor.component';
+import { GetAllUserComponent } from './pages/admin/get-all-user/get-all-user.component';
 import { AdminShowClassesComponent } from './pages/admin/admin-show-classes/admin-show-classes.component';
 import { AddNewClassComponent } from './pages/admin/add-new-class/add-new-class.component';
 
 import { GetProductComponent } from './pages/admin/get-product/get-product.component';
 import { EditProductComponent } from './pages/admin/edit-product/edit-product.component';
+import { AdminUserComponent } from './pages/admin/admin-user/admin-user.component';
+import { GetContactMessagesComponent } from './pages/admin/get-contact-messages/get-contact-messages.component';
+import { PostScheduleComponent } from './pages/admin/post-schedule/post-schedule.component';
 import { GetGymAllComponent } from './pages/admin/get-gym-all/get-gym-all.component';
 import { POSTGymComponent } from './pages/admin/post-gym/post-gym.component';
 
@@ -63,7 +67,7 @@ import { POSTGymComponent } from './pages/admin/post-gym/post-gym.component';
     HeaderComponent,
     FooterComponent,
     AdminComponent,
-    AdminClassesComponent,
+    //AdminClassesComponent,
     AdminClassEditComponent,
     AboutComponent,
     BlogComponent,
@@ -105,10 +109,14 @@ import { POSTGymComponent } from './pages/admin/post-gym/post-gym.component';
 
     GetInstructorComponent,
       EditInstructorComponent,
+      GetAllUserComponent,
       AdminShowClassesComponent,
       AddNewClassComponent,
       GetProductComponent,
       EditProductComponent,
+      AdminUserComponent,
+      GetContactMessagesComponent,
+      PostScheduleComponent,
       GetGymAllComponent,
       POSTGymComponent,
   ],

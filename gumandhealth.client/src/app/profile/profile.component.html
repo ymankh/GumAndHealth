@@ -74,93 +74,103 @@
             </div>
           </div>
         </div>
- 
-        <div class="profile-container">
-          <div class="card">
-            <div class="card-body">
-              <h6 class="mb-3">User Subscriptions</h6>
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>Subscription ID</th>
-                    <th>Service Name</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let sub of userSubscriptions">
-                    <td>{{ sub.id }}</td>
-                    <td>{{ sub.gymName }}</td>
-                    <td>{{ sub.startDate }}</td>
-                    <td>{{ sub.endDate }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+        <div class="card">
+          <div class="card-body">
+            <h6 class="mb-3">User Subscriptions</h6>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Subscription ID</th>
+                  <th>Service Name</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let sub of userSubscriptions">
+                  <td>{{ sub.id }}</td>
+                  <td>{{ sub.gymName }}</td>
+                  <td>{{ sub.startDate | date: 'yyyy-MM-dd' }}</td>
+                  <td>{{ sub.endDate | date: 'yyyy-MM-dd' }}</td>
+                  <td>
+                    <span [ngClass]="{ 'text-success': isActive(sub.endDate), 'text-danger': !isActive(sub.endDate) }">
+                      {{ isActive(sub.endDate) ? 'Active' : 'Not Active' }}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-
-          <div class="card mt-4">
-            <div class="card-body">
-              <h6 class="mb-3">User Orders</h6>
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>Order ID</th>
-                    <th>TotalAmount</th>
-                    <th>Date</th>
-                    <th>Items</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let order of userOrders">
-                    <td>{{ order.id }}</td>
-                    <td>{{ order.totalAmount }}</td>
-                    <td>{{ order.orderDate  }}</td> <!-- تنسيق التاريخ -->
-                    <td>
-                      <ul>
-                        <li *ngFor="let order of order.orderItems">
-                          {{ order.productName }} ({{ order.quantity }}) - ${{ order.price }}
-                        </li>
-                      </ul>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <div *ngIf="userOrders.length === 0" class="alert alert-info">
-                No orders found for this user. <!-- رسالة عند عدم وجود طلبات -->
-              </div>
-            </div>
-          </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         </div>
+        <div class="card mt-4">
+          <div class="card-body">
+            <h6 class="mb-3">User Orders</h6>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Total Amount</th>
+                  <th>Date</th>
+                  <th>Product Name</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let order of userOrders">
+                  <td>{{ order.id }}</td>
+                  <td>{{ order.totalAmount }} JOD</td>
+                  <td>{{ order.orderDate | date: 'yyyy-MM-dd' }}</td> <!-- تنسيق التاريخ -->
+
+                  <td *ngFor="let item of order.orderItems; let i = index">
+                    {{ item.productName }}
+                    <span *ngIf="i < order.orderItems.length - 1">, </span> <!-- إضافة فاصلة بين العناصر -->
+                  </td>
+                  <td *ngFor="let item of order.orderItems; let i = index">
+                    {{ item.quantity }}
+                    <span *ngIf="i < order.orderItems.length - 1">, </span> <!-- إضافة فاصلة بين العناصر -->
+                  </td>
+                  <td *ngFor="let item of order.orderItems; let i = index">
+                    {{ item.price }}JOD
+                    <span *ngIf="i < order.orderItems.length - 1">, </span> <!-- إضافة فاصلة بين العناصر -->
+                  </td>
+
+                </tr>
+              </tbody>
+            </table>
+            <div *ngIf="userOrders.length === 0" class="alert alert-info">
+              No orders found for this user. <!-- رسالة عند عدم وجود طلبات -->
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>
     </div>
   </div>
 

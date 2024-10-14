@@ -1,0 +1,74 @@
+.table-container {
+  width: 50%; /* Make the table-container take up most of the page width */
+   /* Center the table on the page */
+  overflow-x: auto; /* Enable horizontal scrolling for small screens */
+  padding: 20px; /* Add padding around the table */
+  margin-left:30%
+}
+
+.styled-table {
+  width: 100%; /* Make the table take up full width of its container */
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 16px;
+  text-align: left;
+}
+
+  .styled-table thead tr {
+    background-color: #28a745;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+  }
+
+  .styled-table th, .styled-table td {
+    padding: 12px 15px;
+    border: 1px solid #dddddd;
+  }
+
+  .styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+
+    .styled-table tbody tr:nth-of-type(even) {
+      background-color: #f3f3f3;
+    }
+
+    .styled-table tbody tr:last-of-type {
+      border-bottom: 2px solid #28a745;
+    }
+
+  .styled-table img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+
+.view-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+  .view-button:hover {
+    background-color: #0056b3;
+  }
+
+@media (max-width: 768px) {
+  .styled-table th, .styled-table td {
+    padding: 8px 10px;
+    font-size: 14px; /* Smaller font size for small screens */
+  }
+
+  .view-button {
+    padding: 6px 10px;
+  }
+
+  .table-container {
+    width: 100%; /* Ensure table is responsive and fits the screen */
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+}

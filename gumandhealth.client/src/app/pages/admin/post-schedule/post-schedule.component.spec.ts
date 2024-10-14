@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminClassesComponent } from './admin-classes.component';
+import { PostScheduleComponent } from './post-schedule.component';
 
-describe('AdminClassesComponent', () => {
-  let component: AdminClassesComponent;
-  let fixture: ComponentFixture<AdminClassesComponent>;
+describe('PostScheduleComponent', () => {
+  let component: PostScheduleComponent;
+  let fixture: ComponentFixture<PostScheduleComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AdminClassesComponent]
+      declarations: [PostScheduleComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AdminClassesComponent);
+    fixture = TestBed.createComponent(PostScheduleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

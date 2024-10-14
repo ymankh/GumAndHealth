@@ -14,7 +14,7 @@ import { GymsComponent } from './pages/gyms/gyms.component';
 import { RecipesComponent } from './nutrition/recipes/recipes.component';
 import { RecipeDetailComponent } from './nutrition/recipe-detail/recipe-detail.component';
 import { SingleGymComponent } from './pages/single-gym/single-gym.component';
-import { AdminClassesComponent } from './pages/admin-classes/admin-classes.component';
+
 import { ClassDetailsComponent } from './pages/class-details/class-details.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -47,6 +47,9 @@ import { AdminShowClassesComponent } from './pages/admin/admin-show-classes/admi
 import { AddNewClassComponent } from './pages/admin/add-new-class/add-new-class.component';
 import { GetProductComponent } from './pages/admin/get-product/get-product.component';
 import { EditProductComponent } from './pages/admin/edit-product/edit-product.component';
+import { GetAllUserComponent } from './pages/admin/get-all-user/get-all-user.component';
+import { GetContactMessagesComponent } from './pages/admin/get-contact-messages/get-contact-messages.component';
+import { PostScheduleComponent } from './pages/admin/post-schedule/post-schedule.component';
 import { GetGymAllComponent } from './pages/admin/get-gym-all/get-gym-all.component';
 import { POSTGymComponent } from './pages/admin/post-gym/post-gym.component';
 
@@ -59,6 +62,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'Schedule', component: AdminScheduleComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'Messages', component: GetContactMessagesComponent },
   { path: 'admin/edit-class/:id', component: AdminClassEditComponent },
   { path: 'nutrition/tips', component: TipsComponent },
   { path: 'gyms', component: GymsComponent },
@@ -71,7 +75,9 @@ const routes: Routes = [
   { path: 'edit-profile/:id', component: EditProfileComponent },
   { path: 'Gyms', component: GymsComponent },
   { path: 'singleGym/:id', component: SingleGymComponent },
-  { path: 'admin/classes', component: AdminClassesComponent },
+  { path: 'AddScedule', component: PostScheduleComponent },
+
+
   { path: 'class-details/:id', component: ClassDetailsComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'singleGym', component: SingleGymComponent },
@@ -110,6 +116,7 @@ const routes: Routes = [
   { path: 'post-gym', component: POSTGymComponent },
 
   { path: 'view-detiles-admin/:id', component: ViewDetilesAdminComponent },
+  { path: 'GetAllUser', component: GetAllUserComponent },
   { path: 'recipe-admin-post', component: RecipeAdminPostComponent },
   { path: 'admin/products', component: AdminProductsComponent },
   { path: 'products/category/:id', component: ProductCardComponent }, // or ProductsComponent if that's the correct name

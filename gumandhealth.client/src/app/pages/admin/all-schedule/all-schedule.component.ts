@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AhmadService } from '../../../services/ahmad.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { AhmadService } from '../../../services/ahmad.service';
 export class AllScheduleComponent implements OnInit {
   schedules: any[] = [];
 
-  constructor(private ahmadService: AhmadService) { }
+  constructor(private ahmadService: AhmadService, private router: Router) { }
 
   ngOnInit(): void {
     this.loadAllSchedules();
@@ -25,4 +26,9 @@ export class AllScheduleComponent implements OnInit {
       }
     );
   }
+
+  viewDetails(id: number): void {
+    this.router.navigate(['/edit-schedule', id]);
+  }
+
 }

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { root } from '../shared/constants';
 import { Observable } from 'rxjs';
+import { ScheduleDTO } from '../pages/admin/edit-schedule/ScheduleDTO';
 
 
 
@@ -12,11 +13,17 @@ import { Observable } from 'rxjs';
 })
 export class AhmadService {
   constructor(private http: HttpClient) { }
-  
+
+
+
+  getAllMessages(): Observable<any[]> {
+    return this.http.get<any[]>("https://localhost:7280/api/Contacts");
+  }
+
 
   addContact(data: any): Observable<any> {
     debugger
-    return this.http.post<any>("https://localhost:44325/api/Contacts", data)
+    return this.http.post<any>("https://localhost:7280/api/Contacts", data)
   }
   private apiUrl = "https://localhost:44325/api/";
 
@@ -43,6 +50,7 @@ export class AhmadService {
 
 
   ////////////////////////// for scedule
+  
 
   addSchedule(scheduleData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}scdule/AddNewClassSchedule`, scheduleData);
@@ -51,18 +59,28 @@ export class AhmadService {
 
 
 
+ 
+
+
 
   getScheduleById(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/GetScheduleById/${id}`); // Adjust endpoint as necessary
+    return this.http.get<any>(`https://localhost:44325/api/scdule/GetScheduleByID/${id}`);
   }
 
-  updateSchedule(id: number, scheduleData: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/UpdateClassSchedule/${id}`, scheduleData);
+
+  updateSchedule(id: number, scheduleData: ScheduleDTO): Observable<any> {
+    return this.http.put(`  https://localhost:44325/api/scdule/UpdateClassSchedule/${id}`, scheduleData);
   }
+
 
   // New method to get all schedules
   getAllSchedules(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}scdule/GetAllSchedules`); // Adjust the endpoint as needed
   }
+
+  deleteSchedule(id: number): Observable<any> {
+    return this.http.delete<any>(`https://localhost:44325/api/scdule/DeleteClassSchedule/${id}`);
+  }
+
 
 }

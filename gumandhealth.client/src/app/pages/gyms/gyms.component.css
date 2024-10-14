@@ -69,3 +69,12 @@ h4 {
   .gym-type span {
     color: #28a745; /* Green for mixed gym */
   }
+a.btn.btn-primary.mt-3 {
+  background-color: #82d026;
+}
+a.btn.btn-primary.mt-3 {
+  border-color: #82d026;
+}
+.gym-type[_ngcontent-ng-c400351717] span[_ngcontent-ng-c400351717] {
+  color: #82d026;
+}
