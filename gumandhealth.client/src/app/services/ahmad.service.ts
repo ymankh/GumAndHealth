@@ -50,12 +50,16 @@ export class AhmadService {
 
 
   ////////////////////////// for scedule
+  
 
   addSchedule(scheduleData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}scdule/AddNewClassSchedule`, scheduleData);
   }
 
 
+
+
+ 
 
 
 

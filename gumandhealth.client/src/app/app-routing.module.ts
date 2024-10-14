@@ -49,6 +49,7 @@ import { GetProductComponent } from './pages/admin/get-product/get-product.compo
 import { EditProductComponent } from './pages/admin/edit-product/edit-product.component';
 import { GetAllUserComponent } from './pages/admin/get-all-user/get-all-user.component';
 import { GetContactMessagesComponent } from './pages/admin/get-contact-messages/get-contact-messages.component';
+import { PostScheduleComponent } from './pages/admin/post-schedule/post-schedule.component';
 
 
 const routes: Routes = [
@@ -72,6 +73,7 @@ const routes: Routes = [
   { path: 'edit-profile/:id', component: EditProfileComponent },
   { path: 'Gyms', component: GymsComponent },
   { path: 'singleGym/:id', component: SingleGymComponent },
+  { path: 'AddScedule', component: PostScheduleComponent },
 
 
   { path: 'class-details/:id', component: ClassDetailsComponent },

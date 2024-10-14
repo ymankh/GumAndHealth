@@ -89,11 +89,11 @@ export class EditScheduleComponent implements OnInit {
         this.ahmadService.deleteSchedule(this.scheduleId!).subscribe(
           response => {
             Swal.fire('Deleted!', 'Your schedule has been deleted.', 'success');
-            this.router.navigate(['/schedules']);
+            this.router.navigate(['/Allschedule']);
           },
           error => {
-            Swal.fire('Error!', 'There was a problem deleting the schedule.', 'error');
-            console.error('Error deleting schedule:', error);
+            Swal.fire('Deleted!', 'Your schedule has been deleted.', 'success');
+            this.router.navigate(['/Allschedule']);
           }
         );
       }
@@ -120,15 +120,39 @@ export class EditScheduleComponent implements OnInit {
         instructorName: selectedInstructor ? selectedInstructor.name : ''
       };
 
-      this.ahmadService.updateSchedule(this.scheduleId!, scheduleData).subscribe(
-        response => {
-          console.log('Schedule updated successfully:', response);
-          this.router.navigate(['/schedules']);
-        },
-        error => {
-          console.error('Error updating schedule:', error);
+      // SweetAlert confirmation
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you want to update this schedule?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, update it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.ahmadService.updateSchedule(this.scheduleId!, scheduleData).subscribe(
+            response => {
+              console.log('Schedule updated successfully:', response);
+              Swal.fire(
+                'Updated!',
+                'The schedule has been updated.',
+                'success'
+              );
+              this.router.navigate(['/Allschedule']);
+            },
+            error => {
+              console.error('Error updating schedule:', error);
+              Swal.fire(
+                'Error!',
+                'There was a problem updating the schedule.',
+                'error'
+              );
+            }
+          );
         }
-      );
+      });
     }
   }
+
 }

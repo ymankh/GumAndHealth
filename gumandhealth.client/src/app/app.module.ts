@@ -55,6 +55,7 @@ import { GetProductComponent } from './pages/admin/get-product/get-product.compo
 import { EditProductComponent } from './pages/admin/edit-product/edit-product.component';
 import { AdminUserComponent } from './pages/admin/admin-user/admin-user.component';
 import { GetContactMessagesComponent } from './pages/admin/get-contact-messages/get-contact-messages.component';
+import { PostScheduleComponent } from './pages/admin/post-schedule/post-schedule.component';
 
 @NgModule({
   declarations: [
@@ -113,6 +114,7 @@ import { GetContactMessagesComponent } from './pages/admin/get-contact-messages/
       EditProductComponent,
       AdminUserComponent,
       GetContactMessagesComponent,
+      PostScheduleComponent,
   ],
   imports: [
     BrowserModule,
