@@ -6,7 +6,7 @@
 
 <!-- Add Button -->
 <div class="text-center mb-3">
-  <a routerLink="/post-gym" class="btn btn-dark rounded-pill shadow-sm">Add New Recipe</a>
+  <a routerLink="/post-gym" class="btn btn-dark rounded-pill shadow-sm">Add New gym</a>
 
 </div>
 
@@ -34,14 +34,16 @@
           </td>
           <td>{{ service.name }}</td>
           <td>{{ service.description }}</td>
-          <td>{{ service.pricePerMonth | currency }}</td>
+          <td>{{ service.pricePerMonth | currency:'JOD' }}</td>
           <td>{{ service.womenShiftStart }} - {{ service.womenShiftEnd }}</td>
           <td>{{ service.menShiftStart }} - {{ service.menShiftEnd }}</td>
           <td>{{ service.isMixed ? 'Yes' : 'No' }}</td>
           <td>
             <button class="btn btn-danger btn-sm" (click)="confirmDeleteGymService(service.id)">Delete</button>
-            <!--<button class="btn btn-warning btn-sm" (click)="editGymService(service.id)">Edit</button>
-  -->
+            <br />            <br />
+
+
+            <button class="btn btn-warning btn-sm" (click)="editGymService(service.id)">Edit</button>
           </td>
         </tr>
       </tbody>

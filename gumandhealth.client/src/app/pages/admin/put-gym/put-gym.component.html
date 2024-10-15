@@ -1,0 +1,81 @@
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+  <div class="card" style="width: 50%; padding: 20px;">
+    <h2 class="card-title text-center">Edit Gym Service</h2>
+    <form [formGroup]="gymForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+      <!-- Gym Service Name -->
+      <div class="form-group">
+        <label for="name">Gym Service Name</label>
+        <input id="name" class="form-control" formControlName="name" type="text" />
+      </div>
+
+      <!-- Description -->
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" class="form-control" formControlName="description"></textarea>
+      </div>
+
+      <!-- Price Per Month -->
+      <div class="form-group">
+        <label for="pricePerMonth">Price Per Month</label>
+        <input id="pricePerMonth" class="form-control" formControlName="pricePerMonth" type="number" />
+      </div>
+
+      <!-- Women Shift Start -->
+      <div class="form-group">
+        <label for="womenShiftStart">Women Shift Start</label>
+        <input id="womenShiftStart" class="form-control" formControlName="womenShiftStart" type="time" />
+      </div>
+
+      <!-- Women Shift End -->
+      <div class="form-group">
+        <label for="womenShiftEnd">Women Shift End</label>
+        <input id="womenShiftEnd" class="form-control" formControlName="womenShiftEnd" type="time" />
+      </div>
+
+      <!-- Men Shift (Display only if isMixed is true) -->
+      <div *ngIf="gymForm.get('isMixed')?.value" class="form-group">
+        <label for="menShiftStart">Men Shift Start</label>
+        <input id="menShiftStart" class="form-control" formControlName="menShiftStart" type="time" />
+      </div>
+
+      <div *ngIf="gymForm.get('isMixed')?.value" class="form-group">
+        <label for="menShiftEnd">Men Shift End</label>
+        <input id="menShiftEnd" class="form-control" formControlName="menShiftEnd" type="time" />
+      </div>
+
+      <!-- Is Mixed -->
+      <div class="form-group">
+        <label>Is Mixed?</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" formControlName="isMixed" id="isMixedTrue" [value]="true">
+          <label class="form-check-label" for="isMixedTrue">Yes</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" formControlName="isMixed" id="isMixedFalse" [value]="false">
+          <label class="form-check-label" for="isMixedFalse">No</label>
+        </div>
+      </div>
+
+      <!-- Display Previous Image (if available) -->
+      <div *ngIf="previousImageUrl" class="form-group text-center">
+        <label>Previous Image:</label>
+        <div>
+          <img src="https://localhost:7280/api/RecipeCategory/getImage/{{previousImageUrl}}" alt="Previous Gym Service Image" class="img-fluid" style="max-width: 200px; margin-bottom: 10px;">
+        </div>
+      </div>
+
+      <!-- Upload New Image -->
+      <div class="form-group">
+        <label for="image">Upload New Image</label>
+        <input id="image" class="form-control" type="file" (change)="onFileSelected($event)" />
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-center">
+        <button class="btn btn-dark" type="submit" [disabled]="!gymForm.valid">Update Gym Service</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-admin></app-admin>

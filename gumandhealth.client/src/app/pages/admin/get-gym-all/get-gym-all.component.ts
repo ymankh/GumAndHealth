@@ -1,37 +1,47 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router'; // Import Router
 import { NajlaaService } from '../../../services/najlaa.service';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-get-gym-all',
   templateUrl: './get-gym-all.component.html',
-  styleUrl: './get-gym-all.component.css'
+  styleUrls: ['./get-gym-all.component.css'] // Fix typo (styleUrl -> styleUrls)
 })
 
 export class GetGymAllComponent {
-  gymServices: any[] = []; 
+  gymServices: any[] = [];
   errorMessage: string = '';
-    router: any;
-  
-  constructor(private najlaaService: NajlaaService) { }
+
+  constructor(private najlaaService: NajlaaService, private router: Router) { } // Inject Router
+
   ngOnInit(): void {
-    // جلب بيانات الخدمات عند تهيئة المكون
+    // Fetch gym services on component initialization
     this.getAllGymServices();
   }
-  addGymService(): void {
-    this.router.navigate(['post-gym']); // Navigate to the '/post-gym' page
+
+  editGymService(id: number): void {
+    // Redirect to the edit page with the gym ID
+    this.router.navigate(['put-gym', id]);
   }
+
+  addGymService(): void {
+    // Navigate to the '/post-gym' page
+    this.router.navigate(['post-gym']);
+  }
+
   getAllGymServices() {
     this.najlaaService.getGymServices().subscribe({
       next: (data: any[]) => {
-        this.gymServices = data; // حفظ البيانات في المصفوفة
+        this.gymServices = data; // Save data in array
       },
       error: (error: any) => {
         console.error('Error fetching gym services', error);
-        this.errorMessage = 'Error fetching gym services'; // حفظ رسالة الخطأ
+        this.errorMessage = 'Error fetching gym services'; // Save error message
       }
     });
   }
+
   // Confirmation before deletion
   confirmDeleteGymService(id: number): void {
     Swal.fire({
@@ -62,7 +72,7 @@ export class GetGymAllComponent {
           timer: 2000
         }).then(() => {
           // Optionally refresh or navigate to a different page
-          this.router.navigate(['/get-gym-all']); // Navigate to gym service list page
+          this.getAllGymServices(); // Refresh the list after deletion
         });
       },
       (error: any) => {
