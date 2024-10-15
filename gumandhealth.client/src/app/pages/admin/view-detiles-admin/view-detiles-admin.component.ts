@@ -9,7 +9,7 @@ import { NajlaaService } from '../../../services/najlaa.service';
   styleUrls: ['./view-detiles-admin.component.css']
 })
 export class ViewDetilesAdminComponent implements OnInit {
-  recipe: any; // لتخزين تفاصيل الوصفة
+  recipes: any[] = [];  // Changed from 'recipe' to 'recipes'
 
   constructor(
     private route: ActivatedRoute,
@@ -18,42 +18,35 @@ export class ViewDetilesAdminComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id'); // الحصول على معرف الوصفة من المسار
+    const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.najlaaService.getRecipeById(+id).subscribe(
-        recipe => {
-          console.log(recipe);
-          this.recipe = recipe; // حفظ تفاصيل الوصفة
+      this.najlaaService.getRecipesByCategory1(id).subscribe(
+        (recipes) => {
+          console.log(recipes);
+          this.recipes = recipes;  // Save the list of recipes
         },
-        error => {
-          console.error('Error fetching recipe:', error);
+        (error) => {
+          console.error('Error fetching recipes:', error);
         }
       );
     }
   }
 
   editRecipe(id: number): void {
-    // Redirect to the edit page with the recipe ID
     this.router.navigate(['/recipe-admin-put', id]);
   }
 
-  backToRecipes(): void {
-    // Navigate back to the recipes list
-    this.router.navigate(['/recipe-category-admin']);
-  }
-
-  generatePDF(): void {
-    // كود توليد PDF كما هو
-    if (this.recipe) {
+  generatePDF(recipe: any): void {
+    if (recipe) {
       const doc = new jsPDF();
       doc.setFontSize(18);
-      doc.text(this.recipe.name, 10, 10);
+      doc.text(recipe.name, 10, 10);
       doc.setFontSize(12);
-      doc.text(`Description: ${this.recipe.description}`, 10, 30);
-      doc.text(`Calories: ${this.recipe.caloriesCount}`, 10, 50);
+      doc.text(`Description: ${recipe.description}`, 10, 30);
+      doc.text(`Calories: ${recipe.caloriesCount}`, 10, 50);
       doc.text('Ingredients:', 10, 70);
 
-      let ingredients = this.recipe.ingredients;
+      let ingredients = recipe.ingredients;
       if (typeof ingredients === 'string') {
         ingredients = ingredients.split(',');
       }
@@ -67,8 +60,8 @@ export class ViewDetilesAdminComponent implements OnInit {
       }
 
       doc.text('Recipe:', 10, 125);
-      doc.text(this.recipe.recipe1, 10, 135);
-      doc.save(`${this.recipe.name}.pdf`);
+      doc.text(recipe.recipe1, 10, 135);
+      doc.save(`${recipe.name}.pdf`);
     }
   }
 }

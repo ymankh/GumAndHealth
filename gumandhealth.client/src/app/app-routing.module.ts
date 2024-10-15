@@ -53,6 +53,7 @@ import { PostScheduleComponent } from './pages/admin/post-schedule/post-schedule
 import { GetGymAllComponent } from './pages/admin/get-gym-all/get-gym-all.component';
 import { POSTGymComponent } from './pages/admin/post-gym/post-gym.component';
 import { PutGymComponent } from './pages/admin/put-gym/put-gym.component';
+import { RecipescateoryComponent } from './nutrition/recipescateory/recipescateory.component';
 
 
 const routes: Routes = [
@@ -67,8 +68,8 @@ const routes: Routes = [
   { path: 'admin/edit-class/:id', component: AdminClassEditComponent },
   { path: 'nutrition/tips', component: TipsComponent },
   { path: 'gyms', component: GymsComponent },
-  { path: 'recipes', component: RecipesComponent },
-  { path: 'recipes/:id', component: RecipeDetailComponent },
+  { path: 'recipes/:id', component: RecipesComponent },
+  { path: 'recipes1/:id', component: RecipeDetailComponent },
   { path: 'gym/:id', component: SingleGymComponent },
   { path: 'nutrition', component: NutritionComponent },
   { path: 'Profile', component: ProfileComponent },
@@ -116,6 +117,7 @@ const routes: Routes = [
 
   { path: 'get-gym-all', component:GetGymAllComponent },
   { path: 'post-gym', component: POSTGymComponent },
+  { path: 'recipescateory', component: RecipescateoryComponent  },
 
   { path: 'view-detiles-admin/:id', component: ViewDetilesAdminComponent },
   { path: 'GetAllUser', component: GetAllUserComponent },

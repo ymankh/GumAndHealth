@@ -16,10 +16,11 @@ export class RecipeDetailComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id'); // الحصول على معرف الوصفة من المسار
+
     if (id) {
       this.najlaaService.getRecipeById(+id).subscribe(
         recipe => {
-          console.log(recipe); // طباعة البيانات للتمكن من فحصها
+          console.log("recipe",recipe); // طباعة البيانات للتمكن من فحصها
           this.recipe = recipe; // حفظ تفاصيل الوصفة
         },
         error => {

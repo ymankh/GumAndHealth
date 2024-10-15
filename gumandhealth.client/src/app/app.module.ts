@@ -59,6 +59,7 @@ import { PostScheduleComponent } from './pages/admin/post-schedule/post-schedule
 import { GetGymAllComponent } from './pages/admin/get-gym-all/get-gym-all.component';
 import { POSTGymComponent } from './pages/admin/post-gym/post-gym.component';
 import { PutGymComponent } from './pages/admin/put-gym/put-gym.component';
+import { RecipescateoryComponent } from './nutrition/recipescateory/recipescateory.component';
 
 @NgModule({
   declarations: [
@@ -121,6 +122,7 @@ import { PutGymComponent } from './pages/admin/put-gym/put-gym.component';
       GetGymAllComponent,
       POSTGymComponent,
       PutGymComponent,
+      RecipescateoryComponent,
   ],
   imports: [
     BrowserModule,
