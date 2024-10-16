@@ -24,7 +24,7 @@ export class AhmadService {
 
 
   getAllMessages(): Observable<any[]> {
-    return this.http.get<any[]>("https://localhost:7280/api/Contacts");
+    return this.http.get<any[]>("https://localhost:44325/api/Contacts");
   }
 
 
@@ -50,9 +50,9 @@ export class AhmadService {
 
   addContact(data: any): Observable<any> {
     debugger
-    return this.http.post<any>("https://localhost:7280/api/Contacts", data)
+    return this.http.post<any>("https://localhost:44325/api/Contacts", data)
   }
-  private apiUrl = "https://localhost:7280/api/";
+  private apiUrl = "https://localhost:44325/api/";
 
 
   getClassById(id: number): Observable<any> {
