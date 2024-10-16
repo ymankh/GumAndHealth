@@ -1,29 +1,7 @@
-table {
-  width: 50%;
-  border-collapse: collapse;
-}
-
-th, td {
-  padding: 10px;
-  text-align: left;
-}
-
-thead {
-  background-color: #f2f2f2;
-}
-.table th, .table td {
-  vertical-align: middle;
-}
-
-.table th {
-  background-color: #343a40;
-  color: #ffffff;
-}
-
-.table img {
-  border-radius: 50%;
-}
-
-.alert {
-  margin-bottom: 20px;
+table caption {
+  caption-side: top; /* هذا يضمن أن الـ <caption> يظهر في أعلى الجدول */
+  font-size: 3rem; /* حجم الخط */
+  font-weight: bold; /* لجعل النص عريضًا */
+  margin-bottom: 10px; /* المسافة بين الـ <caption> والجدول */
+  text-align:center;
 }

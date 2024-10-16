@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import jsPDF from 'jspdf';
 import { NajlaaService } from '../../../services/najlaa.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-view-detiles-admin',
@@ -9,7 +10,7 @@ import { NajlaaService } from '../../../services/najlaa.service';
   styleUrls: ['./view-detiles-admin.component.css']
 })
 export class ViewDetilesAdminComponent implements OnInit {
-  recipes: any[] = [];  // Changed from 'recipe' to 'recipes'
+  recipes: any[] = [];  // List of recipes
 
   constructor(
     private route: ActivatedRoute,
@@ -30,6 +31,46 @@ export class ViewDetilesAdminComponent implements OnInit {
         }
       );
     }
+  }
+
+  deleteRecipe(id: number): void {
+    // Show SweetAlert for delete confirmation
+    Swal.fire({
+      title: 'هل أنت متأكد؟',
+      text: 'لن تتمكن من التراجع عن هذه العملية!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'نعم، احذفها!',
+      cancelButtonText: 'إلغاء'
+    }).then((result: { isConfirmed: any; }) => {
+      if (result.isConfirmed) {
+        // If user confirms, proceed with deletion
+        this.najlaaService.deleteRecipe(id).subscribe(
+          () => {
+            // Show success message
+            Swal.fire(
+              'تم الحذف!',
+              'تم حذف الوصفة بنجاح.',
+              'success'
+            );
+
+            // Update the recipe list after deletion
+            this.recipes = this.recipes.filter(recipe => recipe.id !== id);
+          },
+          (error: any) => {
+            console.error('Error deleting recipe:', error);
+            // Show error message
+            Swal.fire(
+              'خطأ!',
+              'حدث خطأ أثناء حذف الوصفة.',
+              'error'
+            );
+          }
+        );
+      }
+    });
   }
 
   editRecipe(id: number): void {

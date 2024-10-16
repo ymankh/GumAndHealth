@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NajlaaService } from '../../../services/najlaa.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2'; // Ensure to import SweetAlert2
 
 @Component({
   selector: 'app-recipe-admin-put',
@@ -94,11 +95,26 @@ export class RecipeAdminPutComponent implements OnInit {
     this.najlaaService.updateRecipe(this.recipeId!, formData).subscribe({
       next: (response: any) => {
         console.log('Recipe updated successfully', response);
-        // Navigate to the recipe listing or any other appropriate page
-        this.router.navigate(['/view-detiles-admin', this.recipeForm.get('recipeCategoryId')?.value]);
+        // Show success message using SweetAlert2
+        Swal.fire({
+          icon: 'success',
+          title: 'Recipe updated successfully!',
+          text: 'Your recipe has been updated.',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          // Navigate to the recipe listing or any other appropriate page
+          this.router.navigate(['/view-detiles-admin', this.recipeForm.get('recipeCategoryId')?.value]);
+        });
       },
       error: (error: any) => {
         console.error('Error occurred while updating recipe', error);
+        // Show error message in case of failure
+        Swal.fire({
+          icon: 'error',
+          title: 'Failed to update recipe',
+          text: 'An error occurred while updating the recipe. Please try again.',
+          confirmButtonText: 'OK'
+        });
       }
     });
   }

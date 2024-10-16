@@ -1,8 +1,10 @@
 <!-- Main Content (المحتوى الرئيسي) -->
+
 <div class="container-fluid">
   <div class="row justify-content-end">
     <div class="col-md-10">
-      <h1 class="text-center mb-4 font-weight-bold">Search Orders</h1>
+      <!-- Header باللون الأسود -->
+      <h1 class="text-center mb-4 font-weight-bold text-dark py-2 rounded">Search Orders</h1>
 
       <!-- حقول البحث -->
       <div class="row mb-6 justify-content-end">
@@ -21,8 +23,9 @@
           <input id="productName" [(ngModel)]="productName" placeholder="Enter product name" class="form-control rounded-pill shadow-sm" />
         </div>
 
+        <!-- زر البحث باللون الأسود -->
         <div class="col-md-2 d-flex align-items-end justify-content-end">
-          <button (click)="searchOrders()" class="btn btn-primary rounded-pill w-100 shadow">Search</button>
+          <button (click)="searchOrders()" class="btn btn-dark rounded-pill w-100 shadow">Search</button>
         </div>
       </div>
 
@@ -33,8 +36,8 @@
 
       <!-- تصغير الجدول -->
       <div class="table-responsive d-flex justify-content-center">
-        <table class="table table-striped table-bordered text-center" style="width: 70%;">
-          <thead class="bg-dark text-white">
+        <table class="table table-bordered table-striped text-center">
+          <thead class="bg-black text-white">
             <tr>
               <th>ID</th>
               <th>User Name</th>
@@ -42,9 +45,10 @@
               <th>Total Amount</th>
               <th>Status</th>
               <th>Items</th>
+              <th>Download</th> <!-- Button for downloading PDF -->
             </tr>
           </thead>
-          <tbody>
+          <tbody class="bg-white text-dark">
             <tr *ngFor="let order of orders">
               <td>{{ order.id }}</td>
               <td>{{ order.userName }}</td>
@@ -66,9 +70,13 @@
                   </li>
                 </ul>
               </td>
+              <td>
+                <button (click)="generateUserOrderPDF(order)" class="btn btn-primary rounded-pill shadow-sm">Download PDF</button>
+              </td>
             </tr>
           </tbody>
         </table>
+
       </div>
 
       <!-- رسالة عند عدم وجود طلبات -->
@@ -78,5 +86,72 @@
     </div>
   </div>
 </div>
+
+<!-- Styles -->
+<style>
+  .table th {
+    background-color: #343a40;
+    color: #ffffff;
+    text-align: center;
+  }
+
+  .table td {
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  .table img {
+    border-radius: 8px;
+  }
+
+  .btn-warning {
+    background-color: #f1c40f;
+    color: white;
+  }
+
+  .btn-danger {
+    background-color: #e74c3c;
+    color: white;
+  }
+
+  .btn-info {
+    background-color: #17a2b8;
+    color: white;
+  }
+
+  .btn-dark {
+    background-color: #2d2d2d;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 50px;
+  }
+
+  .table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .col-md-10 {
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  h1 {
+    color: black;
+  }
+
+  /* Badge Styling */
+  .badge-success {
+    background-color: #28a745;
+  }
+
+  .badge-warning {
+    background-color: #ffc107;
+  }
+</style>
 
 <app-admin></app-admin>

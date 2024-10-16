@@ -41,7 +41,11 @@ export class HeaderComponent implements OnInit {
       if (this.searchResults.classServices && this.searchResults.classServices.length > 0) {
         htmlContent += `<h5>Class Services</h5><ul>`;
         this.searchResults.classServices.forEach((service: any) => {
-          htmlContent += `<li><strong>${service.name}</strong>: ${service.pricePerMonth}</li>`;
+          htmlContent += `
+          <li>
+            <strong>${service.name}</strong>: ${service.pricePerMonth}
+            <button class="btn btn-success btn-sm" onclick="window.location.href='/ClassDetails/${service.id}'">View Service</button>
+          </li>`;
         });
         htmlContent += `</ul>`;
       }
@@ -49,7 +53,11 @@ export class HeaderComponent implements OnInit {
       if (this.searchResults.gymServices && this.searchResults.gymServices.length > 0) {
         htmlContent += `<h5>Gym Services</h5><ul>`;
         this.searchResults.gymServices.forEach((service: any) => {
-          htmlContent += `<li><strong>${service.name}</strong>: ${service.description}<strong>${service.pricePerMonth}</strong></li>`;
+          htmlContent += `
+          <li>
+            <strong>${service.name}</strong>: ${service.description} <strong>${service.pricePerMonth}</strong>
+            <button class="btn btn-success btn-sm" onclick="window.location.href='/gym/${service.id}'">View Service</button>
+          </li>`;
         });
         htmlContent += `</ul>`;
       }
@@ -57,7 +65,11 @@ export class HeaderComponent implements OnInit {
       if (this.products && this.searchResults.products.length > 0) {
         htmlContent += `<h5>Products</h5><ul>`;
         this.searchResults.products.forEach((product: any) => {
-          htmlContent += `<li><strong>${product.name}</strong>: ${product.price} JD</li>`;
+          htmlContent += `
+          <li>
+            <strong>${product.name}</strong>: ${product.price} JD
+            <button class="btn btn-success btn-sm" onclick="window.location.href='/products/${product.id}'">View Product</button>
+          </li>`;
         });
         htmlContent += `</ul>`;
       }
@@ -65,7 +77,13 @@ export class HeaderComponent implements OnInit {
       if (this.searchResults.recipes && this.searchResults.recipes.length > 0) {
         htmlContent += `<h5>Recipes</h5><ul>`;
         this.searchResults.recipes.forEach((recipe: any) => {
-          htmlContent += `<li><strong>${recipe.name}</strong>: ${recipe.description}</li>`;
+          console.log("recipe", recipe);
+
+          htmlContent += `
+          <li>
+            <strong>${recipe.name}</strong>: ${recipe.description}
+            <button class="btn btn-success btn-sm" onclick="window.location.href='/recipes1/${recipe.id}'">View Recipe</button>
+          </li>`;
         });
         htmlContent += `</ul>`;
       }
@@ -108,7 +126,7 @@ export class HeaderComponent implements OnInit {
   }
   shouldShowSearch(): boolean {
     // تحديد الصفحات التي تريد إخفاء أو إظهار البحث فيها
-    const hiddenRoutes = ['/admin', '/login', '/profile', '/reset-password', '/cart', '/register', '/about', '/contact', '/password-reset', '/admin-login', '/virifyOtp','/reset-password']; // صفحات لا نريد إظهار البحث فيها
+    const hiddenRoutes = ['/admin', '/login', '/profile', '/reset-password', '/cart', '/register', '/about', '/contact', '/password-reset', '/admin-login', '/virifyOtp', '/reset-password', '/classes','/class-details/:id']; // صفحات لا نريد إظهار البحث فيها
     return !hiddenRoutes.includes(this.router.url); // يظهر البحث إذا لم تكن الصفحة الحالية ضمن القائمة
   }
 
