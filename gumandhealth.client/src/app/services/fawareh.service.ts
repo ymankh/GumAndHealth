@@ -72,7 +72,7 @@ export class FawarehService {
 
 
   /// Delete Class Admin Side //////////
-  private apiUrl = 'https://localhost:7280/api/allClasses'; // Base URL
+  private apiUrl = 'https://localhost:44325/api/allClasses'; // Base URL
 
   deleteClassService(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/DeleteClassService/${id}`);
