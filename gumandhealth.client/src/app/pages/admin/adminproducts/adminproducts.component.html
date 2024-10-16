@@ -1,41 +1,33 @@
-<h2>{{ isEditMode ? 'Edit Product' : 'Add New Product' }}</h2>
-<form (ngSubmit)="isEditMode ? updateProduct() : createProduct()" enctype="multipart/form-data">
-  <table class="form-table">
+<h2 class="text-center mb-4 custom-heading">Add New Product</h2>
+<form (ngSubmit)="createProduct()" enctype="multipart/form-data">
+  <table class="form-table table table-bordered">
     <tr>
       <td><label for="name">Name:</label></td>
-      <td><input id="name" [(ngModel)]="newProduct.name" name="name" required /></td>
+      <td><input id="name" [(ngModel)]="newProduct.name" name="name" required class="form-control" /></td>
     </tr>
     <tr>
       <td><label for="description">Description:</label></td>
-      <td><input id="description" [(ngModel)]="newProduct.description" name="description" required /></td>
+      <td><input id="description" [(ngModel)]="newProduct.description" name="description" required class="form-control" /></td>
     </tr>
     <tr>
       <td><label for="price">Price:</label></td>
-      <td><input id="price" type="number" [(ngModel)]="newProduct.price" name="price" required /></td>
+      <td><input id="price" type="number" [(ngModel)]="newProduct.price" name="price" required class="form-control" /></td>
     </tr>
     <tr>
-      <td><label for="categoryId">Category ID:</label></td>
-      <td><input id="categoryId" type="number" [(ngModel)]="newProduct.categoryId" name="categoryId" required /></td>
-    </tr>
-    <tr>
-      <td><label for="discount">Discount:</label></td>
-      <td><input id="discount" type="number" [(ngModel)]="newProduct.discount" name="discount" /></td>
-    </tr>
-    <tr>
-      <td><label for="tags">Tags:</label></td>
-      <td><input id="tags" [(ngModel)]="newProduct.tags" name="tags" /></td>
-    </tr>
-    <tr>
-      <td><label for="additionalInformation">Additional Information:</label></td>
-      <td><textarea id="additionalInformation" [(ngModel)]="newProduct.additionalInformation" name="additionalInformation"></textarea></td>
+      <td><label for="categoryId">Category:</label></td>
+      <td>
+        <select id="categoryId" [(ngModel)]="newProduct.categoryId" name="categoryId" required class="form-control">
+          <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+        </select>
+      </td>
     </tr>
     <tr>
       <td><label for="image">Upload Image:</label></td>
-      <td><input id="image" type="file" (change)="onFileSelected($event)" /></td>
+      <td><input id="image" type="file" (change)="onFileSelected($event)" class="form-control-file" /></td>
     </tr>
     <tr>
-      <td colspan="2" class="submit-row">
-        <button type="submit">{{ isEditMode ? 'Update' : 'Create' }}</button>
+      <td colspan="2" class="text-center">
+        <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Update' : 'Create' }}</button>
       </td>
     </tr>
   </table>
