@@ -26,25 +26,19 @@
             <tr *ngFor="let item of cartItems">
               <td>{{ item.product?.name }}</td>
               <td class="text-center input-group">
-                <button
-                  class="primary-btn btn"
-                  (click)="incrementQuantity(item)"
-                >
-                  +
-                </button>
-                <input
-                  type="number"
-                  class="form-control text-center"
-                  style="height: 100% !important"
-                  [(ngModel)]="item.quantity"
-                  (ngModelChange)="updateQuantity(item)"
-                  min="1"
-                />
-                <button
-                  class="primary-btn btn"
-                  (click)="decrementQuantity(item)"
-                >
+                <button class="btn btn-sm btn-outline-primary custom-quantity-btn"
+                        (click)="decrementQuantity(item)">
                   -
+                </button>
+                <input type="number"
+                       class="form-control form-control-sm text-center"
+                       style="width: 60px;"
+                       [(ngModel)]="item.quantity"
+                       (ngModelChange)="updateQuantity(item)"
+                       min="1" />
+                <button class="btn btn-sm btn-outline-primary custom-quantity-btn"
+                        (click)="incrementQuantity(item)">
+                  +
                 </button>
               </td>
               <td class="text-end">{{ item.product?.price | currency }}</td>
