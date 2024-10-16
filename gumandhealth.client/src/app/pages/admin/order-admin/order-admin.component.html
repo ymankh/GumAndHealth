@@ -1,12 +1,8 @@
-<!-- Main Content (المحتوى الرئيسي) -->
-
 <div class="container-fluid">
   <div class="row justify-content-end">
     <div class="col-md-10">
-      <!-- Header باللون الأسود -->
       <h1 class="text-center mb-4 font-weight-bold text-dark py-2 rounded">Search Orders</h1>
 
-      <!-- حقول البحث -->
       <div class="row mb-6 justify-content-end">
         <div class="col-md-3 mb-3">
           <label for="userName" class="font-weight-bold">User Name:</label>
@@ -23,18 +19,15 @@
           <input id="productName" [(ngModel)]="productName" placeholder="Enter product name" class="form-control rounded-pill shadow-sm" />
         </div>
 
-        <!-- زر البحث باللون الأسود -->
         <div class="col-md-2 d-flex align-items-end justify-content-end">
           <button (click)="searchOrders()" class="btn btn-dark rounded-pill w-100 shadow">Search</button>
         </div>
       </div>
 
-      <!-- زر تصدير PDF -->
       <div class="text-center mb-4">
         <button (click)="generatePDF()" class="btn btn-success rounded-pill shadow-sm px-4 py-2">Export as PDF</button>
       </div>
 
-      <!-- تصغير الجدول -->
       <div class="table-responsive d-flex justify-content-center">
         <table class="table table-bordered table-striped text-center">
           <thead class="bg-black text-white">
@@ -45,7 +38,8 @@
               <th>Total Amount</th>
               <th>Status</th>
               <th>Items</th>
-              <th>Download</th> <!-- Button for downloading PDF -->
+              <th>Update Status</th>
+              <th>Download</th>
             </tr>
           </thead>
           <tbody class="bg-white text-dark">
@@ -60,15 +54,33 @@
                 </span>
               </td>
               <td>
-                <ul class="list-unstyled">
-                  <li *ngFor="let item of order.orderItems">
-                    <div class="d-flex justify-content-between">
-                      <span>{{ item.productName }}</span>
-                      <span>({{ item.quantity }})</span>
-                      <span>${{ item.price }}</span>
-                    </div>
-                  </li>
-                </ul>
+                <table class="table table-bordered">
+                  <thead class="bg-dark text-white">
+                    <tr>
+                      <th>Product Name</th>
+                      <th>Purchased</th>
+                      <th>Not Purchasing</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of order.orderItems">
+                      <td>{{ item.productName }}</td>
+                      <td>
+                        <label>
+                          <input type="radio" name="purchase_{{ item.id }}" [(ngModel)]="item.isPurchased" [value]="true" (change)="checkAllItems(order)" /> purchasing
+                        </label>
+                      </td>
+                      <td>
+                        <label>
+                          <input type="radio" name="notPurchase_{{ item.id }}" [(ngModel)]="item.isPurchased" [value]="false" (change)="checkAllItems(order)" /> Not buying
+                        </label>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+              <td>
+                <button (click)="updateOrderStatus(order)" class="btn btn-dark rounded-pill shadow-sm">Update Status</button>
               </td>
               <td>
                 <button (click)="generateUserOrderPDF(order)" class="btn btn-primary rounded-pill shadow-sm">Download PDF</button>
@@ -76,10 +88,8 @@
             </tr>
           </tbody>
         </table>
-
       </div>
 
-      <!-- رسالة عند عدم وجود طلبات -->
       <ng-template #noOrders>
         <p class="text-center text-muted">No orders found.</p>
       </ng-template>
@@ -100,23 +110,12 @@
     text-align: center;
   }
 
-  .table img {
-    border-radius: 8px;
+  .badge-success {
+    background-color: #28a745;
   }
 
-  .btn-warning {
-    background-color: #f1c40f;
-    color: white;
-  }
-
-  .btn-danger {
-    background-color: #e74c3c;
-    color: white;
-  }
-
-  .btn-info {
-    background-color: #17a2b8;
-    color: white;
+  .badge-warning {
+    background-color: #ffc107;
   }
 
   .btn-dark {
@@ -127,31 +126,5 @@
     font-size: 1rem;
     border-radius: 50px;
   }
-
-  .table {
-    border-collapse: separate;
-    border-spacing: 0;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-
-  .col-md-10 {
-    margin-left: auto;
-    margin-right: 0;
-  }
-
-  h1 {
-    color: black;
-  }
-
-  /* Badge Styling */
-  .badge-success {
-    background-color: #28a745;
-  }
-
-  .badge-warning {
-    background-color: #ffc107;
-  }
 </style>
-
 <app-admin></app-admin>

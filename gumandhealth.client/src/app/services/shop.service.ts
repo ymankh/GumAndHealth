@@ -8,7 +8,7 @@ import { Category } from '../types/category.model';  // Adjust the path based on
   providedIn: 'root'
 })
 export class ShopService {
-  private apiUrl = 'https://localhost:44325/api/Categories';  // Adjust this to your actual API endpoint
+  private apiUrl = 'https://localhost:7280/api/Categories';  // Adjust this to your actual API endpoint
 
   constructor(private http: HttpClient) { }
 

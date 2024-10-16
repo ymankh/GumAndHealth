@@ -5,7 +5,7 @@
 
   <!-- Button to navigate to Post Schedule -->
   <div class="text-center mb-3">
-    <a routerLink="/AddScedule" class="btn btn-dark rounded-pill shadow-sm">Add New Schedule</a>
+    <a routerLink="/AddScedule" class="btn btn-dark rounded-pill shadow-sm"style="margin-left:60%">Add New Schedule</a>
   </div>
 
   <div *ngIf="schedules.length > 0; else noData" class="d-flex justify-content-center" style="margin-left:10%">
@@ -23,13 +23,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let schedule of schedules">
-              <td>{{ schedule.availableDay }}</td>
-              <td>{{ schedule.className }}</td>
-              <td>{{ schedule.instructorName }}</td>
-              <td>{{ schedule.startTime }}</td>
-              <td>{{ schedule.endTime }}</td>
-              <td>
+            <tr *ngFor="let schedule of schedules"  class="bg-light" style="color:black;">
+              <td class="bg-light" style="color:black;">{{ schedule.availableDay }}</td>
+              <td  class="bg-light" style="color:black;">{{ schedule.className }}</td>
+              <td  class="bg-light" style="color:black;">{{ schedule.instructorName }}</td>
+              <td  class="bg-light" style="color:black;">{{ schedule.startTime }}</td>
+              <td  class="bg-light" style="color:black;">{{ schedule.endTime }}</td>
+              <td  class="bg-light" style="color:black;">
                 <button type="button" class="btn btn-info btn-warning" (click)="viewDetails(schedule.id)">Details</button>
               </td>
             </tr>

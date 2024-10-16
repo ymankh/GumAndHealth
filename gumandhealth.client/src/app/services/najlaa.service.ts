@@ -107,5 +107,8 @@ export class NajlaaService {
     return this.http.get(`${this.apiUrl12}/search-orders`, { params });
   }
 
-
+  // تحديث حالة الطلب
+  updateOrderStatus(orderId: number, status: number): Observable<any> {
+    return this.http.put(`https://localhost:44325/api/order/${orderId}/update-status`, { status });
+  }
 }
