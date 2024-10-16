@@ -1,4 +1,4 @@
-@GumAndHealth.Server_HostAddress = http://localhost:5234
+@GumAndHealth.Server_HostAddress = http://localhost:7280
 
 GET {{GumAndHealth.Server_HostAddress}}/weatherforecast/
 Accept: application/json
