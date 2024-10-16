@@ -43,6 +43,11 @@ export class FawarehService {
   }
 
 
+  getSignleClass(id: any): Observable<any> {
+    return this.http.get<any>(`${this.staticUrl}/allClasses/GetClassesByID?id=${id}`)
+  }
+
+
 
 
   /////// Edit Classes Admin Side ////
@@ -52,6 +57,8 @@ export class FawarehService {
    return this.http.put(`${this.staticUrl}/allClasses/UpdateClassService/${id}`, data)
 
   }
+
+  
 
 
 
