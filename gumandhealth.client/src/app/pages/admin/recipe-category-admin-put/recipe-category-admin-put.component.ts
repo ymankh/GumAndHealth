@@ -89,6 +89,6 @@ export class RecipeCategoryAdminPutComponent implements OnInit {
 
   // دالة للحصول على رابط الصورة الحالية
   getCurrentImageUrl() {
-    return `https://localhost:44325/api/RecipeCategory/getImage/${this.recipeCategory.imagePath}`;
+    return `https://localhost:7280/api/RecipeCategory/getImage/${this.recipeCategory.imagePath}`;
   }
 }
