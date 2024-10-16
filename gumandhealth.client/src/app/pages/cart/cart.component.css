@@ -2,3 +2,35 @@ button.btn.btn-primary.w-100.mt-3 {
   border-color: #82d026;
   background-color: #82d026;
 }
+/* Styles for the quantity buttons */
+/* Styles for the quantity buttons */
+.custom-quantity-btn {
+  width: 30px;
+  padding: 0;
+  font-size: 1rem;
+  background-color: #82d026; /* Set to the same green as the Proceed to Checkout button */
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+  /* Change the background color on hover */
+  .custom-quantity-btn:hover {
+    background-color: #82d026; /* Darker green for hover effect */
+  }
+
+
+/* Adjust the form-control input field size */
+.input-group .form-control-sm {
+  height: 32px;
+  line-height: 1.5;
+}
+
+/* Spacing between the buttons and input field */
+.input-group .form-control-sm,
+.input-group .custom-quantity-btn {
+  border-radius: 0 !important;
+}
+h2 {
+  margin-bottom: 5%;
+}

@@ -13,10 +13,12 @@ namespace GumAndHealth.Server.Controllers
     [ApiController]
     public class ContactsController : ControllerBase
     {
+
         private readonly MyDbContext _context;
 
         public ContactsController(MyDbContext context)
         {
+            IConfiguration configuration;
             _context = context;
         }
 

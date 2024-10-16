@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RahafService } from '../../services/rahaf.service';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../services/auth.service';
+
 
 interface Schedule {
   classScheduleId: number; 
@@ -28,7 +30,7 @@ interface ClassDetails {
 export class ClassDetailsComponent implements OnInit {
   classDetails: ClassDetails | undefined;
 
-  constructor(private route: ActivatedRoute, private _ser: RahafService) { }
+  constructor(private route: ActivatedRoute, private _ser: RahafService, private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
     const classId = this.route.snapshot.paramMap.get('id'); // الحصول على ID الكلاس من URL
@@ -90,7 +92,20 @@ export class ClassDetailsComponent implements OnInit {
     "userID": 0
   }
   AddSubscription(idSubs: any, Iduser: any) {
-    debugger
+    if (!this.auth.isUserLoggedIn()) {
+
+      Swal.fire({
+        icon: 'warning',
+        title: 'Login Required',
+        text: 'You must be logged in to subscribe.',
+        confirmButtonText: 'Login'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['/login']); // Redirect to login
+        }
+      });
+      return;
+    }
     this.paymentData.idSubs = idSubs
     this.paymentData.userID = Iduser
     console.log("payment data :", this.paymentData);
