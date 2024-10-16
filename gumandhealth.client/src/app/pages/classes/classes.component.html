@@ -26,7 +26,7 @@
     <div class="row">
       <div class="col-lg-4 col-md-6 mb-4" *ngFor="let classItem of filteredClasses">
         <div class="single-classes-item" (click)="goToClassDetails(classItem.id)">
-          <img [src]="'https://localhost:44325/api/Classes/getImages/' + classItem.imagePath"
+          <img [src]="'https://localhost:7280/api/Classes/getImages/' + classItem.imagePath"
                alt="{{ classItem.name }}"
                class="class-image" />
           <h4>{{ classItem.name }}</h4>
