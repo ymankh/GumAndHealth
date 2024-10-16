@@ -91,12 +91,12 @@ export class AhmadService {
 
 
   getScheduleById(id: number): Observable<any> {
-    return this.http.get<any>(`https://localhost:7280/api/scdule/GetScheduleByID/${id}`);
+    return this.http.get<any>(`https://localhost:44325/api/scdule/GetScheduleByID/${id}`);
   }
 
 
   updateSchedule(id: number, scheduleData: ScheduleDTO): Observable<any> {
-    return this.http.put(`  https://localhost:7280/api/scdule/UpdateClassSchedule/${id}`, scheduleData);
+    return this.http.put(`  https://localhost:44325/api/scdule/UpdateClassSchedule/${id}`, scheduleData);
   }
 
 
@@ -106,7 +106,7 @@ export class AhmadService {
   }
 
   deleteSchedule(id: number): Observable<any> {
-    return this.http.delete<any>(`https://localhost:7280/api/scdule/DeleteClassSchedule/${id}`);
+    return this.http.delete<any>(`https://localhost:44325/api/scdule/DeleteClassSchedule/${id}`);
   }
 
 
