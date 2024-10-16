@@ -11,8 +11,7 @@ export class FawarehService {
 
   constructor(private http: HttpClient, private auth: AuthService) { }
 
-  staticUrl = "https://localhost:7280/api"
-
+  staticUrl = "https://localhost:7280/api" 
 
 
   ///////////////// get All Gyms Service /////////////////
