@@ -144,8 +144,8 @@ export class EditScheduleComponent implements OnInit {
             error => {
               console.error('Error updating schedule:', error);
               Swal.fire(
-                'Error!',
-                'There was a problem updating the schedule.',
+                'cannt updat!',
+                'you must enter start date and end date',
                 'error'
               );
             }
