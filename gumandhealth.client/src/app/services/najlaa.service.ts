@@ -35,6 +35,9 @@ export class NajlaaService {
   addRecipe(formData: FormData): Observable<any> {
     return this.http.post(`https://localhost:7280/api/Recipe/AddRecipe`, formData);
   }
+  deleteRecipe(id: number) {
+    return this.http.delete(`https://localhost:7280/api/Recipe/${id}`);
+  }
   // Get a specific recipe category by ID
   getRecipeCategory(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
@@ -104,5 +107,8 @@ export class NajlaaService {
     return this.http.get(`${this.apiUrl12}/search-orders`, { params });
   }
 
-
+  // تحديث حالة الطلب
+  updateOrderStatus(orderId: number, status: number): Observable<any> {
+    return this.http.put(`https://localhost:7280/api/order/${orderId}/update-status`, { status });
+  }
 }

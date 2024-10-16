@@ -1,10 +1,8 @@
-<!-- Main Content (المحتوى الرئيسي) -->
 <div class="container-fluid">
   <div class="row justify-content-end">
     <div class="col-md-10">
-      <h1 class="text-center mb-4 font-weight-bold">Search Orders</h1>
+      <h1 class="text-center mb-4 font-weight-bold text-dark py-2 rounded">Search Orders</h1>
 
-      <!-- حقول البحث -->
       <div class="row mb-6 justify-content-end">
         <div class="col-md-3 mb-3">
           <label for="userName" class="font-weight-bold">User Name:</label>
@@ -22,19 +20,17 @@
         </div>
 
         <div class="col-md-2 d-flex align-items-end justify-content-end">
-          <button (click)="searchOrders()" class="btn btn-primary rounded-pill w-100 shadow">Search</button>
+          <button (click)="searchOrders()" class="btn btn-dark rounded-pill w-100 shadow">Search</button>
         </div>
       </div>
 
-      <!-- زر تصدير PDF -->
       <div class="text-center mb-4">
         <button (click)="generatePDF()" class="btn btn-success rounded-pill shadow-sm px-4 py-2">Export as PDF</button>
       </div>
 
-      <!-- تصغير الجدول -->
       <div class="table-responsive d-flex justify-content-center">
-        <table class="table table-striped table-bordered text-center" style="width: 70%;">
-          <thead class="bg-dark text-white">
+        <table class="table table-bordered table-striped text-center">
+          <thead class="bg-black text-white">
             <tr>
               <th>ID</th>
               <th>User Name</th>
@@ -42,9 +38,11 @@
               <th>Total Amount</th>
               <th>Status</th>
               <th>Items</th>
+              <th>Update Status</th>
+              <th>Download</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="bg-white text-dark">
             <tr *ngFor="let order of orders">
               <td>{{ order.id }}</td>
               <td>{{ order.userName }}</td>
@@ -56,22 +54,42 @@
                 </span>
               </td>
               <td>
-                <ul class="list-unstyled">
-                  <li *ngFor="let item of order.orderItems">
-                    <div class="d-flex justify-content-between">
-                      <span>{{ item.productName }}</span>
-                      <span>({{ item.quantity }})</span>
-                      <span>${{ item.price }}</span>
-                    </div>
-                  </li>
-                </ul>
+                <table class="table table-bordered">
+                  <thead class="bg-dark text-white">
+                    <tr>
+                      <th>Product Name</th>
+                      <th>Purchased</th>
+                      <th>Not Purchasing</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of order.orderItems">
+                      <td>{{ item.productName }}</td>
+                      <td>
+                        <label>
+                          <input type="radio" name="purchase_{{ item.id }}" [(ngModel)]="item.isPurchased" [value]="true" (change)="checkAllItems(order)" /> purchasing
+                        </label>
+                      </td>
+                      <td>
+                        <label>
+                          <input type="radio" name="notPurchase_{{ item.id }}" [(ngModel)]="item.isPurchased" [value]="false" (change)="checkAllItems(order)" /> Not buying
+                        </label>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+              <td>
+                <button (click)="updateOrderStatus(order)" class="btn btn-dark rounded-pill shadow-sm">Update Status</button>
+              </td>
+              <td>
+                <button (click)="generateUserOrderPDF(order)" class="btn btn-primary rounded-pill shadow-sm">Download PDF</button>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <!-- رسالة عند عدم وجود طلبات -->
       <ng-template #noOrders>
         <p class="text-center text-muted">No orders found.</p>
       </ng-template>
@@ -79,4 +97,34 @@
   </div>
 </div>
 
+<!-- Styles -->
+<style>
+  .table th {
+    background-color: #343a40;
+    color: #ffffff;
+    text-align: center;
+  }
+
+  .table td {
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  .badge-success {
+    background-color: #28a745;
+  }
+
+  .badge-warning {
+    background-color: #ffc107;
+  }
+
+  .btn-dark {
+    background-color: #2d2d2d;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 50px;
+  }
+</style>
 <app-admin></app-admin>

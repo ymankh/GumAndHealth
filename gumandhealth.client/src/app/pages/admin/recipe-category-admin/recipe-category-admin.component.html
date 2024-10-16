@@ -1,48 +1,62 @@
 <div class="container mt-5">
-  <!-- زر إضافة فئة جديدة -->
-  <div class="text-right mb-4">
-    <button class="btn btn-dark mb-5" (click)="addCategory()" style="width:400px">Add New Category</button>
+  <!-- Bootstrap responsive table for recipe categories -->
+  <div class="row">
+    <div class="col-md-10 ml-auto">
+
+      <!-- Caption and Button aligned to the right under the caption -->
+  
+        <div class="text-right mb-4">
+          <a routerLink="/PostRecipe" class="btn btn-dark rounded-pill shadow-sm">
+            Add New Category
+          </a>
+        </div>
+    
+
+      <!-- Recipe Category Table -->
+      <table class="table table-striped table-hover table-bordered text-center shadow-sm" *ngIf="recipeCategories && recipeCategories.length">
+        <caption class="text-center font-weight-bold">List of Available Recipe Categories</caption>
+
+        <thead class="thead-dark">
+          <tr>
+            <th>#</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody *ngFor="let category of recipeCategories; let i = index">
+          <tr>
+            <th scope="row">{{ i + 1 }}</th>
+            <td>
+              <!-- Display category image -->
+              <img src="https://localhost:7280/api/RecipeCategory/getImage/{{category.imagePath}}" alt="{{ category.name }} Image" class="img-thumbnail" style="width: 100px; height: auto;">
+            </td>
+            <td class="font-weight-bold">{{ category.name }}</td>
+            <td>{{ category.description }}</td>
+            <td>
+              <!-- Action buttons: Edit, Delete, View Recipe -->
+              <button (click)="editCategory(category.id)" class="btn btn-warning btn-sm me-1">
+                <i class="bi bi-pencil-square"></i> Edit
+              </button>
+              <button (click)="confirmDeleteCategory(category.id)" class="btn btn-danger btn-sm me-1">
+                <i class="bi bi-trash"></i> Delete
+              </button>
+              <button (click)="viewRecipe(category.id)" class="btn btn-info btn-sm">
+                <i class="bi bi-eye"></i> View Recipe
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Display message if no categories found -->
+      <div class="text-center mt-4" *ngIf="!recipeCategories || recipeCategories.length === 0">
+        <p class="text-muted">No categories found.</p>
+      </div>
+    </div>
   </div>
 
-  <!-- بدء الجدول مع توسيطه -->
-  <div class="table-responsive">
-    <table class="table table-bordered table-striped mx-auto" style="width: 80%;">
-
-      <!-- العنوان يظهر في أعلى الجدول -->
-      <caption class="text-center">List of Available Recipe Categories</caption>
-
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Image</th>
-          <th scope="col">Name</th>
-          <th scope="col">Description</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let category of recipeCategories; let i = index">
-          <th scope="row">{{ i + 1 }}</th>
-          <td>
-            <img src="https://localhost:7280/api/RecipeCategory/getImage/{{category.imagePath}}" class="img-thumbnail" alt="{{ category.name }} Image" style="width: 100px;">
-          </td>
-          <td>{{ category.name }}</td>
-          <td>{{ category.description }}</td>
-          <td class="text-end">
-            <!-- زر التعديل -->
-            <button class="btn btn-warning btn-sm mb-2" (click)="editCategory(category.id)">Edit</button>
-            <br />
-            <!-- زر الحذف -->
-            <button class="btn btn-danger btn-sm mb-2" (click)="confirmDeleteCategory(category.id)">Delete</button>
-            <br />
-            <!-- زر عرض الوصفة -->
-            <button class="btn btn-info btn-sm mb-2" (click)="viewRecipe(category.id)">View Recipe</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <!-- انتهاء الجدول -->
+  <app-admin></app-admin>
 </div>
-
-<app-admin></app-admin>

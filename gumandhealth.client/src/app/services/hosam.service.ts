@@ -64,7 +64,8 @@ export class HosamService {
     // Clear login state and token from localStorage
     this.isLoggedInSubject.next(false);
     localStorage.removeItem('token');
-    localStorage.removeItem('userId');
+    localStorage.removeItem('AdminId');
+
 
     // Logout notification
     iziToast.info({

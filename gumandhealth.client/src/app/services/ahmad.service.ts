@@ -13,7 +13,7 @@ import emailjs from 'emailjs-com';
   providedIn: 'root',
 })
 export class AhmadService {
-  private userId = 'bmxEC6kifqCWeT4A1';
+  private userId = '9U4q6spKde6CuiEhX';
 // Replace with your EmailJS user ID
 
 
@@ -33,6 +33,7 @@ export class AhmadService {
     const templateParams = {
       to_name: toName,
       from_name: fromName,
+      from_email: to, // Ensure the recipient email is set correctly
       message,
     };
 
@@ -46,6 +47,9 @@ export class AhmadService {
         throw error; // Rethrow error for handling in component
       });
   }
+
+
+
 
 
   addContact(data: any): Observable<any> {

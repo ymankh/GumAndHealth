@@ -168,6 +168,20 @@ namespace GumAndHealth.Server.Controllers
 
             return BadRequest(new { success = false, message = "Image is required" });
         }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteRecipe(long id)
+        {
+            var recipe = await _context.Recipes.FindAsync(id);
+            if (recipe == null)
+            {
+                return NotFound(new { message = "Recipe not found" });
+            }
+
+            _context.Recipes.Remove(recipe);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Recipe deleted successfully" });
+        }
 
     }
 

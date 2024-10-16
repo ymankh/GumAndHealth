@@ -75,12 +75,13 @@
 
     <!-- Reply Input Section -->
     <div class="col-md-6">
-      <div *ngIf="selectedMessage" class="reply-container border rounded p-3 bg-light">
+      <div *ngIf="selectedMessage" class="reply-popup border rounded p-3 bg-light">
         <h4>Replying to: {{ selectedMessage.name }}</h4>
         <textarea [(ngModel)]="replyText" class="form-control mb-2" placeholder="Type your reply here..."></textarea>
         <button class="btn btn-primary" (click)="reply()">Send Reply</button>
       </div>
     </div>
+
   </div>
 </div>
 <app-admin></app-admin>
