@@ -44,6 +44,7 @@ export class HeaderComponent implements OnInit {
           htmlContent += `
           <li>
             <strong>${service.name}</strong>: ${service.pricePerMonth}
+            <br>
             <button class="btn btn-success btn-sm" onclick="window.location.href='/ClassDetails/${service.id}'">View Service</button>
           </li>`;
         });
@@ -56,6 +57,7 @@ export class HeaderComponent implements OnInit {
           htmlContent += `
           <li>
             <strong>${service.name}</strong>: ${service.description} <strong>${service.pricePerMonth}</strong>
+            <br>
             <button class="btn btn-success btn-sm" onclick="window.location.href='/gym/${service.id}'">View Service</button>
           </li>`;
         });
@@ -68,6 +70,7 @@ export class HeaderComponent implements OnInit {
           htmlContent += `
           <li>
             <strong>${product.name}</strong>: ${product.price} JD
+            <br>
             <button class="btn btn-success btn-sm" onclick="window.location.href='/products/${product.id}'">View Product</button>
           </li>`;
         });
@@ -82,6 +85,7 @@ export class HeaderComponent implements OnInit {
           htmlContent += `
           <li>
             <strong>${recipe.name}</strong>: ${recipe.description}
+            <br>
             <button class="btn btn-success btn-sm" onclick="window.location.href='/recipes1/${recipe.id}'">View Recipe</button>
           </li>`;
         });

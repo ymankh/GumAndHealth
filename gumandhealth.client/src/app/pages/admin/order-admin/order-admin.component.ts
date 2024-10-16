@@ -48,34 +48,25 @@ export class OrderAdminComponent implements OnInit {
     );
   }
 
-  // دالة لإنشاء PDF من الطلبات بدون جدول
+  // دالة لإنشاء PDF من الطلبات
   generatePDF(): void {
-    const doc = new jsPDF();  // إنشاء مستند PDF جديد
-
-    // إضافة عنوان التقرير
+    const doc = new jsPDF();
     doc.text('Orders Report', 14, 10);
+    let yPosition = 20;
 
-    let yPosition = 20;  // تحديد مكان البداية على محور Y
-
-    // إضافة بيانات الطلبات بشكل نصوص فقط
     this.orders.forEach(order => {
       doc.text(`Order ID: ${order.id}`, 14, yPosition);
       doc.text(`User Name: ${order.userName}`, 14, yPosition + 10);
       doc.text(`Order Date: ${order.orderDate}`, 14, yPosition + 20);
       doc.text(`Total Amount: $${order.totalAmount}`, 14, yPosition + 30);
       doc.text(`Status: ${order.status}`, 14, yPosition + 40);
-
-      // عرض تفاصيل العناصر المطلوبة
       let orderItems = order.orderItems.map((item: any) => `${item.productName} (x${item.quantity}) - $${item.price}`).join(', ');
       doc.text(`Items: ${orderItems}`, 14, yPosition + 50);
-
-      yPosition += 70;  // الانتقال إلى السطر التالي
+      yPosition += 70;
     });
 
-    // حفظ ملف PDF
     doc.save('orders-report.pdf');
 
-    // إظهار رسالة نجاح باستخدام SweetAlert
     Swal.fire({
       icon: 'success',
       title: 'PDF Generated!',
@@ -83,37 +74,51 @@ export class OrderAdminComponent implements OnInit {
     });
   }
 
+  // دالة لتحديث حالة الطلب
+checkAllItems(order: any): void {
+    const allPurchased = order.orderItems.every((item: any) => item.isPurchased === true); // تحقق أن كل العناصر تم شراؤها
+    order.status = allPurchased ? 1 : 0;  // إذا كل العناصر شراء، يتم تعيين الحالة إلى 1، وإلا 0
+  }
 
+  // تحديث حالة الطلب
+  updateOrderStatus(order: any): void {
+    // تحقق من حالة كل العناصر
+    this.checkAllItems(order);
 
+    // تحديث الطلب في قاعدة البيانات
+    this.najlaaService.updateOrderStatus(order.id, order.status).subscribe(
+      response => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Status Updated!',
+          text: `Order status has been updated to ${order.status == 1 ? 'Completed' : 'Pending'}.`,
+        });
+      },
+      error => {
+        console.error('Error updating order status:', error);
+      }
+    );
+  }
 
   generateUserOrderPDF(order: any): void {
-    const doc = new jsPDF();  // إنشاء مستند PDF جديد
-
-    // إضافة عنوان التقرير
+    const doc = new jsPDF();
     doc.text(`Order Report for ${order.userName}`, 14, 10);
 
-    let yPosition = 20;  // تحديد مكان البداية على محور Y
-
-    // إضافة بيانات الطلب
+    let yPosition = 20;
     doc.text(`Order ID: ${order.id}`, 14, yPosition);
-    doc.text(`User Name: ${order.userName}`, 14, yPosition + 10);
-    doc.text(`Order Date: ${order.orderDate}`, 14, yPosition + 20);
-    doc.text(`Total Amount: $${order.totalAmount}`, 14, yPosition + 30);
-    doc.text(`Status: ${order.status == 1 ? 'Completed' : 'Pending'}`, 14, yPosition + 40);
+    doc.text(`Order Date: ${order.orderDate}`, 14, yPosition + 10);
+    doc.text(`Total Amount: $${order.totalAmount}`, 14, yPosition + 20);
+    doc.text(`Status: ${order.status == 1 ? 'Completed' : 'Pending'}`, 14, yPosition + 30);
 
-    // عرض تفاصيل العناصر المطلوبة
     let orderItems = order.orderItems.map((item: any) => `${item.productName} (x${item.quantity}) - $${item.price}`).join(', ');
-    doc.text(`Items: ${orderItems}`, 14, yPosition + 50);
+    doc.text(`Items: ${orderItems}`, 14, yPosition + 40);
 
-    // حفظ ملف PDF
-    doc.save(`order-report-${order.id}.pdf`);
+    doc.save(`order-${order.id}.pdf`);
 
-    // إظهار رسالة نجاح باستخدام SweetAlert
     Swal.fire({
       icon: 'success',
       title: 'PDF Generated!',
-      text: `The order report for ${order.userName} has been successfully generated.`,
+      text: 'The order report has been successfully generated.',
     });
   }
-
 }

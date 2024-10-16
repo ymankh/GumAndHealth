@@ -266,7 +266,7 @@
     <!-- حلقة لتكرار البطاقات بناءً على البيانات -->
     <div class="col-md-4" *ngFor="let gym of gyms">
       <div class="card" style="height: 400px;">
-        <img src="https://localhost:7280/api/RecipeCategory/getImage/{{gym.imagePath}}"
+        <img src="https://localhost:44325/api/RecipeCategory/getImage/{{gym.imagePath}}"
              class="card-img-top" [alt]="gym.name" style="height: 200px; object-fit: cover; width: 100%;">
         <div class="card-body">
           <h5 class="card-title">{{ gym.name }}</h5>
