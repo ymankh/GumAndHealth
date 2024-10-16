@@ -1,17 +1,13 @@
-<div class="col-10" style="margin-left:17%">
-  <div class="bg-  rounded h-100 p-4">
+<div class="col-10 container">
+  <div class="bg-light rounded h-100 p-4">
     <h6 class="mb-4">Classes</h6>
 
-    <div class="mb-3">
-      <a class="btn btn-success" [routerLink]="['/AddNewClass']">Add New Class</a>
+    <div class="d-flex">
+      <a class="btn btn-dark" [routerLink]="['/AddNewClass']">Add New Class</a>
     </div>
 
-
-
-
-
     <div class="table-responsive">
-      <table class="table">
+      <table class="table thead-dark">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -19,7 +15,6 @@
             <th scope="col">Description</th>
             <th scope="col">Image</th>
             <th scope="col">Price</th>
-
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -29,21 +24,16 @@
             <td>{{ classItem.name }}</td>
             <td>{{ classItem.description }}</td>
             <td>
-              <img [src]="'https://localhost:7280/api/Classes/getImages/' + classItem.imagePath" style="width: 50px">
+              <img [src]="'https://localhost:7280/api/Classes/getImages/' + classItem.imagePath" class="img-thumbnail">
             </td>
             <td>{{ classItem.pricePerMonth }}</td>
-
-
             <td>
               <a class="btn btn-info" [routerLink]="['/admin/edit-class', classItem.id]">Edit</a>
               <a class="btn btn-danger ms-2" (click)="deleteClass(classItem.id)">Delete</a>
-
             </td>
-
-
+          </tr>
         </tbody>
       </table>
-
     </div>
   </div>
 </div>

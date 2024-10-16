@@ -138,7 +138,7 @@ namespace GumAndHealth.Server.Controllers
             _db.ClassServices.Remove(classToDelete);
             _db.SaveChanges();
 
-            return Ok(classToDelete);
+            return Ok();
         }
     }
 }

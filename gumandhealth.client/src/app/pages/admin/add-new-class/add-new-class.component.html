@@ -1,34 +1,31 @@
-
-
-
-
-
-<div class="col-sm-12 col-xl-5" style="margin-left: 35%">
+<div class="col-sm-12 col-xl-6" style="margin-left: 25%">
   <div class="bg-light rounded h-100 p-4">
-    <h6 class="mb-4">Add Class</h6>
-    <form #addClass="ngForm" (ngSubmit)="addNewClass(addClass.value)">
-      <div class="mb-3">
-        <label for="className" class="form-label">Class Name</label>
-        <input type="text" class="form-control" id="className" name="name" required ngModel>
-      </div>
-      <div class="mb-3">
-        <label for="classDescription" class="form-label">Description</label>
-        <input class="form-control" id="classDescription" name="description" required ngModel>
-      </div>
-      <div class="mb-3">
-        <label for="classImagePath" class="form-label">Image URL</label>
-        <input accept="image/*" type="file" class="form-control" id="classImagePath" name="imagePath" required  ngModel (change)="changeImage($event)">
-      </div>
-      <div class="mb-3">
-        <label for="classPrice" class="form-label">Price</label>
-        <input type="number" class="form-control" id="classPrice" name="pricePerMonth" required ngModel>
-      </div>
+    <h2 class="mb-4 text-center custom-heading">Add New Class</h2>
+    <form #addClass="ngForm" (ngSubmit)="addNewClass(addClass.value)" class="form-table">
+      <table class="table table-bordered">
+        <tr>
+          <td><label for="className">Name:</label></td>
+          <td><input type="text" class="form-control" id="className" name="name" required ngModel></td>
+        </tr>
+        <tr>
+          <td><label for="classDescription">Description:</label></td>
+          <td><input class="form-control" id="classDescription" name="description" required ngModel></td>
+        </tr>
+        <tr>
+          <td><label for="classPrice">Price:</label></td>
+          <td><input type="number" class="form-control" id="classPrice" name="pricePerMonth" required ngModel></td>
+        </tr>
+     
+        <tr>
+          <td><label for="classImagePath">Upload Image:</label></td>
+          <td><input accept="image/*" type="file" class="form-control" id="classImagePath" name="imagePath" required ngModel (change)="changeImage($event)"></td>
+        </tr>
+      </table>
 
-      <button type="submit" class="btn btn-primary">Save Changes</button>
-      <!--<button type="button" class="btn btn-danger" (click)="deleteClass()">Delete Class</button>-->
+      <div class="text-center">
+        <button type="submit" class="btn btn-dark">Create</button>
+      </div>
     </form>
-
-
   </div>
 </div>
 <app-admin></app-admin>
