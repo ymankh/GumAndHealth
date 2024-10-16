@@ -20,6 +20,8 @@ import { GymsComponent } from './pages/gyms/gyms.component';
 import { RecipesComponent } from './nutrition/recipes/recipes.component';
 import { RecipeDetailComponent } from './nutrition/recipe-detail/recipe-detail.component';
 import { SingleGymComponent } from './pages/single-gym/single-gym.component';
+
+import { ReplayContactComponent } from './pages/admin/replay-contact/replay-contact.component';
 //import { AdminClassesComponent } from './pages/admin-classes/admin-classes.component';
 import { ClassDetailsComponent } from './pages/class-details/class-details.component';
 import { ProductsComponent } from './pages/products/products.component';
@@ -122,6 +124,7 @@ import { RecipescateoryComponent } from './nutrition/recipescateory/recipescateo
       GetGymAllComponent,
       POSTGymComponent,
       PutGymComponent,
+      ReplayContactComponent,
       RecipescateoryComponent,
   ],
   imports: [

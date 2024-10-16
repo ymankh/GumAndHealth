@@ -44,3 +44,46 @@ h2 {
   .btn-success:hover {
     background-color: #218838;
   }
+.hero-section {
+  position: relative;
+  height: 400px; /* يمكن تعديل الارتفاع حسب الحاجة */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-text {
+  transform: translate(-60%, -87%);
+  color: #fff; /* جعل النص أبيض */
+  text-align: center;
+  font-size: 3rem; /* حجم الخط */
+  font-weight: bold;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5); /* إضافة ظل للنص لجعله بارزًا على الخلفية */
+}
+
+.set-bg {
+  background-size: cover;
+  background-position: center;
+}
+
+.join-button {
+  background-color: #4CAF50; /* لون أخضر فاتح */
+  color: white; /* نص أبيض */
+  border: none; /* إزالة الحدود */
+  padding: 10px 20px; /* حواف داخلية للزر */
+  text-align: center; /* توسيط النص */
+  text-decoration: none; /* إزالة أي خط تحت النص */
+  display: inline-block; /* جعل الزر عنصر بلوك */
+  font-size: 16px; /* حجم الخط */
+  margin: 10px 0; /* إضافة مسافة حول الزر */
+  border-radius: 5px; /* زوايا دائرية */
+  cursor: pointer; /* تغيير شكل المؤشر عند المرور على الزر */
+  transition: background-color 0.3s; /* تأثير انتقالي لتغيير اللون */
+}
+
+  .join-button:hover {
+    background-color: #45a049; /* لون أخضر داكن عند المرور */
+  }
+
