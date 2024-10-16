@@ -42,9 +42,14 @@ export class NajlaaService {
   search(query: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl1}?query=${query}`);
   }
- 
-  getRecipeById(id: number): Observable<any> {
+  getRecipesByCategory(categoryId: number): Observable<any[]> {
+    return this.http.get<any[]>(`https://localhost:7280/api/Recipe/GetRecipeByCategory?recipeCategoryId=${categoryId}`);
+  }
+  getRecipesByCategory1(id: string): Observable<any> {
     return this.http.get(`https://localhost:7280/api/Recipe/GetRecipeByCategory?recipeCategoryId=${id}`);
+  }
+  getRecipeById(id: number): Observable<any> {
+    return this.http.get(`https://localhost:7280/api/Recipe/${id}`);
   }
   getGyms(): Observable<any> {
     return this.http.get<any>("https://localhost:7280/api/Home/GetAllGyms");
@@ -52,14 +57,28 @@ export class NajlaaService {
   getProducts(): Observable<any> {
     return this.http.get<any>("https://localhost:7280/api/Home");
   }
+  // Update Gym Service by ID
+  updateGymService(id: number, formData: FormData): Observable<any> {
+    return this.http.put(`https://localhost:7280/api/GymNajlaa/${id}`, formData);
+  }
+  getGymService1(id: number): Observable<any> {
+    const url = `https://localhost:7280/api/GymNajlaa/${id}`;
+    return this.http.get<any>(url);
+  }
 
 
 
-
+  deleteGymService(id: number): Observable<any> {
+    return this.http.delete(`https://localhost:7280/api/GymNajlaa/${id}`);
+  }
 
   private apiUrl12 = 'https://localhost:7280/api/order'; 
-
-
+  addGymService(formData: FormData): Observable<any> {
+    return this.http.post('https://localhost:7280/api/GymNajlaa', formData);
+  }
+  getGymServices(): Observable<any[]> {
+    return this.http.get<any[]>(`https://localhost:7280/api/GymNajlaa`);
+  }
   // دالة لجلب جميع الطلبات
   getAllOrders(): Observable<any> {
     return this.http.get(`${this.apiUrl12}/orders`);

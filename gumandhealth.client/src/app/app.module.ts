@@ -55,6 +55,11 @@ import { GetProductComponent } from './pages/admin/get-product/get-product.compo
 import { EditProductComponent } from './pages/admin/edit-product/edit-product.component';
 import { AdminUserComponent } from './pages/admin/admin-user/admin-user.component';
 import { GetContactMessagesComponent } from './pages/admin/get-contact-messages/get-contact-messages.component';
+import { PostScheduleComponent } from './pages/admin/post-schedule/post-schedule.component';
+import { GetGymAllComponent } from './pages/admin/get-gym-all/get-gym-all.component';
+import { POSTGymComponent } from './pages/admin/post-gym/post-gym.component';
+import { PutGymComponent } from './pages/admin/put-gym/put-gym.component';
+import { RecipescateoryComponent } from './nutrition/recipescateory/recipescateory.component';
 
 @NgModule({
   declarations: [
@@ -113,6 +118,11 @@ import { GetContactMessagesComponent } from './pages/admin/get-contact-messages/
       EditProductComponent,
       AdminUserComponent,
       GetContactMessagesComponent,
+      PostScheduleComponent,
+      GetGymAllComponent,
+      POSTGymComponent,
+      PutGymComponent,
+      RecipescateoryComponent,
   ],
   imports: [
     BrowserModule,

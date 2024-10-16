@@ -1,0 +1,58 @@
+<br />
+
+<div *ngIf="errorMessage" class="alert alert-danger">
+  {{ errorMessage }}
+</div>
+
+<!-- Add Button -->
+<div class="text-center mb-3">
+  <a routerLink="/post-gym" class="btn btn-dark rounded-pill shadow-sm">Add New gym</a>
+
+</div>
+
+<div *ngIf="gymServices.length > 0; else noData" class="d-flex justify-content-center">
+  <div class="table-responsive" style="max-width: 80%;">
+    <h2 class="text-center">Available Gym Services</h2>
+    <table class="table table-striped text-center mx-auto">
+      <thead class="bg-dark text-white">
+        <!-- Added text-white for better contrast -->
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price Per Month</th>
+          <th>Women Shift</th>
+          <th>Men Shift</th>
+          <th>Is Mixed</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let service of gymServices">
+          <td>
+            <img src="https://localhost:7280/api/RecipeCategory/getImage/{{service.imagePath}}" alt="Gym Image" width="50" height="50" />
+          </td>
+          <td>{{ service.name }}</td>
+          <td>{{ service.description }}</td>
+          <td>{{ service.pricePerMonth | currency:'JOD' }}</td>
+          <td>{{ service.womenShiftStart }} - {{ service.womenShiftEnd }}</td>
+          <td>{{ service.menShiftStart }} - {{ service.menShiftEnd }}</td>
+          <td>{{ service.isMixed ? 'Yes' : 'No' }}</td>
+          <td>
+            <button class="btn btn-danger btn-sm" (click)="confirmDeleteGymService(service.id)">Delete</button>
+            <br />            <br />
+
+
+            <button class="btn btn-warning btn-sm" (click)="editGymService(service.id)">Edit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #noData>
+  <p class="text-center">No gym services available at the moment.</p>
+</ng-template>
+
+<app-admin></app-admin>

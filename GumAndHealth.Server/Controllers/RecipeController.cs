@@ -41,18 +41,20 @@ namespace GumAndHealth.Server.Controllers
         [HttpGet("GetRecipeByCategory")]
         public async Task<IActionResult> GetRecipeByCategory(long recipeCategoryId)
         {
-            // استخدم FirstOrDefaultAsync لجلب الوصفة الأولى التي تتطابق مع الفئة
-            var recipe = await _context.Recipes
-                                       .FirstOrDefaultAsync(r => r.RecipeCategoryId == recipeCategoryId);
+            // Use Where to get all recipes that match the category, and convert to a list
+            var recipes = await _context.Recipes
+                                        .Where(r => r.RecipeCategoryId == recipeCategoryId)
+                                        .ToListAsync();
 
-            // تأكد من أن الوصفة موجودة قبل إعادة النتيجة
-            if (recipe == null)
+            // Check if there are any recipes in the list before returning the result
+            if (recipes == null || recipes.Count == 0)
             {
-                return NotFound("No recipe found for this category.");
+                return NotFound("No recipes found for this category.");
             }
 
-            return Ok(recipe);
+            return Ok(recipes);
         }
+
         [HttpPut]
         [Route("api/Recipe/{id}")]
         public async Task<IActionResult> UpdateRecipe(long id, [FromForm] RecipeDto recipeDto)

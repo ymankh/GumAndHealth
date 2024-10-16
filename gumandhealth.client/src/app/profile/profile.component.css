@@ -61,3 +61,7 @@ body {
   margin-right: 0; /* Remove margin */
   margin-left: 0; /* Remove margin */
 }
+button.btn.btn-primary {
+  border-color: green;
+  background-color: green;
+}

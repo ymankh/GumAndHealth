@@ -49,6 +49,11 @@ import { GetProductComponent } from './pages/admin/get-product/get-product.compo
 import { EditProductComponent } from './pages/admin/edit-product/edit-product.component';
 import { GetAllUserComponent } from './pages/admin/get-all-user/get-all-user.component';
 import { GetContactMessagesComponent } from './pages/admin/get-contact-messages/get-contact-messages.component';
+import { PostScheduleComponent } from './pages/admin/post-schedule/post-schedule.component';
+import { GetGymAllComponent } from './pages/admin/get-gym-all/get-gym-all.component';
+import { POSTGymComponent } from './pages/admin/post-gym/post-gym.component';
+import { PutGymComponent } from './pages/admin/put-gym/put-gym.component';
+import { RecipescateoryComponent } from './nutrition/recipescateory/recipescateory.component';
 
 
 const routes: Routes = [
@@ -63,8 +68,8 @@ const routes: Routes = [
   { path: 'admin/edit-class/:id', component: AdminClassEditComponent },
   { path: 'nutrition/tips', component: TipsComponent },
   { path: 'gyms', component: GymsComponent },
-  { path: 'recipes', component: RecipesComponent },
-  { path: 'recipes/:id', component: RecipeDetailComponent },
+  { path: 'recipes/:id', component: RecipesComponent },
+  { path: 'recipes1/:id', component: RecipeDetailComponent },
   { path: 'gym/:id', component: SingleGymComponent },
   { path: 'nutrition', component: NutritionComponent },
   { path: 'Profile', component: ProfileComponent },
@@ -72,6 +77,7 @@ const routes: Routes = [
   { path: 'edit-profile/:id', component: EditProfileComponent },
   { path: 'Gyms', component: GymsComponent },
   { path: 'singleGym/:id', component: SingleGymComponent },
+  { path: 'AddScedule', component: PostScheduleComponent },
 
 
   { path: 'class-details/:id', component: ClassDetailsComponent },
@@ -107,7 +113,11 @@ const routes: Routes = [
   { path: 'getAllProducts', component: GetProductComponent},
   { path: 'editProducts', component: EditProductComponent },
 
+  { path: 'put-gym/:id', component: PutGymComponent }, // Edit gym route
 
+  { path: 'get-gym-all', component:GetGymAllComponent },
+  { path: 'post-gym', component: POSTGymComponent },
+  { path: 'recipescateory', component: RecipescateoryComponent  },
 
   { path: 'view-detiles-admin/:id', component: ViewDetilesAdminComponent },
   { path: 'GetAllUser', component: GetAllUserComponent },

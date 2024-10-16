@@ -2,6 +2,12 @@
 
 <div class="container mt-4">
   <h2 style="margin-left:12%">Class Schedules</h2>
+
+  <!-- Button to navigate to Post Schedule -->
+  <div class="mb-3" style="margin-left:12%">
+    <a routerLink="/AddScedule" class="btn btn-success">Add New Schedule</a>
+  </div>
+
   <table class="table table-bordered" style="margin-left:12%">
     <thead>
       <tr>
@@ -21,13 +27,11 @@
         <td>{{ schedule.startTime }}</td>
         <td>{{ schedule.endTime }}</td>
         <td>
-
-
-
           <button type="button" class="btn btn-info" (click)="viewDetails(schedule.id)">Details</button>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
+
 <app-admin></app-admin>
