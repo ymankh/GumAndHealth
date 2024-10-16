@@ -68,7 +68,7 @@
           <!-- Image -->
           <div class="form-group col-md-12 mb-3">
             <label for="image" class="font-weight-bold">Image</label>
-            <img *ngIf="currentImage" src="https://localhost:7280/api/RecipeCategory/getImage/{{currentImage}}" alt="Current Recipe Image" class="img-thumbnail mb-2" />
+            <img *ngIf="currentImage" src="https://localhost:44325/api/RecipeCategory/getImage/{{currentImage}}" alt="Current Recipe Image" class="img-thumbnail mb-2" />
             <input id="image" type="file" (change)="onFileSelected($event)" class="form-control-file" />
           </div>
 

@@ -25,8 +25,10 @@ namespace GumAndHealth.Server.Controllers
             // البحث في جدول classService
             var classServiceResults = _db.ClassServices
                 .Where(c => c.Name.Contains(query) || c.Description.Contains(query))
+
                 .Select(c => new
                 {
+                    c.Id,
                     c.Name,
                     c.Description,
                     c.ImagePath,
@@ -38,6 +40,7 @@ namespace GumAndHealth.Server.Controllers
                 .Where(g => g.Name.Contains(query) || g.Description.Contains(query))
                 .Select(g => new
                 {
+                    g.Id,
                     g.Name,
                     g.Description,
                     g.ImagePath,
@@ -54,6 +57,7 @@ namespace GumAndHealth.Server.Controllers
                 .Where(p => p.Name.Contains(query) || p.Description.Contains(query))
                 .Select(p => new
                 {
+                    p.Id,
                     p.Name,
                     p.Price,
                     p.Discount,
@@ -74,6 +78,7 @@ namespace GumAndHealth.Server.Controllers
                 .Where(r => r.Name.Contains(query) || r.Description.Contains(query))
                 .Select(r => new
                 {
+                    r.Id,
                     r.Name,
                     r.Image,
                     r.Description,

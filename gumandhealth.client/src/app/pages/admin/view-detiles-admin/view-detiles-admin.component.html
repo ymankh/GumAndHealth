@@ -2,50 +2,73 @@
   <div class="text-right mb-4">
     <a routerLink="/recipe-admin-post" class="btn btn-dark rounded-pill shadow-sm">Add New Recipe</a>
   </div>
-  <!-- Check if there are any recipes available -->
-  <table class="table table-striped table-hover table-bordered text-center shadow-sm" *ngIf="recipes && recipes.length">
-    <thead class="thead-dark">
-      <tr>
-        <th>Image</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Calories</th>
-        <th>Ingredients</th>
-        <th>Recipe</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let recipe of recipes">
-      <tr>
-        <td>
-          <!-- Display the recipe image -->
-          <img src="https://localhost:7280/api/RecipeCategory/getImage/{{recipe.image}}" alt="{{ recipe.name }}" class="img-thumbnail" style="width: 100px; height: auto;">
-        </td>
-        <td class="font-weight-bold">{{ recipe.name }}</td>
-        <td>{{ recipe.description }}</td>
-        <td class="text-success font-weight-bold">{{ recipe.caloriesCount | number }}</td>
-        <td>
-          <ul class="list-unstyled">
-            <li *ngFor="let ingredient of recipe.ingredients.split(',')" class="text-left">
-              <i class="bi bi-dot"></i> {{ ingredient }}
-            </li>
-          </ul>
-        </td>
-        <td>{{ recipe.recipe1 }}</td>
-        <td>
-          <button (click)="editRecipe(recipe.id)" class="btn btn-warning btn-sm me-1">
-            <i class="bi bi-pencil-square"></i> Edit
-          </button>
-          <button (click)="generatePDF(recipe)" class="btn btn-info btn-sm">
-            <i class="bi bi-file-earmark-pdf"></i> PDF
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
 
-  <!-- Display message if no recipes found -->
-  <div class="text-center mt-4" *ngIf="!recipes || recipes.length === 0">
-    <p class="text-muted">No recipes found.</p>
+  <!-- Bootstrap row for layout adjustment -->
+  <div class="row">
+    <div class="col-md-10 ml-auto">
+      <!-- Caption at the top with larger font size -->
+      <table class="table table-striped table-hover table-bordered text-center shadow-sm" *ngIf="recipes && recipes.length">
+        <!-- Caption styled to be at the top and larger -->
+        <caption class="text-center font-weight-bold" style="caption-side: top;">
+          List of Available Recipes
+        </caption>
+
+        <thead class="thead-dark">
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Calories</th>
+            <th>Ingredients</th>
+            <th>Recipe</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let recipe of recipes">
+          <tr>
+            <td>
+              <!-- Display the recipe image -->
+              <img src="https://localhost:44325/api/RecipeCategory/getImage/{{recipe.image}}" alt="{{ recipe.name }}" class="img-thumbnail" style="width: 100px; height: auto;">
+            </td>
+            <td class="font-weight-bold">{{ recipe.name }}</td>
+            <td>{{ recipe.description }}</td>
+            <td class="text-success font-weight-bold">{{ recipe.caloriesCount | number }}</td>
+            <td>
+              <ul class="list-unstyled">
+                <li *ngFor="let ingredient of recipe.ingredients.split(',')" class="text-left">
+                  <i class="bi bi-dot"></i> {{ ingredient }}
+                </li>
+              </ul>
+            </td>
+            <td>{{ recipe.recipe1 }}</td>
+        
+            <td>
+              <!-- Action buttons: Edit, Delete, View Recipe -->
+              <button (click)="editRecipe(recipe.id)" class="btn btn-warning btn-sm me-1">
+                <i class="bi bi-pencil-square"></i> Edit
+              </button>
+              <br />              <br />
+
+              <button (click)="deleteRecipe(recipe.id)" class="btn btn-danger btn-sm me-1">
+                <i class="bi bi-trash"></i> Delete
+              </button>
+              <br />
+              <br />
+
+              <button (click)="generatePDF(recipe)" class="btn btn-info btn-sm">
+                <i class="bi bi-eye"></i> View PDF
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Display message if no recipes found -->
+      <div class="text-center mt-4" *ngIf="!recipes || recipes.length === 0">
+        <p class="text-muted">No recipes found.</p>
+      </div>
+    </div>
   </div>
+
+  <app-admin></app-admin>
 </div>

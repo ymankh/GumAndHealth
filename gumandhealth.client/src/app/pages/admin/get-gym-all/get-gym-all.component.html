@@ -1,58 +1,116 @@
 <br />
+<!-- Table and Add Button -->
+<div class="row">
+  <div class="col-md-9 ms-auto">
+    <!-- Adjusted to ms-auto to float the content to the right -->
+    <!-- Add New Gym Button -->
+    <div class="text-right mb-4">
+      <a routerLink="/post-gym" class="btn btn-dark rounded-pill shadow-sm">Add New Gym</a>
+    </div>
 
-<div *ngIf="errorMessage" class="alert alert-danger">
-  {{ errorMessage }}
-</div>
+    <!-- Display Gym Services Table -->
+    <div *ngIf="gymServices.length > 0; else noData" class="table-responsive">
+      <table class="table table-striped bg-light text-dark table-bordered">
+        <caption class="table-caption font-weight-bold" >List of Available Gym Services</caption>
 
-<!-- Add Button -->
-<div class="text-center mb-3">
-  <a routerLink="/post-gym" class="btn btn-dark rounded-pill shadow-sm">Add New gym</a>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price Per Month</th>
+            <th>Women Shift</th>
+            <th>Men Shift</th>
+            <th>Is Mixed</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let service of gymServices; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>
+              <img src="https://localhost:44325/api/RecipeCategory/getImage/{{service.imagePath}}" alt="Gym Image" width="50" height="50" />
+            </td>
+            <td>{{ service.name }}</td>
+            <td>{{ service.description }}</td>
+            <td>{{ service.pricePerMonth | currency:'JOD' }}</td>
+            <td>{{ service.womenShiftStart }} - {{ service.womenShiftEnd }}</td>
+            <td>{{ service.menShiftStart }} - {{ service.menShiftEnd }}</td>
+            <td>{{ service.isMixed ? 'Yes' : 'No' }}</td>
+            <td>
+              <button class="btn btn-danger btn-sm" (click)="confirmDeleteGymService(service.id)">Delete</button>
+              <br />
+              <br />
+              <button class="btn btn-warning btn-sm" (click)="editGymService(service.id)">Edit</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-</div>
-
-<div *ngIf="gymServices.length > 0; else noData" class="d-flex justify-content-center">
-  <div class="table-responsive" style="max-width: 80%;">
-    <h2 class="text-center">Available Gym Services</h2>
-    <table class="table table-striped text-center mx-auto">
-      <thead class="bg-dark text-white">
-        <!-- Added text-white for better contrast -->
-        <tr>
-          <th>Image</th>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Price Per Month</th>
-          <th>Women Shift</th>
-          <th>Men Shift</th>
-          <th>Is Mixed</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let service of gymServices">
-          <td>
-            <img src="https://localhost:7280/api/RecipeCategory/getImage/{{service.imagePath}}" alt="Gym Image" width="50" height="50" />
-          </td>
-          <td>{{ service.name }}</td>
-          <td>{{ service.description }}</td>
-          <td>{{ service.pricePerMonth | currency:'JOD' }}</td>
-          <td>{{ service.womenShiftStart }} - {{ service.womenShiftEnd }}</td>
-          <td>{{ service.menShiftStart }} - {{ service.menShiftEnd }}</td>
-          <td>{{ service.isMixed ? 'Yes' : 'No' }}</td>
-          <td>
-            <button class="btn btn-danger btn-sm" (click)="confirmDeleteGymService(service.id)">Delete</button>
-            <br />            <br />
-
-
-            <button class="btn btn-warning btn-sm" (click)="editGymService(service.id)">Edit</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <!-- No Data Available Template -->
+    <ng-template #noData>
+      <p class="text-center">No gym services available at the moment.</p>
+    </ng-template>
   </div>
 </div>
 
-<ng-template #noData>
-  <p class="text-center">No gym services available at the moment.</p>
-</ng-template>
+<!-- Styles -->
+<style>
+  .table th {
+    background-color: #343a40;
+    color: #ffffff;
+    text-align: center;
+  }
+
+  .table td {
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  .table img {
+    border-radius: 8px;
+  }
+
+  .btn-warning {
+    background-color: #f1c40f;
+    color: white;
+  }
+
+  .btn-danger {
+    background-color: #e74c3c;
+    color: white;
+  }
+
+  .btn-dark {
+    background-color: #2d2d2d;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 50px;
+  }
+
+  /* Caption Styles */
+  .table-caption {
+    caption-side: top; /* Moves the caption to the top */
+    font-size: 1.5rem; /* Increases the font size */
+    font-weight: bold; /* Makes the text bold */
+    margin-bottom: 10px; /* Adds some space below the caption */
+    color: #2d2d2d; /* Dark color for better contrast */
+  }
+
+  .table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .col-md-9 {
+    margin-left: auto;
+  }
+</style>
 
 <app-admin></app-admin>

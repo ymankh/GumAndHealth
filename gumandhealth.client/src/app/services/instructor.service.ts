@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class InstructorService {
-  private baseUrl = 'https://localhost:7280/api'; // عنوان الـ API
+  private baseUrl = 'https://localhost:44325/api'; // عنوان الـ API
 
   constructor(private http: HttpClient) { }
 

@@ -32,9 +32,9 @@ export class RecipeCategoryAdminComponent implements OnInit {
   }
 
   // دالة لإضافة فئة جديدة
-  addCategory() {
-    this.router.navigate(['/PostRecipe']); // توجيه المستخدم إلى صفحة إضافة فئة جديدة
-  }
+  //addCategory() {
+  //  this.router.navigate(['/PostRecipe']); // توجيه المستخدم إلى صفحة إضافة فئة جديدة
+  //}
 
   // دالة لعرض تفاصيل الوصفة
   viewRecipe(id: number) {

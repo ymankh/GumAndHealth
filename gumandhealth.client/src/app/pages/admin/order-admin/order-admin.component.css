@@ -12,12 +12,13 @@
   margin-top: 10px;
 }
 
-.table-striped tbody tr:nth-of-type(odd) {
-  background-color: rgba(0, 0, 0, 0.05);
-}
 
-.table-bordered th, .table-bordered td {
-  border: 1px solid #dee2e6;
+
+table caption {
+  caption-side: top; /* هذا يضمن أن الـ <caption> يظهر في أعلى الجدول */
+  font-size: 3rem; /* حجم الخط */
+  font-weight: bold; /* لجعل النص عريضًا */
+  margin-bottom: 10px; /* المسافة بين الـ <caption> والجدول */
 }
 
 .badge-success {
@@ -79,6 +80,37 @@ app-header {
   display: none !important;
 }
 
+/* تنسيق للـ header باللون الأسود والخط باللون الأبيض */
+.table thead {
+  background-color: #000; /* اللون الأسود */
+  color: #fff; /* اللون الأبيض */
+}
+
+/* تنسيق للخلفية البيضاء للنص الداكن في الـ body */
+.table tbody {
+  background-color: #fff; /* اللون الأبيض */
+  color: #343a40; /* نص داكن */
+}
+
+/* تنسيق لتباين أفضل عند التمرير فوق الصفوف */
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* تدرج بسيط عند التمرير */
+}
+
+/* التنسيقات الأخرى التي قد تحتاجها */
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #dee2e6; /* لون الحدود */
+}
+
+/* تعديل لعلامات الحالة */
+.badge-success {
+  background-color: #28a745; /* اللون الأخضر لحالة الاكتمال */
+}
+
+.badge-warning {
+  background-color: #ffc107; /* اللون الأصفر لحالة الانتظار */
+}
 
 
 
