@@ -16,7 +16,7 @@ export class NutritionComponent {
       this.router.navigate(['nutrition/tips']);
     } else if (categoryId === 2) {
       // التوجيه إلى صفحة الوصفات
-      this.router.navigate(['/recipes']);
+      this.router.navigate(['/recipescateory']);
     }
   }
 }

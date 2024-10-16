@@ -78,3 +78,27 @@ a.btn.btn-primary.mt-3 {
 .gym-type[_ngcontent-ng-c400351717] span[_ngcontent-ng-c400351717] {
   color: #82d026;
 }
+
+.hero-section {
+  position: relative;
+  height: 400px; /* يمكن تعديل الارتفاع حسب الحاجة */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-text {
+  transform: translate(-60%, -87%);
+  color: #fff; /* جعل النص أبيض */
+  text-align: center;
+  font-size: 3rem; /* حجم الخط */
+  font-weight: bold;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5); /* إضافة ظل للنص لجعله بارزًا على الخلفية */
+}
+
+.set-bg {
+  background-size: cover;
+  background-position: center;
+}

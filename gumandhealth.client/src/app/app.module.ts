@@ -20,6 +20,8 @@ import { GymsComponent } from './pages/gyms/gyms.component';
 import { RecipesComponent } from './nutrition/recipes/recipes.component';
 import { RecipeDetailComponent } from './nutrition/recipe-detail/recipe-detail.component';
 import { SingleGymComponent } from './pages/single-gym/single-gym.component';
+
+import { ReplayContactComponent } from './pages/admin/replay-contact/replay-contact.component';
 //import { AdminClassesComponent } from './pages/admin-classes/admin-classes.component';
 import { ClassDetailsComponent } from './pages/class-details/class-details.component';
 import { ProductsComponent } from './pages/products/products.component';
@@ -59,6 +61,7 @@ import { PostScheduleComponent } from './pages/admin/post-schedule/post-schedule
 import { GetGymAllComponent } from './pages/admin/get-gym-all/get-gym-all.component';
 import { POSTGymComponent } from './pages/admin/post-gym/post-gym.component';
 import { PutGymComponent } from './pages/admin/put-gym/put-gym.component';
+import { RecipescateoryComponent } from './nutrition/recipescateory/recipescateory.component';
 
 @NgModule({
   declarations: [
@@ -121,6 +124,8 @@ import { PutGymComponent } from './pages/admin/put-gym/put-gym.component';
       GetGymAllComponent,
       POSTGymComponent,
       PutGymComponent,
+      ReplayContactComponent,
+      RecipescateoryComponent,
   ],
   imports: [
     BrowserModule,

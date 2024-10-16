@@ -1,19 +1,17 @@
 <div class="container mt-5">
   <div class="row">
-    <div class="col-md-4 mb-4" *ngFor="let category of recipeCategories">
+    <div class="col-md-4 mb-4" *ngFor="let recipe of allrecipes">
       <div class="flip-card">
         <div class="flip-card-inner">
-          <!-- الوجه الأمامي: الصورة -->
+          <!-- واجهة البطاقة: الصورة -->
           <div class="flip-card-front">
-            <img src="https://localhost:7280/api/RecipeCategory/getImage/{{category.imagePath}}" class="card-img-top" alt="{{ category.name }} Image">
-
-
+            <img [src]="'https://localhost:7280/api/RecipeCategory/getImage/' + recipe.image" class="card-img-top" alt="{{ recipe.name }} Image">
           </div>
-          <!-- الوجه الخلفي: العنوان والنص -->
+          <!-- ظهر البطاقة: العنوان والنص -->
           <div class="flip-card-back">
-            <h5 class="card-title">{{ category.name }}</h5>
-            <p class="card-text">{{ category.description }}</p>
-            <button class="btn btn-light" (click)="viewRecipeDetails(category.id)">View Details</button>
+            <h5 class="card-title">{{ recipe.name }}</h5>
+            <p class="card-text">{{ recipe.description }}</p>
+            <button class="btn btn-light" (click)="viewRecipeDetails(recipe.id)">View Details</button>
           </div>
         </div>
       </div>

@@ -1,50 +1,51 @@
-<div class="container mt-5 d-flex justify-content-center">
-  <div class="card shadow-lg p-4 w-50">
-    <div class="text-right mb-4">
-      <a routerLink="/recipe-admin-post" class="btn btn-dark rounded-pill shadow-sm">Add New Recipe</a>
-    </div>
-
-    <table class="table table-borderless text-center" *ngIf="recipe">
+<div class="container mt-5">
+  <div class="text-right mb-4">
+    <a routerLink="/recipe-admin-post" class="btn btn-dark rounded-pill shadow-sm">Add New Recipe</a>
+  </div>
+  <!-- Check if there are any recipes available -->
+  <table class="table table-striped table-hover table-bordered text-center shadow-sm" *ngIf="recipes && recipes.length">
+    <thead class="thead-dark">
       <tr>
-        <td colspan="2" class="text-center">
-          <img [src]="'https://localhost:7280/api/RecipeCategory/getImage/' + recipe.image"
-               [alt]="recipe.name + ' Image'"
-               class="img-thumbnail rounded shadow-sm"
-               style="width:100%; max-width:300px;">
-        </td>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Calories</th>
+        <th>Ingredients</th>
+        <th>Recipe</th>
+        <th>Actions</th>
       </tr>
+    </thead>
+    <tbody *ngFor="let recipe of recipes">
       <tr>
-        <th class="text-muted">Name</th>
-        <td class="font-weight-bold">{{ recipe.name }}</td>
-      </tr>
-      <tr>
-        <th class="text-muted">Description</th>
-        <td>{{ recipe.description }}</td>
-      </tr>
-      <tr>
-        <th class="text-muted">Calories</th>
-        <td class="text-success font-weight-bold">{{ recipe.caloriesCount }}</td>
-      </tr>
-      <tr>
-        <th class="text-muted">Ingredients</th>
         <td>
-          <ul class="list-unstyled mb-0">
-            <li *ngFor="let ingredient of recipe.ingredients.split(',')">{{ ingredient }}</li>
+          <!-- Display the recipe image -->
+          <img src="https://localhost:7280/api/RecipeCategory/getImage/{{recipe.image}}" alt="{{ recipe.name }}" class="img-thumbnail" style="width: 100px; height: auto;">
+        </td>
+        <td class="font-weight-bold">{{ recipe.name }}</td>
+        <td>{{ recipe.description }}</td>
+        <td class="text-success font-weight-bold">{{ recipe.caloriesCount | number }}</td>
+        <td>
+          <ul class="list-unstyled">
+            <li *ngFor="let ingredient of recipe.ingredients.split(',')" class="text-left">
+              <i class="bi bi-dot"></i> {{ ingredient }}
+            </li>
           </ul>
         </td>
-      </tr>
-      <tr>
-        <th class="text-muted">Recipe</th>
         <td>{{ recipe.recipe1 }}</td>
-      </tr>
-      <tr>
-        <td colspan="2" class="text-center pt-4">
-          <button (click)="editRecipe(recipe.id)" class="btn btn-warning btn-sm mr-2 shadow-sm rounded-pill">Edit</button>
-          <button (click)="backToRecipes()" class="btn btn-secondary shadow-sm rounded-pill">Back to Recipes</button>
+        <td>
+          <button (click)="editRecipe(recipe.id)" class="btn btn-warning btn-sm me-1">
+            <i class="bi bi-pencil-square"></i> Edit
+          </button>
+          <button (click)="generatePDF(recipe)" class="btn btn-info btn-sm">
+            <i class="bi bi-file-earmark-pdf"></i> PDF
+          </button>
         </td>
       </tr>
-    </table>
+    </tbody>
+  </table>
+
+  <!-- Display message if no recipes found -->
+  <div class="text-center mt-4" *ngIf="!recipes || recipes.length === 0">
+    <p class="text-muted">No recipes found.</p>
   </div>
 </div>
-
-<app-admin></app-admin>

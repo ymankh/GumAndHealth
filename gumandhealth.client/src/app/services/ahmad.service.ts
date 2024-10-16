@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { root } from '../shared/constants';
 import { Observable } from 'rxjs';
 import { ScheduleDTO } from '../pages/admin/edit-schedule/ScheduleDTO';
+import emailjs from 'emailjs-com';
 
 
 
@@ -12,12 +13,38 @@ import { ScheduleDTO } from '../pages/admin/edit-schedule/ScheduleDTO';
   providedIn: 'root',
 })
 export class AhmadService {
-  constructor(private http: HttpClient) { }
+  private userId = 'bmxEC6kifqCWeT4A1';
+// Replace with your EmailJS user ID
+
+
+  constructor(private http: HttpClient) {
+    emailjs.init(this.userId); // Initialize EmailJS with your user ID
+  }
 
 
 
   getAllMessages(): Observable<any[]> {
     return this.http.get<any[]>("https://localhost:7280/api/Contacts");
+  }
+
+
+  // Method to send emails
+  sendEmail(toName: string, fromName: string, to: string, message: string): Promise<any> {
+    const templateParams = {
+      to_name: toName,
+      from_name: fromName,
+      message,
+    };
+
+    return emailjs.send('service_21ldtmr', 'template_g3x5tjk', templateParams)
+      .then(response => {
+        console.log('Email sent successfully:', response);
+        return response;
+      })
+      .catch(error => {
+        console.error('Error sending email:', error);
+        throw error; // Rethrow error for handling in component
+      });
   }
 
 
