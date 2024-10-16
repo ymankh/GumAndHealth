@@ -42,9 +42,14 @@ export class NajlaaService {
   search(query: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl1}?query=${query}`);
   }
- 
-  getRecipeById(id: number): Observable<any> {
+  getRecipesByCategory(categoryId: number): Observable<any[]> {
+    return this.http.get<any[]>(`https://localhost:7280/api/Recipe/GetRecipeByCategory?recipeCategoryId=${categoryId}`);
+  }
+  getRecipesByCategory1(id: string): Observable<any> {
     return this.http.get(`https://localhost:7280/api/Recipe/GetRecipeByCategory?recipeCategoryId=${id}`);
+  }
+  getRecipeById(id: number): Observable<any> {
+    return this.http.get(`https://localhost:7280/api/Recipe/${id}`);
   }
   getGyms(): Observable<any> {
     return this.http.get<any>("https://localhost:7280/api/Home/GetAllGyms");

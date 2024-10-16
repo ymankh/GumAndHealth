@@ -35,13 +35,15 @@ export class ReplayContactComponent implements OnInit {
       const senderEmail = this.selectedMessage.email; // Use the sender's email
       const senderName = this.selectedMessage.name; // Use the sender's name
 
-      console.log(`Sending email to: ${senderEmail}, from: ${senderName}, message: ${this.replyText}`); // Debugging output
+      console.log(`Preparing to send email to: ${senderEmail}, from: ${senderName}, message: ${this.replyText}`); // Debugging output
 
       this.ahmadService.sendEmail(senderName, 'Admin Name', senderEmail, this.replyText)
         .then(() => {
+          console.log(`Email sent successfully to: ${senderEmail}`); // Debugging output
           this.replyText = ''; // Clear input after sending
           this.selectedMessage = null; // Clear selected message
           this.loadMessages(); // Reload messages if needed
+
           // Show success alert with the recipient's email
           Swal.fire({
             icon: 'success',
@@ -66,6 +68,10 @@ export class ReplayContactComponent implements OnInit {
       });
     }
   }
+
+
+
+
 
 
 }

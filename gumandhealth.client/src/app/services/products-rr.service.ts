@@ -9,7 +9,7 @@ export class ProductsRRService {
 
 
   constructor(private http: HttpClient) { }
-  staticData = "https://localhost:7280/api";
+  staticData = "https://localhost:44325/api";
 
   getAllProducts(): Observable<any> {
     return this.http.get<any>(`${this.staticData}/Products/AllProductsNew`);

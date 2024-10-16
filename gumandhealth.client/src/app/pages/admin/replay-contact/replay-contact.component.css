@@ -165,3 +165,46 @@
 
   margin-left:15%
 }
+.reply-popup {
+  position: fixed; /* Fixed positioning for the pop-up */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust for true center */
+  z-index: 1050; /* Ensure it appears above other content */
+  width: 350px; /* Set a width for the pop-up */
+  padding: 20px; /* Add padding for inner spacing */
+  background-color: #ffffff; /* White background for contrast */
+  border-radius: 10px; /* Rounded corners for a softer look */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* Softer, larger shadow */
+  transition: all 0.3s ease; /* Smooth transition effect */
+  animation: fadeIn 0.3s; /* Fade-in animation */
+}
+
+  .reply-popup h4 {
+    margin-bottom: 15px; /* Spacing below the heading */
+    color: #333; /* Darker text for readability */
+  }
+
+  .reply-popup textarea {
+    border-radius: 5px; /* Rounded corners for the textarea */
+    resize: none; /* Disable resizing */
+    height: 100px; /* Set a fixed height */
+  }
+
+  .reply-popup button {
+    width: 100%; /* Full width for buttons */
+    border-radius: 5px; /* Rounded corners for buttons */
+  }
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -45%); /* Slightly adjust the position */
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%); /* Return to centered position */
+  }
+}

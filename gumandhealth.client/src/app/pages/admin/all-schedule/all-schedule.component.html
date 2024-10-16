@@ -1,37 +1,48 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-<div class="container mt-4">
-  <h2 style="margin-left:12%">Class Schedules</h2>
+<div class="container mt-4" style="margin-left:17%">
+  <h2 class="text-center">Class Schedules</h2>
 
   <!-- Button to navigate to Post Schedule -->
-  <div class="mb-3" style="margin-left:12%">
-    <a routerLink="/AddScedule" class="btn btn-success">Add New Schedule</a>
+  <div class="text-center mb-3">
+    <a routerLink="/AddScedule" class="btn btn-dark rounded-pill shadow-sm">Add New Schedule</a>
   </div>
 
-  <table class="table table-bordered" style="margin-left:12%">
-    <thead>
-      <tr>
-        <th>Available Day</th>
-        <th>Class Name</th>
-        <th>Instructor Name</th>
-        <th>Start Time</th>
-        <th>End Time</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let schedule of schedules">
-        <td>{{ schedule.availableDay }}</td>
-        <td>{{ schedule.className }}</td>
-        <td>{{ schedule.instructorName }}</td>
-        <td>{{ schedule.startTime }}</td>
-        <td>{{ schedule.endTime }}</td>
-        <td>
-          <button type="button" class="btn btn-info" (click)="viewDetails(schedule.id)">Details</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div *ngIf="schedules.length > 0; else noData" class="d-flex justify-content-center" style="margin-left:10%">
+    <div class="table-responsive" style="max-width: 80%;">
+      <div class="bg- rounded h-100 p-4">
+        <table class="table table-dark">
+          <thead>
+            <tr>
+              <th scope="col">Available Day</th>
+              <th scope="col">Class Name</th>
+              <th scope="col">Instructor Name</th>
+              <th scope="col">Start Time</th>
+              <th scope="col">End Time</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let schedule of schedules">
+              <td>{{ schedule.availableDay }}</td>
+              <td>{{ schedule.className }}</td>
+              <td>{{ schedule.instructorName }}</td>
+              <td>{{ schedule.startTime }}</td>
+              <td>{{ schedule.endTime }}</td>
+              <td>
+                <button type="button" class="btn btn-info btn-warning" (click)="viewDetails(schedule.id)">Details</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noData>
+    <p class="text-center">No class schedules available at the moment.</p>
+  </ng-template>
+
 </div>
 
 <app-admin></app-admin>

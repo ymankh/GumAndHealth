@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FawarehService } from '../../services/fawareh.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import Swal from 'sweetalert2';  // Import SweetAlert
 
 @Component({
   selector: 'app-single-gym',
@@ -11,14 +13,19 @@ export class SingleGymComponent {
   singleGymData: any;
   parameter: any;
 
-  paymentMethod = 'paypal';  // Set the payment method to 'paypal'
+  paymentMethod = 'paypal';  
 
   ngOnInit() {
     this.parameter = this._route.snapshot.paramMap.get("id");
     this.getSingleGym(this.parameter);
   }
 
-  constructor(private _ser: FawarehService, private _route: ActivatedRoute) { }
+  constructor(
+    private _ser: FawarehService,
+    private _route: ActivatedRoute,
+    private auth: AuthService,
+    private router: Router
+  ) { }
 
   getSingleGym(id: any) {
     this._ser.getSignleGym(id).subscribe((data) => {
@@ -27,38 +34,72 @@ export class SingleGymComponent {
   }
 
   addUserSubscription(gymServiceId: number) {
+    if (!this.auth.isUserLoggedIn()) {
+   
+      Swal.fire({
+        icon: 'warning',
+        title: 'Login Required',
+        text: 'You must be logged in to subscribe.',
+        confirmButtonText: 'Login'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['/login']); // Redirect to login
+        }
+      });
+      return;
+    }
+
     const subscriptionData = {
       gymServiceId: gymServiceId
     };
 
-    // Call the service to add the subscription and get PayPal approval URL
+   
     this._ser.addGymSubscription(subscriptionData).subscribe(
       (response: any) => {
         const approvalUrl = response.approvalUrl;
 
         if (approvalUrl) {
-          // Open PayPal approval URL in a new pop-up window
+      
           const paymentWindow = window.open(approvalUrl, '_blank', 'width=800,height=600');
 
           if (paymentWindow) {
-            // Poll for payment window closure
+          
             const pollPaymentWindow = setInterval(() => {
               if (paymentWindow.closed) {
                 clearInterval(pollPaymentWindow);
-                alert("Payment process completed. Please check your subscription status.");
-                
+            
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Payment Completed',
+                  text: 'Please check your subscription status.'
+                });
               }
             }, 1000);
           } else {
-            alert("Failed to open payment window. Please check your browser's pop-up settings.");
+          
+            Swal.fire({
+              icon: 'error',
+              title: 'Popup Blocked',
+              text: 'Failed to open payment window. Please check your browser\'s pop-up settings.'
+            });
           }
         } else {
-          alert("Failed to initiate PayPal payment. Please try again.");
+       
+          Swal.fire({
+            icon: 'error',
+            title: 'Payment Failed',
+            text: 'Failed to initiate PayPal payment. Please try again.'
+          });
         }
       },
       (error) => {
         console.error("Error adding subscription:", error);
-        alert("Failed to add subscription. Please try again.");
+  
+        Swal.fire({
+          icon: 'error',
+          title: 'Subscription Failed',
+          text: 'Failed to add subscription. Please try again.'
+        });
       }
     );
   }
