@@ -1,76 +1,54 @@
 import { Component, OnInit } from '@angular/core';
-import { AhmadService } from '../../services/ahmad.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { FawarehService } from '../../services/fawareh.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-class-edit',
   templateUrl: './admin-class-edit.component.html',
   styleUrls: ['./admin-class-edit.component.css']
 })
-export class AdminClassEditComponent {
-
-  imageFile: any
-  changeImage(event: any) {
-
-    this.imageFile = event.target.files[0]
-
-  }
- 
-
-  constructor(private _ser: FawarehService, private _route: ActivatedRoute, private _router: Router) { }
-
+export class AdminClassEditComponent implements OnInit {
 
   classId: any;
+  classData: any = {}; // Store the class data
+
+  imageFile: any;
+
+  constructor(
+    private _ser: FawarehService,
+    private _route: ActivatedRoute,
+    private _router: Router
+  ) { }
+
   ngOnInit() {
     this.classId = this._route.snapshot.paramMap.get("id");
+
+    // Fetch the class data
+    this._ser.getSignleClass(this.classId).subscribe(
+      (data) => {
+        this.classData = data;  // Store the fetched class data
+      },
+      (error) => {
+        console.error("Error fetching class data:", error);
+      }
+    );
   }
 
+  changeImage(event: any) {
+    this.imageFile = event.target.files[0];
+  }
 
   updateClass(data: any) {
-    debugger
     var formdata = new FormData();
 
-
     for (let item in data) {
-      formdata.append(item, data[item])
+      formdata.append(item, data[item]);
     }
 
-    formdata.append("imagePath", this.imageFile)
+    formdata.append("imagePath", this.imageFile);
 
-    this._ser.editClass(this.classId, formdata).subscribe((data) => {
-      alert("Service Updated Successfully !")
-      //this._router.navigate(["/dashboard"])
+    this._ser.editClass(this.classId, formdata).subscribe((response) => {
+      alert("Class Updated Successfully!");
     });
   }
 }
-
-
-
-
-
-
-
-
-
-
-  ////////////////////////////
-  //  deleteClass(): void {
-  //    console.log('Delete class button clicked');
-  //    if (confirm('Are you sure you want to delete this class?')) {
-  //      console.log('Confirmation received');
-  //      console.log('Class ID to delete:', this.classItem.id);
-
-  //      this.classService.deleteClass(this.classItem.id).subscribe(() => {
-  //        console.log('Class deleted successfully');
-  //        this.router.navigate(['admin/classes']);
-  //      }, error => {
-  //        console.error('Error deleting class:', error);
-  //        alert('An error occurred while deleting the class. Please try again.');
-  //      });
-  //    } else {
-  //      console.log('Deletion cancelled');
-  //    }
-  //  }
-  //}
-

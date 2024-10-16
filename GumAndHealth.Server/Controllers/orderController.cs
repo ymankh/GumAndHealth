@@ -94,7 +94,30 @@ namespace GumAndHealth.Server.Controllers
 
             return Ok(orderDTOs);
         }
+        // API لتعديل حالة الطلب
+        [HttpPut("{id}/update-status")]
+        public async Task<IActionResult> UpdateOrderStatus(long id)
+        {
+            // البحث عن الطلب بناءً على المعرف
+            var order = await _context.Orders.FindAsync(id);
 
+            if (order == null)
+            {
+                return NotFound(new { message = "Order not found" });
+            }
+
+            // التحقق من حالة الطلب الحالية
+            if (order.Status == "0")
+            {
+                order.Status = "1"; // تغيير الحالة إلى 1
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "Order status updated successfully" });
+            }
+            else
+            {
+                return BadRequest(new { message = "Order status is not 0" });
+            }
+        }
 
 
 
